@@ -1,2 +1,2 @@
 # olwibaCN
-Olwiba's take on shadcn UI.
+Olwiba's take on shadcn primitives.
