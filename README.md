@@ -1,60 +1,52 @@
-# @olwiba/cn
+# olwibaCN
 
-> Customized shadcn/ui primitives — part of the [shadcn "cn" family](https://ui.shadcn.com/).
+Custom shadcn/ui component registry.
 
-## What This Is
-
-Base UI components built on top of shadcn/ui with Olwiba-specific customizations. These are the foundational primitives used by `@olwiba/ui`.
-
-## Package
+## Structure
 
 ```
-npm: @olwiba/cn
-registry: private (Verdaccio)
+olwibaCN/
+├── registry/           # Source components
+│   ├── lib/           # Utilities (utils.ts)
+│   └── ui/            # UI components (button.tsx, etc.)
+├── public/r/          # Generated JSON (served at /r/{name}.json)
+├── src/               # TanStack Start docs site
+├── registry.json      # Registry definition
+└── vite.config.ts
 ```
 
-## Installation
+## Adding Components
+
+1. Create component in `registry/ui/` or `registry/lib/`
+2. Add entry to `registry.json`
+3. Run `npx shadcn@latest build`
+
+## Development
 
 ```bash
-# Configure Verdaccio in bunfig.toml first
-bun add @olwiba/cn
+bun install
+bun dev              # Start dev server at localhost:3000
+bun run registry:build   # Generate JSON files
 ```
 
-## Components
+## Using in Projects
 
-- Button
-- Card (Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription)
-- Dialog
-- Input
-- Label
-- Form components
-- Dropdown Menu
-- Avatar
-- Separator
-- Tabs
-- Toast / Sonner
-- Checkbox
-- Select
-- Textarea
-- Badge
-- Alert
-- Skeleton
+Add to your project's `components.json`:
 
-## Utilities
-
-```tsx
-import { cn } from "@olwiba/cn";
-
-// Merge Tailwind classes
-cn("px-4 py-2", conditional && "bg-blue-500");
+```json
+{
+  "registries": {
+    "@olwibacn": "https://cn.olwiba.com/r/{name}.json"
+  }
+}
 ```
 
-## Peer Dependencies
+Then install components:
 
-- react
-- tailwindcss
+```bash
+shadcn add @olwibacn/button
+```
 
-## Related
+## Deployment
 
-- [@olwiba/ui](https://github.com/Olwiba/olwibaUI) — App components built on cn
-- [@genesis/renderer](https://github.com/Olwiba/genesis-renderer) — JSON-to-UI engine
+Hosted on Coolify at `cn.olwiba.com`. Push to master triggers auto-deploy.
