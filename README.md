@@ -49,4 +49,5 @@ shadcn add @olwibacn/button
 
 ## Deployment
 
-Hosted on Coolify at `cn.olwiba.com`. Push to master triggers auto-deploy.
+Hosted on Coolify at `cn.olwiba.com`. 
+Push to master triggers auto-deploy.
