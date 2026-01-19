@@ -43,10 +43,10 @@ function RootComponent() {
       </head>
       <body className="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white min-h-screen transition-colors">
         <header className="border-b border-neutral-200 dark:border-neutral-800">
-          <nav className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+          <nav className="max-w-5xl mx-auto px-8 h-14 flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <Link to="/" className="font-semibold">
-                olwibaCN
+              <Link to="/" className="font-bold">
+                olwiba<span className="text-green-400">CN</span>
               </Link>
               <Link
                 to="/components"
