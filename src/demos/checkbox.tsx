@@ -1,5 +1,5 @@
-import { Checkbox } from "~/components/ui/checkbox";
-import { Label } from "~/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 export default function CheckboxDemo() {
   return (
@@ -10,7 +10,7 @@ export default function CheckboxDemo() {
       </div>
       <div className="flex items-center space-x-2">
         <Checkbox id="disabled" disabled />
-        <Label htmlFor="disabled">Disabled checkbox</Label>
+        <Label htmlFor="disabled" className="text-muted-foreground">Disabled</Label>
       </div>
     </div>
   );

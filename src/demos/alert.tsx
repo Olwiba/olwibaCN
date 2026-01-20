@@ -1,12 +1,12 @@
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function AlertDemo() {
   return (
-    <div className="flex flex-col gap-4 w-full max-w-md">
+    <div className="w-full max-w-md space-y-4">
       <Alert>
         <AlertTitle>Heads up!</AlertTitle>
         <AlertDescription>
-          You can add components to your app using the cli.
+          You can add components and dependencies to your app using the cli.
         </AlertDescription>
       </Alert>
       <Alert variant="destructive">

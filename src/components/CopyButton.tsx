@@ -1,11 +1,13 @@
-import * as React from "react";
+'use client';
+
+import * as React from 'react';
 
 interface CopyButtonProps {
   text: string;
   className?: string;
 }
 
-export function CopyButton({ text, className = "" }: CopyButtonProps) {
+export function CopyButton({ text, className = '' }: CopyButtonProps) {
   const [copied, setCopied] = React.useState(false);
 
   const copy = async () => {
@@ -17,7 +19,7 @@ export function CopyButton({ text, className = "" }: CopyButtonProps) {
   return (
     <button
       onClick={copy}
-      className={`p-2 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors ${className}`}
+      className={`p-2 rounded-md hover:bg-fd-accent transition-colors ${className}`}
       aria-label="Copy to clipboard"
     >
       {copied ? (

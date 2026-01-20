@@ -1,0 +1,52 @@
+---
+title: Input
+description: Displays a form input field.
+---
+
+<ComponentPreview name="input" />
+
+## Installation
+
+<InstallationTabs name="input" />
+
+## Usage
+
+```tsx
+import { Input } from "@/components/ui/input"
+```
+
+```tsx
+<Input type="email" placeholder="Email" />
+```
+
+## Examples
+
+### Default
+
+```tsx
+<Input type="text" placeholder="Enter text..." />
+```
+
+### Disabled
+
+```tsx
+<Input disabled type="text" placeholder="Disabled" />
+```
+
+### With Label
+
+```tsx
+<div className="grid w-full max-w-sm items-center gap-1.5">
+  <Label htmlFor="email">Email</Label>
+  <Input type="email" id="email" placeholder="Email" />
+</div>
+```
+
+### File Input
+
+```tsx
+<div className="grid w-full max-w-sm items-center gap-1.5">
+  <Label htmlFor="picture">Picture</Label>
+  <Input id="picture" type="file" />
+</div>
+```

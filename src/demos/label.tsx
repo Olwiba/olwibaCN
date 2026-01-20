@@ -1,10 +1,11 @@
-import { Label } from "~/components/ui/label";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function LabelDemo() {
   return (
-    <div className="space-y-2">
-      <Label htmlFor="email">Your email address</Label>
-      <p className="text-sm text-neutral-500">Labels are used to describe form inputs.</p>
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <Label htmlFor="email">Email</Label>
+      <Input type="email" id="email" placeholder="Email" />
     </div>
   );
 }

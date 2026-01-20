@@ -1,29 +1,38 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { HomeLayout } from 'fumadocs-ui/layouts/home';
+import { baseOptions } from '@/lib/layout.shared';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: Home,
 });
 
 function Home() {
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">olwibaCN</h1>
-        <p className="text-neutral-500 dark:text-neutral-400 mb-8">Custom shadcn/ui registry</p>
-        
-        <div className="space-y-4">
-          <code className="block bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded text-sm">
-            shadcn add @olwibacn/button
-          </code>
-          
+    <HomeLayout {...baseOptions()}>
+      <div className="flex flex-col flex-1 justify-center items-center px-4 py-16 text-center">
+        <h1 className="text-4xl font-bold mb-4">
+          olwiba<span className="text-green-400">CN</span>
+        </h1>
+        <p className="text-fd-muted-foreground text-lg mb-8 max-w-md">
+          Custom shadcn/ui component registry. Copy and paste components into your apps.
+        </p>
+        <div className="flex gap-4">
           <Link
-            to="/components"
-            className="inline-block px-6 py-2 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-md font-medium hover:bg-neutral-800 dark:hover:bg-white/90 transition-colors"
+            to="/docs/$"
+            params={{ _splat: '' }}
+            className="px-4 py-2 rounded-lg bg-fd-primary text-fd-primary-foreground font-medium text-sm"
           >
-            Browse Components
+            Get Started
+          </Link>
+          <Link
+            to="/docs/$"
+            params={{ _splat: 'components' }}
+            className="px-4 py-2 rounded-lg border border-fd-border font-medium text-sm hover:bg-fd-accent"
+          >
+            Components
           </Link>
         </div>
       </div>
-    </div>
+    </HomeLayout>
   );
 }

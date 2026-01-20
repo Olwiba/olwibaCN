@@ -1,8 +1,8 @@
-import { Spinner } from "~/components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function SpinnerDemo() {
   return (
-    <div className="flex gap-4">
+    <div className="flex items-center gap-4">
       <Spinner />
     </div>
   );

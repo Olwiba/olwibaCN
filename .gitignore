@@ -9,6 +9,7 @@ package-lock.json
 .output
 .nitro
 .tanstack
+.source
 
 /build/
 /api/
