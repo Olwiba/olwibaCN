@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Link } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
-import { ComponentPreview } from '@/components/ComponentPreview';
-import { InstallationTabs } from '@/components/InstallationTabs';
-import { Callout } from '@/components/Callout';
-import { CopyButton } from '@/components/CopyButton';
-import { CopyCommandButton } from '@/components/CopyCommandButton';
+import { ComponentPreview } from '@/components/docs/ComponentPreview';
+import { InstallationTabs } from '@/components/docs/InstallationTabs';
+import { Callout } from '@/components/docs/Callout';
+import { CopyButton } from '@/components/docs/CopyButton';
+import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
 import {
   Accordion,
   AccordionContent,

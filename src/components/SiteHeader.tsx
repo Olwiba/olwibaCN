@@ -2,7 +2,7 @@
 
 import { Link } from '@tanstack/react-router';
 import { ModeSwitcher } from '@/components/ModeSwitcher';
-import { SearchButton } from '@/components/SearchButton';
+import { SearchButton } from '@/components/docs/SearchButton';
 
 const navItems = [
   { label: 'Docs', href: '/docs' },

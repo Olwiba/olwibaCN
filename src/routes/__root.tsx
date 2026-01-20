@@ -4,7 +4,7 @@ import appCss from '@/styles/app.css?url';
 import { RootProvider } from 'fumadocs-ui/provider/tanstack';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import SearchDialog from '@/components/SearchDialog';
+import SearchDialog from '@/components/docs/SearchDialog';
 
 export const Route = createRootRoute({
   head: () => ({

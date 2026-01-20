@@ -1,6 +1,7 @@
 node_modules
 bun.lock
 package-lock.json
+bunfig.toml
 
 .DS_Store
 .cache
@@ -11,6 +12,8 @@ package-lock.json
 .tanstack
 .source
 
+# Build output
+dist/
 /build/
 /api/
 /server/build
