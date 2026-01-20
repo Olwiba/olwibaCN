@@ -3,6 +3,10 @@ title: Button
 description: Displays a button or a component that looks like a button.
 ---
 
+<div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwiba/button" />
+</div>
+
 <ComponentPreview name="button" />
 
 ## Installation
@@ -17,60 +21,6 @@ import { Button } from "@/components/ui/button"
 
 ```tsx
 <Button variant="outline">Button</Button>
-```
-
-## Examples
-
-### Default
-
-```tsx
-<Button>Button</Button>
-```
-
-### Outline
-
-```tsx
-<Button variant="outline">Outline</Button>
-```
-
-### Secondary
-
-```tsx
-<Button variant="secondary">Secondary</Button>
-```
-
-### Ghost
-
-```tsx
-<Button variant="ghost">Ghost</Button>
-```
-
-### Destructive
-
-```tsx
-<Button variant="destructive">Destructive</Button>
-```
-
-### Link
-
-```tsx
-<Button variant="link">Link</Button>
-```
-
-### Icon
-
-```tsx
-<Button variant="outline" size="icon" aria-label="Submit">
-  <ArrowUpIcon />
-</Button>
-```
-
-### With Icon
-
-```tsx
-<Button variant="outline" size="sm">
-  <GitBranchIcon /> New Branch
-</Button>
 ```
 
 ## API Reference

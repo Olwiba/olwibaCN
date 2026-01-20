@@ -3,6 +3,10 @@ title: Card
 description: Displays a card with header, content, and footer.
 ---
 
+<div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwiba/card" />
+</div>
+
 <ComponentPreview name="card" />
 
 ## Installation
@@ -33,33 +37,6 @@ import {
   </CardContent>
   <CardFooter>
     <p>Card Footer</p>
-  </CardFooter>
-</Card>
-```
-
-## Examples
-
-### Simple Card
-
-```tsx
-<Card className="w-[350px]">
-  <CardHeader>
-    <CardTitle>Create project</CardTitle>
-    <CardDescription>Deploy your new project in one-click.</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <form>
-      <div className="grid w-full items-center gap-4">
-        <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" placeholder="Name of your project" />
-        </div>
-      </div>
-    </form>
-  </CardContent>
-  <CardFooter className="flex justify-between">
-    <Button variant="outline">Cancel</Button>
-    <Button>Deploy</Button>
   </CardFooter>
 </Card>
 ```

@@ -4,13 +4,27 @@ import { source } from '@/lib/source';
 import browserCollections from 'fumadocs-mdx:collections/browser';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
+import * as React from 'react';
 import { Suspense } from 'react';
 import { mdxComponents } from '@/lib/mdx-components';
 import { DocsSidebar } from '@/components/DocsSidebar';
+import { DocsToc, type TocItem } from '@/components/DocsToc';
+import { DocsCopyPage } from '@/components/DocsCopyPage';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { findNeighbour } from 'fumadocs-core/page-tree';
+
+function extractTextFromReactNode(node: React.ReactNode): string {
+  if (node === null || node === undefined) return '';
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(extractTextFromReactNode).join('');
+  if (typeof node === 'object' && 'props' in node) {
+    return extractTextFromReactNode((node as React.ReactElement).props.children);
+  }
+  return '';
+}
 
 export const Route = createFileRoute('/docs/$')({
   component: Page,
@@ -32,6 +46,7 @@ const serverLoader = createServerFn({
 
     const pageTree = source.getPageTree();
     const neighbours = findNeighbour(pageTree, page.url);
+    const rawContent = await page.data.getText('raw');
 
     return {
       path: page.path,
@@ -41,6 +56,12 @@ const serverLoader = createServerFn({
         title: page.data.title,
         description: page.data.description,
       },
+      toc: (page.data.toc ?? []).map((item: { title?: React.ReactNode; url: string; depth: number }) => ({
+        title: extractTextFromReactNode(item.title),
+        url: item.url,
+        depth: item.depth,
+      })) as TocItem[],
+      rawContent,
       neighbours: {
         previous: neighbours.previous ? { url: neighbours.previous.url, name: neighbours.previous.name } : null,
         next: neighbours.next ? { url: neighbours.next.url, name: neighbours.next.name } : null,
@@ -82,6 +103,10 @@ function Page() {
                       {loaderData.frontmatter.title}
                     </h1>
                     <div className="flex items-center gap-2">
+                      <DocsCopyPage
+                        page={loaderData.rawContent}
+                        url={typeof window !== 'undefined' ? window.location.href : loaderData.url}
+                      />
                       {loaderData.neighbours.previous && (
                         <Button asChild size="icon" variant="secondary" className="size-8">
                           <Link to={loaderData.neighbours.previous.url}>
@@ -127,6 +152,16 @@ function Page() {
                 )}
               </div>
             </div>
+            {loaderData.toc?.length > 0 && (
+              <div className="ml-auto hidden w-72 shrink-0 flex-col py-4 lg:py-6 xl:flex">
+                <div className="h-[var(--top-spacing)] shrink-0" />
+                <div className="sticky top-[calc(var(--header-height)+1px)] z-30 max-h-[calc(100svh-var(--header-height)-1px)] overflow-hidden overscroll-none">
+                  <div className="no-scrollbar overflow-y-auto px-8 py-2">
+                    <DocsToc toc={loaderData.toc} />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </SidebarProvider>

@@ -1,36 +1,31 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import { Check, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { cn } from "@/lib/utils";
 
 interface CopyButtonProps {
   text: string;
   className?: string;
 }
 
-export function CopyButton({ text, className = '' }: CopyButtonProps) {
-  const [copied, setCopied] = React.useState(false);
-
-  const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+export function CopyButton({ text, className }: CopyButtonProps) {
+  const { copyToClipboard, isCopied } = useCopyToClipboard();
 
   return (
-    <button
-      onClick={copy}
-      className={`p-2 rounded-md hover:bg-fd-accent transition-colors ${className}`}
-      aria-label="Copy to clipboard"
+    <Button
+      variant="ghost"
+      size="icon"
+      className={cn("size-7 opacity-0 transition-opacity group-hover:opacity-100", className)}
+      onClick={() => copyToClipboard(text)}
     >
-      {copied ? (
-        <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
+      {isCopied ? (
+        <Check className="size-3.5" />
       ) : (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
+        <Copy className="size-3.5" />
       )}
-    </button>
+      <span className="sr-only">Copy code</span>
+    </Button>
   );
 }

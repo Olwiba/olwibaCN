@@ -3,6 +3,10 @@ title: Badge
 description: Displays a badge or a component that looks like a badge.
 ---
 
+<div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwiba/badge" />
+</div>
+
 <ComponentPreview name="badge" />
 
 ## Installation
@@ -17,32 +21,6 @@ import { Badge } from "@/components/ui/badge"
 
 ```tsx
 <Badge variant="outline">Badge</Badge>
-```
-
-## Examples
-
-### Default
-
-```tsx
-<Badge>Badge</Badge>
-```
-
-### Secondary
-
-```tsx
-<Badge variant="secondary">Secondary</Badge>
-```
-
-### Outline
-
-```tsx
-<Badge variant="outline">Outline</Badge>
-```
-
-### Destructive
-
-```tsx
-<Badge variant="destructive">Destructive</Badge>
 ```
 
 ## API Reference
