@@ -1,15 +1,16 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { createFileRoute, notFound, Link } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { source } from '@/lib/source';
 import browserCollections from 'fumadocs-mdx:collections/browser';
-import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { baseOptions } from '@/lib/layout.shared';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
 import { Suspense } from 'react';
-import { ComponentPreview } from '@/components/ComponentPreview';
-import { InstallationTabs } from '@/components/InstallationTabs';
+import { mdxComponents } from '@/lib/mdx-components';
+import { DocsSidebar } from '@/components/DocsSidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { findNeighbour } from 'fumadocs-core/page-tree';
 
 export const Route = createFileRoute('/docs/$')({
   component: Page,
@@ -29,47 +30,106 @@ const serverLoader = createServerFn({
     const page = source.getPage(slugs);
     if (!page) throw notFound();
 
+    const pageTree = source.getPageTree();
+    const neighbours = findNeighbour(pageTree, page.url);
+
     return {
       path: page.path,
-      pageTree: await source.serializePageTree(source.getPageTree()),
+      url: page.url,
+      pageTree: await source.serializePageTree(pageTree),
+      frontmatter: {
+        title: page.data.title,
+        description: page.data.description,
+      },
+      neighbours: {
+        previous: neighbours.previous ? { url: neighbours.previous.url, name: neighbours.previous.name } : null,
+        next: neighbours.next ? { url: neighbours.next.url, name: neighbours.next.name } : null,
+      },
     };
   });
 
 const clientLoader = browserCollections.docs.createClientLoader({
-  component(
-    { toc, frontmatter, default: MDX },
-    props: {
-      className?: string;
-    },
-  ) {
+  component({ default: MDX }) {
     return (
-      <DocsPage toc={toc} {...props}>
-        <DocsTitle>{frontmatter.title}</DocsTitle>
-        <DocsDescription>{frontmatter.description}</DocsDescription>
-        <DocsBody>
-          <MDX
-            components={{
-              ...defaultMdxComponents,
-              ComponentPreview,
-              InstallationTabs,
-            }}
-          />
-        </DocsBody>
-      </DocsPage>
+      <div className="w-full flex-1">
+        <MDX
+          components={{
+            ...defaultMdxComponents,
+            ...mdxComponents,
+          }}
+        />
+      </div>
     );
   },
 });
 
 function Page() {
   const data = useFumadocsLoader(Route.useLoaderData());
+  const loaderData = Route.useLoaderData();
 
   return (
-    <DocsLayout {...baseOptions()} tree={data.pageTree}>
-      <Suspense>
-        {clientLoader.useContent(data.path, {
-          className: '',
-        })}
-      </Suspense>
-    </DocsLayout>
+    <div className="flex flex-1 flex-col px-2">
+      <SidebarProvider className="min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+        <DocsSidebar tree={data.pageTree} />
+        <div className="h-full w-full lg:ml-[var(--sidebar-width)]">
+          <div className="flex items-stretch xl:w-full">
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="h-[var(--top-spacing)] shrink-0" />
+              <div className="flex w-full min-w-0 max-w-2xl flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-6 lg:py-8 dark:text-neutral-300">
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-start justify-between">
+                    <h1 className="scroll-m-20 font-semibold text-4xl tracking-tight sm:text-3xl xl:text-4xl">
+                      {loaderData.frontmatter.title}
+                    </h1>
+                    <div className="flex items-center gap-2">
+                      {loaderData.neighbours.previous && (
+                        <Button asChild size="icon" variant="secondary" className="size-8">
+                          <Link to={loaderData.neighbours.previous.url}>
+                            <ArrowLeft className="size-4" />
+                            <span className="sr-only">Previous</span>
+                          </Link>
+                        </Button>
+                      )}
+                      {loaderData.neighbours.next && (
+                        <Button asChild size="icon" variant="secondary" className="size-8">
+                          <Link to={loaderData.neighbours.next.url}>
+                            <ArrowRight className="size-4" />
+                            <span className="sr-only">Next</span>
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                  {loaderData.frontmatter.description && (
+                    <p className="text-balance text-muted-foreground">
+                      {loaderData.frontmatter.description}
+                    </p>
+                  )}
+                </div>
+                <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
+                  {clientLoader.useContent(data.path, {})}
+                </Suspense>
+              </div>
+              <div className="hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-6">
+                {loaderData.neighbours.previous && (
+                  <Button asChild size="sm" variant="secondary">
+                    <Link to={loaderData.neighbours.previous.url}>
+                      <ArrowLeft className="size-4" /> {loaderData.neighbours.previous.name}
+                    </Link>
+                  </Button>
+                )}
+                {loaderData.neighbours.next && (
+                  <Button asChild size="sm" variant="secondary" className="ml-auto">
+                    <Link to={loaderData.neighbours.next.url}>
+                      {loaderData.neighbours.next.name} <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </SidebarProvider>
+    </div>
   );
 }

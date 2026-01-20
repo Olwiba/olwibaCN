@@ -2,6 +2,9 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-r
 import * as React from 'react';
 import appCss from '@/styles/app.css?url';
 import { RootProvider } from 'fumadocs-ui/provider/tanstack';
+import { SiteHeader } from '@/components/SiteHeader';
+import { SiteFooter } from '@/components/SiteFooter';
+import SearchDialog from '@/components/SearchDialog';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -38,12 +41,22 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+      <body className="flex min-h-screen flex-col antialiased [--header-height:3.5rem] [--footer-height:3.5rem]">
+        <RootProvider
+          search={{
+            SearchDialog,
+          }}
+        >
+          <SiteHeader />
+          <div className="mx-auto w-full max-w-[1400px] flex-1 border-r border-l border-dashed">
+            {children}
+          </div>
+          <SiteFooter />
+        </RootProvider>
         <Scripts />
       </body>
     </html>
