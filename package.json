@@ -1,6 +1,6 @@
 {
   "name": "@olwiba/cn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "type": "module",
   "sideEffects": false,
@@ -28,7 +28,8 @@
     "registry:build": "npx shadcn@latest build",
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
-    "prepublishOnly": "bun run build:package"
+    "prepublishOnly": "bun run build:package",
+    "publish": "npm publish --registry https://npm.olwiba.com/"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
