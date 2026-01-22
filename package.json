@@ -29,7 +29,7 @@
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
     "prepublishOnly": "bun run build:package",
-    "publish": "npm publish --registry https://npm.olwiba.com/"
+    "release": "npm publish --registry https://npm.olwiba.com/"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
