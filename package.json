@@ -21,9 +21,10 @@
     "src/styles/app.css"
   ],
   "scripts": {
-    "dev": "vite dev",
-    "build": "bun run registry:build && vite build",
-    "build:package": "tsup",
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "web:dev": "vite dev",
+    "web:build": "bun run registry:build && vite build",
     "start": "node .output/server/index.mjs",
     "registry:build": "npx shadcn@latest build",
     "types:check": "fumadocs-mdx && tsc --noEmit",
