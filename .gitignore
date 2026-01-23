@@ -6,6 +6,7 @@ bunfig.toml
 .DS_Store
 .cache
 .env
+.env.production
 .vercel
 .output
 .nitro
