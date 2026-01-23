@@ -23,13 +23,12 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "web:dev": "vite dev",
-    "web:build": "bun run registry:build && vite build",
+    "web:dev": "fumadocs-mdx && vite dev",
+    "web:build": "fumadocs-mdx && bun run registry:build && vite build",
     "start": "node .output/server/index.mjs",
     "registry:build": "npx shadcn@latest build",
     "types:check": "fumadocs-mdx && tsc --noEmit",
-    "postinstall": "fumadocs-mdx",
-    "prepublishOnly": "bun run build:package",
+    "prepublishOnly": "bun run build",
     "release": "npm publish --registry https://npm.olwiba.com/"
   },
   "dependencies": {
