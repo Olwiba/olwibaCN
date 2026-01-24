@@ -92,7 +92,7 @@
     "tailwindcss": ">=4.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",
