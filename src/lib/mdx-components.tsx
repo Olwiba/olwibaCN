@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils';
 import { ComponentPreview } from '@/components/docs/ComponentPreview';
 import { InstallationTabs } from '@/components/docs/InstallationTabs';
 import { Callout } from '@/components/docs/Callout';
-import { CopyButton } from '@/components/docs/CopyButton';
 import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
+import { CodeFence } from '@/components/docs/CodeFence';
 import {
   Accordion,
   AccordionContent,
@@ -127,36 +127,9 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  pre: ({ className, children, ...props }: React.ComponentProps<'pre'>) => {
-    const codeContent = React.Children.toArray(children).find(
-      (child) => React.isValidElement(child) && child.type === 'code'
-    );
-    const textContent =
-      React.isValidElement(codeContent) &&
-      typeof codeContent.props.children === 'string'
-        ? codeContent.props.children
-        : '';
-
-    return (
-      <div className="group relative my-4 rounded-lg border bg-muted/50">
-        <pre
-          className={cn(
-            'no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none has-[[data-highlighted-line]]:px-0 has-[[data-line-numbers]]:px-0',
-            className
-          )}
-          {...props}
-        >
-          {children}
-        </pre>
-        {textContent && (
-          <CopyButton
-            text={textContent}
-            className="absolute right-2 top-2"
-          />
-        )}
-      </div>
-    );
-  },
+  pre: ({ className, children, ...props }: React.ComponentProps<'pre'>) => (
+    <CodeFence className={className}>{children}</CodeFence>
+  ),
   code: ({ className, children, ...props }: React.ComponentProps<'code'>) => {
     if (typeof children === 'string') {
       return (

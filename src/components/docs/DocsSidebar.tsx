@@ -72,11 +72,14 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
                 <SidebarGroupContent>
                   {item.type === 'folder' && (
                     <SidebarMenu className="gap-0.5">
-                      {item.children.map((childItem) => {
-                        if (childItem.type !== 'page') return null;
-                        if (childItem.url === '/docs') return null;
-
-                        return (
+                      {item.children
+                        .filter((childItem) => {
+                          if (childItem.type !== 'page') return false;
+                          if (childItem.url === '/docs') return false;
+                          if (childItem.$id?.endsWith('index.mdx')) return false;
+                          return true;
+                        })
+                        .map((childItem) => (
                           <SidebarMenuItem key={childItem.url}>
                             <SidebarMenuButton
                               asChild
@@ -86,8 +89,7 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
                               <Link to={childItem.url}>{childItem.name}</Link>
                             </SidebarMenuButton>
                           </SidebarMenuItem>
-                        );
-                      })}
+                        ))}
                     </SidebarMenu>
                   )}
                 </SidebarGroupContent>

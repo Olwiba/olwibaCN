@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { CopyButton } from './CopyButton';
+import { CodeFence } from './CodeFence';
 
 interface InstallationTabsProps {
   name: string;
@@ -36,12 +36,7 @@ export function InstallationTabs({ name }: InstallationTabsProps) {
           </button>
         ))}
       </div>
-      <div className="relative">
-        <pre className="bg-fd-secondary border border-fd-border rounded-lg p-4 pr-12 text-sm font-mono overflow-x-auto">
-          {command}
-        </pre>
-        <CopyButton text={command} className="absolute top-3 right-3" />
-      </div>
+      <CodeFence code={command} className="my-0" />
     </div>
   );
 }

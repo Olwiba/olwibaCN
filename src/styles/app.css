@@ -221,17 +221,11 @@
     }
   }
 
+  /* rehype-pretty-code figure is just a wrapper - CodeFence handles the styling */
   [data-rehype-pretty-code-figure] {
-    background-color: var(--color-code);
-    color: var(--color-code-foreground);
-    border-radius: var(--radius-lg);
-    border-width: 0px;
-    border-color: var(--border);
-    margin-top: calc(var(--spacing) * 6);
-    overflow: hidden;
+    position: relative;
     font-size: var(--text-sm);
     outline: none;
-    position: relative;
   }
 
   [data-rehype-pretty-code-title] {
@@ -289,4 +283,5 @@
       background-color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
     }
   }
+
 }
