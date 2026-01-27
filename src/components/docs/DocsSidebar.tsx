@@ -37,7 +37,8 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
       <SidebarContent className="relative no-scrollbar overflow-x-hidden">
         <div className="pointer-events-none absolute top-0 left-0 right-0 z-10 h-8 bg-gradient-to-b from-background to-transparent" />
         <ScrollArea className="h-full w-full">
-          <div className="px-2 pt-4 pb-12">
+          <div className="h-[var(--top-spacing)] shrink-0" />
+          <div className="px-2 pb-12">
             <SidebarGroup>
             <SidebarGroupLabel className="font-medium text-muted-foreground">
               Sections

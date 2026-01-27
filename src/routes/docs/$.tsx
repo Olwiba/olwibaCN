@@ -90,13 +90,13 @@ function Page() {
 
   return (
     <div className="flex flex-1 flex-col px-2">
-      <SidebarProvider className="min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+      <SidebarProvider className="min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:1.5rem] lg:[--sidebar-width:240px] lg:[--top-spacing:2rem]">
         <DocsSidebar tree={data.pageTree} />
         <div className="h-full w-full lg:ml-[var(--sidebar-width)]">
           <div className="flex items-stretch xl:w-full">
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="h-[var(--top-spacing)] shrink-0" />
-              <div className="flex w-full min-w-0 max-w-2xl flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-6 lg:py-8 dark:text-neutral-300">
+              <div className="flex w-full min-w-0 max-w-2xl flex-1 flex-col gap-8 px-4 pb-6 text-neutral-800 md:px-6 lg:pb-8 dark:text-neutral-300">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-start justify-between">
                     <h1 className="scroll-m-20 font-semibold text-4xl tracking-tight sm:text-3xl xl:text-4xl">
@@ -153,10 +153,10 @@ function Page() {
               </div>
             </div>
             {loaderData.toc?.length > 0 && (
-              <div className="ml-auto hidden w-72 shrink-0 flex-col py-4 lg:py-6 xl:flex">
+              <div className="ml-auto hidden w-72 shrink-0 flex-col pb-4 lg:pb-6 xl:flex">
                 <div className="h-[var(--top-spacing)] shrink-0" />
                 <div className="sticky top-[calc(var(--header-height)+1px)] z-30 max-h-[calc(100svh-var(--header-height)-1px)] overflow-hidden overscroll-none">
-                  <div className="no-scrollbar overflow-y-auto px-8 py-2">
+                  <div className="no-scrollbar overflow-y-auto px-8 pb-2">
                     <DocsToc toc={loaderData.toc} />
                   </div>
                 </div>
