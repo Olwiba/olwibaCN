@@ -33,10 +33,10 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="no-scrollbar overflow-x-hidden">
+      <SidebarContent className="relative no-scrollbar overflow-x-hidden">
+        <div className="pointer-events-none absolute top-0 left-0 right-0 z-10 h-8 bg-gradient-to-b from-background to-transparent" />
         <ScrollArea className="h-full w-full">
-          <div className="sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b from-background via-background/80 to-background/50" />
-          <div className="px-2">
+          <div className="px-2 pt-4 pb-12">
             <SidebarGroup>
             <SidebarGroupLabel className="font-medium text-muted-foreground">
               Sections
@@ -98,8 +98,8 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
             );
           })}
           </div>
-          <div className="sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
         </ScrollArea>
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-12 bg-gradient-to-t from-background to-transparent" />
       </SidebarContent>
     </Sidebar>
   );
