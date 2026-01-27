@@ -30,7 +30,7 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
 
   return (
     <Sidebar
-      className="fixed top-[calc(var(--header-height)+1px)] left-auto z-30 hidden w-[220px] lg:w-[240px] h-[calc(100svh-var(--header-height)-1px)] overscroll-none bg-transparent lg:flex"
+      className="sticky top-[calc(var(--header-height)+1px)] z-30 hidden w-[220px] lg:w-[240px] h-[calc(100svh-var(--header-height)-1px)] self-start overscroll-none bg-transparent lg:flex"
       collapsible="none"
       {...props}
     >

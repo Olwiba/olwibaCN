@@ -92,7 +92,7 @@ function Page() {
     <div className="flex flex-1 flex-col px-2">
       <SidebarProvider className="min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:1.5rem] lg:[--sidebar-width:240px] lg:[--top-spacing:2rem]">
         <DocsSidebar tree={data.pageTree} />
-        <div className="h-full w-full lg:ml-[var(--sidebar-width)]">
+        <div className="flex-1 min-w-0">
           <div className="flex items-stretch xl:w-full">
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="h-[var(--top-spacing)] shrink-0" />
