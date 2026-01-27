@@ -6,6 +6,8 @@ import { InstallationTabs } from '@/components/docs/InstallationTabs';
 import { Callout } from '@/components/docs/Callout';
 import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
 import { CodeFence } from '@/components/docs/CodeFence';
+import { ThemeCodeBlock } from '@/components/docs/ThemeCodeBlock';
+import { ThemeSelector } from '@/components/ThemeSelector';
 import {
   Accordion,
   AccordionContent,
@@ -203,6 +205,9 @@ export const mdxComponents = {
   ComponentPreview,
   InstallationTabs,
   CopyCommandButton,
+  CodeFence,
+  ThemeSelector,
+  ThemeCodeBlock,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn('font-medium underline underline-offset-4', className)}

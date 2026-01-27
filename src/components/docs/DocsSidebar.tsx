@@ -29,14 +29,15 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
 
   return (
     <Sidebar
-      className="fixed top-[calc(var(--header-height)+1px)] left-auto z-30 hidden h-[calc(100svh-var(--header-height)-1px)] overscroll-none bg-transparent lg:flex"
+      className="fixed top-[calc(var(--header-height)+1px)] left-auto z-30 hidden w-[220px] lg:w-[240px] h-[calc(100svh-var(--header-height)-1px)] overscroll-none bg-transparent lg:flex"
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="no-scrollbar overflow-x-hidden px-2">
-        <ScrollArea className="h-[calc(90svh-50px)]">
+      <SidebarContent className="no-scrollbar overflow-x-hidden">
+        <ScrollArea className="h-full w-full">
           <div className="sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b from-background via-background/80 to-background/50" />
-          <SidebarGroup>
+          <div className="px-2">
+            <SidebarGroup>
             <SidebarGroupLabel className="font-medium text-muted-foreground">
               Sections
             </SidebarGroupLabel>
@@ -96,6 +97,7 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
               </SidebarGroup>
             );
           })}
+          </div>
           <div className="sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
         </ScrollArea>
       </SidebarContent>

@@ -5,6 +5,7 @@ import { RootProvider } from 'fumadocs-ui/provider/tanstack';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import SearchDialog from '@/components/docs/SearchDialog';
+import { ActiveThemeProvider } from '@/components/active-theme';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -46,17 +47,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="flex min-h-screen flex-col antialiased [--header-height:3.5rem] [--footer-height:3.5rem]">
-        <RootProvider
-          search={{
-            SearchDialog,
-          }}
-        >
-          <SiteHeader />
-          <div className="mx-auto w-full max-w-[1400px] flex-1 border-r border-l border-dashed">
-            {children}
-          </div>
-          <SiteFooter />
-        </RootProvider>
+        <ActiveThemeProvider>
+          <RootProvider
+            search={{
+              SearchDialog,
+            }}
+          >
+            <SiteHeader />
+            <div className="mx-auto w-full max-w-[1400px] flex-1 border-r border-l border-dashed">
+              {children}
+            </div>
+            <SiteFooter />
+          </RootProvider>
+        </ActiveThemeProvider>
         <Scripts />
       </body>
     </html>
