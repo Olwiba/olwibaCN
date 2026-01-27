@@ -17,6 +17,7 @@ import type { PageTree } from 'fumadocs-core/source';
 const TOP_LEVEL_SECTIONS = [
   { name: 'Get Started', href: '/docs' },
   { name: 'Components', href: '/docs/components' },
+  { name: 'Themes', href: '/docs/themes' },
 ];
 
 interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
@@ -64,6 +65,7 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
 
           {tree.children.map((item) => {
             if (item.$id === 'root:index.mdx') return null;
+            if (item.$id === 'root:themes.mdx') return null;
 
             return (
               <SidebarGroup key={item.$id}>
