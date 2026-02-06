@@ -37,31 +37,23 @@ import {
 
 ## API Reference
 
-### Accordion
+<APIReference name="Accordion" props={[
+  { name: "type", type: '"single" | "multiple"' },
+  { name: "collapsible", type: "boolean", default: "false" },
+  { name: "defaultValue", type: "string | string[]", default: "undefined" },
+  { name: "value", type: "string | string[]", default: "undefined" },
+  { name: "onValueChange", type: "(value: string | string[]) => void", default: "undefined" }
+]} />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `type` | `"single" \| "multiple"` | - |
-| `collapsible` | `boolean` | `false` |
-| `defaultValue` | `string \| string[]` | `undefined` |
-| `value` | `string \| string[]` | `undefined` |
-| `onValueChange` | `(value: string \| string[]) => void` | `undefined` |
+<APIReference name="AccordionItem" props={[
+  { name: "value", type: "string" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />
 
-### AccordionItem
+<APIReference name="AccordionTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `string` | - |
-| `disabled` | `boolean` | `false` |
-
-### AccordionTrigger
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
-
-### AccordionContent
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
+<APIReference name="AccordionContent" extends="div" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />

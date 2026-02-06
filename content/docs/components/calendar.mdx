@@ -1,6 +1,6 @@
 ---
-title: Calendar *
-description: Calendar component from the olwibaCN registry.
+title: Calendar
+description: A date picker component with single, multiple, and range selection modes.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -20,5 +20,24 @@ import { Calendar } from "@/components/ui/calendar"
 ```
 
 ```tsx
-<Calendar />
+const [date, setDate] = useState<Date | undefined>(new Date())
+
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+/>
 ```
+
+## API Reference
+
+<APIReference name="Calendar" props={[
+  { name: "mode", type: '"single" | "multiple" | "range"', default: "undefined" },
+  { name: "selected", type: "Date | Date[] | DateRange", default: "undefined" },
+  { name: "onSelect", type: "(date: Date | undefined) => void", default: "undefined" },
+  { name: "showOutsideDays", type: "boolean", default: "true" },
+  { name: "captionLayout", type: '"label" | "dropdown"', default: '"label"' },
+  { name: "buttonVariant", type: '"ghost" | "outline"', default: '"ghost"' },
+  { name: "classNames", type: "Partial<ClassNames>", default: "undefined" },
+  { name: "components", type: "Partial<Components>", default: "undefined" }
+]} />

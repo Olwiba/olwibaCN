@@ -36,6 +36,10 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 
 ## API Reference
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `variant` | `"default" \| "destructive" \| "info" \| "warning" \| "tip"` | `"default"` |
+<APIReference name="Alert" extends="div" props={[
+  { name: "variant", type: '"default" | "destructive" | "info" | "warning" | "tip"', default: '"default"' }
+]} />
+
+<APIReference name="AlertTitle" extends="h5" />
+
+<APIReference name="AlertDescription" extends="div" />

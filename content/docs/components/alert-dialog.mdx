@@ -51,28 +51,30 @@ import {
 
 ## API Reference
 
-### AlertDialog
+<APIReference name="AlertDialog" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" }
+]} />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `open` | `boolean` | `undefined` |
-| `onOpenChange` | `(open: boolean) => void` | `undefined` |
-| `defaultOpen` | `boolean` | `false` |
+<APIReference name="AlertDialogTrigger" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
 
-### AlertDialogTrigger
+<APIReference name="AlertDialogContent" extends="div" />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
+<APIReference name="AlertDialogHeader" extends="div" />
 
-### AlertDialogAction
+<APIReference name="AlertDialogFooter" extends="div" />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
+<APIReference name="AlertDialogTitle" extends="h2" />
 
-### AlertDialogCancel
+<APIReference name="AlertDialogDescription" extends="p" />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
+<APIReference name="AlertDialogAction" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="AlertDialogCancel" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />

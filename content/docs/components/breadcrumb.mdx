@@ -1,6 +1,6 @@
 ---
-title: Breadcrumb *
-description: Breadcrumb component from the olwibaCN registry.
+title: Breadcrumb
+description: Displays the path to the current resource using a hierarchy of links.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,48 @@ description: Breadcrumb component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Breadcrumb } from "@/components/ui/breadcrumb"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 ```
 
 ```tsx
-<Breadcrumb />
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Current Page</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
 ```
+
+## API Reference
+
+<APIReference name="Breadcrumb" extends="nav" props={[
+  { name: "separator", type: "ReactNode", default: "undefined" }
+]} />
+
+<APIReference name="BreadcrumbList" extends="ol" />
+
+<APIReference name="BreadcrumbItem" extends="li" />
+
+<APIReference name="BreadcrumbLink" extends="a" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="BreadcrumbPage" extends="span" />
+
+<APIReference name="BreadcrumbSeparator" extends="li" props={[
+  { name: "children", type: "ReactNode", default: "<ChevronRight />" }
+]} />
+
+<APIReference name="BreadcrumbEllipsis" extends="span" />

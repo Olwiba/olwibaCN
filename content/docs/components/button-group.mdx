@@ -1,6 +1,6 @@
 ---
-title: Button Group *
-description: Button Group component from the olwibaCN registry.
+title: Button Group
+description: Groups related buttons together with shared borders and optional separators.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,36 @@ description: Button Group component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { ButtonGroup } from "@/components/ui/button-group"
+import { ButtonGroup, ButtonGroupText, ButtonGroupSeparator } from "@/components/ui/button-group"
+import { Button } from "@/components/ui/button"
 ```
 
 ```tsx
-<ButtonGroup />
+<ButtonGroup>
+  <Button variant="outline">Left</Button>
+  <Button variant="outline">Center</Button>
+  <Button variant="outline">Right</Button>
+</ButtonGroup>
 ```
+
+```tsx
+<ButtonGroup orientation="vertical">
+  <Button variant="outline">Top</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Bottom</Button>
+</ButtonGroup>
+```
+
+## API Reference
+
+<APIReference name="ButtonGroup" extends="div" props={[
+  { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"' }
+]} />
+
+<APIReference name="ButtonGroupText" extends="div" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ButtonGroupSeparator" props={[
+  { name: "orientation", type: '"horizontal" | "vertical"', default: '"vertical"' }
+]} />

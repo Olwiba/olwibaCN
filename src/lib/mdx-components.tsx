@@ -5,6 +5,7 @@ import { ComponentPreview } from '@/components/docs/ComponentPreview';
 import { InstallationTabs } from '@/components/docs/InstallationTabs';
 import { Callout } from '@/components/docs/Callout';
 import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
+import { APIReference } from '@/components/docs/APIReference';
 import { CodeFence } from '@/components/docs/CodeFence';
 import { ThemeCodeBlock } from '@/components/docs/ThemeCodeBlock';
 import { ThemeSelector } from '@/components/ThemeSelector';
@@ -205,6 +206,7 @@ export const mdxComponents = {
   ComponentPreview,
   InstallationTabs,
   CopyCommandButton,
+  APIReference,
   CodeFence,
   ThemeSelector,
   ThemeCodeBlock,

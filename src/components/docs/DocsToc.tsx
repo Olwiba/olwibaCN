@@ -195,8 +195,8 @@ function useScrollToActive(
 
 function depthToX(depth: number): number {
   if (depth <= 2) return 1;
-  if (depth === 3) return 6;
-  return 10;
+  if (depth === 3) return 17;
+  return 33;
 }
 
 function generateTocPath(
@@ -226,11 +226,11 @@ function generateTocPath(
     if (curr.x === prev.x) {
       d += ` L ${curr.x} ${curr.bottom}`;
     } else {
-      // Curve in the gap between items
-      const gapMid = (prev.bottom + curr.top) / 2;
-      const r = Math.min(4, (curr.top - prev.bottom) / 3);
-      d += ` L ${prev.x} ${gapMid - r}`;
-      d += ` C ${prev.x} ${gapMid}, ${curr.x} ${gapMid}, ${curr.x} ${gapMid + r}`;
+      // Straight through the gap, then angle within the next item's space
+      const OFFSET = 4; // px into the next item where the angle completes
+      const off = Math.min(OFFSET, (curr.bottom - curr.top) / 2);
+      d += ` L ${prev.x} ${curr.top}`;
+      d += ` L ${curr.x} ${curr.top + off}`;
       d += ` L ${curr.x} ${curr.bottom}`;
     }
   }

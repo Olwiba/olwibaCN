@@ -28,23 +28,17 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 ## API Reference
 
-### Avatar
+<APIReference name="Avatar" extends="span" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
+<APIReference name="AvatarImage" extends="img" props={[
+  { name: "src", type: "string" },
+  { name: "alt", type: "string" },
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
 
-### AvatarImage
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `src` | `string` | - |
-| `alt` | `string` | - |
-| `asChild` | `boolean` | `false` |
-
-### AvatarFallback
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `delayMs` | `number` | `undefined` |
-| `asChild` | `boolean` | `false` |
+<APIReference name="AvatarFallback" extends="span" props={[
+  { name: "delayMs", type: "number", default: "undefined" },
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
