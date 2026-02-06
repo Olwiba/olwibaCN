@@ -1,6 +1,6 @@
 ---
-title: Carousel *
-description: Carousel component from the olwibaCN registry.
+title: Carousel
+description: A carousel with motion and swipe built on top of Embla Carousel.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,46 @@ description: Carousel component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Carousel } from "@/components/ui/carousel"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 ```
 
 ```tsx
-<Carousel />
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>Slide 1</CarouselItem>
+    <CarouselItem>Slide 2</CarouselItem>
+    <CarouselItem>Slide 3</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
 ```
+
+## API Reference
+
+<APIReference name="Carousel" extends="div" props={[
+  { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"' },
+  { name: "opts", type: "EmblaCarouselOptions", default: "undefined" },
+  { name: "plugins", type: "EmblaCarouselPlugin[]", default: "undefined" },
+  { name: "setApi", type: "(api: CarouselApi) => void", default: "undefined" }
+]} />
+
+<APIReference name="CarouselContent" extends="div" />
+
+<APIReference name="CarouselItem" extends="div" />
+
+<APIReference name="CarouselPrevious" extends="button" props={[
+  { name: "variant", type: "ButtonVariant", default: '"outline"' },
+  { name: "size", type: "ButtonSize", default: '"icon"' }
+]} />
+
+<APIReference name="CarouselNext" extends="button" props={[
+  { name: "variant", type: "ButtonVariant", default: '"outline"' },
+  { name: "size", type: "ButtonSize", default: '"icon"' }
+]} />

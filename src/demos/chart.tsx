@@ -20,13 +20,13 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
 
 export default function ChartDemo() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full max-w-md">
+    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
       <BarChart accessibilityLayer data={chartData}>
         <XAxis
           dataKey="month"
@@ -35,7 +35,7 @@ export default function ChartDemo() {
           axisLine={false}
           tickFormatter={(value) => value.slice(0, 3)}
         />
-        <YAxis tickLine={false} axisLine={false} tickMargin={10} />
+        <YAxis tickLine={false} axisLine={false} width={30} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
       </BarChart>

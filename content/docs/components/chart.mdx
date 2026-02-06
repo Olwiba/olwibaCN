@@ -1,6 +1,6 @@
 ---
-title: Chart *
-description: Chart component from the olwibaCN registry.
+title: Chart
+description: Beautiful, theme-aware charts built on top of Recharts.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,49 @@ description: Chart component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Chart } from "@/components/ui/chart"
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/components/ui/chart"
+import { Bar, BarChart, XAxis } from "recharts"
 ```
 
 ```tsx
-<Chart />
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig
+
+<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+  <BarChart data={data}>
+    <XAxis dataKey="month" />
+    <ChartTooltip content={<ChartTooltipContent />} />
+    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+  </BarChart>
+</ChartContainer>
 ```
+
+## API Reference
+
+<APIReference name="ChartContainer" extends="div" props={[
+  { name: "config", type: "ChartConfig" },
+  { name: "children", type: "ReactElement (Recharts chart)" }
+]} />
+
+<APIReference name="ChartTooltipContent" extends="div" props={[
+  { name: "hideLabel", type: "boolean", default: "false" },
+  { name: "hideIndicator", type: "boolean", default: "false" },
+  { name: "indicator", type: '"line" | "dot" | "dashed"', default: '"dot"' },
+  { name: "nameKey", type: "string", default: "undefined" },
+  { name: "labelKey", type: "string", default: "undefined" }
+]} />
+
+<APIReference name="ChartLegendContent" extends="div" props={[
+  { name: "hideIcon", type: "boolean", default: "false" },
+  { name: "nameKey", type: "string", default: "undefined" },
+  { name: "verticalAlign", type: '"top" | "bottom"', default: '"bottom"' }
+]} />
