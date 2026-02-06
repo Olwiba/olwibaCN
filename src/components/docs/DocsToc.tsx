@@ -15,31 +15,42 @@ function useActiveItem(itemIds: string[]) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        }
-      },
-      { rootMargin: "0% 0% -80% 0%" }
-    );
+    if (!itemIds.length) return;
 
-    for (const id of itemIds ?? []) {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
+    const update = () => {
+      const scrollTop = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const triggerPoint = scrollTop + viewportHeight * 0.5;
+
+      // At bottom of page — last heading wins
+      if (scrollTop + viewportHeight >= docHeight - 2) {
+        setActiveId(itemIds[itemIds.length - 1]);
+        return;
       }
-    }
+
+      // Find the last heading above the trigger point
+      let active: string | null = null;
+      for (const id of itemIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top + scrollTop <= triggerPoint) {
+          active = id;
+        } else {
+          break;
+        }
+      }
+
+      setActiveId(active ?? itemIds[0]);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
 
     return () => {
-      for (const id of itemIds ?? []) {
-        const element = document.getElementById(id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      }
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
   }, [itemIds]);
 
@@ -97,11 +108,19 @@ function useScrollProgress(
       const scrollTop = window.scrollY;
       const viewportHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
-      
-      // Trigger point is ~20% from top of viewport
-      const triggerPoint = scrollTop + viewportHeight * 0.2;
+      const maxScroll = docHeight - viewportHeight;
 
-      // Find which section we're in and how far through it
+      // At bottom of page — snap to last item
+      if (maxScroll > 0 && scrollTop + viewportHeight >= docHeight - 2) {
+        const last = headingPositions[headingPositions.length - 1];
+        setProgress({ top: last.tocTop, height: last.tocHeight });
+        return;
+      }
+
+      // Trigger point is ~20% from top of viewport
+      const triggerPoint = scrollTop + viewportHeight * 0.5;
+
+      // Find which section we're in
       let currentIndex = 0;
       for (let i = headingPositions.length - 1; i >= 0; i--) {
         if (triggerPoint >= headingPositions[i].docTop) {
@@ -120,11 +139,12 @@ function useScrollProgress(
         const positionInSection = triggerPoint - current.docTop;
         progressRatio = Math.max(0, Math.min(1, positionInSection / sectionLength));
       } else {
-        // Last section - calculate progress to end of document
-        const remainingDoc = docHeight - current.docTop - viewportHeight;
-        if (remainingDoc > 0) {
-          const positionInSection = triggerPoint - current.docTop;
-          progressRatio = Math.max(0, Math.min(1, positionInSection / remainingDoc));
+        // Last section — interpolate from when heading hits trigger to page bottom
+        const sectionScrollStart = current.docTop - viewportHeight * 0.5;
+        const sectionScrollEnd = maxScroll;
+        const range = sectionScrollEnd - sectionScrollStart;
+        if (range > 0) {
+          progressRatio = Math.max(0, Math.min(1, (scrollTop - sectionScrollStart) / range));
         } else {
           progressRatio = 1;
         }
