@@ -1,6 +1,6 @@
 ---
 title: Avatar
-description: Avatar component from the olwibaCN registry.
+description: An image element with a fallback for representing the user.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,35 @@ description: Avatar component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Avatar } from "@/components/ui/avatar"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 ```
 
 ```tsx
-<Avatar />
+<Avatar>
+  <AvatarImage src="/avatar.png" alt="@olwiba" />
+  <AvatarFallback>OB</AvatarFallback>
+</Avatar>
 ```
+
+## API Reference
+
+### Avatar
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+
+### AvatarImage
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `src` | `string` | - |
+| `alt` | `string` | - |
+| `asChild` | `boolean` | `false` |
+
+### AvatarFallback
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `delayMs` | `number` | `undefined` |
+| `asChild` | `boolean` | `false` |

@@ -1,6 +1,6 @@
 ---
 title: Aspect Ratio
-description: Aspect Ratio component from the olwibaCN registry.
+description: Displays content within a desired ratio.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -20,5 +20,13 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 ```
 
 ```tsx
-<AspectRatio />
+<AspectRatio ratio={16 / 9}>
+  <img src="..." alt="..." className="h-full w-full object-cover" />
+</AspectRatio>
 ```
+
+## API Reference
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `ratio` | `number` | `1` |

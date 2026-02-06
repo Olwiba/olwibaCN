@@ -1,6 +1,6 @@
 ---
 title: Alert
-description: Alert component from the olwibaCN registry.
+description: Displays a callout for important information with semantic color variants.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,26 @@ description: Alert component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Alert } from "@/components/ui/alert"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 ```
 
 ```tsx
-<Alert />
+<Alert>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>You can add components using the cli.</AlertDescription>
+</Alert>
 ```
+
+```tsx
+<Alert variant="info">
+  <Info className="h-4 w-4" />
+  <AlertTitle>Info</AlertTitle>
+  <AlertDescription>Your account has been updated.</AlertDescription>
+</Alert>
+```
+
+## API Reference
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "destructive" \| "info" \| "warning" \| "tip"` | `"default"` |

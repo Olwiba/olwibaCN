@@ -1,6 +1,6 @@
 ---
 title: Alert Dialog
-description: Alert Dialog component from the olwibaCN registry.
+description: A modal dialog that interrupts the user with important content and expects a response.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,63 @@ description: Alert Dialog component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { AlertDialog } from "@/components/ui/alert-dialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 ```
 
 ```tsx
-<AlertDialog />
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="outline">Delete Account</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
 ```
+
+## API Reference
+
+### AlertDialog
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | `undefined` |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` |
+| `defaultOpen` | `boolean` | `false` |
+
+### AlertDialogTrigger
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+
+### AlertDialogAction
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+
+### AlertDialogCancel
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |

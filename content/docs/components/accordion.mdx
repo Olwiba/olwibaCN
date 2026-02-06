@@ -1,6 +1,6 @@
 ---
 title: Accordion
-description: Accordion component from the olwibaCN registry.
+description: A vertically stacked set of interactive headings that each reveal a section of content.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,52 @@ description: Accordion component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Accordion } from "@/components/ui/accordion"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 ```
 
 ```tsx
-<Accordion />
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
 ```
+
+## API Reference
+
+### Accordion
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `type` | `"single" \| "multiple"` | - |
+| `collapsible` | `boolean` | `false` |
+| `defaultValue` | `string \| string[]` | `undefined` |
+| `value` | `string \| string[]` | `undefined` |
+| `onValueChange` | `(value: string \| string[]) => void` | `undefined` |
+
+### AccordionItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | - |
+| `disabled` | `boolean` | `false` |
+
+### AccordionTrigger
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+
+### AccordionContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
