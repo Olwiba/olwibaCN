@@ -15,7 +15,7 @@ export function SiteHeader() {
       <div className="flex h-full w-full max-w-[1400px] items-center gap-2 border-r border-l border-dashed px-4 md:mx-auto md:gap-5 md:px-6">
         <Link className="flex items-center gap-2" to="/">
           <span className="font-bold text-lg">
-            olwiba<span className="text-green-400">CN</span>
+            olwiba<span className="text-primary">CN</span>
           </span>
         </Link>
 
@@ -46,7 +46,7 @@ export function SiteHeader() {
               </svg>
               <span className="hidden sm:inline">GitHub</span>
             </a>
-            <span className="absolute -right-2 -top-2 rotate-12 bg-green-500 px-1.5 pt-0.5 pb-1 text-[8px] font-bold text-white rounded-xs">
+            <span className="absolute -right-2 -top-2 rotate-12 bg-primary px-1.5 pt-0.5 pb-1 text-[8px] font-bold text-primary-foreground rounded-xs">
               soon
             </span>
           </div>

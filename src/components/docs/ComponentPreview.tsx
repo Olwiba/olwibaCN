@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 
 const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   // Existing demos
@@ -60,6 +61,21 @@ const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   tooltip: React.lazy(() => import('@/demos/tooltip')),
 };
 
+// Portal context — demos render <DemoControls> in their tree,
+// but the DOM gets portaled below the preview area.
+const ControlsPortalContext = React.createContext<HTMLDivElement | null>(null);
+
+export function DemoControls({ children }: { children: React.ReactNode }) {
+  const target = React.useContext(ControlsPortalContext);
+  if (!target) return null;
+  return createPortal(
+    <div className="border-t border-fd-border px-6 py-4">
+      {children}
+    </div>,
+    target,
+  );
+}
+
 interface ComponentPreviewProps {
   name: string;
   title?: string;
@@ -67,23 +83,27 @@ interface ComponentPreviewProps {
 
 export function ComponentPreview({ name, title }: ComponentPreviewProps) {
   const Demo = demos[name];
+  const [portalTarget, setPortalTarget] = React.useState<HTMLDivElement | null>(null);
 
   return (
-    <div className="border border-fd-border rounded-lg overflow-hidden not-prose my-6">
-      {title && (
-        <div className="px-4 py-2 border-b border-fd-border bg-fd-muted/50">
-          <span className="text-sm text-fd-muted-foreground">{title}</span>
-        </div>
-      )}
-      <div className="p-8 bg-fd-background flex items-center justify-center min-h-[200px]">
-        {Demo ? (
-          <React.Suspense fallback={<div className="text-fd-muted-foreground">Loading...</div>}>
-            <Demo />
-          </React.Suspense>
-        ) : (
-          <p className="text-fd-muted-foreground">Demo coming soon for: {name}</p>
+    <ControlsPortalContext.Provider value={portalTarget}>
+      <div className="border border-fd-border rounded-lg overflow-hidden not-prose my-6">
+        {title && (
+          <div className="px-4 py-2 border-b border-fd-border bg-fd-muted/50">
+            <span className="text-sm text-fd-muted-foreground">{title}</span>
+          </div>
         )}
+        <div className="p-8 bg-fd-background flex items-center justify-center min-h-[200px]">
+          {Demo ? (
+            <React.Suspense fallback={<div className="text-fd-muted-foreground">Loading...</div>}>
+              <Demo />
+            </React.Suspense>
+          ) : (
+            <p className="text-fd-muted-foreground">Demo coming soon for: {name}</p>
+          )}
+        </div>
+        <div ref={setPortalTarget} />
       </div>
-    </div>
+    </ControlsPortalContext.Provider>
   );
 }
