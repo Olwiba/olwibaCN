@@ -52,7 +52,7 @@ export default function ButtonDemo() {
               {sizes.map((s) => (
                 <Button
                   key={s}
-                  variant={size === s ? "default" : "outline"}
+                  variant={size === s ? "default" : "secondary"}
                   size="sm"
                   onClick={() => setSize(s)}
                 >
