@@ -47,11 +47,21 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const hasBackdrop = playful && variant !== "ghost" && variant !== "link"
 
+    const backdropColor: Record<string, string> = {
+      default: "bg-primary/30 dark:bg-primary/20",
+      destructive: "bg-destructive/30 dark:bg-destructive/20",
+      secondary: "bg-foreground/10 dark:bg-foreground/10",
+      outline: "bg-foreground/10 dark:bg-foreground/10",
+    }
+
     if (hasBackdrop) {
       return (
         <span className="group/playful relative inline-flex">
           <span
-            className="absolute inset-0 rounded-md bg-primary/30 transition-transform duration-200 translate-x-[3px] translate-y-[3px] -rotate-[0.5deg] group-hover/playful:-rotate-[1.5deg] group-hover/playful:scale-[1.01] dark:bg-primary/20"
+            className={cn(
+              "absolute inset-0 rounded-md transition-transform duration-200 translate-x-[3px] translate-y-[3px] -rotate-[0.5deg] group-hover/playful:-rotate-[1.5deg] group-hover/playful:scale-[1.01]",
+              backdropColor[variant ?? "default"],
+            )}
             aria-hidden="true"
           />
           <Comp
