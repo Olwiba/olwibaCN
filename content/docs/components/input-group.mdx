@@ -1,6 +1,6 @@
 ---
-title: Input Group *
-description: Input Group component from the olwibaCN registry.
+title: Input Group
+description: A wrapper that combines an input with addons like icons, text, or buttons.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,38 @@ description: Input Group component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { InputGroup } from "@/components/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group"
 ```
 
 ```tsx
-<InputGroup />
+<InputGroup>
+  <InputGroupAddon>
+    <Search className="h-4 w-4" />
+  </InputGroupAddon>
+  <InputGroupInput placeholder="Search..." />
+</InputGroup>
 ```
+
+## API Reference
+
+<APIReference name="InputGroup" extends="div" />
+
+<APIReference name="InputGroupAddon" extends="div" props={[
+  { name: "align", type: "'inline-start' | 'inline-end' | 'block-start' | 'block-end'", default: "'inline-start'" }
+]} />
+
+<APIReference name="InputGroupInput" extends="input" />
+
+<APIReference name="InputGroupTextarea" extends="textarea" />
+
+<APIReference name="InputGroupButton" extends="button" props={[
+  { name: "variant", type: "ButtonVariant", default: "'ghost'" },
+  { name: "size", type: "'xs' | 'sm' | 'icon-xs' | 'icon-sm'", default: "'xs'" }
+]} />
+
+<APIReference name="InputGroupText" extends="span" />

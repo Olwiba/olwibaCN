@@ -1,6 +1,6 @@
 ---
-title: Command *
-description: Command component from the olwibaCN registry.
+title: Command
+description: A fast, composable command menu built on top of cmdk.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,61 @@ description: Command component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Command } from "@/components/ui/command"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command"
 ```
 
 ```tsx
-<Command />
+<Command>
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem>Calendar</CommandItem>
+      <CommandItem>Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>Profile</CommandItem>
+      <CommandItem>Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
 ```
+
+## API Reference
+
+<APIReference name="Command" extends="div" />
+
+<APIReference name="CommandDialog" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" }
+]} />
+
+<APIReference name="CommandInput" extends="input" />
+
+<APIReference name="CommandList" extends="div" />
+
+<APIReference name="CommandEmpty" extends="div" />
+
+<APIReference name="CommandGroup" extends="div" props={[
+  { name: "heading", type: "ReactNode", default: "undefined" }
+]} />
+
+<APIReference name="CommandItem" extends="div" props={[
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "onSelect", type: "(value: string) => void", default: "undefined" },
+  { name: "value", type: "string", default: "undefined" }
+]} />
+
+<APIReference name="CommandSeparator" extends="div" />
+
+<APIReference name="CommandShortcut" extends="span" />

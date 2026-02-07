@@ -1,6 +1,6 @@
 ---
-title: Drawer *
-description: Drawer component from the olwibaCN registry.
+title: Drawer
+description: A panel that slides in from the edge of the screen, built on top of Vaul.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,69 @@ description: Drawer component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Drawer } from "@/components/ui/drawer"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 ```
 
 ```tsx
-<Drawer />
+<Drawer>
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Are you sure?</DrawerTitle>
+      <DrawerDescription>This action cannot be undone.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <Button>Submit</Button>
+      <DrawerClose>
+        <Button variant="outline">Cancel</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
 ```
+
+## API Reference
+
+<APIReference name="Drawer" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "shouldScaleBackground", type: "boolean", default: "true" },
+  { name: "direction", type: "'top' | 'bottom' | 'left' | 'right'", default: "'bottom'" },
+  { name: "dismissible", type: "boolean", default: "true" },
+  { name: "handleOnly", type: "boolean", default: "false" },
+  { name: "snapPoints", type: "number[]", default: "undefined" },
+  { name: "fadeFromIndex", type: "number", default: "undefined" }
+]} />
+
+<APIReference name="DrawerTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DrawerPortal" props={[
+  { name: "container", type: "HTMLElement", default: "undefined" }
+]} />
+
+<APIReference name="DrawerOverlay" extends="div" />
+
+<APIReference name="DrawerContent" extends="div" />
+
+<APIReference name="DrawerHeader" extends="div" />
+
+<APIReference name="DrawerFooter" extends="div" />
+
+<APIReference name="DrawerTitle" extends="h2" />
+
+<APIReference name="DrawerDescription" extends="p" />
+
+<APIReference name="DrawerClose" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />

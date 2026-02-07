@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Calculator,
   Calendar,
@@ -16,7 +18,6 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-
 export default function CommandDemo() {
   return (
     <Command className="rounded-lg border shadow-md w-[300px]">
@@ -42,17 +43,17 @@ export default function CommandDemo() {
           <CommandItem>
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
-            <CommandShortcut>⌘P</CommandShortcut>
+            <CommandShortcut shortcut="mod+P" />
           </CommandItem>
           <CommandItem>
             <CreditCard className="mr-2 h-4 w-4" />
             <span>Billing</span>
-            <CommandShortcut>⌘B</CommandShortcut>
+            <CommandShortcut shortcut="mod+B" />
           </CommandItem>
           <CommandItem>
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
-            <CommandShortcut>⌘S</CommandShortcut>
+            <CommandShortcut shortcut="mod+S" />
           </CommandItem>
         </CommandGroup>
       </CommandList>

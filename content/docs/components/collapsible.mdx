@@ -1,6 +1,6 @@
 ---
-title: Collapsible *
-description: Collapsible component from the olwibaCN registry.
+title: Collapsible
+description: An interactive component which expands and collapses a panel.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,33 @@ description: Collapsible component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Collapsible } from "@/components/ui/collapsible"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 ```
 
 ```tsx
-<Collapsible />
+<Collapsible>
+  <CollapsibleTrigger>Toggle</CollapsibleTrigger>
+  <CollapsibleContent>
+    Content that can be collapsed.
+  </CollapsibleContent>
+</Collapsible>
 ```
+
+## API Reference
+
+<APIReference name="Collapsible" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="CollapsibleTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="CollapsibleContent" extends="div" />

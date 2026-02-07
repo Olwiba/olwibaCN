@@ -17,8 +17,8 @@ export default function ItemDemo() {
       <Item>
         <ItemMedia variant="image">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>SC</AvatarFallback>
+            <AvatarImage src="/android-chrome-512x512.png" />
+            <AvatarFallback>OC</AvatarFallback>
           </Avatar>
         </ItemMedia>
         <ItemContent>
@@ -35,7 +35,7 @@ export default function ItemDemo() {
         <ItemMedia variant="image">
           <Avatar>
             <AvatarImage src="https://github.com/vercel.png" />
-            <AvatarFallback>JD</AvatarFallback>
+            <AvatarFallback>JS</AvatarFallback>
           </Avatar>
         </ItemMedia>
         <ItemContent>

@@ -1,6 +1,6 @@
 ---
-title: Context Menu *
-description: Context Menu component from the olwibaCN registry.
+title: Context Menu
+description: Displays a menu at the pointer's position when the trigger is right-clicked.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,73 @@ description: Context Menu component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { ContextMenu } from "@/components/ui/context-menu"
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
 ```
 
 ```tsx
-<ContextMenu />
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Back</ContextMenuItem>
+    <ContextMenuItem>Forward</ContextMenuItem>
+    <ContextMenuItem>Reload</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
 ```
+
+## API Reference
+
+<APIReference name="ContextMenu" props={[
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" }
+]} />
+
+<APIReference name="ContextMenuTrigger" extends="span" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ContextMenuContent" extends="div" props={[
+  { name: "alignOffset", type: "number", default: "0" },
+  { name: "avoidCollisions", type: "boolean", default: "true" }
+]} />
+
+<APIReference name="ContextMenuItem" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ContextMenuCheckboxItem" extends="div" props={[
+  { name: "checked", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ContextMenuRadioGroup" props={[
+  { name: "value", type: "string", default: "undefined" },
+  { name: "onValueChange", type: "(value: string) => void", default: "undefined" }
+]} />
+
+<APIReference name="ContextMenuRadioItem" extends="div" props={[
+  { name: "value", type: "string" }
+]} />
+
+<APIReference name="ContextMenuLabel" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ContextMenuSeparator" extends="div" />
+
+<APIReference name="ContextMenuShortcut" extends="span" />
+
+<APIReference name="ContextMenuSub" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" }
+]} />
+
+<APIReference name="ContextMenuSubTrigger" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ContextMenuSubContent" extends="div" />

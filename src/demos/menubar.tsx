@@ -7,7 +7,6 @@ import {
   MenubarShortcut,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-
 export default function MenubarDemo() {
   return (
     <Menubar>
@@ -15,10 +14,10 @@ export default function MenubarDemo() {
         <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+            New Tab <MenubarShortcut shortcut="mod+T" />
           </MenubarItem>
           <MenubarItem>
-            New Window <MenubarShortcut>⌘N</MenubarShortcut>
+            New Window <MenubarShortcut shortcut="mod+N" />
           </MenubarItem>
           <MenubarSeparator />
           <MenubarItem>Share</MenubarItem>
@@ -30,10 +29,10 @@ export default function MenubarDemo() {
         <MenubarTrigger>Edit</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
+            Undo <MenubarShortcut shortcut="mod+Z" />
           </MenubarItem>
           <MenubarItem>
-            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+            Redo <MenubarShortcut shortcut="shift+mod+Z" />
           </MenubarItem>
           <MenubarSeparator />
           <MenubarItem>Cut</MenubarItem>

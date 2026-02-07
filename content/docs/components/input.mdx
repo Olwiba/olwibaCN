@@ -1,10 +1,10 @@
 ---
-title: Input *
-description: Displays a form input field.
+title: Input
+description: Displays a form input field for text entry.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
-  <CopyCommandButton command="bunx shadcn@latest add @olwiba/input" />
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/input" />
 </div>
 
 <ComponentPreview name="input" />
@@ -22,3 +22,11 @@ import { Input } from "@/components/ui/input"
 ```tsx
 <Input type="email" placeholder="Email" />
 ```
+
+## API Reference
+
+<APIReference name="Input" extends="input" props={[
+  { name: "type", type: "string", default: "'text'" },
+  { name: "placeholder", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />

@@ -3,6 +3,7 @@ import * as MenubarPrimitive from "@radix-ui/react-menubar"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Hotkey } from "@/components/ui/hotkey"
 
 function MenubarMenu({
   ...props
@@ -220,8 +221,10 @@ MenubarSeparator.displayName = MenubarPrimitive.Separator.displayName
 
 const MenubarShortcut = ({
   className,
+  shortcut,
+  children,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: React.HTMLAttributes<HTMLSpanElement> & { shortcut?: string }) => {
   return (
     <span
       className={cn(
@@ -229,7 +232,9 @@ const MenubarShortcut = ({
         className
       )}
       {...props}
-    />
+    >
+      {shortcut != null ? <Hotkey shortcut={shortcut} /> : children}
+    </span>
   )
 }
 MenubarShortcut.displayname = "MenubarShortcut"

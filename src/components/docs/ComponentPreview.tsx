@@ -41,6 +41,7 @@ const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   field: React.lazy(() => import('@/demos/field')),
   form: React.lazy(() => import('@/demos/form')),
   'hover-card': React.lazy(() => import('@/demos/hover-card')),
+  hotkey: React.lazy(() => import('@/demos/hotkey')),
   'input-group': React.lazy(() => import('@/demos/input-group')),
   'input-otp': React.lazy(() => import('@/demos/input-otp')),
   item: React.lazy(() => import('@/demos/item')),

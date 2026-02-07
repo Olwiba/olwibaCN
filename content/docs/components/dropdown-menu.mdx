@@ -1,6 +1,6 @@
 ---
-title: Dropdown Menu *
-description: Dropdown Menu component from the olwibaCN registry.
+title: Dropdown Menu
+description: Displays a menu of actions or options triggered by a button.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,98 @@ description: Dropdown Menu component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { DropdownMenu } from "@/components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 ```
 
 ```tsx
-<DropdownMenu />
+<DropdownMenu>
+  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Billing</DropdownMenuItem>
+    <DropdownMenuItem>Settings</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
 ```
+
+## API Reference
+
+<APIReference name="DropdownMenu" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" },
+  { name: "modal", type: "boolean", default: "true" },
+  { name: "dir", type: "'ltr' | 'rtl'", default: "undefined" }
+]} />
+
+<APIReference name="DropdownMenuTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DropdownMenuContent" extends="div" props={[
+  { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "'bottom'" },
+  { name: "sideOffset", type: "number", default: "4" },
+  { name: "align", type: "'start' | 'center' | 'end'", default: "'center'" },
+  { name: "alignOffset", type: "number", default: "0" },
+  { name: "avoidCollisions", type: "boolean", default: "true" },
+  { name: "loop", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DropdownMenuItem" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" },
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "onSelect", type: "(event: Event) => void", default: "undefined" }
+]} />
+
+<APIReference name="DropdownMenuCheckboxItem" extends="div" props={[
+  { name: "checked", type: "boolean", default: "false" },
+  { name: "onCheckedChange", type: "(checked: boolean) => void", default: "undefined" }
+]} />
+
+<APIReference name="DropdownMenuRadioGroup" props={[
+  { name: "value", type: "string", default: "undefined" },
+  { name: "onValueChange", type: "(value: string) => void", default: "undefined" }
+]} />
+
+<APIReference name="DropdownMenuRadioItem" extends="div" props={[
+  { name: "value", type: "string" }
+]} />
+
+<APIReference name="DropdownMenuLabel" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DropdownMenuSeparator" extends="div" />
+
+<APIReference name="DropdownMenuShortcut" extends="span" />
+
+<APIReference name="DropdownMenuGroup" extends="div" />
+
+<APIReference name="DropdownMenuPortal" props={[
+  { name: "container", type: "HTMLElement", default: "undefined" },
+  { name: "forceMount", type: "boolean", default: "undefined" }
+]} />
+
+<APIReference name="DropdownMenuSub" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DropdownMenuSubTrigger" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DropdownMenuSubContent" extends="div" props={[
+  { name: "sideOffset", type: "number", default: "0" },
+  { name: "alignOffset", type: "number", default: "0" }
+]} />

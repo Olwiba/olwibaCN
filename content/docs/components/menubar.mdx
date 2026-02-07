@@ -1,5 +1,5 @@
 ---
-title: Menubar *
+title: Menubar
 description: Menubar component from the olwibaCN registry.
 ---
 
@@ -22,3 +22,69 @@ import { Menubar } from "@/components/ui/menubar"
 ```tsx
 <Menubar />
 ```
+
+## API Reference
+
+<APIReference name="Menubar" extends="div" />
+
+<APIReference name="MenubarMenu" extends="div" />
+
+<APIReference name="MenubarTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="MenubarContent" extends="div" props={[
+  { name: "align", type: "'start' | 'center' | 'end'", default: "'start'" },
+  { name: "alignOffset", type: "number", default: "-4" },
+  { name: "sideOffset", type: "number", default: "8" }
+]} />
+
+<APIReference name="MenubarItem" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" },
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "onSelect", type: "(event: Event) => void", default: "undefined" }
+]} />
+
+<APIReference name="MenubarSubTrigger" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="MenubarSubContent" extends="div" props={[
+  { name: "sideOffset", type: "number", default: "8" },
+  { name: "alignOffset", type: "number", default: "-4" }
+]} />
+
+<APIReference name="MenubarCheckboxItem" extends="div" props={[
+  { name: "checked", type: "boolean", default: "false" },
+  { name: "onCheckedChange", type: "(checked: boolean) => void", default: "undefined" }
+]} />
+
+<APIReference name="MenubarRadioGroup" extends="div" props={[
+  { name: "value", type: "string", default: "undefined" },
+  { name: "onValueChange", type: "(value: string) => void", default: "undefined" }
+]} />
+
+<APIReference name="MenubarRadioItem" extends="div" props={[
+  { name: "value", type: "string" }
+]} />
+
+<APIReference name="MenubarLabel" extends="div" props={[
+  { name: "inset", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="MenubarSeparator" extends="div" />
+
+<APIReference name="MenubarShortcut" extends="span" />
+
+<APIReference name="MenubarGroup" extends="div" />
+
+<APIReference name="MenubarPortal" props={[
+  { name: "container", type: "HTMLElement", default: "undefined" },
+  { name: "forceMount", type: "boolean", default: "undefined" }
+]} />
+
+<APIReference name="MenubarSub" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" }
+]} />

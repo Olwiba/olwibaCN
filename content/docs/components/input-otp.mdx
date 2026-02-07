@@ -1,6 +1,6 @@
 ---
-title: Input Otp *
-description: Input Otp component from the olwibaCN registry.
+title: Input OTP
+description: A one-time password input built on top of input-otp.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,45 @@ description: Input Otp component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { InputOtp } from "@/components/ui/input-otp"
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+} from "@/components/ui/input-otp"
 ```
 
 ```tsx
-<InputOtp />
+<InputOTP maxLength={6}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+  </InputOTPGroup>
+  <InputOTPSeparator />
+  <InputOTPGroup>
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>
 ```
+
+## API Reference
+
+<APIReference name="InputOTP" extends="input" props={[
+  { name: "maxLength", type: "number", default: "required" },
+  { name: "value", type: "string", default: "undefined" },
+  { name: "onChange", type: "(value: string) => void", default: "undefined" },
+  { name: "pattern", type: "string", default: "undefined" },
+  { name: "containerClassName", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="InputOTPGroup" extends="div" />
+
+<APIReference name="InputOTPSlot" extends="div" props={[
+  { name: "index", type: "number", default: "required" }
+]} />
+
+<APIReference name="InputOTPSeparator" extends="div" />

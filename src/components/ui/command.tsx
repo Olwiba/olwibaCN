@@ -7,6 +7,7 @@ import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Hotkey } from "@/components/ui/hotkey"
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
@@ -126,8 +127,10 @@ CommandItem.displayName = CommandPrimitive.Item.displayName
 
 const CommandShortcut = ({
   className,
+  shortcut,
+  children,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: React.HTMLAttributes<HTMLSpanElement> & { shortcut?: string }) => {
   return (
     <span
       className={cn(
@@ -135,7 +138,9 @@ const CommandShortcut = ({
         className
       )}
       {...props}
-    />
+    >
+      {shortcut != null ? <Hotkey shortcut={shortcut} /> : children}
+    </span>
   )
 }
 CommandShortcut.displayName = "CommandShortcut"

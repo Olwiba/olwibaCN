@@ -1,6 +1,6 @@
 ---
-title: Dialog *
-description: Dialog component from the olwibaCN registry.
+title: Dialog
+description: A modal window that overlays the main content and requires user interaction.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,73 @@ description: Dialog component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Dialog } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 ```
 
 ```tsx
-<Dialog />
+<Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button type="submit">Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
 ```
+
+## API Reference
+
+<APIReference name="Dialog" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" },
+  { name: "modal", type: "boolean", default: "true" }
+]} />
+
+<APIReference name="DialogTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="DialogPortal" props={[
+  { name: "container", type: "HTMLElement", default: "undefined" },
+  { name: "forceMount", type: "boolean", default: "undefined" }
+]} />
+
+<APIReference name="DialogOverlay" extends="div" props={[
+  { name: "forceMount", type: "boolean", default: "undefined" }
+]} />
+
+<APIReference name="DialogContent" extends="div" props={[
+  { name: "forceMount", type: "boolean", default: "undefined" },
+  { name: "onOpenAutoFocus", type: "(event: Event) => void", default: "undefined" },
+  { name: "onCloseAutoFocus", type: "(event: Event) => void", default: "undefined" },
+  { name: "onEscapeKeyDown", type: "(event: KeyboardEvent) => void", default: "undefined" },
+  { name: "onPointerDownOutside", type: "(event: PointerDownOutsideEvent) => void", default: "undefined" },
+  { name: "onInteractOutside", type: "(event: PointerDownOutsideEvent | FocusOutsideEvent) => void", default: "undefined" }
+]} />
+
+<APIReference name="DialogHeader" extends="div" />
+
+<APIReference name="DialogFooter" extends="div" />
+
+<APIReference name="DialogTitle" extends="h2" />
+
+<APIReference name="DialogDescription" extends="p" />
+
+<APIReference name="DialogClose" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />

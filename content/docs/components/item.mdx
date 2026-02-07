@@ -1,6 +1,6 @@
 ---
-title: Item *
-description: Item component from the olwibaCN registry.
+title: Item
+description: A flexible list item layout with media, content, and action slots.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,63 @@ description: Item component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Item } from "@/components/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemMedia,
+  ItemActions,
+  ItemGroup,
+} from "@/components/ui/item"
 ```
 
 ```tsx
-<Item />
+<ItemGroup>
+  <Item>
+    <ItemMedia variant="image">
+      <Avatar>
+        <AvatarImage src="/avatar.png" />
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+    </ItemMedia>
+    <ItemContent>
+      <ItemTitle>John Doe</ItemTitle>
+      <ItemDescription>Software Engineer</ItemDescription>
+    </ItemContent>
+    <ItemActions>
+      <Button variant="ghost" size="icon">
+        <MoreHorizontal className="h-4 w-4" />
+      </Button>
+    </ItemActions>
+  </Item>
+</ItemGroup>
 ```
+
+## API Reference
+
+<APIReference name="Item" extends="div" props={[
+  { name: "variant", type: "'default' | 'outline' | 'muted'", default: "'default'" },
+  { name: "size", type: "'default' | 'sm'", default: "'default'" },
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="ItemGroup" extends="div" />
+
+<APIReference name="ItemMedia" extends="div" props={[
+  { name: "variant", type: "'default' | 'icon' | 'image'", default: "'default'" }
+]} />
+
+<APIReference name="ItemContent" extends="div" />
+
+<APIReference name="ItemTitle" extends="div" />
+
+<APIReference name="ItemDescription" extends="p" />
+
+<APIReference name="ItemActions" extends="div" />
+
+<APIReference name="ItemHeader" extends="div" />
+
+<APIReference name="ItemFooter" extends="div" />
+
+<APIReference name="ItemSeparator" extends="div" />

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ContextMenu,
   ContextMenuContent,
@@ -6,7 +8,6 @@ import {
   ContextMenuShortcut,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-
 export default function ContextMenuDemo() {
   return (
     <ContextMenu>
@@ -16,20 +17,20 @@ export default function ContextMenuDemo() {
       <ContextMenuContent className="w-64">
         <ContextMenuItem>
           Back
-          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+          <ContextMenuShortcut shortcut="mod+[" />
         </ContextMenuItem>
         <ContextMenuItem disabled>
           Forward
-          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+          <ContextMenuShortcut shortcut="mod+]" />
         </ContextMenuItem>
         <ContextMenuItem>
           Reload
-          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+          <ContextMenuShortcut shortcut="mod+R" />
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem>
           Save Page As...
-          <ContextMenuShortcut>⌘S</ContextMenuShortcut>
+          <ContextMenuShortcut shortcut="mod+S" />
         </ContextMenuItem>
         <ContextMenuItem>Print...</ContextMenuItem>
       </ContextMenuContent>

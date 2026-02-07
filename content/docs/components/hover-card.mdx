@@ -1,6 +1,6 @@
 ---
-title: Hover Card *
-description: Hover Card component from the olwibaCN registry.
+title: Hover Card
+description: A card that appears when hovering over a trigger element, for sighted users.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,41 @@ description: Hover Card component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { HoverCard } from "@/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
 ```
 
 ```tsx
-<HoverCard />
+<HoverCard>
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent>
+    Content that appears on hover.
+  </HoverCardContent>
+</HoverCard>
 ```
+
+## API Reference
+
+<APIReference name="HoverCard" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" },
+  { name: "openDelay", type: "number", default: "700" },
+  { name: "closeDelay", type: "number", default: "300" }
+]} />
+
+<APIReference name="HoverCardTrigger" extends="a" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="HoverCardContent" extends="div" props={[
+  { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "'bottom'" },
+  { name: "sideOffset", type: "number", default: "4" },
+  { name: "align", type: "'start' | 'center' | 'end'", default: "'center'" },
+  { name: "alignOffset", type: "number", default: "0" },
+  { name: "avoidCollisions", type: "boolean", default: "true" },
+  { name: "forceMount", type: "boolean", default: "undefined" }
+]} />

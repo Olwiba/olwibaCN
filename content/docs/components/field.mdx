@@ -1,6 +1,6 @@
 ---
-title: Field *
-description: Field component from the olwibaCN registry.
+title: Field
+description: A composable form field layout with label, description, and error support.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -16,9 +16,48 @@ description: Field component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Field } from "@/components/ui/field"
+import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldGroup,
+} from "@/components/ui/field"
 ```
 
 ```tsx
-<Field />
+<FieldGroup>
+  <Field>
+    <FieldLabel>Email</FieldLabel>
+    <Input type="email" placeholder="Enter your email" />
+    <FieldDescription>We'll never share your email.</FieldDescription>
+  </Field>
+</FieldGroup>
 ```
+
+## API Reference
+
+<APIReference name="Field" extends="div" props={[
+  { name: "orientation", type: "'vertical' | 'horizontal' | 'responsive'", default: "'vertical'" }
+]} />
+
+<APIReference name="FieldGroup" extends="div" />
+
+<APIReference name="FieldSet" extends="fieldset" />
+
+<APIReference name="FieldLegend" extends="legend" props={[
+  { name: "variant", type: "'legend' | 'label'", default: "'legend'" }
+]} />
+
+<APIReference name="FieldLabel" extends="label" />
+
+<APIReference name="FieldTitle" extends="div" />
+
+<APIReference name="FieldContent" extends="div" />
+
+<APIReference name="FieldDescription" extends="p" />
+
+<APIReference name="FieldError" extends="div" props={[
+  { name: "errors", type: "Array<{ message?: string } | undefined>", default: "undefined" }
+]} />
+
+<APIReference name="FieldSeparator" extends="div" />

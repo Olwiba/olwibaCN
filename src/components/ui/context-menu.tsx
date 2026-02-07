@@ -3,6 +3,7 @@ import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Hotkey } from "@/components/ui/hotkey"
 
 const ContextMenu = ContextMenuPrimitive.Root
 
@@ -165,8 +166,10 @@ ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName
 
 const ContextMenuShortcut = ({
   className,
+  shortcut,
+  children,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: React.HTMLAttributes<HTMLSpanElement> & { shortcut?: string }) => {
   return (
     <span
       className={cn(
@@ -174,7 +177,9 @@ const ContextMenuShortcut = ({
         className
       )}
       {...props}
-    />
+    >
+      {shortcut != null ? <Hotkey shortcut={shortcut} /> : children}
+    </span>
   )
 }
 ContextMenuShortcut.displayName = "ContextMenuShortcut"

@@ -5,6 +5,7 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Hotkey } from "@/components/ui/hotkey"
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 
@@ -170,13 +171,17 @@ DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
 
 const DropdownMenuShortcut = ({
   className,
+  shortcut,
+  children,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: React.HTMLAttributes<HTMLSpanElement> & { shortcut?: string }) => {
   return (
     <span
       className={cn("ml-auto text-xs tracking-widest opacity-60", className)}
       {...props}
-    />
+    >
+      {shortcut != null ? <Hotkey shortcut={shortcut} /> : children}
+    </span>
   )
 }
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut"

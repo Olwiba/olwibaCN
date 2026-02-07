@@ -1,6 +1,6 @@
 ---
-title: Checkbox *
-description: Checkbox component from the olwibaCN registry.
+title: Checkbox
+description: A control that allows the user to toggle between checked and not checked.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
@@ -20,5 +20,21 @@ import { Checkbox } from "@/components/ui/checkbox"
 ```
 
 ```tsx
-<Checkbox />
+<div className="flex items-center space-x-2">
+  <Checkbox id="terms" />
+  <label htmlFor="terms">Accept terms and conditions</label>
+</div>
 ```
+
+## API Reference
+
+<APIReference name="Checkbox" extends="button" props={[
+  { name: "checked", type: "boolean | 'indeterminate'", default: "undefined" },
+  { name: "onCheckedChange", type: "(checked: boolean | 'indeterminate') => void", default: "undefined" },
+  { name: "defaultChecked", type: "boolean", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "required", type: "boolean", default: "false" },
+  { name: "name", type: "string", default: "undefined" },
+  { name: "value", type: "string", default: '"on"' },
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
