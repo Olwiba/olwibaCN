@@ -11,13 +11,9 @@ import { fireConfetti } from "@/lib/confetti";
 export default function ConfettiDemo() {
   const [centered, setCentered] = useState(false);
 
-  const run = () => {
-    fireConfetti({ centered });
-  };
-
   return (
     <>
-      <Button onClick={run} size="lg" className="gap-2">
+      <Button onClick={() => fireConfetti({ centered })} size="lg" className="gap-2">
         <Play className="h-4 w-4" />
         Fire confetti
       </Button>

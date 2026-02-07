@@ -15,7 +15,7 @@ description: Canvas confetti using the current theme.
 
 ## Usage
 
-Uses theme primary colors. Fires from bottom-left and bottom-right corners; use `centered: true` for bottom center. Safe to call multiple times.
+Fires from bottom-left and bottom-right corners; use `centered: true` for bottom center. With no `colors` option, confetti reads `--primary` and `--primary-foreground` from the document (so it matches your theme). Pass `colors` (HEX strings) to override. Safe to call multiple times.
 
 ```tsx
 import { fireConfetti } from "@/lib/confetti"
@@ -29,6 +29,10 @@ fireConfetti()
 fireConfetti({ centered: true })
 ```
 
+```tsx
+fireConfetti({ colors: ["#22c55e", "#15803d"] })
+```
+
 ## API Reference
 
 <APIReference name="fireConfetti" props={[
@@ -37,5 +41,5 @@ fireConfetti({ centered: true })
   { name: "spread", type: "number", default: "60" },
   { name: "scalar", type: "number", default: "1.2" },
   { name: "ticks", type: "number", default: "200" },
-  { name: "colors", type: "string[]", default: "theme primary" }
+  { name: "colors", type: "string[]", default: "—" }
 ]} />
