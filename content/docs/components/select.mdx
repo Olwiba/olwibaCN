@@ -1,5 +1,5 @@
 ---
-title: Select *
+title: Select
 description: Select component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,66 @@ description: Select component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Select } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 ```
 
 ```tsx
-<Select />
+<Select>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Select a fruit" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Fruits</SelectLabel>
+      <SelectItem value="apple">Apple</SelectItem>
+      <SelectItem value="banana">Banana</SelectItem>
+      <SelectItem value="grapes">Grapes</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
 ```
+
+## API Reference
+
+<APIReference name="Select" props={[
+  { name: "value", type: "string", default: "undefined" },
+  { name: "onValueChange", type: "(value: string) => void", default: "undefined" },
+  { name: "defaultValue", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "required", type: "boolean", default: "false" },
+  { name: "name", type: "string", default: "undefined" }
+]} />
+
+<APIReference name="SelectTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="SelectContent" extends="div" props={[
+  { name: "position", type: "'popper' | 'item-aligned'", default: "'popper'" },
+  { name: "sideOffset", type: "number", default: "4" }
+]} />
+
+<APIReference name="SelectGroup" extends="div" />
+
+<APIReference name="SelectValue" extends="span" />
+
+<APIReference name="SelectLabel" extends="div" />
+
+<APIReference name="SelectItem" extends="div" props={[
+  { name: "value", type: "string" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="SelectSeparator" extends="div" />
+
+<APIReference name="SelectScrollUpButton" extends="button" />
+
+<APIReference name="SelectScrollDownButton" extends="button" />

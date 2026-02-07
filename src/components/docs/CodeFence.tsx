@@ -22,18 +22,39 @@ function extractText(node: React.ReactNode): string {
 }
 
 export function CodeFence({ children, code, className }: CodeFenceProps) {
-  // If code prop is provided, use it directly; otherwise extract from children
   const textContent = code ?? extractText(children).trim();
+  const preRef = React.useRef<HTMLPreElement>(null);
+  const [showFade, setShowFade] = React.useState(false);
+
+  React.useEffect(() => {
+    const pre = preRef.current;
+    if (!pre) return;
+    const check = () => setShowFade(pre.scrollWidth > pre.clientWidth);
+    check();
+    const ro = new ResizeObserver(check);
+    ro.observe(pre);
+    return () => ro.disconnect();
+  }, [children, code]);
 
   return (
-    <div className={cn("group relative my-4", className)}>
-      <pre className="no-scrollbar min-w-0 overflow-x-auto rounded-lg border bg-code text-code-foreground px-4 py-3.5 pr-12 text-sm font-mono">
-        {children ?? <code>{code}</code>}
-      </pre>
-      <CopyButton
-        text={textContent}
-        className="absolute right-2.5 top-2.5 z-10"
-      />
+    <div className={cn("group my-4 flex overflow-hidden rounded-lg border bg-code text-code-foreground", className)}>
+      <div className="relative min-w-0 flex-1">
+        <pre
+          ref={preRef}
+          className="no-scrollbar overflow-x-auto px-4 py-3.5 text-sm font-mono"
+        >
+          {children ?? <code>{code}</code>}
+        </pre>
+        {showFade && (
+          <div
+            className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 shrink-0 bg-gradient-to-r from-transparent to-[var(--color-code)]"
+            aria-hidden
+          />
+        )}
+      </div>
+      <div className="flex shrink-0 items-center self-start pt-[10.5px] pr-2">
+        <CopyButton text={textContent} />
+      </div>
     </div>
   );
 }

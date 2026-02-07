@@ -16,11 +16,33 @@ description: Menubar component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Menubar } from "@/components/ui/menubar"
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
 ```
 
 ```tsx
-<Menubar />
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        New Tab <MenubarShortcut shortcut="mod+T" />
+      </MenubarItem>
+      <MenubarItem>
+        New Window <MenubarShortcut shortcut="mod+N" />
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>Print</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
 ```
 
 ## API Reference

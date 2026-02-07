@@ -1,5 +1,5 @@
 ---
-title: Resizable *
+title: Resizable
 description: Resizable component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,35 @@ description: Resizable component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Resizable } from "@/components/ui/resizable"
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable"
 ```
 
 ```tsx
-<Resizable />
+<ResizablePanelGroup className="min-h-[200px] max-w-md rounded-lg border">
+  <ResizablePanel defaultSize={50}>
+    <div className="flex h-full items-center justify-center p-6">Panel One</div>
+  </ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel defaultSize={50}>
+    <div className="flex h-full items-center justify-center p-6">Panel Two</div>
+  </ResizablePanel>
+</ResizablePanelGroup>
 ```
+
+## API Reference
+
+<APIReference name="ResizablePanelGroup" extends="div" props={[
+  { name: "direction", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+  { name: "autoSaveId", type: "string", default: "undefined" }
+]} />
+
+<APIReference name="ResizablePanel" extends="div" props={[
+  { name: "defaultSize", type: "number", default: "undefined" },
+  { name: "minSize", type: "number", default: "undefined" },
+  { name: "maxSize", type: "number", default: "undefined" },
+  { name: "order", type: "number", default: "undefined" }
+]} />
+
+<APIReference name="ResizableHandle" extends="div" props={[
+  { name: "withHandle", type: "boolean", default: "false" }
+]} />

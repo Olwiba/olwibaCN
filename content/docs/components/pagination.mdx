@@ -1,5 +1,5 @@
 ---
-title: Pagination *
+title: Pagination
 description: Pagination component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,54 @@ description: Pagination component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Pagination } from "@/components/ui/pagination"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 ```
 
 ```tsx
-<Pagination />
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>2</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
 ```
+
+## API Reference
+
+<APIReference name="Pagination" extends="nav" />
+
+<APIReference name="PaginationContent" extends="ul" />
+
+<APIReference name="PaginationItem" extends="li" />
+
+<APIReference name="PaginationLink" extends="a" props={[
+  { name: "isActive", type: "boolean", default: "false" },
+  { name: "size", type: "'default' | 'sm' | 'lg' | 'icon'", default: "'icon'" }
+]} />
+
+<APIReference name="PaginationPrevious" extends="a" />
+
+<APIReference name="PaginationNext" extends="a" />
+
+<APIReference name="PaginationEllipsis" extends="span" />

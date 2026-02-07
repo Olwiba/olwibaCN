@@ -1,5 +1,5 @@
 ---
-title: Popover *
+title: Popover
 description: Popover component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,39 @@ description: Popover component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Popover } from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
 ```
 
 ```tsx
-<Popover />
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Open popover</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80">
+    <div className="grid gap-4">
+      <h4 className="font-medium leading-none">Dimensions</h4>
+      <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+    </div>
+  </PopoverContent>
+</Popover>
 ```
+
+## API Reference
+
+<APIReference name="Popover" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="PopoverTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="PopoverContent" extends="div" props={[
+  { name: "align", type: "'start' | 'center' | 'end'", default: "'center'" },
+  { name: "sideOffset", type: "number", default: "4" }
+]} />
+
+<APIReference name="PopoverAnchor" extends="div" />

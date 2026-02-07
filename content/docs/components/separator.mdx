@@ -1,5 +1,5 @@
 ---
-title: Separator *
+title: Separator
 description: Separator component from the olwibaCN registry.
 ---
 
@@ -20,5 +20,25 @@ import { Separator } from "@/components/ui/separator"
 ```
 
 ```tsx
-<Separator />
+<div>
+  <div className="space-y-1">
+    <h4 className="text-sm font-medium leading-none">Title</h4>
+    <p className="text-sm text-muted-foreground">Description.</p>
+  </div>
+  <Separator className="my-4" />
+  <div className="flex h-5 items-center space-x-4 text-sm">
+    <div>Blog</div>
+    <Separator orientation="vertical" />
+    <div>Docs</div>
+    <Separator orientation="vertical" />
+    <div>Source</div>
+  </div>
+</div>
 ```
+
+## API Reference
+
+<APIReference name="Separator" extends="div" props={[
+  { name: "orientation", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+  { name: "decorative", type: "boolean", default: "true" }
+]} />

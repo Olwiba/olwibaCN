@@ -1,5 +1,5 @@
 ---
-title: Radio Group *
+title: Radio Group
 description: Radio Group component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,39 @@ description: Radio Group component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { RadioGroup } from "@/components/ui/radio-group"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
 ```
 
 ```tsx
-<RadioGroup />
+<RadioGroup defaultValue="comfortable">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="default" id="r1" />
+    <Label htmlFor="r1">Default</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="comfortable" id="r2" />
+    <Label htmlFor="r2">Comfortable</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="compact" id="r3" />
+    <Label htmlFor="r3">Compact</Label>
+  </div>
+</RadioGroup>
 ```
+
+## API Reference
+
+<APIReference name="RadioGroup" extends="div" props={[
+  { name: "value", type: "string", default: "undefined" },
+  { name: "onValueChange", type: "(value: string) => void", default: "undefined" },
+  { name: "defaultValue", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "name", type: "string", default: "undefined" },
+  { name: "required", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="RadioGroupItem" extends="button" props={[
+  { name: "value", type: "string" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />

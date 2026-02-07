@@ -1,5 +1,5 @@
 ---
-title: Sidebar *
+title: Sidebar
 description: Sidebar component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,96 @@ description: Sidebar component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Sidebar } from "@/components/ui/sidebar"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 ```
 
 ```tsx
-<Sidebar />
+<SidebarProvider defaultOpen>
+  <Sidebar className="border-r">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>Home</SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>Settings</SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <main className="flex-1 p-4">
+    <SidebarTrigger />
+    <p>Main content</p>
+  </main>
+</SidebarProvider>
 ```
+
+## API Reference
+
+<APIReference name="SidebarProvider" props={[
+  { name: "defaultOpen", type: "boolean", default: "true" },
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" }
+]} />
+
+<APIReference name="Sidebar" extends="aside" />
+
+<APIReference name="SidebarTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="SidebarHeader" extends="div" />
+
+<APIReference name="SidebarFooter" extends="div" />
+
+<APIReference name="SidebarContent" extends="div" />
+
+<APIReference name="SidebarGroup" extends="div" />
+
+<APIReference name="SidebarGroupLabel" extends="span" />
+
+<APIReference name="SidebarGroupContent" extends="div" />
+
+<APIReference name="SidebarGroupAction" extends="div" />
+
+<APIReference name="SidebarMenu" extends="ul" />
+
+<APIReference name="SidebarMenuItem" extends="li" />
+
+<APIReference name="SidebarMenuButton" extends="button" />
+
+<APIReference name="SidebarMenuAction" extends="div" />
+
+<APIReference name="SidebarMenuBadge" extends="div" />
+
+<APIReference name="SidebarMenuSub" extends="ul" />
+
+<APIReference name="SidebarMenuSubButton" extends="button" />
+
+<APIReference name="SidebarMenuSubItem" extends="div" />
+
+<APIReference name="SidebarMenuSkeleton" extends="div" />
+
+<APIReference name="SidebarSeparator" extends="div" />
+
+<APIReference name="SidebarInput" extends="input" />
+
+<APIReference name="SidebarInset" extends="main" />
+
+<APIReference name="SidebarRail" extends="div" />

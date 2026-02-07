@@ -1,5 +1,5 @@
 ---
-title: Progress *
+title: Progress
 description: Progress component from the olwibaCN registry.
 ---
 
@@ -20,5 +20,12 @@ import { Progress } from "@/components/ui/progress"
 ```
 
 ```tsx
-<Progress />
+<Progress value={66} />
 ```
+
+## API Reference
+
+<APIReference name="Progress" extends="div" props={[
+  { name: "value", type: "number", default: "undefined" },
+  { name: "max", type: "number", default: "100" }
+]} />

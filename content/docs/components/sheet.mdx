@@ -1,5 +1,5 @@
 ---
-title: Sheet *
+title: Sheet
 description: Sheet component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,66 @@ description: Sheet component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Sheet } from "@/components/ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 ```
 
 ```tsx
-<Sheet />
+<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="outline">Open Sheet</Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Edit profile</SheetTitle>
+      <SheetDescription>
+        Make changes to your profile here.
+      </SheetDescription>
+    </SheetHeader>
+    <div className="grid gap-4 py-4">
+      {/* form content */}
+    </div>
+    <SheetFooter>
+      <Button type="submit">Save changes</Button>
+    </SheetFooter>
+  </SheetContent>
+</Sheet>
 ```
+
+## API Reference
+
+<APIReference name="Sheet" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="SheetTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="SheetContent" extends="div" props={[
+  { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "'right'" }
+]} />
+
+<APIReference name="SheetClose" extends="button" />
+
+<APIReference name="SheetHeader" extends="div" />
+
+<APIReference name="SheetFooter" extends="div" />
+
+<APIReference name="SheetTitle" extends="h2" />
+
+<APIReference name="SheetDescription" extends="p" />
+
+<APIReference name="SheetOverlay" extends="div" />
+
+<APIReference name="SheetPortal" />

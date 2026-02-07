@@ -1,5 +1,5 @@
 ---
-title: Switch *
+title: Switch
 description: Switch component from the olwibaCN registry.
 ---
 
@@ -17,8 +17,21 @@ description: Switch component from the olwibaCN registry.
 
 ```tsx
 import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 ```
 
 ```tsx
-<Switch />
+<div className="flex items-center space-x-2">
+  <Switch id="airplane-mode" />
+  <Label htmlFor="airplane-mode">Airplane Mode</Label>
+</div>
 ```
+
+## API Reference
+
+<APIReference name="Switch" extends="button" props={[
+  { name: "checked", type: "boolean", default: "undefined" },
+  { name: "onCheckedChange", type: "(checked: boolean) => void", default: "undefined" },
+  { name: "defaultChecked", type: "boolean", default: "false" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />

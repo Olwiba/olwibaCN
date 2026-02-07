@@ -1,5 +1,5 @@
 ---
-title: Slider *
+title: Slider
 description: Slider component from the olwibaCN registry.
 ---
 
@@ -20,5 +20,17 @@ import { Slider } from "@/components/ui/slider"
 ```
 
 ```tsx
-<Slider />
+<Slider defaultValue={[50]} max={100} step={1} />
 ```
+
+## API Reference
+
+<APIReference name="Slider" extends="span" props={[
+  { name: "value", type: "number[]", default: "undefined" },
+  { name: "onValueChange", type: "(value: number[]) => void", default: "undefined" },
+  { name: "defaultValue", type: "number[]", default: "undefined" },
+  { name: "min", type: "number", default: "0" },
+  { name: "max", type: "number", default: "100" },
+  { name: "step", type: "number", default: "1" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />

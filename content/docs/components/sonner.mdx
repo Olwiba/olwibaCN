@@ -1,5 +1,5 @@
 ---
-title: Sonner *
+title: Sonner
 description: Sonner component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,23 @@ description: Sonner component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Sonner } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
+import { Button } from "@/components/ui/button"
 ```
 
 ```tsx
-<Sonner />
+<Toaster />
+<Button onClick={() => toast("Event created", { description: "Sunday at 9:00 AM" })}>
+  Show Toast
+</Button>
+<Button onClick={() => toast.success("Saved!")}>Success</Button>
+<Button onClick={() => toast.error("Something went wrong")}>Error</Button>
 ```
+
+## API Reference
+
+<APIReference name="Toaster" extends="div" props={[
+  { name: "position", type: "'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center'", default: "'bottom-right'" },
+  { name: "expand", type: "boolean", default: "false" }
+]} />
