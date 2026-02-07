@@ -110,6 +110,12 @@ function useScrollProgress(
         return;
       }
 
+      if (scrollTop <= 2) {
+        const first = headingPositions[0];
+        setProgress({ top: first.tocTop, height: first.tocHeight });
+        return;
+      }
+
       const triggerPoint = scrollTop + viewportHeight * 0.5;
 
       let currentIndex = 0;
