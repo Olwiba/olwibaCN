@@ -33,6 +33,7 @@ const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   chart: React.lazy(() => import('@/demos/chart')),
   collapsible: React.lazy(() => import('@/demos/collapsible')),
   command: React.lazy(() => import('@/demos/command')),
+  confetti: React.lazy(() => import('@/demos/confetti')),
   'context-menu': React.lazy(() => import('@/demos/context-menu')),
   dialog: React.lazy(() => import('@/demos/dialog')),
   drawer: React.lazy(() => import('@/demos/drawer')),

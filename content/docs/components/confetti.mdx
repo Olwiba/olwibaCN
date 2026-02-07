@@ -1,0 +1,41 @@
+---
+title: Confetti
+description: Canvas confetti using the current theme.
+---
+
+<div className="flex flex-col md:flex-row items-center justify-end gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/confetti" />
+</div>
+
+<ComponentPreview name="confetti" />
+
+## Installation
+
+<InstallationTabs name="confetti" />
+
+## Usage
+
+Uses theme primary colors. Fires from bottom-left and bottom-right corners; use `centered: true` for bottom center. Safe to call multiple times.
+
+```tsx
+import { fireConfetti } from "@/lib/confetti"
+```
+
+```tsx
+fireConfetti()
+```
+
+```tsx
+fireConfetti({ centered: true })
+```
+
+## API Reference
+
+<APIReference name="fireConfetti" props={[
+  { name: "centered", type: "boolean", default: "false" },
+  { name: "particleCount", type: "number", default: "120" },
+  { name: "spread", type: "number", default: "60" },
+  { name: "scalar", type: "number", default: "1.2" },
+  { name: "ticks", type: "number", default: "200" },
+  { name: "colors", type: "string[]", default: "theme primary" }
+]} />
