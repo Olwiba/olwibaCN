@@ -1,5 +1,5 @@
 ---
-title: Tooltip *
+title: Tooltip
 description: Tooltip component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,47 @@ description: Tooltip component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Tooltip } from "@/components/ui/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
 ```
 
 ```tsx
-<Tooltip />
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Hover me</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Add to library</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+
+## API Reference
+
+<APIReference name="TooltipProvider" props={[
+  { name: "delayDuration", type: "number", default: "700" },
+  { name: "skipDelayDuration", type: "number", default: "300" }
+]} />
+
+<APIReference name="Tooltip" props={[
+  { name: "open", type: "boolean", default: "undefined" },
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "defaultOpen", type: "boolean", default: "false" },
+  { name: "delayDuration", type: "number", default: "undefined" }
+]} />
+
+<APIReference name="TooltipTrigger" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
+
+<APIReference name="TooltipContent" extends="div" props={[
+  { name: "sideOffset", type: "number", default: "4" },
+  { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "undefined" }
+]} />

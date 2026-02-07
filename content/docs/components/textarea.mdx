@@ -1,5 +1,5 @@
 ---
-title: Textarea *
+title: Textarea
 description: Textarea component from the olwibaCN registry.
 ---
 
@@ -20,5 +20,12 @@ import { Textarea } from "@/components/ui/textarea"
 ```
 
 ```tsx
-<Textarea />
+<Textarea placeholder="Type your message here." />
 ```
+
+## API Reference
+
+<APIReference name="Textarea" extends="textarea" props={[
+  { name: "placeholder", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />

@@ -1,5 +1,5 @@
 ---
-title: Table *
+title: Table
 description: Table component from the olwibaCN registry.
 ---
 
@@ -16,9 +16,51 @@ description: Table component from the olwibaCN registry.
 ## Usage
 
 ```tsx
-import { Table } from "@/components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 ```
 
 ```tsx
-<Table />
+<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead className="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell className="text-right">$250.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
 ```
+
+## API Reference
+
+<APIReference name="Table" extends="table" />
+
+<APIReference name="TableHeader" extends="thead" />
+
+<APIReference name="TableBody" extends="tbody" />
+
+<APIReference name="TableFooter" extends="tfoot" />
+
+<APIReference name="TableRow" extends="tr" />
+
+<APIReference name="TableHead" extends="th" />
+
+<APIReference name="TableCell" extends="td" />
+
+<APIReference name="TableCaption" extends="caption" />

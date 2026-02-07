@@ -1,9 +1,12 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function SonnerDemo() {
   return (
-    <div className="flex flex-wrap gap-2">
+    <>
+      <Toaster />
+      <div className="flex flex-wrap gap-2">
       <Button
         variant="outline"
         onClick={() =>
@@ -27,5 +30,6 @@ export default function SonnerDemo() {
         Error
       </Button>
     </div>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 ---
-title: Toggle *
+title: Toggle
 description: Toggle component from the olwibaCN registry.
 ---
 
@@ -20,5 +20,16 @@ import { Toggle } from "@/components/ui/toggle"
 ```
 
 ```tsx
-<Toggle />
+<Toggle aria-label="Toggle italic">Italic</Toggle>
+<Toggle variant="outline">Bold</Toggle>
 ```
+
+## API Reference
+
+<APIReference name="Toggle" extends="button" props={[
+  { name: "pressed", type: "boolean", default: "undefined" },
+  { name: "onPressedChange", type: "(pressed: boolean) => void", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "variant", type: "'default' | 'outline'", default: "'default'" },
+  { name: "size", type: "'default' | 'sm' | 'lg'", default: "'default'" }
+]} />
