@@ -227,9 +227,9 @@ function generateTocPath(
       d += ` L ${curr.x} ${curr.bottom}`;
     } else {
       // Straight through the gap, then angle within the next item's space
-      const OFFSET = 4; // px into the next item where the angle completes
+      const OFFSET = 8; // px into the next item where the angle completes
       const off = Math.min(OFFSET, (curr.bottom - curr.top) / 2);
-      d += ` L ${prev.x} ${curr.top}`;
+      d += ` L ${prev.x} ${curr.top - off}`;
       d += ` L ${curr.x} ${curr.top + off}`;
       d += ` L ${curr.x} ${curr.bottom}`;
     }
