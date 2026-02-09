@@ -8,6 +8,7 @@ import * as React from 'react';
 import { Suspense } from 'react';
 import { mdxComponents } from '@/lib/mdx-components';
 import { DocsSidebar } from '@/components/docs/DocsSidebar';
+import { DocsMobileNav } from '@/components/docs/DocsMobileNav';
 import { DocsToc, type TocItem } from '@/components/docs/DocsToc';
 import { DocsCopyPage } from '@/components/docs/DocsCopyPage';
 import { SidebarProvider } from '@/components/ui/sidebar';
@@ -93,6 +94,7 @@ function Page() {
       <SidebarProvider className="min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:1.5rem] lg:[--sidebar-width:240px] lg:[--top-spacing:2rem]">
         <DocsSidebar tree={data.pageTree} />
         <div className="flex-1 min-w-0">
+          <DocsMobileNav tree={data.pageTree} />
           <div className="flex items-stretch xl:w-full">
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="h-[var(--top-spacing)] shrink-0" />

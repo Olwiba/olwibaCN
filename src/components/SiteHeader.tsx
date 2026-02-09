@@ -13,6 +13,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 flex h-14 shrink-0 items-center gap-2 border-b border-dashed bg-background/95 backdrop-blur-sm">
       <div className="flex h-full w-full max-w-[1400px] items-center gap-2 border-r border-l border-dashed px-4 md:mx-auto md:gap-5 md:px-6">
+        <div id="docs-mobile-nav-trigger" className="empty:hidden lg:hidden" />
         <Link className="flex items-center gap-2" to="/">
           <span className="font-bold text-lg">
             olwiba<span className="text-primary">CN</span>
