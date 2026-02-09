@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hotkey",
+  "title": "Hotkey",
+  "description": "Keyboard shortcut with platform-aware modifiers",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/hotkey.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst MODIFIER_ORDER = [\"shift\", \"ctrl\", \"alt\", \"mod\"] as const;\ntype ModifierName = (typeof MODIFIER_ORDER)[number];\n\nconst MAC_SYMBOLS: Record<ModifierName, string> = {\n  shift: \"⇧\",\n  ctrl: \"⌃\",\n  alt: \"⌥\",\n  mod: \"⌘\",\n};\n\nfunction parseShortcut(shortcut: string): { modifiers: ModifierName[]; key: string } {\n  const parts = shortcut\n    .split(\"+\")\n    .map((p) => p.trim().toLowerCase())\n    .filter(Boolean);\n  const key = parts.filter((p) => !MODIFIER_ORDER.includes(p as ModifierName)).pop() ?? \"\";\n  const modifiers = parts.filter((p) =>\n    MODIFIER_ORDER.includes(p as ModifierName)\n  ) as ModifierName[];\n  return {\n    modifiers: MODIFIER_ORDER.filter((m) => modifiers.includes(m)),\n    key: key.toUpperCase() || key,\n  };\n}\n\nfunction formatShortcut(shortcut: string, isMac: boolean): string {\n  const { modifiers, key } = parseShortcut(shortcut);\n  if (isMac) {\n    const modStr = modifiers.map((m) => MAC_SYMBOLS[m]).join(\"\");\n    return `${modStr}${key}`;\n  }\n  const modLabels: Record<ModifierName, string> = {\n    shift: \"Shift\",\n    ctrl: \"Ctrl\",\n    alt: \"Alt\",\n    mod: \"Ctrl\",\n  };\n  const modStr = modifiers.map((m) => modLabels[m]).join(\"+\");\n  return key ? `${modStr}+${key}` : `${modStr}+`;\n}\n\nexport function useIsMac(): boolean {\n  const [isMac, setIsMac] = React.useState(false);\n  React.useEffect(() => {\n    setIsMac(\n      typeof navigator !== \"undefined\" &&\n        navigator.platform.toUpperCase().includes(\"MAC\")\n    );\n  }, []);\n  return isMac;\n}\n\nexport interface HotkeyProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Shortcut string, e.g. \"mod+T\", \"shift+mod+Z\", \"mod\" (modifier only) */\n  shortcut: string;\n  /** When true, render inside a <kbd> for standalone use (e.g. toolbar). When false, raw span for use inside MenubarShortcut etc. */\n  asKbd?: boolean;\n}\n\nconst Hotkey = React.forwardRef<HTMLSpanElement, HotkeyProps>(\n  ({ shortcut, asKbd = false, className, ...props }, ref) => {\n    const isMac = useIsMac();\n    const content = formatShortcut(shortcut, isMac);\n\n    if (asKbd) {\n      return (\n        <kbd\n          ref={ref as React.Ref<HTMLElement>}\n          data-slot=\"hotkey\"\n          className={cn(\n            \"bg-muted text-muted-foreground pointer-events-none inline-flex h-5 w-fit min-w-5 select-none items-center justify-center gap-1 rounded-sm px-1 font-sans text-xs font-medium\",\n            \"[&_svg:not([class*='size-'])]:size-3\",\n            className\n          )}\n          {...props}\n        >\n          {content}\n        </kbd>\n      );\n    }\n    return (\n      <span ref={ref} className={className} {...props}>\n        {content}\n      </span>\n    );\n  }\n);\nHotkey.displayName = \"Hotkey\";\n\nexport { Hotkey };\n",
+      "type": "registry:ui",
+      "target": "components/ui/hotkey.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

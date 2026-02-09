@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-copy-to-clipboard",
+  "title": "useCopyToClipboard",
+  "description": "Hook to copy text to clipboard with timeout reset",
+  "files": [
+    {
+      "path": "src/hooks/use-copy-to-clipboard.ts",
+      "content": "import { useState, useCallback } from \"react\";\n\nexport function useCopyToClipboard(timeout = 2000) {\n  const [isCopied, setIsCopied] = useState(false);\n\n  const copyToClipboard = useCallback(\n    async (text: string) => {\n      try {\n        await navigator.clipboard.writeText(text);\n        setIsCopied(true);\n        setTimeout(() => setIsCopied(false), timeout);\n        return true;\n      } catch {\n        setIsCopied(false);\n        return false;\n      }\n    },\n    [timeout]\n  );\n\n  return { copyToClipboard, isCopied };\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/use-copy-to-clipboard.ts"
+    }
+  ],
+  "type": "registry:hook"
+}
