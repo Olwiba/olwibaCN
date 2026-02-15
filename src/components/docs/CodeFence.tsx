@@ -37,7 +37,7 @@ export function CodeFence({ children, code, className }: CodeFenceProps) {
   }, [children, code]);
 
   return (
-    <div className={cn("group my-4 flex overflow-hidden rounded-lg border bg-code text-code-foreground", className)}>
+    <div className={cn("group my-4 flex overflow-hidden rounded-lg border bg-code text-code-foreground shadow-inner", className)}>
       <div className="relative min-w-0 flex-1">
         <pre
           ref={preRef}

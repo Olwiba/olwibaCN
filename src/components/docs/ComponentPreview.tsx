@@ -89,7 +89,7 @@ export function ComponentPreview({ name, title }: ComponentPreviewProps) {
 
   return (
     <ControlsPortalContext.Provider value={portalTarget}>
-      <div className="border border-fd-border rounded-lg overflow-visible not-prose my-6">
+      <div className="border border-dashed border-fd-border rounded-lg overflow-visible not-prose my-6">
         {title && (
           <div className="px-4 py-2 border-b border-fd-border bg-fd-muted/50">
             <span className="text-sm text-fd-muted-foreground">{title}</span>

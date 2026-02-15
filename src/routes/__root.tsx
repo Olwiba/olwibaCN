@@ -54,8 +54,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             }}
           >
             <SiteHeader />
-            <div className="mx-auto w-full max-w-[1400px] flex-1 border-r border-l border-dashed">
-              {children}
+            <div className="flex flex-1 justify-center">
+              <div className="w-4 shrink-0 border-dashed blueprint-pattern lg:w-12 lg:border-l" aria-hidden="true" />
+              <div className="relative z-10 w-full max-w-[1400px] flex-1 border-l border-r border-dashed bg-background">
+                {children}
+              </div>
+              <div className="w-4 shrink-0 border-dashed blueprint-pattern lg:w-12 lg:border-r" aria-hidden="true" />
             </div>
             <SiteFooter />
           </RootProvider>
@@ -65,3 +69,4 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+

@@ -93,6 +93,7 @@ function Page() {
     <div className="flex flex-1 flex-col px-2">
       <SidebarProvider className="min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:1.5rem] lg:[--sidebar-width:240px] lg:[--top-spacing:2rem]">
         <DocsSidebar tree={data.pageTree} />
+        <div className="hidden lg:block w-4 self-stretch border-x border-dashed blueprint-pattern" aria-hidden="true" />
         <div className="flex-1 min-w-0">
           <DocsMobileNav tree={data.pageTree} />
           <div className="flex items-stretch xl:w-full">
@@ -155,7 +156,9 @@ function Page() {
               </div>
             </div>
             {loaderData.toc?.length > 0 && (
-              <div className="ml-auto hidden w-72 shrink-0 flex-col pb-4 lg:pb-6 xl:flex">
+              <>
+              <div className="hidden xl:block w-4 self-stretch border-x border-dashed blueprint-pattern" aria-hidden="true" />
+              <div className="hidden w-72 shrink-0 flex-col pb-4 lg:pb-6 xl:flex">
                 <div className="h-[var(--top-spacing)] shrink-0" />
                 <div className="sticky top-[calc(var(--header-height)+13px)] z-30 max-h-[calc(100svh-var(--header-height)-1px)] overflow-hidden overscroll-none">
                   <div className="no-scrollbar overflow-y-auto px-8 pb-2">
@@ -163,6 +166,7 @@ function Page() {
                   </div>
                 </div>
               </div>
+              </>
             )}
           </div>
         </div>

@@ -69,11 +69,15 @@
       height: 0;
     }
   }
+
 }
 
 :root {
   /* Small radius preset */
   --radius: 0.25rem;
+
+  /* Blueprint / schematic pattern */
+  --blueprint-fg: oklch(0 0 0 / 0.04);
 
   /* Neutral base colors */
   --background: oklch(1 0 0);
@@ -121,6 +125,8 @@
 }
 
 .dark {
+  --blueprint-fg: oklch(1 0 0 / 0.07);
+
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -203,6 +209,18 @@
 }
 
 @layer components {
+  .blueprint-pattern {
+    background-image: repeating-linear-gradient(
+      315deg,
+      var(--blueprint-fg) 0,
+      var(--blueprint-fg) 1px,
+      transparent 0,
+      transparent 50%
+    );
+    background-size: 10px 10px;
+    background-attachment: fixed;
+  }
+
   .steps {
     &:first-child {
       @apply !mt-0;
