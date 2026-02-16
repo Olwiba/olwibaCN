@@ -4,6 +4,11 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
+export interface CalloutProps extends React.HTMLAttributes<HTMLDivElement> {
+  icon?: React.ReactNode;
+  variant?: 'default' | 'info' | 'warning';
+}
+
 export function Callout({
   title,
   children,
@@ -11,10 +16,7 @@ export function Callout({
   className,
   variant = 'default',
   ...props
-}: React.ComponentProps<typeof Alert> & {
-  icon?: React.ReactNode;
-  variant?: 'default' | 'info' | 'warning';
-}) {
+}: CalloutProps) {
   return (
     <Alert
       data-variant={variant}

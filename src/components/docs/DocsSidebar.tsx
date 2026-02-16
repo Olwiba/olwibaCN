@@ -12,21 +12,28 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import type { PageTree } from 'fumadocs-core/source';
+import type { Root, Node, Item } from 'fumadocs-core/page-tree';
 
-const TOP_LEVEL_SECTIONS = [
+export interface SidebarSection {
+  name: string;
+  href: string;
+}
+
+const TOP_LEVEL_SECTIONS: SidebarSection[] = [
   { name: 'Get Started', href: '/docs' },
   { name: 'Components', href: '/docs/components' },
   { name: 'Themes', href: '/docs/themes' },
 ];
 
-interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  tree: PageTree.Root;
+export interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  tree: Root;
+  sections?: SidebarSection[];
 }
 
-export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
+export function DocsSidebar({ tree, sections, ...props }: DocsSidebarProps) {
   const location = useLocation();
   const pathname = location.pathname;
+  const navSections = sections ?? TOP_LEVEL_SECTIONS;
 
   return (
     <Sidebar
@@ -39,13 +46,14 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
         <ScrollArea className="h-full w-full">
           <div className="h-[var(--top-spacing)] shrink-0" />
           <div className="px-2 pb-12">
+            {navSections.length > 0 && (
             <SidebarGroup>
             <SidebarGroupLabel className="font-medium text-muted-foreground">
               Sections
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                {navSections.map(({ name, href }) => (
                   <SidebarMenuItem key={name}>
                     <SidebarMenuButton
                       asChild
@@ -63,8 +71,9 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+            )}
 
-          {tree.children.map((item) => {
+          {tree.children.map((item: Node) => {
             if (item.$id === 'root:index.mdx') return null;
             if (item.$id === 'root:themes.mdx') return null;
 
@@ -77,23 +86,26 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
                   {item.type === 'folder' && (
                     <SidebarMenu className="gap-0.5">
                       {item.children
-                        .filter((childItem) => {
+                        .filter((childItem: Node) => {
                           if (childItem.type !== 'page') return false;
                           if (childItem.url === '/docs') return false;
                           if (childItem.$id?.endsWith('index.mdx')) return false;
                           return true;
                         })
-                        .map((childItem) => (
-                          <SidebarMenuItem key={childItem.url}>
+                        .map((childItem: Node) => {
+                          const page = childItem as Item;
+                          return (
+                          <SidebarMenuItem key={page.url}>
                             <SidebarMenuButton
                               asChild
                               className="relative h-[30px] w-fit overflow-visible border border-transparent font-medium text-[0.8rem] data-[active=true]:border-accent data-[active=true]:bg-accent"
-                              isActive={childItem.url === pathname}
+                              isActive={page.url === pathname}
                             >
-                              <Link to={childItem.url}>{childItem.name}</Link>
+                              <Link to={page.url}>{page.name}</Link>
                             </SidebarMenuButton>
                           </SidebarMenuItem>
-                        ))}
+                          );
+                        })}
                     </SidebarMenu>
                   )}
                 </SidebarGroupContent>

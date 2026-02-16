@@ -340,15 +340,17 @@ export interface TocItem {
   depth: number;
 }
 
+export interface DocsTocProps {
+  toc: TocItem[];
+  variant?: "dropdown" | "list";
+  className?: string;
+}
+
 export function DocsToc({
   toc,
   variant = "list",
   className,
-}: {
-  toc: TocItem[];
-  variant?: "dropdown" | "list";
-  className?: string;
-}) {
+}: DocsTocProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const svgPathRef = useRef<SVGPathElement>(null);

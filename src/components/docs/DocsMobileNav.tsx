@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PanelLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { PageTree } from 'fumadocs-core/source';
+import type { Root, Node, Item } from 'fumadocs-core/page-tree';
 
 const TOP_LEVEL_SECTIONS = [
   { name: 'Get Started', href: '/docs' },
@@ -20,11 +20,13 @@ const TOP_LEVEL_SECTIONS = [
   { name: 'Themes', href: '/docs/themes' },
 ];
 
-interface DocsMobileNavProps {
-  tree: PageTree.Root;
+export interface DocsMobileNavProps {
+  tree: Root;
+  sections?: { name: string; href: string }[];
 }
 
-export function DocsMobileNav({ tree }: DocsMobileNavProps) {
+export function DocsMobileNav({ tree, sections }: DocsMobileNavProps) {
+  const navSections = sections ?? TOP_LEVEL_SECTIONS;
   const [open, setOpen] = React.useState(false);
   const [portalTarget, setPortalTarget] = React.useState<HTMLElement | null>(null);
   const location = useLocation();
@@ -63,7 +65,7 @@ export function DocsMobileNav({ tree }: DocsMobileNavProps) {
                   Sections
                 </p>
                 <div className="flex flex-col gap-0.5">
-                  {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                  {navSections.map(({ name, href }) => (
                     <Link
                       key={name}
                       to={href}
@@ -82,7 +84,7 @@ export function DocsMobileNav({ tree }: DocsMobileNavProps) {
                 </div>
               </div>
 
-              {tree.children.map((item) => {
+              {tree.children.map((item: Node) => {
                 if (item.$id === 'root:index.mdx') return null;
                 if (item.$id === 'root:themes.mdx') return null;
                 if (item.type !== 'folder') return null;
@@ -95,25 +97,28 @@ export function DocsMobileNav({ tree }: DocsMobileNavProps) {
                     <div className="flex flex-col gap-0.5">
                       {item.children
                         .filter(
-                          (child) =>
+                          (child: Node) =>
                             child.type === 'page' &&
-                            child.url !== '/docs' &&
+                            (child as Item).url !== '/docs' &&
                             !child.$id?.endsWith('index.mdx')
                         )
-                        .map((child) => (
-                          <Link
-                            key={child.url}
-                            to={child.url}
-                            className={cn(
-                              'rounded-md px-2 py-1.5 text-[0.8rem] font-medium',
-                              child.url === pathname
-                                ? 'border border-accent bg-accent'
-                                : 'border border-transparent text-muted-foreground hover:bg-accent/50'
-                            )}
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
+                        .map((child: Node) => {
+                          const page = child as Item;
+                          return (
+                            <Link
+                              key={page.url}
+                              to={page.url}
+                              className={cn(
+                                'rounded-md px-2 py-1.5 text-[0.8rem] font-medium',
+                                page.url === pathname
+                                  ? 'border border-accent bg-accent'
+                                  : 'border border-transparent text-muted-foreground hover:bg-accent/50'
+                              )}
+                            >
+                              {page.name}
+                            </Link>
+                          );
+                        })}
                     </div>
                   </div>
                 );

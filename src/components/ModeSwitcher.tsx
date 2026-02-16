@@ -4,7 +4,9 @@ import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export function ModeSwitcher() {
+export interface ModeSwitcherProps {}
+
+export function ModeSwitcher(_props: ModeSwitcherProps = {}) {
   const [theme, setTheme] = React.useState<'light' | 'dark'>('dark');
 
   React.useEffect(() => {

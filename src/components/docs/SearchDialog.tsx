@@ -22,18 +22,29 @@ interface PageItem {
   url: string;
 }
 
-export default function SearchDialog(props: SharedProps) {
+export type SearchDialogItem = { label: string; href: string; description?: string };
+
+export type SearchDialogSharedProps = SharedProps;
+
+export interface SearchDialogProps extends SharedProps {
+  items?: SearchDialogItem[];
+}
+
+export function SearchDialog(props: SearchDialogProps) {
+  const { items, ...restProps } = props;
   const { search, setSearch, query } = useDocsSearch({
     type: 'fetch',
   });
   const [allPages, setAllPages] = useState<PageItem[]>([]);
 
   useEffect(() => {
-    fetch('/api/pages')
-      .then((res) => res.json())
-      .then((pages: PageItem[]) => setAllPages(pages))
-      .catch(() => {});
-  }, []);
+    if (!items) {
+      fetch('/api/pages')
+        .then((res) => res.json())
+        .then((pages: PageItem[]) => setAllPages(pages))
+        .catch(() => {});
+    }
+  }, [items]);
 
   const groupedPages = allPages.reduce<Record<string, PageItem[]>>((acc, page) => {
     const parts = page.url.split('/').filter(Boolean);
@@ -49,7 +60,7 @@ export default function SearchDialog(props: SharedProps) {
       isLoading={query.isLoading}
       onSearchChange={setSearch}
       search={search}
-      {...props}
+      {...restProps}
     >
       <SearchDialogOverlay />
       <SearchDialogContent className="mt-20 md:mt-0">
@@ -64,7 +75,25 @@ export default function SearchDialog(props: SharedProps) {
         </SearchDialogHeader>
         <SearchDialogList items={query.data !== 'empty' ? query.data : null} />
 
-        {search ? null : (
+        {search ? null : items ? (
+          <div className="flex flex-col pb-4">
+            {items.map((item) => (
+              <a
+                className="block px-4 py-2 text-sm hover:bg-muted"
+                href={item.href}
+                key={item.href}
+                onClick={() => restProps.onOpenChange?.(false)}
+              >
+                <span className="font-medium">{item.label}</span>
+                {item.description && (
+                  <span className="ml-2 text-muted-foreground text-xs">
+                    {item.description}
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        ) : (
           <ScrollArea className="max-h-[400px]">
             <div className="flex flex-col pb-4">
               {Object.entries(groupedPages).map(([section, pages]) => (
@@ -77,7 +106,7 @@ export default function SearchDialog(props: SharedProps) {
                       className="block px-4 py-2 text-sm hover:bg-muted"
                       to={page.url}
                       key={page.url}
-                      onClick={() => props.onOpenChange?.(false)}
+                      onClick={() => restProps.onOpenChange?.(false)}
                     >
                       <span className="font-medium">{page.title}</span>
                       {page.description && (

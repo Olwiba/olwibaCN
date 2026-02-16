@@ -36,8 +36,9 @@ export function ActiveThemeProvider({
   );
   const styleRef = React.useRef<HTMLStyleElement | null>(null);
 
-  // Load theme from cookie on mount
+  // Load theme from cookie on mount (only when no explicit initialTheme)
   React.useEffect(() => {
+    if (initialTheme) return;
     const savedTheme = getThemeCookie();
     if (savedTheme && savedTheme !== activeTheme) {
       setActiveThemeState(savedTheme);

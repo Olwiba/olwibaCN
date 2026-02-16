@@ -29,7 +29,7 @@ export function ThemeCodeBlock() {
         <span className="text-sm font-medium">Select theme to copy:</span>
         <Select
           value={selectedTheme}
-          onValueChange={(value) => setSelectedTheme(value as Theme)}
+          onValueChange={(value: string) => setSelectedTheme(value as Theme)}
         >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select theme" />
