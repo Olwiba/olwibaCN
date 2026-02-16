@@ -5,19 +5,40 @@ import { CodeFence } from './CodeFence';
 
 interface InstallationTabsProps {
   name: string;
+  variant?: 'shorthand' | 'url';
 }
 
 const packageManagers = [
-  { id: 'bun', label: 'bun', command: (pkg: string) => `bunx shadcn@latest add @olwibacn/${pkg}` },
-  { id: 'pnpm', label: 'pnpm', command: (pkg: string) => `pnpm dlx shadcn@latest add @olwibacn/${pkg}` },
-  { id: 'npm', label: 'npm', command: (pkg: string) => `npx shadcn@latest add @olwibacn/${pkg}` },
-  { id: 'yarn', label: 'yarn', command: (pkg: string) => `npx shadcn@latest add @olwibacn/${pkg}` },
+  {
+    id: 'bun',
+    label: 'bun',
+    shorthand: (pkg: string) => `bunx shadcn@latest add @olwibacn/${pkg}`,
+    url: (pkg: string) => `bunx shadcn@latest add https://cn.olwiba.com/r/${pkg}.json`,
+  },
+  {
+    id: 'pnpm',
+    label: 'pnpm',
+    shorthand: (pkg: string) => `pnpm dlx shadcn@latest add @olwibacn/${pkg}`,
+    url: (pkg: string) => `pnpm dlx shadcn@latest add https://cn.olwiba.com/r/${pkg}.json`,
+  },
+  {
+    id: 'npm',
+    label: 'npm',
+    shorthand: (pkg: string) => `npx shadcn@latest add @olwibacn/${pkg}`,
+    url: (pkg: string) => `npx shadcn@latest add https://cn.olwiba.com/r/${pkg}.json`,
+  },
+  {
+    id: 'yarn',
+    label: 'yarn',
+    shorthand: (pkg: string) => `npx shadcn@latest add @olwibacn/${pkg}`,
+    url: (pkg: string) => `npx shadcn@latest add https://cn.olwiba.com/r/${pkg}.json`,
+  },
 ];
 
-export function InstallationTabs({ name }: InstallationTabsProps) {
+export function InstallationTabs({ name, variant = 'shorthand' }: InstallationTabsProps) {
   const [active, setActive] = React.useState('bun');
   const activeManager = packageManagers.find((pm) => pm.id === active)!;
-  const command = activeManager.command(name);
+  const command = activeManager[variant](name);
 
   return (
     <div className="not-prose my-6">
@@ -36,7 +57,7 @@ export function InstallationTabs({ name }: InstallationTabsProps) {
           </button>
         ))}
       </div>
-      <CodeFence code={command} className="my-0" />
+      <CodeFence code={command} language="bash" className="my-0" />
     </div>
   );
 }

@@ -7,7 +7,26 @@ import { CopyButton } from "./CopyButton";
 interface CodeFenceProps {
   children?: React.ReactNode;
   code?: string;
+  language?: string;
   className?: string;
+}
+
+// Lazily create and cache the shiki highlighter
+let highlighterPromise: ReturnType<typeof createHighlighterLazy> | null = null;
+
+async function createHighlighterLazy() {
+  const { createHighlighter } = await import("shiki");
+  return createHighlighter({
+    themes: ["github-dark", "github-light-default"],
+    langs: ["bash", "tsx", "typescript", "css"],
+  });
+}
+
+function getHighlighter() {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighterLazy();
+  }
+  return highlighterPromise;
 }
 
 // Recursively extract text from React nodes (handles rehype-pretty-code nested spans)
@@ -24,10 +43,39 @@ function extractText(node: React.ReactNode): string {
   return "";
 }
 
-export function CodeFence({ children, code, className }: CodeFenceProps) {
+export function CodeFence({ children, code, language, className }: CodeFenceProps) {
   const textContent = code ?? extractText(children).trim();
   const preRef = React.useRef<HTMLPreElement>(null);
   const [showFade, setShowFade] = React.useState(false);
+  const [highlightedHtml, setHighlightedHtml] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (!code) return;
+    let cancelled = false;
+
+    getHighlighter().then((hl) => {
+      if (cancelled) return;
+      const html = hl.codeToHtml(code, {
+        lang: language ?? "bash",
+        themes: { light: "github-light-default", dark: "github-dark" },
+        defaultColor: false,
+        transformers: [
+          {
+            line(node) {
+              node.properties["data-line"] = "";
+              delete node.properties.class;
+            },
+          },
+        ],
+      });
+      const match = html.match(/<code>([\s\S]*)<\/code>/);
+      setHighlightedHtml(match ? match[1] : null);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [code, language]);
 
   React.useEffect(() => {
     const pre = preRef.current;
@@ -37,7 +85,7 @@ export function CodeFence({ children, code, className }: CodeFenceProps) {
     const ro = new ResizeObserver(check);
     ro.observe(pre);
     return () => ro.disconnect();
-  }, [children, code]);
+  }, [children, code, highlightedHtml]);
 
   return (
     <div className={cn("group my-4 flex overflow-hidden rounded-lg border bg-code text-code-foreground shadow-inner", className)}>
@@ -46,7 +94,11 @@ export function CodeFence({ children, code, className }: CodeFenceProps) {
           ref={preRef}
           className="no-scrollbar overflow-x-auto px-4 py-3.5 text-sm font-mono"
         >
-          {children ?? <code>{code}</code>}
+          {children ?? (
+            highlightedHtml
+              ? <code dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
+              : <code>{code}</code>
+          )}
         </pre>
         {showFade && (
           <div

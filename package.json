@@ -27,9 +27,10 @@
     "web:build": "fumadocs-mdx && bun run registry:build && vite build",
     "start": "bun run server.ts",
     "registry:build": "npx shadcn@latest build",
+    "tsc": "tsc",
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "prepublishOnly": "bun run build",
-    "release": "npm publish --registry https://npm.olwiba.com/"
+    "release": "npm publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -111,6 +112,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Olwiba/olwibaCN"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "author": "Olwiba",
   "license": "MIT"
