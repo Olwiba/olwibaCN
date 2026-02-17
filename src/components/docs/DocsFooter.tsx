@@ -10,16 +10,26 @@ export function DocsFooter({ children }: DocsFooterProps) {
       <div className="h-full w-4 shrink-0 border-dashed lg:w-12 lg:border-l" aria-hidden="true" />
       <div className="flex h-full w-full max-w-[1400px] items-center gap-1 border-l border-r border-dashed px-4 lg:gap-2 lg:px-6">
         {children ?? (
-          <p className="text-muted-foreground text-xs md:text-sm">
-            Built with 💖 by <a
-              className="underline"
-              href="https://github.com/Olwiba"
+          <>
+            <p className="text-muted-foreground text-xs md:text-sm">
+              Built with 💖 by <a
+                className="underline"
+                href="https://github.com/Olwiba"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Olwiba
+              </a>
+            </p>
+            <a
+              className="text-muted-foreground ml-auto text-xs underline md:text-sm"
+              href="https://github.com/Olwiba/olwibaCN/blob/master/CHANGELOG.md"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Olwiba
+              changelog.md
             </a>
-          </p>
+          </>
         )}
       </div>
       <div className="h-full w-4 shrink-0 border-dashed lg:w-12 lg:border-r" aria-hidden="true" />
