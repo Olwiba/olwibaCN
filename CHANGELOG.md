@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1
+
+### Added
+
+- Exported `AsciiText` component and `AsciiTextProps` type from the package barrel — interactive FIGlet ASCII art renderer with hover glow, click ripples, and accent coloring (font bundled inline)
+- Exported `fireConfetti` and `ConfettiOptions` from the package barrel (`@olwiba/cn`), enabling consumers to trigger theme-aware confetti without installing `canvas-confetti` directly
+
 ## 0.1.0
 
 ### Added

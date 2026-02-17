@@ -56,5 +56,11 @@ export * from './toggle';
 export * from './toggle-group';
 export * from './tooltip';
 
+// Standalone components
+export { AsciiText, type AsciiTextProps } from '../AsciiText';
+
 // Hooks
 export { useIsMobile } from '@/hooks/use-mobile';
+
+// Lib
+export { fireConfetti, type ConfettiOptions } from '../../lib/confetti';

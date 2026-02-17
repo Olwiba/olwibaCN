@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
+import { AsciiText } from '@/components/AsciiText';
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -7,10 +8,8 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   return (
-    <div className="flex flex-col flex-1 justify-center items-center px-4 py-16 text-center">
-      <h1 className="text-4xl font-bold mb-4">
-        olwiba<span className="text-primary">CN</span>
-      </h1>
+    <div className="flex flex-col flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] justify-center items-center px-4 py-16 text-center">
+      <AsciiText text="olwibaCN" accent="CN" accentColor="var(--primary)" />
       <p className="text-muted-foreground text-lg mb-8 max-w-md">
         Custom shadcn/ui component registry. Copy and paste components into your apps.
       </p>
