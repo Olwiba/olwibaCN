@@ -4,6 +4,7 @@ import { Terminal, Check } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { fireConfetti } from "@/lib/confetti";
 
 interface CopyCommandButtonProps {
   command: string;
@@ -19,6 +20,7 @@ export function CopyCommandButton({
   const handleCopy = () => {
     copyToClipboard(copyCommand ?? command);
     toast.success("Command copied to clipboard");
+    fireConfetti();
   };
 
   const shortCommand = command.split(" ").at(-1);

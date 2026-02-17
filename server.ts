@@ -9,6 +9,7 @@ app.use('/*', serveStatic({ root: './dist/client' }))
 
 // Let TanStack Start handle everything else (SSR, server functions)
 app.all('*', async (c) => {
+  // @ts-expect-error - dist/server/server.js is generated at build time
   const handler = await import('./dist/server/server.js')
   return handler.default.fetch(c.req.raw)
 })

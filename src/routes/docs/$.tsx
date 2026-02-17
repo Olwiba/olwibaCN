@@ -48,8 +48,8 @@ const serverLoader = createServerFn({
       })) as TocItem[],
       rawContent,
       neighbours: {
-        previous: neighbours.previous ? { url: neighbours.previous.url, name: neighbours.previous.name } : null,
-        next: neighbours.next ? { url: neighbours.next.url, name: neighbours.next.name } : null,
+        previous: neighbours.previous ? { url: neighbours.previous.url, name: extractTextFromReactNode(neighbours.previous.name) } : null,
+        next: neighbours.next ? { url: neighbours.next.url, name: extractTextFromReactNode(neighbours.next.name) } : null,
       },
     };
   });
@@ -76,7 +76,7 @@ function Page() {
   return (
     <DocsLayout loaderData={loaderData} pageTree={data.pageTree}>
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
-        {clientLoader.useContent(data.path, {})}
+        {clientLoader.useContent(data.path, undefined)}
       </Suspense>
     </DocsLayout>
   );
