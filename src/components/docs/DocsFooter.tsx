@@ -2,9 +2,10 @@ import * as React from 'react';
 
 export interface DocsFooterProps {
   children?: React.ReactNode;
+  changelogUrl?: string;
 }
 
-export function DocsFooter({ children }: DocsFooterProps) {
+export function DocsFooter({ children, changelogUrl }: DocsFooterProps) {
   return (
     <footer className="flex h-14 shrink-0 justify-center border-t">
       <div className="h-full w-4 shrink-0 border-dashed lg:w-12 lg:border-l" aria-hidden="true" />
@@ -21,14 +22,16 @@ export function DocsFooter({ children }: DocsFooterProps) {
                 Olwiba
               </a>
             </p>
-            <a
-              className="text-muted-foreground ml-auto text-xs underline md:text-sm"
-              href="https://github.com/Olwiba/olwibaCN/blob/master/CHANGELOG.md"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              changelog.md
-            </a>
+            {changelogUrl && (
+              <a
+                className="text-muted-foreground ml-auto text-xs underline md:text-sm"
+                href={changelogUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                changelog.md
+              </a>
+            )}
           </>
         )}
       </div>
