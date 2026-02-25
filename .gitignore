@@ -21,3 +21,9 @@ dist/
 
 # Generated route tree
 src/routeTree.gen.ts
+
+# Release artifacts
+artifacts/
+*.tgz
+npm-debug.log*
+
