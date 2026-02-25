@@ -4,7 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
   entry: ['src/components/ui/index.ts'],
   format: ['esm'],
-  dts: false, // TODO: Fix react-resizable-panels type issue, then re-enable
+  dts: true,
   splitting: false,
   sourcemap: true,
   clean: true,
@@ -35,3 +35,4 @@ export default defineConfig({
     js: '"use client";',
   },
 });
+

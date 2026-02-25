@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2
+
+### Added
+
+- GitHub publish workflow (`.github/workflows/publish-package.yml`) to publish to GitHub Packages and attach `.tgz` package artifacts to workflow runs/releases.
+
+### Fixed
+
+- Package type declarations are now emitted (`tsup dts: true`) and published.
+- Package metadata now explicitly exposes types (`types` + `exports["."].types`).
 ## 0.1.1
 
 ### Added
@@ -38,3 +48,4 @@
 - Initial release
 - Custom shadcn/ui component primitives
 - Documentation site with Fumadocs + TanStack Start
+
