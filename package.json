@@ -31,7 +31,7 @@
     "tsc": "tsc",
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "prepublishOnly": "bun run build",
-    "release": "bun run build && npm pack --pack-destination artifacts && npm publish && node scripts/upload-release-asset.mjs"
+    "release": "bun run build && npm pack --pack-destination artifacts && node scripts/upload-release-asset.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
