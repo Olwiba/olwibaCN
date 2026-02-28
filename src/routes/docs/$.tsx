@@ -9,7 +9,14 @@ import { Suspense } from 'react';
 import { mdxComponents } from '@/lib/mdx-components';
 import { type TocItem } from '@/components/docs/DocsToc';
 import { DocsLayout, extractTextFromReactNode, type PageLoaderData } from '@/components/docs/DocsLayout';
+import { type SidebarSection } from '@/components/docs/DocsSidebar';
 import { findNeighbour } from 'fumadocs-core/page-tree';
+
+const sidebarSections: SidebarSection[] = [
+  { name: 'Get Started', href: '/docs' },
+  { name: 'Themes', href: '/docs/themes' },
+  { name: 'Components', href: '/docs/components' },
+];
 
 export const Route = createFileRoute('/docs/$')({
   component: Page,
@@ -74,7 +81,7 @@ function Page() {
   const data = useFumadocsLoader(loaderData);
 
   return (
-    <DocsLayout loaderData={loaderData} pageTree={data.pageTree}>
+    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections}>
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
         {clientLoader.useContent(data.path, undefined)}
       </Suspense>

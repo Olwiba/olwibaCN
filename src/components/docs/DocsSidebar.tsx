@@ -80,7 +80,13 @@ export function DocsSidebar({ tree, sections, ...props }: DocsSidebarProps) {
             return (
               <SidebarGroup key={item.$id}>
                 <SidebarGroupLabel className="font-medium text-muted-foreground">
-                  {item.name}
+                  {item.type === 'folder' && item.index ? (
+                    <Link to={item.index.url} className="hover:text-foreground transition-colors">
+                      {item.name}
+                    </Link>
+                  ) : (
+                    item.name
+                  )}
                 </SidebarGroupLabel>
                 <SidebarGroupContent>
                   {item.type === 'folder' && (
