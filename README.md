@@ -51,3 +51,17 @@ shadcn add @olwibacn/button
 
 Hosted on Coolify at `cn.olwiba.com`. 
 Push to master triggers auto-deploy.
+
+## Package Release Flow
+
+Package publishing is tag-driven, not push-driven.
+
+1. Make the change locally and validate it.
+2. Bump `package.json` once the release content is final.
+3. Commit and push `master`.
+4. Create a matching version tag, for example `v0.1.3`.
+5. Push the tag: `git push origin v0.1.3`.
+
+The `publish-package` GitHub Actions workflow runs automatically on `v*` tags and verifies that the tag matches the package version before publishing. `workflow_dispatch` remains available as a manual fallback.
+
+When a shared docs behavior change starts here as beta docs work, validate it in `olwibaCN` first, then sync the released docs-facing pieces into `olwibaDOCS`.
