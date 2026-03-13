@@ -8,6 +8,7 @@ import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
 import { APIReference } from '@/components/docs/APIReference';
 import { CodeFence } from '@/components/docs/CodeFence';
 import { ThemeCodeBlock } from '@/components/docs/ThemeCodeBlock';
+import { Sandbox } from '@/components/docs/Sandbox';
 import { ThemeSelector } from '@/components/ThemeSelector';
 import {
   Accordion,
@@ -210,6 +211,7 @@ export const mdxComponents = {
   CodeFence,
   ThemeSelector,
   ThemeCodeBlock,
+  Sandbox,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn('font-medium underline underline-offset-4', className)}

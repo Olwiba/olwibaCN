@@ -9,6 +9,11 @@ interface CodeFenceProps {
   code?: string;
   language?: string;
   className?: string;
+  preClassName?: string;
+  codeClassName?: string;
+  codeWrapClassName?: string;
+  showCopyButton?: boolean;
+  showLineNumbers?: boolean;
 }
 
 // Lazily create and cache the shiki highlighter
@@ -43,8 +48,19 @@ function extractText(node: React.ReactNode): string {
   return "";
 }
 
-export function CodeFence({ children, code, language, className }: CodeFenceProps) {
+export function CodeFence({
+  children,
+  code,
+  language,
+  className,
+  preClassName,
+  codeClassName,
+  codeWrapClassName,
+  showCopyButton = true,
+  showLineNumbers = false,
+}: CodeFenceProps) {
   const textContent = code ?? extractText(children).trim();
+  const plainLines = React.useMemo(() => (code ?? "").split("\n"), [code]);
   const preRef = React.useRef<HTMLPreElement>(null);
   const [showFade, setShowFade] = React.useState(false);
   const [highlightedHtml, setHighlightedHtml] = React.useState<string | null>(null);
@@ -92,13 +108,36 @@ export function CodeFence({ children, code, language, className }: CodeFenceProp
       <div className="relative min-w-0 flex-1">
         <pre
           ref={preRef}
-          className="no-scrollbar overflow-x-auto px-4 py-3.5 text-sm font-mono"
-        >
-          {children ?? (
-            highlightedHtml
-              ? <code dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
-              : <code>{code}</code>
+          className={cn(
+            "no-scrollbar overflow-x-auto px-4 py-3.5 text-sm font-mono",
+            preClassName
           )}
+        >
+          <span className={cn(codeWrapClassName)}>
+            {children ?? (
+              highlightedHtml
+                ? (
+                  <code
+                    className={codeClassName}
+                    data-line-numbers={showLineNumbers || undefined}
+                    dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+                  />
+                )
+                : (
+                  <code
+                    className={codeClassName}
+                    data-line-numbers={showLineNumbers || undefined}
+                  >
+                    {plainLines.map((line, index) => (
+                      <span data-line="" key={index}>
+                        {line}
+                        {index < plainLines.length - 1 ? "\n" : ""}
+                      </span>
+                    ))}
+                  </code>
+                )
+            )}
+          </span>
         </pre>
         {showFade && (
           <div
@@ -107,9 +146,11 @@ export function CodeFence({ children, code, language, className }: CodeFenceProp
           />
         )}
       </div>
-      <div className="flex shrink-0 items-center self-start pt-[10.5px] pr-2">
-        <CopyButton text={textContent} />
-      </div>
+      {showCopyButton ? (
+        <div className="flex shrink-0 items-center self-start pt-[10.5px] pr-2">
+          <CopyButton text={textContent} />
+        </div>
+      ) : null}
     </div>
   );
 }
