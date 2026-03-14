@@ -64,4 +64,6 @@ Package publishing is tag-driven, not push-driven.
 
 The `publish-package` GitHub Actions workflow runs automatically on `v*` tags and verifies that the tag matches the package version before publishing. `workflow_dispatch` remains available as a manual fallback.
 
+If the `DISCORD_WEBHOOK_URL` GitHub Actions secret is configured, the publish workflow also sends a Discord notification on both success and failure.
+
 When a shared docs behavior change starts here as beta docs work, validate it in `olwibaCN` first, then sync the released docs-facing pieces into `olwibaDOCS`.
