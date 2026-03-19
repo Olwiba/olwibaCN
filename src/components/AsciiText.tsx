@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useEffect, useCallback, useMemo } from 'react';
+import { useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import fontRaw from '@/assets/dosrebel.flf?raw';
 
 const CHAR_W = 7.5;
@@ -137,6 +137,8 @@ export function AsciiText({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
+  const hasPaintedRef = useRef(false);
+  const [isCanvasReady, setIsCanvasReady] = useState(false);
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({
     x: -100,
     y: -100,
@@ -245,9 +247,19 @@ export function AsciiText({
 
     ctx.globalAlpha = 1;
 
+    if (!hasPaintedRef.current) {
+      hasPaintedRef.current = true;
+      setIsCanvasReady(true);
+    }
+
     // Prune old waves
     wavesRef.current = wavesRef.current.filter((w) => time - w.t < 3);
   }, [cells, accentCols, color, accentColor]);
+
+  useEffect(() => {
+    hasPaintedRef.current = false;
+    setIsCanvasReady(false);
+  }, [text, accent, color, accentColor]);
 
   useEffect(() => {
     let running = true;
@@ -302,19 +314,49 @@ export function AsciiText({
 
   const canvasW = Math.ceil(cols * CHAR_W);
   const canvasH = rows * CHAR_H;
+  const fallbackAccentColor = accentColor || 'currentColor';
 
   return (
     <div className="flex justify-center select-none mb-2 w-full px-4" aria-hidden="true">
-      <canvas
-        ref={canvasRef}
-        width={canvasW}
-        height={canvasH}
-        className="text-foreground cursor-pointer"
-        style={{ maxWidth: '100%', height: 'auto', aspectRatio: `${canvasW} / ${canvasH}` }}
-        onMouseMove={handleMouseMove}
-        onClick={handleClick}
-        onMouseLeave={handleMouseLeave}
-      />
+      <div
+        className="relative"
+        style={{ width: canvasW, maxWidth: '100%' }}
+      >
+        <svg
+          viewBox={`0 0 ${canvasW} ${canvasH}`}
+          className={`text-foreground pointer-events-none block h-auto w-full transition-opacity duration-200 ${
+            isCanvasReady ? 'opacity-0' : 'opacity-100'
+          }`}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          {cells.map((cell) => {
+            const isAccent = accentCols.has(cell.col);
+            return (
+              <rect
+                key={`${cell.col}-${cell.row}`}
+                x={cell.col * CHAR_W}
+                y={cell.row * CHAR_H}
+                width={CHAR_W}
+                height={CHAR_H}
+                fill={isAccent ? fallbackAccentColor : 'currentColor'}
+                opacity={cell.ch === '░' ? 0.15 : 0.78}
+              />
+            );
+          })}
+        </svg>
+        <canvas
+          ref={canvasRef}
+          width={canvasW}
+          height={canvasH}
+          className={`text-foreground absolute inset-0 block h-auto w-full cursor-pointer transition-opacity duration-200 ${
+            isCanvasReady ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ aspectRatio: `${canvasW} / ${canvasH}` }}
+          onMouseMove={handleMouseMove}
+          onClick={handleClick}
+          onMouseLeave={handleMouseLeave}
+        />
+      </div>
     </div>
   );
 }
