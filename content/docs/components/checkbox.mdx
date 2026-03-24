@@ -26,6 +26,14 @@ import { Checkbox } from "@/components/ui/checkbox"
 </div>
 ```
 
+```tsx
+<Checkbox playful id="terms" />
+```
+
+```tsx
+<Checkbox smooth id="terms" />
+```
+
 ## API Reference
 
 <APIReference name="Checkbox" extends="button" props={[
@@ -36,5 +44,7 @@ import { Checkbox } from "@/components/ui/checkbox"
   { name: "required", type: "boolean", default: "false" },
   { name: "name", type: "string", default: "undefined" },
   { name: "value", type: "string", default: '"on"' },
-  { name: "asChild", type: "boolean", default: "false" }
+  { name: "asChild", type: "boolean", default: "false" },
+  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
+  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
 ]} />

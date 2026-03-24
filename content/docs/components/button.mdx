@@ -27,11 +27,16 @@ import { Button } from "@/components/ui/button"
 <Button variant="outline" playful>Button</Button>
 ```
 
+```tsx
+<Button variant="outline" smooth>Button</Button>
+```
+
 ## API Reference
 
 <APIReference name="Button" extends="button" props={[
   { name: "variant", type: '"default" | "outline" | "ghost" | "destructive" | "secondary" | "link"', default: '"default"' },
   { name: "size", type: '"default" | "sm" | "lg" | "icon"', default: '"default"' },
-  { name: "playful", type: "boolean", default: "false" },
+  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
+  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." },
   { name: "asChild", type: "boolean", default: "false" }
 ]} />
