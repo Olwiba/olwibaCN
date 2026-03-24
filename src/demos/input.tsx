@@ -2,22 +2,56 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { DemoControls } from "@/components/docs/ComponentPreview";
 
+type Mode = "default" | "playful" | "smooth";
+
+const modes: Mode[] = ["default", "playful", "smooth"];
+
 export default function InputDemo() {
+  const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
   return (
     <>
       <div className="flex flex-col gap-4 w-[300px]">
-        <Input type="text" placeholder="Text" disabled={disabled} />
-        <Input type="password" placeholder="Password" disabled={disabled} />
+        <Input
+          type="text"
+          placeholder="Text"
+          playful={mode === "playful"}
+          smooth={mode === "smooth"}
+          disabled={disabled}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          playful={mode === "playful"}
+          smooth={mode === "smooth"}
+          disabled={disabled}
+        />
       </div>
 
       <DemoControls>
         <div className="flex flex-wrap items-start gap-6">
+          <div className="space-y-1.5">
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
+            <div className="flex gap-1.5">
+              {modes.map((m) => (
+                <Button
+                  key={m}
+                  variant={mode === m ? "default" : "secondary"}
+                  size="sm"
+                  onClick={() => setMode(m)}
+                >
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
+                </Button>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-1.5">
             <span className="text-xs font-medium text-fd-muted-foreground">Options</span>
             <div className="flex h-9 items-center gap-4">
