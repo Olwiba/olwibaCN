@@ -39,10 +39,11 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   playful?: boolean
+  smooth?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, playful = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, playful = false, smooth = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
 
     const hasBackdrop = playful && variant !== "ghost" && variant !== "link"
@@ -60,12 +61,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <span
             className={cn(
               "absolute inset-0 rounded-md transition-transform duration-200 translate-x-[3px] translate-y-[3px] -rotate-[0.5deg] group-hover/playful:-rotate-[1.5deg] group-hover/playful:scale-[1.01]",
+              smooth && "rounded-2xl",
               backdropColor[variant ?? "default"],
             )}
             aria-hidden="true"
           />
           <Comp
-            className={cn(buttonVariants({ variant, size, className }), "relative rotate-[0.3deg]")}
+            className={cn(buttonVariants({ variant, size, className }), "relative rotate-[0.3deg]", smooth && "rounded-2xl")}
             ref={ref}
             {...props}
           />
@@ -75,7 +77,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, className }), smooth && "rounded-2xl")}
         ref={ref}
         {...props}
       />
