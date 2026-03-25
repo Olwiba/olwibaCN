@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Mail } from "lucide-react";
 
-type ButtonMode = "default" | "playful" | "smooth";
+type Mode = "default" | "playful" | "smooth";
 
 const variants: NonNullable<ButtonProps["variant"]>[] = [
   "default",
@@ -18,18 +18,12 @@ const variants: NonNullable<ButtonProps["variant"]>[] = [
   "link",
 ];
 
-const sizes: NonNullable<ButtonProps["size"]>[] = [
-  "default",
-  "sm",
-  "lg",
-  "icon",
-];
-
-const modes: ButtonMode[] = ["default", "playful", "smooth"];
+const sizes: NonNullable<ButtonProps["size"]>[] = ["default", "sm", "lg", "icon"];
+const modes: Mode[] = ["default", "playful", "smooth"];
 
 export default function ButtonDemo() {
   const [size, setSize] = useState<ButtonProps["size"]>("default");
-  const [mode, setMode] = useState<ButtonMode>("default");
+  const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
   const usageProps = [
@@ -93,8 +87,12 @@ export default function ButtonDemo() {
             <span className="text-xs font-medium text-fd-muted-foreground">Options</span>
             <div className="flex h-9 items-center gap-4">
               <div className="flex items-center gap-2">
-                <Switch id="disabled" checked={disabled} onCheckedChange={setDisabled} />
-                <Label htmlFor="disabled" className="text-xs">Disabled</Label>
+                <Switch
+                  id="btn-disabled"
+                  checked={disabled}
+                  onCheckedChange={setDisabled}
+                />
+                <Label htmlFor="btn-disabled" className="text-xs">Disabled</Label>
               </div>
             </div>
           </div>

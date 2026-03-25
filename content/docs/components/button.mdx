@@ -21,11 +21,15 @@ import { Button } from "@/components/ui/button"
 
 <LiveUsageCode name="button" defaultCode={`<Button>Button</Button>`} />
 
+```tsx
+<Button variant="outline" smooth>Button</Button>
+```
+
 ## API Reference
 
 <APIReference name="Button" extends="button" props={[
   { name: "variant", type: '"default" | "outline" | "ghost" | "destructive" | "secondary" | "link"', default: '"default"' },
   { name: "size", type: '"default" | "sm" | "lg" | "icon"', default: '"default"' },
-  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined", description: 'playful adds a rotation with drop-shadow backdrop. smooth rounds corners for a softer look.' },
   { name: "asChild", type: "boolean", default: "false" }
 ]} />

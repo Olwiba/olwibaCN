@@ -23,13 +23,39 @@ const badgeVariants = cva(
   }
 )
 
+const badgeBackdropColor: Record<string, string> = {
+  default: "bg-primary/30 dark:bg-primary/20",
+  secondary: "bg-foreground/10 dark:bg-foreground/10",
+  destructive: "bg-destructive/30 dark:bg-destructive/20",
+  outline: "bg-foreground/10 dark:bg-foreground/10",
+}
+
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  playful?: boolean
+  smooth?: boolean
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, playful = false, smooth = false, ...props }: BadgeProps) {
+  if (playful) {
+    return (
+      <span className="group/playful relative inline-flex">
+        <span
+          aria-hidden="true"
+          className={cn(
+            "absolute inset-0 rounded-full transition-transform duration-200 translate-x-[2px] translate-y-[2px] -rotate-[1deg] group-hover/playful:-rotate-[2.5deg] group-hover/playful:scale-[1.02]",
+            smooth && "rounded-xl",
+            badgeBackdropColor[variant ?? "default"],
+          )}
+        />
+        <div className={cn(badgeVariants({ variant }), "relative rotate-[0.5deg]", smooth && "rounded-xl", className)} {...props} />
+      </span>
+    )
+  }
+
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant }), smooth && "rounded-xl", className)} {...props} />
   )
 }
 

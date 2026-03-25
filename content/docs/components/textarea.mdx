@@ -23,9 +23,19 @@ import { Textarea } from "@/components/ui/textarea"
 <Textarea placeholder="Type your message here." />
 ```
 
+```tsx
+<Textarea playful placeholder="Type your message here." />
+```
+
+```tsx
+<Textarea smooth placeholder="Type your message here." />
+```
+
 ## API Reference
 
 <APIReference name="Textarea" extends="textarea" props={[
   { name: "placeholder", type: "string", default: "undefined" },
-  { name: "disabled", type: "boolean", default: "false" }
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
+  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
 ]} />

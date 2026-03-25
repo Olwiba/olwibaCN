@@ -41,9 +41,20 @@ import {
 </Card>
 ```
 
+```tsx
+<Card playful>...</Card>
+```
+
+```tsx
+<Card smooth>...</Card>
+```
+
 ## API Reference
 
-<APIReference name="Card" extends="div" />
+<APIReference name="Card" extends="div" props={[
+  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
+  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
+]} />
 
 <APIReference name="CardHeader" extends="div" />
 

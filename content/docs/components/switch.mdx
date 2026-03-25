@@ -27,11 +27,16 @@ import { Label } from "@/components/ui/label"
 </div>
 ```
 
+```tsx
+<Switch playful id="airplane-mode" />
+```
+
 ## API Reference
 
 <APIReference name="Switch" extends="button" props={[
   { name: "checked", type: "boolean", default: "undefined" },
   { name: "onCheckedChange", type: "(checked: boolean) => void", default: "undefined" },
   { name: "defaultChecked", type: "boolean", default: "false" },
-  { name: "disabled", type: "boolean", default: "false" }
+  { name: "disabled", type: "boolean", default: "false" },
+  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." }
 ]} />
