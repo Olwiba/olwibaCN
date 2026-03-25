@@ -1,0 +1,57 @@
+---
+title: Modes
+description: Apply personality to components with the mode prop — default, smooth, or playful.
+---
+
+## Overview
+
+Components in this library share a consistent `mode` prop that controls their visual personality. The base theme is intentionally blocky and utilitarian. Modes let you opt into a different feel without changing the component's variant or structure.
+
+| Mode | Description |
+|------|-------------|
+| *(omitted)* | Default — blocky, sharp, standard |
+| `smooth` | Softens the blockiness — rounder corners, more fluid |
+| `playful` | Expressive and fun — backdrop shadow, slight rotation |
+
+## Usage
+
+Omitting `mode` gives you the default style. Pass `mode` to opt in:
+
+```tsx
+<Button>Default</Button>
+
+<Button mode="smooth">Smooth</Button>
+
+<Button mode="playful">Playful</Button>
+```
+
+## Default
+
+The base style across all components. Sharp corners, solid shadows, no frills. Consistent with a blocky design system aesthetic.
+
+```tsx
+<Button variant="outline">Default</Button>
+```
+
+## Smooth
+
+Removes the geometric blockiness from the default theme. Components get rounder corners and softer edges — same structure, just less rigid.
+
+```tsx
+<Button variant="outline" mode="smooth">Smooth</Button>
+```
+
+## Playful
+
+Adds a fun, expressive layer. Components render with a backdrop shadow and a subtle rotation that animates on hover. Structurally, playful wraps the component in a positioning context to support the backdrop element.
+
+```tsx
+<Button variant="outline" mode="playful">Playful</Button>
+```
+
+## Implementation notes
+
+- `mode` is a prop on the component itself, not a CVA variant. This is because `playful` requires a DOM structure change (wrapper `<span>` + backdrop `<span>`) that class utilities alone can't express.
+- `smooth` is applied via additional Tailwind classes on the root element — no structural change needed.
+- `mode` is defined per-component. The visual interpretation of smooth and playful is tailored to each component's shape.
+- The default (omitted) is always zero-cost — no extra classes or DOM nodes.

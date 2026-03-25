@@ -23,14 +23,30 @@ const alertVariants = cva(
   }
 )
 
+type AlertMode = "playful" | "smooth"
+type AlertSize = "sm" | "default" | "lg"
+
 const Alert = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
->(({ className, variant, ...props }, ref) => (
+  React.HTMLAttributes<HTMLDivElement> &
+    VariantProps<typeof alertVariants> & {
+      mode?: AlertMode
+      size?: AlertSize
+      disabled?: boolean
+    }
+>(({ className, variant, mode, size, disabled, ...props }, ref) => (
   <div
     ref={ref}
     role="alert"
-    className={cn(alertVariants({ variant }), className)}
+    className={cn(
+      alertVariants({ variant }),
+      size === "sm" && "p-3 text-xs [&>svg]:top-3 [&>svg]:left-3",
+      size === "lg" && "p-6 text-base [&>svg]:top-6 [&>svg]:left-6",
+      mode === "smooth" && "rounded-2xl",
+      mode === "playful" && "border-l-4",
+      disabled && "opacity-50 pointer-events-none",
+      className,
+    )}
     {...props}
   />
 ))

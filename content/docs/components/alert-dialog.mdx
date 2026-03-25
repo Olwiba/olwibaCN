@@ -61,7 +61,9 @@ import {
   { name: "asChild", type: "boolean", default: "false" }
 ]} />
 
-<APIReference name="AlertDialogContent" extends="div" />
+<APIReference name="AlertDialogContent" extends="div" props={[
+  { name: "variant", type: '"playful" | "smooth"', default: "undefined" }
+]} />
 
 <APIReference name="AlertDialogHeader" extends="div" />
 

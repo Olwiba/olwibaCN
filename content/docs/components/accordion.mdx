@@ -42,13 +42,17 @@ import {
   { name: "collapsible", type: "boolean", default: "false" },
   { name: "defaultValue", type: "string | string[]", default: "undefined" },
   { name: "value", type: "string | string[]", default: "undefined" },
-  { name: "onValueChange", type: "(value: string | string[]) => void", default: "undefined" }
+  { name: "onValueChange", type: "(value: string | string[]) => void", default: "undefined" },
+  { name: "variant", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "size", type: '"sm" | "default"', default: '"default"' }
 ]} />
 
 <APIReference name="AccordionItem" props={[
   { name: "value", type: "string" },
   { name: "disabled", type: "boolean", default: "false" }
 ]} />
+
+
 
 <APIReference name="AccordionTrigger" extends="button" props={[
   { name: "asChild", type: "boolean", default: "false" }

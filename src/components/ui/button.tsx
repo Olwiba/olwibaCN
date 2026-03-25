@@ -38,14 +38,14 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
-  playful?: boolean
+  mode?: "playful" | "smooth"
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, playful = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, mode, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
 
-    const hasBackdrop = playful && variant !== "ghost" && variant !== "link"
+    const hasBackdrop = mode === "playful" && variant !== "ghost" && variant !== "link"
 
     const backdropColor: Record<string, string> = {
       default: "bg-primary/30 dark:bg-primary/20",
@@ -75,7 +75,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          mode === "smooth" && "rounded-full shadow-none",
+        )}
         ref={ref}
         {...props}
       />

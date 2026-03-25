@@ -4,53 +4,97 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const Accordion = AccordionPrimitive.Root
+type AccordionVariant = "playful" | "smooth"
+type AccordionSize = "sm" | "default"
+
+const AccordionContext = React.createContext<{ variant?: AccordionVariant; size?: AccordionSize }>({})
+
+const Accordion = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & {
+    variant?: AccordionVariant
+    size?: AccordionSize
+  }
+>(({ variant, size, ...props }, ref) => (
+  <AccordionContext.Provider value={{ variant, size }}>
+    <AccordionPrimitive.Root ref={ref} {...props} />
+  </AccordionContext.Provider>
+))
+Accordion.displayName = "Accordion"
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item
-    ref={ref}
-    className={cn("border-b", className)}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const { variant } = React.useContext(AccordionContext)
+  return (
+    <AccordionPrimitive.Item
+      ref={ref}
+      className={cn(
+        !variant && "border-b",
+        variant === "smooth" && "rounded-xl border bg-card mb-2 last:mb-0",
+        variant === "playful" && "border-b border-l-4 border-l-primary/40",
+        "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+        className
+      )}
+      {...props}
+    />
+  )
+})
 AccordionItem.displayName = "AccordionItem"
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-))
+>(({ className, children, ...props }, ref) => {
+  const { variant, size } = React.useContext(AccordionContext)
+  return (
+    <AccordionPrimitive.Header className="flex">
+      <AccordionPrimitive.Trigger
+        ref={ref}
+        className={cn(
+          "flex flex-1 items-center justify-between font-medium transition-all [&[data-state=open]>svg]:rotate-180",
+          size === "sm" ? "py-2" : "py-4",
+          !variant && "hover:underline",
+          variant === "smooth" && "px-4 hover:opacity-70",
+          variant === "playful" && "pl-4 hover:underline",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <ChevronDown className={cn(
+          "h-4 w-4 shrink-0 transition-transform duration-200",
+          variant === "smooth" && "mr-4",
+        )} />
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  )
+})
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    {...props}
-  >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
-))
-
+>(({ className, children, ...props }, ref) => {
+  const { variant, size } = React.useContext(AccordionContext)
+  return (
+    <AccordionPrimitive.Content
+      ref={ref}
+      className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+      {...props}
+    >
+      <div className={cn(
+        size === "sm" ? "pb-2 pt-0" : "pb-4 pt-0",
+        variant === "smooth" && "px-4",
+        variant === "playful" && "pl-4",
+        className,
+      )}>
+        {children}
+      </div>
+    </AccordionPrimitive.Content>
+  )
+})
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
