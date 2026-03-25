@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Mail } from "lucide-react";
@@ -31,6 +31,13 @@ export default function ButtonDemo() {
   const [size, setSize] = useState<ButtonProps["size"]>("default");
   const [mode, setMode] = useState<ButtonMode>("default");
   const [disabled, setDisabled] = useState(false);
+
+  const usageProps = [
+    size !== "default" && `size="${size}"`,
+    mode !== "default" && `mode="${mode}"`,
+    disabled && "disabled",
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Button${usageProps ? " " + usageProps : ""}>Button</Button>`);
 
   return (
     <>
@@ -67,7 +74,7 @@ export default function ButtonDemo() {
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
               {modes.map((m) => (
                 <Button

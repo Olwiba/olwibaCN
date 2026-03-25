@@ -2,56 +2,63 @@
 
 import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Info, TriangleAlert, Lightbulb, CircleX } from "lucide-react";
 
-type AlertVariant = "default" | "playful" | "smooth";
+type AlertMode = "default" | "playful" | "smooth";
 type AlertSize = "default" | "sm" | "lg";
 
-const variants: AlertVariant[] = ["default", "playful", "smooth"];
+const modes: AlertMode[] = ["default", "playful", "smooth"];
 const sizes: AlertSize[] = ["default", "sm", "lg"];
 
 export default function AlertDemo() {
-  const [variant, setVariant] = useState<AlertVariant>("default");
+  const [mode, setMode] = useState<AlertMode>("default");
   const [size, setSize] = useState<AlertSize>("default");
   const [disabled, setDisabled] = useState(false);
 
-  const mode = variant === "default" ? undefined : variant;
+  const resolvedMode = mode === "default" ? undefined : mode;
+
+  const usageProps = [
+    resolvedMode && `mode="${resolvedMode}"`,
+    size !== "default" && `size="${size}"`,
+    disabled && "disabled",
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Alert${usageProps ? " " + usageProps : ""}>\n  <AlertTitle>Heads up!</AlertTitle>\n  <AlertDescription>Description.</AlertDescription>\n</Alert>`);
 
   return (
     <>
       <div className="w-full max-w-md space-y-4">
-        <Alert mode={mode} size={size} disabled={disabled}>
+        <Alert mode={resolvedMode} size={size} disabled={disabled}>
           <AlertTitle>Heads up!</AlertTitle>
           <AlertDescription>
             You can add components and dependencies to your app using the cli.
           </AlertDescription>
         </Alert>
-        <Alert variant="info" mode={mode} size={size} disabled={disabled}>
+        <Alert variant="info" mode={resolvedMode} size={size} disabled={disabled}>
           <Info className="h-4 w-4" />
           <AlertTitle>Info</AlertTitle>
           <AlertDescription>
             Your account has been updated with the latest changes.
           </AlertDescription>
         </Alert>
-        <Alert variant="warning" mode={mode} size={size} disabled={disabled}>
+        <Alert variant="warning" mode={resolvedMode} size={size} disabled={disabled}>
           <TriangleAlert className="h-4 w-4" />
           <AlertTitle>Warning</AlertTitle>
           <AlertDescription>
             Your trial expires in 3 days. Upgrade to keep access.
           </AlertDescription>
         </Alert>
-        <Alert variant="tip" mode={mode} size={size} disabled={disabled}>
+        <Alert variant="tip" mode={resolvedMode} size={size} disabled={disabled}>
           <Lightbulb className="h-4 w-4" />
           <AlertTitle>Tip</AlertTitle>
           <AlertDescription>
             Use keyboard shortcuts to navigate faster.
           </AlertDescription>
         </Alert>
-        <Alert variant="destructive" mode={mode} size={size} disabled={disabled}>
+        <Alert variant="destructive" mode={resolvedMode} size={size} disabled={disabled}>
           <CircleX className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>
@@ -79,16 +86,16 @@ export default function AlertDemo() {
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
-              {variants.map((v) => (
+              {modes.map((m) => (
                 <Button
-                  key={v}
-                  variant={variant === v ? "default" : "secondary"}
+                  key={m}
+                  variant={mode === m ? "default" : "secondary"}
                   size="sm"
-                  onClick={() => setVariant(v)}
+                  onClick={() => setMode(m)}
                 >
-                  {v.charAt(0).toUpperCase() + v.slice(1)}
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
                 </Button>
               ))}
             </div>

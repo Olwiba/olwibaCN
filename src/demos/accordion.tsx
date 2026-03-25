@@ -7,21 +7,27 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-type AccordionVariant = "default" | "playful" | "smooth";
+type AccordionMode = "default" | "playful" | "smooth";
 type AccordionSize = "default" | "sm";
 
-const variants: AccordionVariant[] = ["default", "playful", "smooth"];
+const modes: AccordionMode[] = ["default", "playful", "smooth"];
 const sizes: AccordionSize[] = ["default", "sm"];
 
 export default function AccordionDemo() {
-  const [variant, setVariant] = useState<AccordionVariant>("default");
+  const [mode, setMode] = useState<AccordionMode>("default");
   const [size, setSize] = useState<AccordionSize>("default");
   const [disabled, setDisabled] = useState(false);
+
+  const usageProps = [
+    mode !== "default" && `mode="${mode}"`,
+    size !== "default" && `size="${size}"`,
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Accordion type="single" collapsible${usageProps ? " " + usageProps : ""}>\n  <AccordionItem value="item-1"${disabled ? " disabled" : ""}>\n    <AccordionTrigger>Is it accessible?</AccordionTrigger>\n    <AccordionContent>Yes.</AccordionContent>\n  </AccordionItem>\n</Accordion>`);
 
   return (
     <>
@@ -29,7 +35,7 @@ export default function AccordionDemo() {
         type="single"
         collapsible
         className="w-full max-w-md"
-        variant={variant === "default" ? undefined : variant}
+        mode={mode === "default" ? undefined : mode}
         size={size}
       >
         <AccordionItem value="item-1" disabled={disabled}>
@@ -71,16 +77,16 @@ export default function AccordionDemo() {
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
-              {variants.map((v) => (
+              {modes.map((m) => (
                 <Button
-                  key={v}
-                  variant={variant === v ? "default" : "secondary"}
+                  key={m}
+                  variant={mode === m ? "default" : "secondary"}
                   size="sm"
-                  onClick={() => setVariant(v)}
+                  onClick={() => setMode(m)}
                 >
-                  {v.charAt(0).toUpperCase() + v.slice(1)}
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
                 </Button>
               ))}
             </div>

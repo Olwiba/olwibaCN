@@ -19,18 +19,13 @@ description: An image element with a fallback for representing the user.
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 ```
 
-```tsx
-<Avatar>
-  <AvatarImage src="/avatar.png" alt="@olwiba" />
-  <AvatarFallback>OB</AvatarFallback>
-</Avatar>
-```
+<LiveUsageCode name="avatar" defaultCode={`<Avatar>\n  <AvatarImage src="/avatar.png" alt="@olwiba" />\n  <AvatarFallback>OB</AvatarFallback>\n</Avatar>`} />
 
 ## API Reference
 
 <APIReference name="Avatar" extends="span" props={[
   { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
-  { name: "variant", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "disabled", type: "boolean", default: "false" },
   { name: "asChild", type: "boolean", default: "false" }
 ]} />

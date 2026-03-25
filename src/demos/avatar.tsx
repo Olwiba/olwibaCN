@@ -2,27 +2,34 @@
 
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-type AvatarVariant = "default" | "playful" | "smooth";
+type AvatarMode = "default" | "playful" | "smooth";
 type AvatarSize = "default" | "sm" | "lg";
 
-const variants: AvatarVariant[] = ["default", "playful", "smooth"];
+const modes: AvatarMode[] = ["default", "playful", "smooth"];
 const sizes: AvatarSize[] = ["default", "sm", "lg"];
 
 export default function AvatarDemo() {
-  const [variant, setVariant] = useState<AvatarVariant>("default");
+  const [mode, setMode] = useState<AvatarMode>("default");
   const [size, setSize] = useState<AvatarSize>("default");
   const [disabled, setDisabled] = useState(false);
+
+  const usageProps = [
+    size !== "default" && `size="${size}"`,
+    mode !== "default" && `mode="${mode}"`,
+    disabled && "disabled",
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Avatar${usageProps ? " " + usageProps : ""}>\n  <AvatarImage src="/avatar.png" alt="@olwiba" />\n  <AvatarFallback>OB</AvatarFallback>\n</Avatar>`);
 
   return (
     <>
       <div className="flex items-center gap-4">
         <Avatar
-          variant={variant === "default" ? undefined : variant}
+          mode={mode === "default" ? undefined : mode}
           size={size}
           disabled={disabled}
         >
@@ -30,7 +37,7 @@ export default function AvatarDemo() {
           <AvatarFallback>OB</AvatarFallback>
         </Avatar>
         <Avatar
-          variant={variant === "default" ? undefined : variant}
+          mode={mode === "default" ? undefined : mode}
           size={size}
           disabled={disabled}
         >
@@ -57,16 +64,16 @@ export default function AvatarDemo() {
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
-              {variants.map((v) => (
+              {modes.map((m) => (
                 <Button
-                  key={v}
-                  variant={variant === v ? "default" : "secondary"}
+                  key={m}
+                  variant={mode === m ? "default" : "secondary"}
                   size="sm"
-                  onClick={() => setVariant(v)}
+                  onClick={() => setMode(m)}
                 >
-                  {v.charAt(0).toUpperCase() + v.slice(1)}
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
                 </Button>
               ))}
             </div>

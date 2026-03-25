@@ -4,19 +4,19 @@ import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-type AccordionVariant = "playful" | "smooth"
+type AccordionMode = "playful" | "smooth"
 type AccordionSize = "sm" | "default"
 
-const AccordionContext = React.createContext<{ variant?: AccordionVariant; size?: AccordionSize }>({})
+const AccordionContext = React.createContext<{ mode?: AccordionMode; size?: AccordionSize }>({})
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & {
-    variant?: AccordionVariant
+    mode?: AccordionMode
     size?: AccordionSize
   }
->(({ variant, size, ...props }, ref) => (
-  <AccordionContext.Provider value={{ variant, size }}>
+>(({ mode, size, ...props }, ref) => (
+  <AccordionContext.Provider value={{ mode, size }}>
     <AccordionPrimitive.Root ref={ref} {...props} />
   </AccordionContext.Provider>
 ))
@@ -26,14 +26,14 @@ const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => {
-  const { variant } = React.useContext(AccordionContext)
+  const { mode } = React.useContext(AccordionContext)
   return (
     <AccordionPrimitive.Item
       ref={ref}
       className={cn(
-        !variant && "border-b",
-        variant === "smooth" && "rounded-xl border bg-card mb-2 last:mb-0",
-        variant === "playful" && "border-b border-l-4 border-l-primary/40",
+        !mode && "border-b",
+        mode === "smooth" && "rounded-xl border bg-card mb-2 last:mb-0",
+        mode === "playful" && "border-b border-l-4 border-l-primary/40",
         "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
         className
       )}
@@ -47,7 +47,7 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => {
-  const { variant, size } = React.useContext(AccordionContext)
+  const { mode, size } = React.useContext(AccordionContext)
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -55,9 +55,9 @@ const AccordionTrigger = React.forwardRef<
         className={cn(
           "flex flex-1 items-center justify-between font-medium transition-all [&[data-state=open]>svg]:rotate-180",
           size === "sm" ? "py-2" : "py-4",
-          !variant && "hover:underline",
-          variant === "smooth" && "px-4 hover:opacity-70",
-          variant === "playful" && "pl-4 hover:underline",
+          !mode && "hover:underline",
+          mode === "smooth" && "px-4 hover:opacity-70",
+          mode === "playful" && "pl-4 hover:underline",
           className
         )}
         {...props}
@@ -65,7 +65,7 @@ const AccordionTrigger = React.forwardRef<
         {children}
         <ChevronDown className={cn(
           "h-4 w-4 shrink-0 transition-transform duration-200",
-          variant === "smooth" && "mr-4",
+          mode === "smooth" && "mr-4",
         )} />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -77,7 +77,7 @@ const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
-  const { variant, size } = React.useContext(AccordionContext)
+  const { mode, size } = React.useContext(AccordionContext)
   return (
     <AccordionPrimitive.Content
       ref={ref}
@@ -86,8 +86,8 @@ const AccordionContent = React.forwardRef<
     >
       <div className={cn(
         size === "sm" ? "pb-2 pt-0" : "pb-4 pt-0",
-        variant === "smooth" && "px-4",
-        variant === "playful" && "pl-4",
+        mode === "smooth" && "px-4",
+        mode === "playful" && "pl-4",
         className,
       )}>
         {children}

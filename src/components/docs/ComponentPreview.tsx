@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 import { createPortal } from 'react-dom';
+import { CodeFence } from './CodeFence';
+import { setUsageCode, subscribeUsageCode, getUsageCode } from '@/lib/usage-code-store';
 
 const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   // Existing demos
@@ -67,6 +69,24 @@ const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
 // but the DOM gets portaled below the preview area.
 const ControlsPortalContext = React.createContext<HTMLDivElement | null>(null);
 
+// Component name context — lets useUsageCode know which store key to write to.
+const ComponentNameContext = React.createContext<string>('');
+
+export function useUsageCode(code: string) {
+  const name = React.useContext(ComponentNameContext);
+  React.useEffect(() => {
+    if (!name) return;
+    setUsageCode(name, code);
+    return () => setUsageCode(name, null);
+  }, [name, code]);
+}
+
+export function LiveUsageCode({ name, defaultCode }: { name: string; defaultCode: string }) {
+  const [code, setCode] = React.useState<string>(() => getUsageCode(name) ?? defaultCode);
+  React.useEffect(() => subscribeUsageCode(name, (c) => setCode(c ?? defaultCode)), [name, defaultCode]);
+  return <CodeFence code={code} language="tsx" />;
+}
+
 export function DemoControls({ children }: { children: React.ReactNode }) {
   const target = React.useContext(ControlsPortalContext);
   if (!target) return null;
@@ -89,6 +109,7 @@ export function ComponentPreview({ name, title }: ComponentPreviewProps) {
 
   return (
     <ControlsPortalContext.Provider value={portalTarget}>
+      <ComponentNameContext.Provider value={name}>
       <div className="border border-dashed border-fd-border rounded-lg overflow-visible not-prose my-6">
         {title && (
           <div className="px-4 py-2 border-b border-fd-border bg-fd-muted/50">
@@ -106,6 +127,7 @@ export function ComponentPreview({ name, title }: ComponentPreviewProps) {
         </div>
         <div ref={setPortalTarget} />
       </div>
+      </ComponentNameContext.Provider>
     </ControlsPortalContext.Provider>
   );
 }

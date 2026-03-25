@@ -19,27 +19,14 @@ description: Displays a callout for important information with semantic color va
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 ```
 
-```tsx
-<Alert>
-  <AlertTitle>Heads up!</AlertTitle>
-  <AlertDescription>You can add components using the cli.</AlertDescription>
-</Alert>
-```
-
-```tsx
-<Alert variant="info">
-  <Info className="h-4 w-4" />
-  <AlertTitle>Info</AlertTitle>
-  <AlertDescription>Your account has been updated.</AlertDescription>
-</Alert>
-```
+<LiveUsageCode name="alert" defaultCode={`<Alert>\n  <AlertTitle>Heads up!</AlertTitle>\n  <AlertDescription>Description.</AlertDescription>\n</Alert>`} />
 
 ## API Reference
 
 <APIReference name="Alert" extends="div" props={[
   { name: "variant", type: '"default" | "destructive" | "info" | "warning" | "tip"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
-  { name: "variant", type: '"playful" | "smooth"', default: "undefined" },
   { name: "disabled", type: "boolean", default: "false" }
 ]} />
 

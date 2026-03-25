@@ -13,24 +13,27 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-type AlertDialogVariant = "default" | "playful" | "smooth";
-const variants: AlertDialogVariant[] = ["default", "playful", "smooth"];
+type AlertDialogMode = "default" | "playful" | "smooth";
+const modes: AlertDialogMode[] = ["default", "playful", "smooth"];
 
 export default function AlertDialogDemo() {
-  const [variant, setVariant] = useState<AlertDialogVariant>("default");
+  const [mode, setMode] = useState<AlertDialogMode>("default");
   const [disabled, setDisabled] = useState(false);
+
+  const contentProps = mode !== "default" ? ` mode="${mode}"` : "";
+  useUsageCode(`<AlertDialog>\n  <AlertDialogTrigger asChild>\n    <Button variant="outline"${disabled ? " disabled" : ""}>Click me</Button>\n  </AlertDialogTrigger>\n  <AlertDialogContent${contentProps}>\n    ...\n  </AlertDialogContent>\n</AlertDialog>`);
 
   return (
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="outline" disabled={disabled}>Delete Account</Button>
+          <Button variant="outline" disabled={disabled}>Click me</Button>
         </AlertDialogTrigger>
-        <AlertDialogContent variant={variant === "default" ? undefined : variant}>
+        <AlertDialogContent mode={mode === "default" ? undefined : mode}>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
@@ -48,16 +51,16 @@ export default function AlertDialogDemo() {
       <DemoControls>
         <div className="flex flex-wrap items-start gap-6">
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
-              {variants.map((v) => (
+              {modes.map((m) => (
                 <Button
-                  key={v}
-                  variant={variant === v ? "default" : "secondary"}
+                  key={m}
+                  variant={mode === m ? "default" : "secondary"}
                   size="sm"
-                  onClick={() => setVariant(v)}
+                  onClick={() => setMode(m)}
                 >
-                  {v.charAt(0).toUpperCase() + v.slice(1)}
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
                 </Button>
               ))}
             </div>

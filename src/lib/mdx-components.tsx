@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
-import { ComponentPreview } from '@/components/docs/ComponentPreview';
+import { ComponentPreview, LiveUsageCode } from '@/components/docs/ComponentPreview';
 import { InstallationTabs } from '@/components/docs/InstallationTabs';
 import { Callout } from '@/components/docs/Callout';
 import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
@@ -205,6 +205,7 @@ export const mdxComponents = {
   AlertTitle,
   AlertDescription,
   ComponentPreview,
+  LiveUsageCode,
   InstallationTabs,
   CopyCommandButton,
   APIReference,

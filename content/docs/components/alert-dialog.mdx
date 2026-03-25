@@ -29,25 +29,7 @@ import {
 } from "@/components/ui/alert-dialog"
 ```
 
-```tsx
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="outline">Delete Account</Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-      <AlertDialogDescription>
-        This action cannot be undone.
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction>Continue</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
+<LiveUsageCode name="alert-dialog" defaultCode={`<AlertDialog>\n  <AlertDialogTrigger asChild>\n    <Button variant="outline">Click me</Button>\n  </AlertDialogTrigger>\n  <AlertDialogContent>\n    ...\n  </AlertDialogContent>\n</AlertDialog>`} />
 
 ## API Reference
 
@@ -62,7 +44,7 @@ import {
 ]} />
 
 <APIReference name="AlertDialogContent" extends="div" props={[
-  { name: "variant", type: '"playful" | "smooth"', default: "undefined" }
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" }
 ]} />
 
 <APIReference name="AlertDialogHeader" extends="div" />

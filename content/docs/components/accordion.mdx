@@ -24,16 +24,7 @@ import {
 } from "@/components/ui/accordion"
 ```
 
-```tsx
-<Accordion type="single" collapsible>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It adheres to the WAI-ARIA design pattern.
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
-```
+<LiveUsageCode name="accordion" defaultCode={`<Accordion type="single" collapsible>\n  <AccordionItem value="item-1">\n    <AccordionTrigger>Is it accessible?</AccordionTrigger>\n    <AccordionContent>Yes.</AccordionContent>\n  </AccordionItem>\n</Accordion>`} />
 
 ## API Reference
 
@@ -43,7 +34,7 @@ import {
   { name: "defaultValue", type: "string | string[]", default: "undefined" },
   { name: "value", type: "string | string[]", default: "undefined" },
   { name: "onValueChange", type: "(value: string | string[]) => void", default: "undefined" },
-  { name: "variant", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "size", type: '"sm" | "default"', default: '"default"' }
 ]} />
 
