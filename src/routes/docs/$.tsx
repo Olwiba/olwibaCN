@@ -80,7 +80,7 @@ function Page() {
   const data = useFumadocsLoader(loaderData);
 
   return (
-    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections}>
+    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections} defaultOpenFolders>
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
         {clientLoader.useContent(data.path, undefined)}
       </Suspense>
