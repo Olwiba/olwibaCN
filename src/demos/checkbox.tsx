@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 
 type Mode = "default" | "playful" | "smooth";
 
@@ -13,18 +13,20 @@ const modes: Mode[] = ["default", "playful", "smooth"];
 
 export default function CheckboxDemo() {
   const [mode, setMode] = useState<Mode>("default");
-  const [checked, setChecked] = useState<boolean | "indeterminate">(true);
   const [disabled, setDisabled] = useState(false);
+
+  const usageProps = [
+    mode !== "default" && `mode="${mode}"`,
+    disabled && "disabled",
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Checkbox${usageProps ? " " + usageProps : ""} />`);
 
   return (
     <>
       <div className="flex items-center space-x-2">
         <Checkbox
           id="demo"
-          checked={checked}
-          onCheckedChange={setChecked}
-          playful={mode === "playful"}
-          smooth={mode === "smooth"}
+          mode={mode === "default" ? undefined : mode}
           disabled={disabled}
         />
         <Label htmlFor="demo" className={disabled ? "text-muted-foreground" : ""}>
@@ -54,11 +56,7 @@ export default function CheckboxDemo() {
             <span className="text-xs font-medium text-fd-muted-foreground">Options</span>
             <div className="flex h-9 items-center gap-4">
               <div className="flex items-center gap-2">
-                <Switch
-                  id="checkbox-disabled"
-                  checked={disabled}
-                  onCheckedChange={setDisabled}
-                />
+                <Switch id="checkbox-disabled" checked={disabled} onCheckedChange={setDisabled} />
                 <Label htmlFor="checkbox-disabled" className="text-xs">Disabled</Label>
               </div>
             </div>

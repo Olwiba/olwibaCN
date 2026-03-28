@@ -19,23 +19,11 @@ description: A multi-line text input field for longer form content.
 import { Textarea } from "@/components/ui/textarea"
 ```
 
-```tsx
-<Textarea placeholder="Type your message here." />
-```
-
-```tsx
-<Textarea playful placeholder="Type your message here." />
-```
-
-```tsx
-<Textarea smooth placeholder="Type your message here." />
-```
+<LiveUsageCode name="textarea" defaultCode={`<Textarea placeholder="Type your message here." />`} />
 
 ## API Reference
 
 <APIReference name="Textarea" extends="textarea" props={[
-  { name: "placeholder", type: "string", default: "undefined" },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "disabled", type: "boolean", default: "false" },
-  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
-  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
 ]} />

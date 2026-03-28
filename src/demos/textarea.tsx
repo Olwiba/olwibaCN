@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 
 type Mode = "default" | "playful" | "smooth";
 
@@ -15,13 +15,18 @@ export default function TextareaDemo() {
   const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
+  const usageProps = [
+    mode !== "default" && `mode="${mode}"`,
+    disabled && "disabled",
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Textarea${usageProps ? " " + usageProps : ""} placeholder="Type your message here." />`);
+
   return (
     <>
       <Textarea
         placeholder="Type your message here."
         className="w-[300px]"
-        playful={mode === "playful"}
-        smooth={mode === "smooth"}
+        mode={mode === "default" ? undefined : mode}
         disabled={disabled}
       />
 
@@ -47,11 +52,7 @@ export default function TextareaDemo() {
             <span className="text-xs font-medium text-fd-muted-foreground">Options</span>
             <div className="flex h-9 items-center gap-4">
               <div className="flex items-center gap-2">
-                <Switch
-                  id="textarea-disabled"
-                  checked={disabled}
-                  onCheckedChange={setDisabled}
-                />
+                <Switch id="textarea-disabled" checked={disabled} onCheckedChange={setDisabled} />
                 <Label htmlFor="textarea-disabled" className="text-xs">Disabled</Label>
               </div>
             </div>

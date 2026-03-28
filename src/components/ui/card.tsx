@@ -3,27 +3,22 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  playful?: boolean
-  smooth?: boolean
+  mode?: "playful" | "smooth"
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, playful = false, smooth = false, ...props }, ref) => {
-    if (playful) {
+  ({ className, mode, ...props }, ref) => {
+    if (mode === "playful") {
       return (
         <div className="group/playful relative">
           <div
             aria-hidden="true"
-            className={cn(
-              "absolute inset-0 rounded-lg bg-border transition-transform duration-200 translate-x-[5px] translate-y-[5px] -rotate-[0.5deg] group-hover/playful:-rotate-[1.5deg] group-hover/playful:translate-x-[6px] group-hover/playful:translate-y-[6px]",
-              smooth && "rounded-3xl"
-            )}
+            className="absolute inset-0 rounded-lg bg-border transition-transform duration-200 translate-x-[5px] translate-y-[5px] -rotate-[0.5deg] group-hover/playful:-rotate-[1.5deg] group-hover/playful:translate-x-[6px] group-hover/playful:translate-y-[6px]"
           />
           <div
             ref={ref}
             className={cn(
               "relative rounded-lg border bg-card text-card-foreground shadow-sm rotate-[0.3deg]",
-              smooth && "rounded-3xl",
               className
             )}
             {...props}
@@ -37,7 +32,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={cn(
           "rounded-lg border bg-card text-card-foreground shadow-sm",
-          smooth && "rounded-3xl",
+          mode === "smooth" && "rounded-3xl",
           className
         )}
         {...props}

@@ -19,24 +19,12 @@ description: A control that allows the user to toggle between checked and not ch
 import { Checkbox } from "@/components/ui/checkbox"
 ```
 
-```tsx
-<div className="flex items-center space-x-2">
-  <Checkbox id="terms" />
-  <label htmlFor="terms">Accept terms and conditions</label>
-</div>
-```
-
-```tsx
-<Checkbox playful id="terms" />
-```
-
-```tsx
-<Checkbox smooth id="terms" />
-```
+<LiveUsageCode name="checkbox" defaultCode={`<Checkbox />`} />
 
 ## API Reference
 
 <APIReference name="Checkbox" extends="button" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "checked", type: "boolean | 'indeterminate'", default: "undefined" },
   { name: "onCheckedChange", type: "(checked: boolean | 'indeterminate') => void", default: "undefined" },
   { name: "defaultChecked", type: "boolean", default: "undefined" },
@@ -44,7 +32,4 @@ import { Checkbox } from "@/components/ui/checkbox"
   { name: "required", type: "boolean", default: "false" },
   { name: "name", type: "string", default: "undefined" },
   { name: "value", type: "string", default: '"on"' },
-  { name: "asChild", type: "boolean", default: "false" },
-  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
-  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
 ]} />

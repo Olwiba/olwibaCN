@@ -26,34 +26,12 @@ import {
 } from "@/components/ui/card"
 ```
 
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>Card Description</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Card Content</p>
-  </CardContent>
-  <CardFooter>
-    <p>Card Footer</p>
-  </CardFooter>
-</Card>
-```
-
-```tsx
-<Card playful>...</Card>
-```
-
-```tsx
-<Card smooth>...</Card>
-```
+<LiveUsageCode name="card" defaultCode={`<Card>\n  <CardHeader>\n    <CardTitle>Title</CardTitle>\n  </CardHeader>\n  <CardContent>Content</CardContent>\n</Card>`} />
 
 ## API Reference
 
 <APIReference name="Card" extends="div" props={[
-  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
-  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
 ]} />
 
 <APIReference name="CardHeader" extends="div" />

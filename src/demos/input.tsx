@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 
 type Mode = "default" | "playful" | "smooth";
 
@@ -15,21 +15,25 @@ export default function InputDemo() {
   const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
+  const usageProps = [
+    mode !== "default" && `mode="${mode}"`,
+    disabled && "disabled",
+  ].filter(Boolean).join(" ");
+  useUsageCode(`<Input${usageProps ? " " + usageProps : ""} placeholder="Email" />`);
+
   return (
     <>
       <div className="flex flex-col gap-4 w-[300px]">
         <Input
           type="text"
           placeholder="Text"
-          playful={mode === "playful"}
-          smooth={mode === "smooth"}
+          mode={mode === "default" ? undefined : mode}
           disabled={disabled}
         />
         <Input
           type="password"
           placeholder="Password"
-          playful={mode === "playful"}
-          smooth={mode === "smooth"}
+          mode={mode === "default" ? undefined : mode}
           disabled={disabled}
         />
       </div>
@@ -56,11 +60,7 @@ export default function InputDemo() {
             <span className="text-xs font-medium text-fd-muted-foreground">Options</span>
             <div className="flex h-9 items-center gap-4">
               <div className="flex items-center gap-2">
-                <Switch
-                  id="input-disabled"
-                  checked={disabled}
-                  onCheckedChange={setDisabled}
-                />
+                <Switch id="input-disabled" checked={disabled} onCheckedChange={setDisabled} />
                 <Label htmlFor="input-disabled" className="text-xs">Disabled</Label>
               </div>
             </div>

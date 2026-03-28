@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
 
 type Mode = "default" | "playful" | "smooth";
 
@@ -19,12 +19,14 @@ const modes: Mode[] = ["default", "playful", "smooth"];
 export default function CardDemo() {
   const [mode, setMode] = useState<Mode>("default");
 
+  const usageProps = mode !== "default" ? ` mode="${mode}"` : "";
+  useUsageCode(`<Card${usageProps}>\n  <CardHeader>\n    <CardTitle>Title</CardTitle>\n  </CardHeader>\n  <CardContent>Content</CardContent>\n</Card>`);
+
   return (
     <>
       <Card
         className="w-[350px]"
-        playful={mode === "playful"}
-        smooth={mode === "smooth"}
+        mode={mode === "default" ? undefined : mode}
       >
         <CardHeader>
           <CardTitle>Create project</CardTitle>
