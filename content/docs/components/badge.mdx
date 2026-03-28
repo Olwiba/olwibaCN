@@ -19,22 +19,12 @@ description: Displays a badge or a component that looks like a badge.
 import { Badge } from "@/components/ui/badge"
 ```
 
-```tsx
-<Badge variant="outline">Badge</Badge>
-```
-
-```tsx
-<Badge playful>Badge</Badge>
-```
-
-```tsx
-<Badge smooth>Badge</Badge>
-```
+<LiveUsageCode name="badge" defaultCode={`<Badge>Badge</Badge>`} />
 
 ## API Reference
 
 <APIReference name="Badge" extends="div" props={[
   { name: "variant", type: '"default" | "secondary" | "outline" | "destructive"', default: '"default"' },
-  { name: "playful", type: "boolean", default: "false", description: "Adds a slight rotation and an offset drop-shadow backdrop." },
-  { name: "smooth", type: "boolean", default: "false", description: "Rounds corners more aggressively for a softer, friendlier look." }
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "disabled", type: "boolean", default: "false" }
 ]} />
