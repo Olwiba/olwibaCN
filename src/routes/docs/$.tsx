@@ -17,6 +17,12 @@ const sidebarSections: SidebarSection[] = [
   { name: 'Themes', href: '/docs/themes' },
 ];
 
+const completedComponents = [
+  'Accordion',
+  'Alert',
+  'Alert Dialog',
+];
+
 export const Route = createFileRoute('/docs/$')({
   component: Page,
   loader: async ({ params }) => {
@@ -80,7 +86,7 @@ function Page() {
   const data = useFumadocsLoader(loaderData);
 
   return (
-    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections} defaultOpenFolders>
+    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections} defaultOpenFolders completedItems={completedComponents}>
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
         {clientLoader.useContent(data.path, undefined)}
       </Suspense>
