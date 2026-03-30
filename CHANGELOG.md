@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.5
+
+### Fixed
+
+- Force clean rebuild to correct 0.1.4 compiled output — Card, Input, Textarea, Checkbox, Switch shipped stale `playful`/`smooth` boolean types instead of the `mode?: "playful" | "smooth"` API introduced in the source.
+
+## 0.1.4
+
+### Changed
+
+- Card, Input, Textarea, Checkbox, Switch: replaced separate `playful`/`smooth` boolean props with a single `mode?: "playful" | "smooth"`, matching the Button pattern.
+- Badge primitive simplified to a direct pass-through (no mode support).
+- Breadcrumb component and demo updates.
+
 ## 0.1.3
 
 ### Fixed
