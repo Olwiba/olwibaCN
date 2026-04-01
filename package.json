@@ -1,6 +1,6 @@
 {
   "name": "@olwiba/cn",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": false,
   "type": "module",
   "sideEffects": false,
@@ -12,14 +12,18 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./styles": "./src/styles/app.css"
+    "./styles": "./src/styles/app.css",
+    "./theme": "./src/styles/theme.css",
+    "./preset": "./src/styles/preset.css"
   },
   "files": [
     "dist",
     "src/components/ui",
     "src/lib/utils.ts",
     "src/hooks",
-    "src/styles/app.css"
+    "src/styles/app.css",
+    "src/styles/theme.css",
+    "src/styles/preset.css"
   ],
   "scripts": {
     "dev": "tsup --watch",
