@@ -11,9 +11,9 @@
  *   @import 'tailwindcss';
  *   @import '@olwiba/cn/preset';
  *
- *   /* optional overrides */
+ *   (optional overrides)
  *   :root {
- *     --primary: oklch(0.546 0.245 262.881); /* swap to blue */
+ *     --primary: oklch(0.546 0.245 262.881);
  *   }
  */
 
