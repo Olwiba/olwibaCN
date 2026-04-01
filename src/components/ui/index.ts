@@ -64,3 +64,6 @@ export { useIsMobile } from '@/hooks/use-mobile';
 
 // Lib
 export { fireConfetti, type ConfettiOptions } from '../../lib/confetti';
+
+// Theme
+export { ThemeScript } from './theme-script';
