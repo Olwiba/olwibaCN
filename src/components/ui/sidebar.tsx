@@ -37,6 +37,7 @@ type SidebarContextProps = {
   openMobile: boolean
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
+  portalContainer: HTMLElement | null
   toggleSidebar: () => void
 }
 
@@ -57,6 +58,17 @@ const SidebarProvider = React.forwardRef<
     defaultOpen?: boolean
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    /**
+     * Breakpoint used for container-based mobile behavior.
+     * In embedded contexts (docs sandboxes, modals), sidebar mobile mode is based on
+     * this provider's rendered width instead of the top-level window width.
+     */
+    mobileBreakpoint?: number
+    /**
+     * `viewport` (default) — `min-h-svh` for full-page app shells.
+     * `embedded` — `h-full min-h-0` to fill a parent (docs sandboxes, modals); avoids viewport-sized layout.
+     */
+    layout?: "viewport" | "embedded"
   }
 >(
   (
@@ -64,6 +76,8 @@ const SidebarProvider = React.forwardRef<
       defaultOpen = true,
       open: openProp,
       onOpenChange: setOpenProp,
+      mobileBreakpoint = 768,
+      layout = "viewport",
       className,
       style,
       children,
@@ -71,7 +85,14 @@ const SidebarProvider = React.forwardRef<
     },
     ref
   ) => {
-    const isMobile = useIsMobile()
+    const viewportIsMobile = useIsMobile()
+    const wrapperRef = React.useRef<HTMLDivElement | null>(null)
+    const [portalContainer, setPortalContainer] =
+      React.useState<HTMLElement | null>(null)
+    const [isContainerMobile, setIsContainerMobile] = React.useState<
+      boolean | null
+    >(null)
+    const isMobile = isContainerMobile ?? viewportIsMobile
     const [openMobile, setOpenMobile] = React.useState(false)
 
     // This is the internal state of the sidebar.
@@ -99,6 +120,31 @@ const SidebarProvider = React.forwardRef<
         ? setOpenMobile((open) => !open)
         : setOpen((open) => !open)
     }, [isMobile, setOpen, setOpenMobile])
+
+    React.useEffect(() => {
+      const node = wrapperRef.current
+      if (!node) return
+      setPortalContainer(node.ownerDocument?.body ?? null)
+
+      const updateFromWidth = (width: number) => {
+        setIsContainerMobile(width < mobileBreakpoint)
+      }
+
+      updateFromWidth(node.clientWidth)
+
+      const view = node.ownerDocument?.defaultView
+      const ResizeObserverCtor = view?.ResizeObserver ?? ResizeObserver
+      if (!ResizeObserverCtor) return
+
+      const observer = new ResizeObserverCtor((entries) => {
+        const nextWidth = entries[0]?.contentRect.width
+        if (typeof nextWidth === "number") {
+          updateFromWidth(nextWidth)
+        }
+      })
+      observer.observe(node)
+      return () => observer.disconnect()
+    }, [mobileBreakpoint])
 
     // Adds a keyboard shortcut to toggle the sidebar.
     React.useEffect(() => {
@@ -128,9 +174,19 @@ const SidebarProvider = React.forwardRef<
         isMobile,
         openMobile,
         setOpenMobile,
+        portalContainer,
         toggleSidebar,
       }),
-      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+      [
+        state,
+        open,
+        setOpen,
+        isMobile,
+        openMobile,
+        setOpenMobile,
+        portalContainer,
+        toggleSidebar,
+      ]
     )
 
     return (
@@ -145,10 +201,18 @@ const SidebarProvider = React.forwardRef<
               } as React.CSSProperties
             }
             className={cn(
-              "group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar",
+              "group/sidebar-wrapper flex w-full items-stretch has-[[data-variant=inset]]:bg-sidebar",
+              layout === "embedded" ? "h-full min-h-0" : "min-h-svh",
               className
             )}
-            ref={ref}
+            ref={(node) => {
+              wrapperRef.current = node
+              if (typeof ref === "function") {
+                ref(node)
+              } else if (ref) {
+                ref.current = node
+              }
+            }}
             {...props}
           >
             {children}
@@ -166,6 +230,13 @@ const Sidebar = React.forwardRef<
     side?: "left" | "right"
     variant?: "sidebar" | "floating" | "inset"
     collapsible?: "offcanvas" | "icon" | "none"
+    /**
+     * Where the desktop sidebar panel is positioned.
+     * - `viewport` — `position: fixed` to the window (default shadcn behaviour; full-page apps).
+     * - `contained` — `position: absolute` within the sidebar row; use in docs previews, modals, or any
+     *   non–full-viewport shell so the rail and main content stay one layout unit.
+     */
+    sidebarPosition?: "viewport" | "contained"
   }
 >(
   (
@@ -173,13 +244,15 @@ const Sidebar = React.forwardRef<
       side = "left",
       variant = "sidebar",
       collapsible = "offcanvas",
+      sidebarPosition = "viewport",
       className,
       children,
       ...props
     },
     ref
   ) => {
-    const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+    const { isMobile, state, openMobile, setOpenMobile, portalContainer } =
+      useSidebar()
 
     if (collapsible === "none") {
       return (
@@ -200,6 +273,7 @@ const Sidebar = React.forwardRef<
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
           <SheetContent
+            container={portalContainer}
             data-sidebar="sidebar"
             data-mobile="true"
             className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
@@ -220,43 +294,71 @@ const Sidebar = React.forwardRef<
       )
     }
 
+    const isContained = sidebarPosition === "contained"
+    const isCollapsed = state === "collapsed"
+    const isIconCollapsed = isCollapsed && collapsible === "icon"
+    const isOffcanvasCollapsed = isCollapsed && collapsible === "offcanvas"
+
     return (
       <div
         ref={ref}
-        className="group peer hidden text-sidebar-foreground md:block"
+        className={cn(
+          "group peer hidden shrink-0 text-sidebar-foreground md:block",
+          isContained && "relative"
+        )}
         data-state={state}
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
         data-side={side}
+        data-sidebar-position={sidebarPosition}
+        {...props}
       >
         {/* This is what handles the sidebar gap on desktop */}
         <div
           className={cn(
-            "relative w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear",
-            "group-data-[collapsible=offcanvas]:w-0",
+            "relative bg-transparent transition-[width] duration-200 ease-linear",
+            isContained ? "hidden w-0 md:hidden" : "w-[--sidebar-width]",
             "group-data-[side=right]:rotate-180",
+            isOffcanvasCollapsed && "w-0",
             variant === "floating" || variant === "inset"
-              ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
+              ? isIconCollapsed
+                ? "w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
+                : null
+              : isIconCollapsed
+                ? "w-[--sidebar-width-icon]"
+                : null
           )}
         />
         <div
           className={cn(
-            "fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex",
+            isContained
+              ? "relative z-10 hidden h-full w-[--sidebar-width] shrink-0 transition-[left,right,width] duration-200 ease-linear md:flex"
+              : "fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex",
             side === "left"
-              ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
-              : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
+              ? cn(
+                  isContained ? "" : "left-0",
+                  !isContained && isOffcanvasCollapsed && "left-[calc(var(--sidebar-width)*-1)]"
+                )
+              : cn(
+                  isContained ? "" : "right-0",
+                  !isContained && isOffcanvasCollapsed && "right-[calc(var(--sidebar-width)*-1)]"
+                ),
             // Adjust the padding for floating and inset variants.
             variant === "floating" || variant === "inset"
-              ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+              ? cn(
+                  "p-2",
+                  isIconCollapsed && "w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
+                )
+              : cn(
+                  side === "left" ? "border-r" : "border-l",
+                  isIconCollapsed && "w-[--sidebar-width-icon]"
+                ),
             className
           )}
-          {...props}
         >
           <div
             data-sidebar="sidebar"
-            className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+            className="flex h-full min-h-0 w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
           >
             {children}
           </div>
@@ -330,7 +432,9 @@ const SidebarInset = React.forwardRef<
     <main
       ref={ref}
       className={cn(
-        "relative flex w-full flex-1 flex-col bg-background",
+        // flex-1 + min-w-0 (not w-full): in a row flex, w-full resolves to the full provider width and
+        // the main column can paint under the sidebar; min-w-0 lets flex sizing + truncation work.
+        "relative flex min-h-0 min-w-0 flex-1 flex-col bg-background",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow",
         className
       )}
