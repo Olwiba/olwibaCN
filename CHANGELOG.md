@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.10
+
+### Added
+
+- Dev banner rendering now supports multi-step width fallbacks with optional `compactSegments`, so terminals that cannot fit full DOS Rebel output gracefully fall back to compact figlet or plain text.
+
+### Changed
+
+- Banner segment normalization now defaults missing segment colors to white, and rendering now uses segmented boundary coloring to keep mixed-color banners stable.
+- DOS Rebel font rendering utilities were updated to support the responsive banner pipeline used by downstream docs and UI repos.
+
 ## 0.1.5
 
 ### Fixed
