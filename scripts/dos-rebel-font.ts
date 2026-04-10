@@ -1,26 +1,16 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
 type ParsedFont = {
   height: number
   glyphs: Map<string, string[]>
 }
 
-const DOS_REBEL_FLF_URL =
-  "https://raw.githubusercontent.com/Olwiba/figlet-fonts/main/DOS%20Rebel.flf"
-
 let parsedFontCache: ParsedFont | null = null
 let renderCache = new Map<string, string[]>()
-let fontTextPromise: Promise<string> | null = null
 
-async function getFontText(): Promise<string> {
-  if (!fontTextPromise) {
-    fontTextPromise = (async () => {
-      const response = await fetch(DOS_REBEL_FLF_URL)
-      if (!response.ok) {
-        throw new Error(`Failed to fetch DOS Rebel font: ${response.status}`)
-      }
-      return response.text()
-    })()
-  }
-  return fontTextPromise
+function getFontText(): string {
+  return readFileSync(join(import.meta.dir, 'DOS-Rebel.flf'), 'utf-8')
 }
 
 function parseDosRebelFont(raw: string): ParsedFont {
@@ -59,7 +49,7 @@ export async function renderDosRebel(text: string): Promise<string[]> {
   const cached = renderCache.get(text)
   if (cached) return cached
 
-  const raw = await getFontText()
+  const raw = getFontText()
   const { height, glyphs } = parseDosRebelFont(raw)
   const output = Array.from({ length: height }, () => "")
 
@@ -80,4 +70,3 @@ export async function renderDosRebel(text: string): Promise<string[]> {
   renderCache.set(text, rendered)
   return rendered
 }
-
