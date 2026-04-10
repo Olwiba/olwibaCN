@@ -1,13 +1,15 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   mode?: "playful" | "smooth"
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, mode, ...props }, ref) => {
+  ({ className, mode: modeProp, ...props }, ref) => {
+    const mode = modeProp ?? useUIVariant()
     if (mode === "playful") {
       return (
         <div className="group/playful relative">

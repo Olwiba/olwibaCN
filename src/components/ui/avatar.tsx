@@ -4,6 +4,7 @@ import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 type AvatarMode = "playful" | "smooth"
 type AvatarSize = "sm" | "default" | "lg"
@@ -55,7 +56,8 @@ const Avatar = React.forwardRef<
     size?: AvatarSize
     disabled?: boolean
   }
->(({ className, mode, size = "default", disabled, ...props }, ref) => {
+>(({ className, mode: modeProp, size = "default", disabled, ...props }, ref) => {
+  const mode = (modeProp ?? useUIVariant()) as AvatarMode | undefined
   if (mode === "playful") {
     return (
       <AvatarContext.Provider value={{ mode }}>

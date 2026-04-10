@@ -2,6 +2,7 @@ import * as React from "react"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> {
   mode?: "playful"
@@ -10,7 +11,8 @@ export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof Switc
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   SwitchProps
->(({ className, mode, ...props }, ref) => {
+>(({ className, mode: modeProp, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
   if (mode === "playful") {
     return (
       <span className="group/playful relative inline-flex">

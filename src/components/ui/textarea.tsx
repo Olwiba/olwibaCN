@@ -1,13 +1,15 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 export interface TextareaProps extends React.ComponentProps<"textarea"> {
   mode?: "playful" | "smooth"
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, mode, ...props }, ref) => {
+  ({ className, mode: modeProp, ...props }, ref) => {
+    const mode = modeProp ?? useUIVariant()
     if (mode === "playful") {
       return (
         <span className="group/playful relative inline-flex w-full">

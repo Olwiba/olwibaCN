@@ -3,6 +3,7 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 import { Check } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   mode?: "playful" | "smooth"
@@ -11,7 +12,8 @@ export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Che
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
->(({ className, mode, ...props }, ref) => {
+>(({ className, mode: modeProp, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
   if (mode === "playful") {
     return (
       <span className="group/playful relative inline-flex">

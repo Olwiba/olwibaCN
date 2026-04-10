@@ -1,13 +1,15 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 export interface InputProps extends React.ComponentProps<"input"> {
   mode?: "playful" | "smooth"
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, mode, ...props }, ref) => {
+  ({ className, type, mode: modeProp, ...props }, ref) => {
+    const mode = modeProp ?? useUIVariant()
     if (mode === "playful") {
       return (
         <span className="group/playful relative inline-flex w-full">

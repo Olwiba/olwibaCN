@@ -1,6 +1,9 @@
 // Utility
 export { cn } from '@/lib/utils';
 
+// Global variant context
+export { UIVariantProvider, useUIVariant, type UIVariant } from './ui-variant-context';
+
 // Components
 export * from './accordion';
 export * from './alert';
