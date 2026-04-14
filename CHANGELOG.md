@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.12
+
+### Added
+
+- `StatusIndicator` primitive: generic dot indicator with `tone`, `size`, `pulse`, and optional `dotClassName` override. Renders a pulsing or static dot with an optional inline label via children. No product state or copy — pills, status labels, and brand colors remain downstream concerns.
+- `StatusIndicator` registered in the shadcn registry at `cn.olwiba.com/r/status-indicator.json`.
+- `StatusIndicator` docs page added to the component reference.
+
+### Changed
+
+- Package description updated to reflect the full ecosystem role.
+- README rewritten to accurately document the export surface, consumption paths, and ecosystem position.
+- Registry index and existing component registry metadata refreshed.
+
 ## 0.1.10
 
 ### Added

@@ -61,6 +61,7 @@ const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   sidebar: React.lazy(() => import('@/demos/sidebar')),
   sonner: React.lazy(() => import('@/demos/sonner')),
   table: React.lazy(() => import('@/demos/table')),
+  'status-indicator': React.lazy(() => import('@/demos/status-indicator')),
   'toggle-group': React.lazy(() => import('@/demos/toggle-group')),
   tooltip: React.lazy(() => import('@/demos/tooltip')),
 };

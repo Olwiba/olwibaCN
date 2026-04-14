@@ -1,10 +1,10 @@
 {
   "name": "@olwiba/cn",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": false,
   "type": "module",
   "sideEffects": false,
-  "description": "olwibaCN - Custom shadcn/ui component primitives",
+  "description": "Shared UI primitives, styling foundations, and shadcn registry components for the Olwiba ecosystem",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "exports": {

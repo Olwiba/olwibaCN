@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-indicator",
+  "title": "Status Indicator",
+  "description": "Live/status dot with optional pulse and label",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst statusIndicatorDotVariants = cva(\n  \"relative inline-flex shrink-0 rounded-full bg-current\",\n  {\n    variants: {\n      tone: {\n        default: \"text-foreground\",\n        success: \"text-primary\",\n        muted: \"text-muted-foreground\",\n        destructive: \"text-destructive\",\n      },\n      size: {\n        sm: \"size-1.5\",\n        default: \"size-2\",\n        lg: \"size-2.5\",\n      },\n    },\n    defaultVariants: {\n      tone: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorDotVariants> {\n  pulse?: boolean\n  dotClassName?: string\n}\n\nfunction StatusIndicator({\n  className,\n  dotClassName,\n  tone,\n  size,\n  pulse = false,\n  children,\n  ...props\n}: StatusIndicatorProps) {\n  const hasAccessibleLabel =\n    props[\"aria-label\"] != null ||\n    props[\"aria-labelledby\"] != null ||\n    React.Children.count(children) > 0\n\n  return (\n    <span\n      data-slot=\"status-indicator\"\n      className={cn(\"inline-flex items-center gap-2\", className)}\n      aria-hidden={hasAccessibleLabel ? undefined : true}\n      {...props}\n    >\n      <span\n        data-slot=\"status-indicator-dot\"\n        className={cn(statusIndicatorDotVariants({ tone, size }), dotClassName)}\n      >\n        {pulse ? (\n          <span\n            data-slot=\"status-indicator-pulse\"\n            className=\"absolute inset-0 rounded-full bg-current opacity-70 animate-ping\"\n          />\n        ) : null}\n        <span className=\"relative block size-full rounded-full bg-current\" />\n      </span>\n      {children ? (\n        <span data-slot=\"status-indicator-label\">{children}</span>\n      ) : null}\n    </span>\n  )\n}\n\nexport { StatusIndicator, statusIndicatorDotVariants }\n",
+      "type": "registry:ui",
+      "target": "components/ui/status-indicator.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

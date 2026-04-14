@@ -1,0 +1,44 @@
+---
+title: Status Indicator
+description: A low-level status dot with optional pulse and inline label.
+---
+
+<div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/status-indicator" />
+</div>
+
+<ComponentPreview name="status-indicator" />
+
+## Installation
+
+<InstallationTabs name="status-indicator" />
+
+## Usage
+
+```tsx
+import { StatusIndicator } from "@/components/ui/status-indicator"
+```
+
+<LiveUsageCode
+  name="status-indicator"
+  defaultCode={`<StatusIndicator tone="success" pulse>Operational</StatusIndicator>`}
+/>
+
+Use `StatusIndicator` when you need a generic live/online/offline signal without committing to a product-specific badge, pill, or card. It stays intentionally small:
+
+- use it as a decorative dot inside your own shells and badges
+- add children for an inline text label
+- add `aria-label` when using the dot without visible text
+
+## API Reference
+
+<APIReference
+  name="StatusIndicator"
+  extends="span"
+  props={[
+    { name: "tone", type: '"default" | "success" | "muted" | "destructive"', default: '"default"' },
+    { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+    { name: "pulse", type: "boolean", default: "false" },
+    { name: "dotClassName", type: "string", default: "undefined", description: "Additional classes for the dot wrapper." },
+  ]}
+/>
