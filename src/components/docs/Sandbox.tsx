@@ -520,16 +520,15 @@ export function Sandbox({
             <div className="mx-auto min-w-[360px]" ref={containerRef}>
               <div
                 className={cn(
-                  'relative mx-auto min-h-[320px] overflow-hidden rounded-md border border-fd-border bg-background transition-[width]',
+                  'relative mx-auto rounded-md border border-fd-border bg-background transition-[width]',
+                  'min-h-[320px] overflow-hidden',
                   shellPreview ? 'p-0' : 'p-4',
                   isResizing && 'select-none'
                 )}
                 style={{
                   width: `${previewWidth}px`,
                   ...(previewHeight
-                    ? {
-                        height: `${isExpanded ? Math.max(previewHeight, 720) : previewHeight}px`,
-                      }
+                    ? { height: `${isExpanded ? Math.max(previewHeight, 720) : previewHeight}px` }
                     : {}),
                 }}
               >
