@@ -71,3 +71,6 @@ export { fireConfetti, type ConfettiOptions } from '../../lib/confetti';
 
 // Theme
 export { ThemeScript } from './theme-script';
+
+// Effects
+export { Enchanted, type EnchantedProps } from './enchanted';

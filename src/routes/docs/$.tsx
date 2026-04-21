@@ -16,7 +16,7 @@ const sidebarSections: SidebarSection[] = [
   { name: 'Get Started', href: '/docs' },
   { name: 'Themes', href: '/docs/themes' },
   { name: 'Modes', href: '/docs/modes' },
-  { name: 'Components', href: '/docs/components' },
+  { name: 'Components', href: '/docs/components', enchanted: true },
 ];
 
 const completedComponents = [

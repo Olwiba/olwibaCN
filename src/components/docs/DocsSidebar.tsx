@@ -19,12 +19,14 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
+import { Enchanted } from '@/components/ui/enchanted';
 import type { Root, Node, Item } from 'fumadocs-core/page-tree';
 
 export interface SidebarSection {
   name: string;
   href: string;
   icon?: React.ComponentType<{ className?: string }>;
+  enchanted?: boolean;
 }
 
 const TOP_LEVEL_SECTIONS: SidebarSection[] = [
@@ -49,10 +51,12 @@ interface SidebarFolderProps {
   defaultOpen: boolean;
   pathname: string;
   completedItems?: string[];
+  enchanted?: boolean;
 }
 
-function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSection, defaultOpen, pathname, completedItems }: SidebarFolderProps) {
+function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSection, defaultOpen, pathname, completedItems, enchanted }: SidebarFolderProps) {
   const [open, setOpen] = useState(defaultOpen);
+  const HeaderRow = enchanted ? Enchanted : 'div';
 
   // Open when the user navigates into this section (direct URL, search, etc.).
   useEffect(() => {
@@ -62,7 +66,7 @@ function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSectio
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="group/collapsible">
       <SidebarMenuItem>
-        <div className="flex w-full items-center">
+        <HeaderRow className="flex w-full items-center">
           {/* Chevron: toggle only, no navigation */}
           <CollapsibleTrigger asChild>
             <button
@@ -93,16 +97,22 @@ function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSectio
               {name}
             </Link>
           </SidebarMenuButton>
-        </div>
+        </HeaderRow>
 
         {/* Width ghost: always in DOM so sidebar width is stable on open/close */}
         <div className="h-0 w-fit overflow-hidden pointer-events-none select-none" aria-hidden="true">
           <SidebarMenuSub>
-            {pages.map((page) => (
-              <SidebarMenuSubItem key={page.url}>
-                <SidebarMenuSubButton>{page.name}</SidebarMenuSubButton>
-              </SidebarMenuSubItem>
-            ))}
+            {pages.map((page) => {
+              const isComplete = !completedItems || completedItems.includes(page.url);
+              return (
+                <SidebarMenuSubItem key={page.url}>
+                  <SidebarMenuSubButton>
+                    {page.name}
+                    {!isComplete && <span className="ml-1">*</span>}
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              );
+            })}
           </SidebarMenuSub>
         </div>
 
@@ -162,7 +172,7 @@ export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, c
   }
 
   return (
-    <div className="z-30 hidden w-fit self-stretch lg:flex lg:flex-col" {...props}>
+    <div className="z-30 hidden w-fit self-stretch lg:flex lg:flex-col transition-[width] duration-150 ease-out" {...props}>
       <div className="h-[var(--top-spacing)] shrink-0" />
       <div className="relative sticky top-[calc(var(--header-height)+13px)] z-30 h-[calc(100svh-var(--header-height)-13px)] overflow-hidden overscroll-none">
         <div
@@ -179,7 +189,7 @@ export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, c
               <SidebarGroupContent>
                 <SidebarMenu className="gap-0.5">
 
-                  {navSections.map(({ name, href, icon: Icon }) => {
+                  {navSections.map(({ name, href, icon: Icon, enchanted }) => {
                     const inSection = href === '/docs' ? pathname === href : pathname.startsWith(href);
                     const isActive = pathname === href;
                     const folder = folderBySection.get(href);
@@ -206,6 +216,7 @@ export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, c
                           defaultOpen={isExpanded}
                           pathname={pathname}
                           completedItems={completedItems}
+                          enchanted={enchanted}
                         />
                       );
                     }
