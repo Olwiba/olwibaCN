@@ -97,7 +97,7 @@
     "tailwindcss": ">=4.0.0"
   },
   "devDependencies": {
-    "@olwiba/dx": "0.0.1",
+    "@olwiba/dx": "0.0.2",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/canvas-confetti": "^1.9.0",
     "@types/mdx": "^2.0.13",
