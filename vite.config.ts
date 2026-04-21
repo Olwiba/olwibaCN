@@ -3,7 +3,7 @@ import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import { defineConfig } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 import mdx from 'fumadocs-mdx/vite';
-import { createDevBannerPlugin } from './scripts/dev-banner';
+import { createDevBannerPlugin } from '@olwiba/dx';
 
 export default defineConfig({
   server: {
