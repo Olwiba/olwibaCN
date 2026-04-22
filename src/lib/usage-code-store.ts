@@ -11,7 +11,9 @@ export function setUsageCode(name: string, code: string | null) {
 export function subscribeUsageCode(name: string, fn: Subscriber) {
   if (!subscribers.has(name)) subscribers.set(name, new Set())
   subscribers.get(name)!.add(fn)
-  return () => subscribers.get(name)?.delete(fn)
+  return () => {
+    subscribers.get(name)?.delete(fn)
+  }
 }
 
 export function getUsageCode(name: string) {

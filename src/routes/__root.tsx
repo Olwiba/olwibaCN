@@ -6,6 +6,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SearchDialog } from '@/components/docs/SearchDialog';
 import { ActiveThemeProvider } from '@/components/active-theme';
+import { projectThemeStyleVars } from '@/project.config';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -42,7 +43,11 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      style={projectThemeStyleVars as React.CSSProperties}
+    >
       <head>
         <HeadContent />
       </head>
@@ -69,4 +74,3 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
-

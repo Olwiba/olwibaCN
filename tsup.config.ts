@@ -1,6 +1,7 @@
 import { defineConfig } from 'tsup';
 import { resolve } from 'path';
 import { createTsupBannerHook } from '@olwiba/dx';
+import { projectBanner } from './src/project.config';
 
 export default defineConfig({
   entry: ['src/components/ui/index.ts'],
@@ -35,11 +36,5 @@ export default defineConfig({
   banner: {
     js: '"use client";',
   },
-  onSuccess: createTsupBannerHook({
-    segments: [
-      { text: 'olwiba' },
-      { text: 'CN', colorHex: '#22D3EE' },
-    ],
-  }),
+  onSuccess: createTsupBannerHook(projectBanner),
 });
-

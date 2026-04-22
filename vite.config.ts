@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 import mdx from 'fumadocs-mdx/vite';
 import { createDevBannerPlugin } from '@olwiba/dx';
+import { projectBanner } from './src/project.config';
 
 export default defineConfig({
   server: {
@@ -11,12 +12,7 @@ export default defineConfig({
     allowedHosts: true,
   },
   plugins: [
-    createDevBannerPlugin({
-      segments: [
-        { text: 'olwiba' },
-        { text: 'CN', colorHex: '#22D3EE' },
-      ],
-    }),
+    createDevBannerPlugin(projectBanner),
     mdx(await import('./source.config')),
     tsConfigPaths({
       projects: ['./tsconfig.json'],

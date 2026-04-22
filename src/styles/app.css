@@ -68,8 +68,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  /* Emerald theme - primary colors */
-  --primary: oklch(0.596 0.145 163.225);
+  /* Project accent */
+  --primary: var(--project-brand-accent);
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -81,7 +81,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.596 0.145 163.225);
+  --ring: var(--project-brand-accent);
 
   /* Emerald chart colors */
   --chart-1: oklch(0.765 0.177 163.223);
@@ -92,7 +92,7 @@
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.596 0.145 163.225);
+  --sidebar-primary: var(--project-brand-accent);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
@@ -115,8 +115,8 @@
   --popover: oklch(0.269 0 0);
   --popover-foreground: oklch(0.985 0 0);
 
-  /* Emerald theme - primary colors (brighter for dark mode) */
-  --primary: oklch(0.765 0.177 163.223);
+  /* Project accent */
+  --primary: var(--project-brand-accent-dark);
   --primary-foreground: oklch(0.145 0 0);
 
   --secondary: oklch(0.269 0 0);
@@ -128,7 +128,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.765 0.177 163.223);
+  --ring: var(--project-brand-accent-dark);
 
   /* Emerald chart colors */
   --chart-1: oklch(0.765 0.177 163.223);
@@ -139,7 +139,7 @@
 
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.765 0.177 163.223);
+  --sidebar-primary: var(--project-brand-accent-dark);
   --sidebar-primary-foreground: oklch(0.145 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
