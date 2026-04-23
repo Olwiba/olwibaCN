@@ -25,21 +25,14 @@ import {
 } from "@/components/ui/carousel"
 ```
 
-```tsx
-<Carousel>
-  <CarouselContent>
-    <CarouselItem>Slide 1</CarouselItem>
-    <CarouselItem>Slide 2</CarouselItem>
-    <CarouselItem>Slide 3</CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>
-```
+<LiveUsageCode name="carousel" defaultCode={`<Carousel className="w-full max-w-xs">\n  <CarouselContent>\n    <CarouselItem>Slide 1</CarouselItem>\n    <CarouselItem>Slide 2</CarouselItem>\n    <CarouselItem>Slide 3</CarouselItem>\n  </CarouselContent>\n  <CarouselPrevious />\n  <CarouselNext />\n</Carousel>`} />
 
 ## API Reference
 
 <APIReference name="Carousel" extends="div" props={[
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
   { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"' },
   { name: "opts", type: "EmblaCarouselOptions", default: "undefined" },
   { name: "plugins", type: "EmblaCarouselPlugin[]", default: "undefined" },
