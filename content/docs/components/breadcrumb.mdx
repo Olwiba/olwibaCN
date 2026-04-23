@@ -26,19 +26,7 @@ import {
 } from "@/components/ui/breadcrumb"
 ```
 
-```tsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Current Page</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
+<LiveUsageCode name="breadcrumb" defaultCode={`<Breadcrumb>\n  <BreadcrumbList>\n    <BreadcrumbItem>\n      <BreadcrumbLink href="/">Home</BreadcrumbLink>\n    </BreadcrumbItem>\n    <BreadcrumbSeparator />\n    <BreadcrumbItem>\n      <BreadcrumbPage>Current Page</BreadcrumbPage>\n    </BreadcrumbItem>\n  </BreadcrumbList>\n</Breadcrumb>`} />
 
 ## API Reference
 
@@ -46,7 +34,9 @@ import {
   { name: "separator", type: "ReactNode", default: "undefined" }
 ]} />
 
-<APIReference name="BreadcrumbList" extends="ol" />
+<APIReference name="BreadcrumbList" extends="ol" props={[
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' }
+]} />
 
 <APIReference name="BreadcrumbItem" extends="li" />
 

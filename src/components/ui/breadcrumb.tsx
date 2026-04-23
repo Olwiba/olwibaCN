@@ -12,14 +12,23 @@ const Breadcrumb = React.forwardRef<
 >(({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />)
 Breadcrumb.displayName = "Breadcrumb"
 
+type BreadcrumbSize = "sm" | "default" | "lg"
+
+const breadcrumbListSizeClasses: Record<BreadcrumbSize, string> = {
+  sm: "gap-1 text-xs sm:gap-1.5",
+  default: "gap-1.5 text-sm sm:gap-2.5",
+  lg: "gap-2 text-base sm:gap-3",
+}
+
 const BreadcrumbList = React.forwardRef<
   HTMLOListElement,
-  React.ComponentPropsWithoutRef<"ol">
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<"ol"> & { size?: BreadcrumbSize }
+>(({ className, size = "default", ...props }, ref) => (
   <ol
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
+      "flex flex-wrap items-center break-words text-muted-foreground",
+      breadcrumbListSizeClasses[size],
       className
     )}
     {...props}

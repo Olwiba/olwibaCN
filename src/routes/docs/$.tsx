@@ -26,6 +26,7 @@ const completedComponents = [
   '/docs/components/aspect-ratio',
   '/docs/components/avatar',
   '/docs/components/badge',
+  '/docs/components/breadcrumb',
 ];
 
 export const Route = createFileRoute('/docs/$')({
