@@ -27,6 +27,9 @@ const completedComponents = [
   '/docs/components/avatar',
   '/docs/components/badge',
   '/docs/components/breadcrumb',
+  '/docs/components/button-group',
+  '/docs/components/button',
+  '/docs/components/calendar',
 ];
 
 export const Route = createFileRoute('/docs/$')({

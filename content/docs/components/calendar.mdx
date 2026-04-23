@@ -19,15 +19,7 @@ description: A date picker component with single, multiple, and range selection 
 import { Calendar } from "@/components/ui/calendar"
 ```
 
-```tsx
-const [date, setDate] = useState<Date | undefined>(new Date())
-
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-/>
-```
+<LiveUsageCode name="calendar" defaultCode={`<Calendar\n  mode="single"\n  selected={date}\n  onSelect={setDate}\n/>`} />
 
 ## API Reference
 
@@ -35,6 +27,9 @@ const [date, setDate] = useState<Date | undefined>(new Date())
   { name: "mode", type: '"single" | "multiple" | "range"', default: "undefined" },
   { name: "selected", type: "Date | Date[] | DateRange", default: "undefined" },
   { name: "onSelect", type: "(date: Date | undefined) => void", default: "undefined" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "uiMode", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
   { name: "showOutsideDays", type: "boolean", default: "true" },
   { name: "captionLayout", type: '"label" | "dropdown"', default: '"label"' },
   { name: "buttonVariant", type: '"ghost" | "outline"', default: '"ghost"' },
