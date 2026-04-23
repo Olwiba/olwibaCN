@@ -32,6 +32,7 @@ const completedComponents = [
   '/docs/components/calendar',
   '/docs/components/card',
   '/docs/components/carousel',
+  '/docs/components/chart',
 ];
 
 export const Route = createFileRoute('/docs/$')({

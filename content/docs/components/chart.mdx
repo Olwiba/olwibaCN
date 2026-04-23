@@ -25,28 +25,14 @@ import {
 import { Bar, BarChart, XAxis } from "recharts"
 ```
 
-```tsx
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
-  },
-} satisfies ChartConfig
-
-<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-  <BarChart data={data}>
-    <XAxis dataKey="month" />
-    <ChartTooltip content={<ChartTooltipContent />} />
-    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-  </BarChart>
-</ChartContainer>
-```
+<LiveUsageCode name="chart" defaultCode={`<ChartContainer config={chartConfig} className="min-h-[200px] w-full">\n  <BarChart data={chartData}>\n    <XAxis dataKey="month" />\n    <ChartTooltip content={<ChartTooltipContent />} />\n    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />\n  </BarChart>\n</ChartContainer>`} />
 
 ## API Reference
 
 <APIReference name="ChartContainer" extends="div" props={[
   { name: "config", type: "ChartConfig" },
-  { name: "children", type: "ReactElement (Recharts chart)" }
+  { name: "children", type: "ReactElement (Recharts chart)" },
+  { name: "disabled", type: "boolean", default: "false" }
 ]} />
 
 <APIReference name="ChartTooltipContent" extends="div" props={[
