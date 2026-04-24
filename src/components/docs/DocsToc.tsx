@@ -189,9 +189,10 @@ function useScrollToActive(
     const isBelow = activeRect.bottom > containerRect.bottom;
 
     if (isAbove || isBelow) {
-      activeElement.scrollIntoView({
+      const centerOffset = container.clientHeight / 2 - activeElement.offsetHeight / 2;
+      container.scrollTo({
+        top: activeElement.offsetTop - centerOffset,
         behavior: "smooth",
-        block: "center",
       });
     }
   }, [activeId, containerRef]);
