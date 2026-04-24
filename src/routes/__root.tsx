@@ -1,5 +1,6 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
+import { createRootRoute, HeadContent, Link, Outlet, Scripts } from '@tanstack/react-router';
 import * as React from 'react';
+import { ErrorPage } from '@/components/ui/error-page';
 import appCss from '@/styles/app.css?url';
 import { RootProvider } from 'fumadocs-ui/provider/tanstack';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -8,7 +9,19 @@ import { SearchDialog } from '@/components/docs/SearchDialog';
 import { ActiveThemeProvider } from '@/components/active-theme';
 import { projectThemeStyleVars } from '@/project.config';
 
+function NotFound() {
+  return (
+    <div className="flex flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] items-center justify-center p-6">
+      <ErrorPage
+        renderLink={({ href, children }) => <Link to={href}>{children}</Link>}
+        backAction={{ label: "Go back", onClick: () => window.history.back() }}
+      />
+    </div>
+  );
+}
+
 export const Route = createRootRoute({
+  notFoundComponent: NotFound,
   head: () => ({
     meta: [
       { charSet: 'utf-8' },

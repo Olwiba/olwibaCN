@@ -218,6 +218,8 @@ function CalendarDayButton({
     !modifiers.range_end &&
     !modifiers.range_middle
 
+  const isPlayfulSelected = uiMode === "playful" && isSelectedSingle
+
   const button = (
     <Button
       ref={ref}
@@ -231,6 +233,7 @@ function CalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         "data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 flex aspect-square h-auto w-full min-w-[--cell-size] flex-col gap-1 font-normal leading-none data-[range-end=true]:rounded-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] [&>span]:text-xs [&>span]:opacity-70",
+        isPlayfulSelected && "relative rotate-[0.3deg]",
         defaultClassNames.day,
         className
       )}
@@ -238,11 +241,11 @@ function CalendarDayButton({
     />
   )
 
-  if (uiMode === "playful" && isSelectedSingle) {
+  if (isPlayfulSelected) {
     return (
       <span className="group/playful relative inline-flex w-full h-full">
         <span
-          className="absolute inset-0 rounded-md bg-primary/30 dark:bg-primary/20 translate-x-[6px] translate-y-[6px] -rotate-[0.5deg] transition-transform duration-200 group-hover/playful:-rotate-[1.5deg] group-hover/playful:scale-[1.01]"
+          className="absolute inset-0 rounded-md bg-primary/30 dark:bg-primary/20 translate-x-[3px] translate-y-[3px] -rotate-[0.5deg] transition-transform duration-200 group-hover/playful:-rotate-[1.5deg] group-hover/playful:scale-[1.01]"
           aria-hidden="true"
         />
         {button}

@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { source } from '@/lib/source';
 import browserCollections from 'fumadocs-mdx:collections/browser';
@@ -11,11 +11,25 @@ import { type TocItem } from '@/components/docs/DocsToc';
 import { DocsLayout, extractTextFromReactNode, type PageLoaderData } from '@/components/docs/DocsLayout';
 import { type SidebarSection } from '@/components/docs/DocsSidebar';
 import { findNeighbour } from 'fumadocs-core/page-tree';
+import { ErrorPage } from '@/components/ui/error-page';
+
+function DocsNotFound() {
+  return (
+    <div className="flex flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] items-center justify-center p-6">
+      <ErrorPage
+        renderLink={({ href, children }) => <Link to={href}>{children}</Link>}
+        backAction={{ label: 'Go back', onClick: () => window.history.back() }}
+      />
+    </div>
+  );
+}
 
 const sidebarSections: SidebarSection[] = [
   { name: 'Get Started', href: '/docs' },
   { name: 'Themes', href: '/docs/themes' },
   { name: 'Modes', href: '/docs/modes' },
+  { name: 'Icons', href: '/docs/icons' },
+  { name: 'Mechanics', href: '/docs/mechanics', enchanted: true },
   { name: 'Components', href: '/docs/components', enchanted: true },
 ];
 
@@ -33,10 +47,15 @@ const completedComponents = [
   '/docs/components/card',
   '/docs/components/carousel',
   '/docs/components/chart',
+  '/docs/components/checkbox',
+  '/docs/mechanics/collapsible',
+  '/docs/mechanics/context-menu',
+  '/docs/components/confetti',
 ];
 
 export const Route = createFileRoute('/docs/$')({
   component: Page,
+  notFoundComponent: DocsNotFound,
   loader: async ({ params }) => {
     const slugs = params._splat?.split('/') ?? [];
     const data = await serverLoader({ data: slugs });

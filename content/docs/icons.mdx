@@ -1,0 +1,38 @@
+---
+title: Icons
+description: olwibaCN uses Lucide React for all icons.
+---
+
+All components use [Lucide React](https://lucide.dev) as their icon library. It ships as a peer dependency — install it once and all components share it automatically.
+
+Browse the full catalogue and search by name at [lucide.dev/icons](https://lucide.dev/icons).
+
+```bash
+bun add lucide-react
+```
+
+```tsx
+import { ArrowLeft } from "lucide-react"
+```
+
+## Icons used internally
+
+These are the icons referenced by olwibaCN components. You don't need to install anything extra — they resolve through the same `lucide-react` peer dependency.
+
+| Icon | Name | Used by |
+|------|------|---------|
+| <ArrowLeft className="h-4 w-4" /> | `ArrowLeft` | Carousel |
+| <ArrowRight className="h-4 w-4" /> | `ArrowRight` | Carousel |
+| <Check className="h-4 w-4" /> | `Check` | Checkbox, Select, DropdownMenu, ContextMenu |
+| <ChevronDown className="h-4 w-4" /> | `ChevronDown` | Select, Accordion, Calendar |
+| <ChevronLeft className="h-4 w-4" /> | `ChevronLeft` | Calendar, Pagination |
+| <ChevronRight className="h-4 w-4" /> | `ChevronRight` | Calendar, Breadcrumb, Pagination, ContextMenu |
+| <ChevronUp className="h-4 w-4" /> | `ChevronUp` | Select |
+| <Circle className="h-4 w-4" /> | `Circle` | RadioGroup, ContextMenu |
+| <Dot className="h-4 w-4" /> | `Dot` | StatusIndicator |
+| <GripVertical className="h-4 w-4" /> | `GripVertical` | Resizable |
+| <Loader2Icon className="h-4 w-4 animate-spin" /> | `Loader2Icon` | Spinner |
+| <MoreHorizontal className="h-4 w-4" /> | `MoreHorizontal` | Breadcrumb, Pagination |
+| <PanelLeft className="h-4 w-4" /> | `PanelLeft` | Sidebar |
+| <Search className="h-4 w-4" /> | `Search` | Command |
+| <X className="h-4 w-4" /> | `X` | Sheet, Command |

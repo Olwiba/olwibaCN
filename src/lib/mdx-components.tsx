@@ -9,6 +9,11 @@ import { APIReference } from '@/components/docs/APIReference';
 import { CodeFence } from '@/components/docs/CodeFence';
 import { ThemeCodeBlock } from '@/components/docs/ThemeCodeBlock';
 import { Sandbox } from '@/components/docs/Sandbox';
+import {
+  ArrowLeft, ArrowRight, Check, ChevronDown, ChevronLeft, ChevronRight,
+  ChevronUp, Circle, Dot, GripVertical, Loader2Icon, MoreHorizontal,
+  PanelLeft, Search, X,
+} from 'lucide-react';
 import { ThemeSelector } from '@/components/ThemeSelector';
 import {
   Accordion,
@@ -213,6 +218,9 @@ export const mdxComponents = {
   ThemeSelector,
   ThemeCodeBlock,
   Sandbox,
+  ArrowLeft, ArrowRight, Check, ChevronDown, ChevronLeft, ChevronRight,
+  ChevronUp, Circle, Dot, GripVertical, Loader2Icon, MoreHorizontal,
+  PanelLeft, Search, X,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn('font-medium underline underline-offset-4', className)}
