@@ -21,18 +21,13 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 ```
 
-```tsx
-<Toaster />
-<Button onClick={() => toast("Event created", { description: "Sunday at 9:00 AM" })}>
-  Show Toast
-</Button>
-<Button onClick={() => toast.success("Saved!")}>Success</Button>
-<Button onClick={() => toast.error("Something went wrong")}>Error</Button>
-```
+<LiveUsageCode name="sonner" defaultCode={`<Toaster />\n<Button onClick={() => toast("Event has been created", { description: "Sunday, December 03, 2023 at 9:00 AM" })}>\n  Show Toast\n</Button>\n<Button onClick={() => toast.success("Successfully saved!")}>Success</Button>\n<Button onClick={() => toast.error("Something went wrong")}>Error</Button>`} />
 
 ## API Reference
 
 <APIReference name="Toaster" extends="div" props={[
-  { name: "position", type: "'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center'", default: "'bottom-right'" },
-  { name: "expand", type: "boolean", default: "false" }
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"' },
+  { name: "expand", type: "boolean", default: "false" },
+  { name: "theme", type: '"light" | "dark" | "system"', default: '"system"' },
 ]} />

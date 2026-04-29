@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
 type BadgeVariant = "default" | "secondary" | "outline" | "destructive";
 type BadgeSize = "sm" | "default" | "lg";

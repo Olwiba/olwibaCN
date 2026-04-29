@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";

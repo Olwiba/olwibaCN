@@ -8,7 +8,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 

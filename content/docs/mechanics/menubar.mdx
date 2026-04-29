@@ -27,27 +27,13 @@ import {
 } from "@/components/ui/menubar"
 ```
 
-```tsx
-<Menubar>
-  <MenubarMenu>
-    <MenubarTrigger>File</MenubarTrigger>
-    <MenubarContent>
-      <MenubarItem>
-        New Tab <MenubarShortcut shortcut="mod+T" />
-      </MenubarItem>
-      <MenubarItem>
-        New Window <MenubarShortcut shortcut="mod+N" />
-      </MenubarItem>
-      <MenubarSeparator />
-      <MenubarItem>Print</MenubarItem>
-    </MenubarContent>
-  </MenubarMenu>
-</Menubar>
-```
+<LiveUsageCode name="menubar" defaultCode={`<Menubar>\n  <MenubarMenu>\n    <MenubarTrigger>File</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>\n        New Tab <MenubarShortcut shortcut="mod+T" />\n      </MenubarItem>\n      <MenubarItem>\n        New Window <MenubarShortcut shortcut="mod+N" />\n      </MenubarItem>\n      <MenubarSeparator />\n      <MenubarItem>Share</MenubarItem>\n      <MenubarSeparator />\n      <MenubarItem>Print</MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n  <MenubarMenu>\n    <MenubarTrigger>Edit</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>\n        Undo <MenubarShortcut shortcut="mod+Z" />\n      </MenubarItem>\n      <MenubarItem>\n        Redo <MenubarShortcut shortcut="shift+mod+Z" />\n      </MenubarItem>\n      <MenubarSeparator />\n      <MenubarItem>Cut</MenubarItem>\n      <MenubarItem>Copy</MenubarItem>\n      <MenubarItem>Paste</MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n  <MenubarMenu>\n    <MenubarTrigger>View</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>Zoom In</MenubarItem>\n      <MenubarItem>Zoom Out</MenubarItem>\n      <MenubarSeparator />\n      <MenubarItem>Fullscreen</MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n</Menubar>`} />
 
 ## API Reference
 
-<APIReference name="Menubar" extends="div" />
+<APIReference name="Menubar" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" }
+]} />
 
 <APIReference name="MenubarMenu" extends="div" />
 
@@ -56,6 +42,7 @@ import {
 ]} />
 
 <APIReference name="MenubarContent" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "align", type: "'start' | 'center' | 'end'", default: "'start'" },
   { name: "alignOffset", type: "number", default: "-4" },
   { name: "sideOffset", type: "number", default: "8" }
@@ -72,6 +59,7 @@ import {
 ]} />
 
 <APIReference name="MenubarSubContent" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "sideOffset", type: "number", default: "8" },
   { name: "alignOffset", type: "number", default: "-4" }
 ]} />

@@ -5,7 +5,7 @@ import appCss from '@/styles/app.css?url';
 import { RootProvider } from 'fumadocs-ui/provider/tanstack';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import { SearchDialog } from '@/components/docs/SearchDialog';
+import { SearchDialog } from '@/docs/components/SearchDialog';
 import { ActiveThemeProvider } from '@/components/active-theme';
 import { projectThemeStyleVars } from '@/project.config';
 

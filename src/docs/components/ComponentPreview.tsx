@@ -78,13 +78,19 @@ export function useUsageCode(code: string) {
   React.useEffect(() => {
     if (!name) return;
     setUsageCode(name, code);
-    return () => setUsageCode(name, null);
   }, [name, code]);
+  React.useEffect(() => {
+    if (!name) return;
+    return () => setUsageCode(name, null);
+  }, [name]);
 }
 
 export function LiveUsageCode({ name, defaultCode }: { name: string; defaultCode: string }) {
   const [code, setCode] = React.useState<string>(() => getUsageCode(name) ?? defaultCode);
-  React.useEffect(() => subscribeUsageCode(name, (c) => setCode(c ?? defaultCode)), [name, defaultCode]);
+  React.useEffect(() => {
+    setCode(getUsageCode(name) ?? defaultCode);
+    return subscribeUsageCode(name, (c) => setCode(c ?? defaultCode));
+  }, [name, defaultCode]);
   return <CodeFence code={code} language="tsx" />;
 }
 

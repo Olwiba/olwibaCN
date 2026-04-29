@@ -18,21 +18,11 @@ description: A floating content panel triggered by a button, useful for forms or
 ```tsx
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 ```
 
-```tsx
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">Open popover</Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-80">
-    <div className="grid gap-4">
-      <h4 className="font-medium leading-none">Dimensions</h4>
-      <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
-    </div>
-  </PopoverContent>
-</Popover>
-```
+<LiveUsageCode name="popover" defaultCode={`<Popover>\n  <PopoverTrigger asChild>\n    <Button variant="outline">Open popover</Button>\n  </PopoverTrigger>\n  <PopoverContent className="w-80">\n    <div className="grid gap-4">\n      <div className="space-y-2">\n        <h4 className="font-medium leading-none">Dimensions</h4>\n        <p className="text-sm text-muted-foreground">\n          Set the dimensions for the layer.\n        </p>\n      </div>\n      <div className="grid gap-2">\n        <div className="grid grid-cols-3 items-center gap-4">\n          <Label htmlFor="width">Width</Label>\n          <Input id="width" defaultValue="100%" className="col-span-2 h-8" />\n        </div>\n        <div className="grid grid-cols-3 items-center gap-4">\n          <Label htmlFor="height">Height</Label>\n          <Input id="height" defaultValue="25px" className="col-span-2 h-8" />\n        </div>\n      </div>\n    </div>\n  </PopoverContent>\n</Popover>`} />
 
 ## API Reference
 
@@ -47,6 +37,7 @@ import { Button } from "@/components/ui/button"
 ]} />
 
 <APIReference name="PopoverContent" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "align", type: "'start' | 'center' | 'end'", default: "'center'" },
   { name: "sideOffset", type: "number", default: "4" }
 ]} />

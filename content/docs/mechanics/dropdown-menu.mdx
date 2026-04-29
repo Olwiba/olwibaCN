@@ -17,27 +17,25 @@ description: Displays a menu of actions or options triggered by a button.
 
 ```tsx
 import {
+  CreditCard,
+  LogOut,
+  Settings,
+  User,
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 ```
 
-```tsx
-<DropdownMenu>
-  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>Profile</DropdownMenuItem>
-    <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Settings</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-```
+<LiveUsageCode name="dropdown-menu" defaultCode={`<DropdownMenu>\n  <DropdownMenuTrigger asChild>\n    <Button variant="outline">Open Menu</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent className="w-56">\n    <DropdownMenuLabel>My Account</DropdownMenuLabel>\n    <DropdownMenuSeparator />\n    <DropdownMenuGroup>\n      <DropdownMenuItem>\n        <User className="mr-2 h-4 w-4" />\n        <span>Profile</span>\n        <DropdownMenuShortcut shortcut="shift+mod+P" />\n      </DropdownMenuItem>\n      <DropdownMenuItem>\n        <CreditCard className="mr-2 h-4 w-4" />\n        <span>Billing</span>\n        <DropdownMenuShortcut shortcut="mod+B" />\n      </DropdownMenuItem>\n      <DropdownMenuItem>\n        <Settings className="mr-2 h-4 w-4" />\n        <span>Settings</span>\n        <DropdownMenuShortcut shortcut="mod+S" />\n      </DropdownMenuItem>\n    </DropdownMenuGroup>\n    <DropdownMenuSeparator />\n    <DropdownMenuItem>\n      <LogOut className="mr-2 h-4 w-4" />\n      <span>Log out</span>\n      <DropdownMenuShortcut shortcut="shift+mod+Q" />\n    </DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>`} />
 
 ## API Reference
 
@@ -54,6 +52,7 @@ import {
 ]} />
 
 <APIReference name="DropdownMenuContent" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "'bottom'" },
   { name: "sideOffset", type: "number", default: "4" },
   { name: "align", type: "'start' | 'center' | 'end'", default: "'center'" },
@@ -108,6 +107,7 @@ import {
 ]} />
 
 <APIReference name="DropdownMenuSubContent" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "sideOffset", type: "number", default: "0" },
   { name: "alignOffset", type: "number", default: "0" }
 ]} />

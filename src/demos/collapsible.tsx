@@ -6,7 +6,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { cn } from "@/lib/utils";
 
 export default function CollapsibleDemo() {

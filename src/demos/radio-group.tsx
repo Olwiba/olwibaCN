@@ -4,11 +4,39 @@ import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
+
+function getRadioGroupUsageCode({
+  groupDisabled,
+  compactDisabled,
+}: {
+  groupDisabled: boolean;
+  compactDisabled: boolean;
+}) {
+  const groupDisabledAttr = groupDisabled ? " disabled" : "";
+  const compactDisabledAttr = compactDisabled ? " disabled" : "";
+
+  return `<RadioGroup defaultValue="comfortable"${groupDisabledAttr}>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="default" id="r1" />
+    <Label htmlFor="r1">Default</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="comfortable" id="r2" />
+    <Label htmlFor="r2">Comfortable</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="compact" id="r3"${compactDisabledAttr} />
+    <Label htmlFor="r3">Compact</Label>
+  </div>
+</RadioGroup>`;
+}
 
 export default function RadioGroupDemo() {
   const [groupDisabled, setGroupDisabled] = useState(false);
   const [compactDisabled, setCompactDisabled] = useState(false);
+
+  useUsageCode(getRadioGroupUsageCode({ groupDisabled, compactDisabled }));
 
   return (
     <>

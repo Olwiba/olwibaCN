@@ -6,6 +6,9 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { UIVariantProvider } from "@/components/ui/ui-variant-context"
+
+type SheetMode = "playful" | "smooth"
 
 const Sheet = SheetPrimitive.Root
 
@@ -49,28 +52,50 @@ const sheetVariants = cva(
   }
 )
 
+const sideRoundingSmooth: Record<string, string> = {
+  right: "rounded-l-2xl",
+  left: "rounded-r-2xl",
+  top: "rounded-b-2xl",
+  bottom: "rounded-t-2xl",
+}
+
+const sideRoundingPlayful: Record<string, string> = {
+  right: "rounded-l-xl",
+  left: "rounded-r-xl",
+  top: "rounded-b-xl",
+  bottom: "rounded-t-xl",
+}
+
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
   container?: HTMLElement | null
+  mode?: SheetMode
 }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "right", className, children, container, ...props }, ref) => (
+>(({ side = "right", className, children, container, mode, ...props }, ref) => (
   <SheetPortal container={container ?? undefined}>
     <SheetOverlay />
     <SheetPrimitive.Content
       ref={ref}
-      className={cn(sheetVariants({ side }), className)}
+      className={cn(
+        sheetVariants({ side }),
+        mode === "smooth" && `${sideRoundingSmooth[side ?? "right"]} shadow-xl`,
+        mode === "playful" && `${sideRoundingPlayful[side ?? "right"]} border-2 shadow-lg shadow-primary/10`,
+        className
+      )}
       {...props}
     >
-      {children}
-      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
-      </SheetPrimitive.Close>
+      <UIVariantProvider mode={mode}>
+        {children}
+        <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+          <X className="h-4 w-4" />
+          <span className="sr-only">Close</span>
+        </SheetPrimitive.Close>
+      </UIVariantProvider>
     </SheetPrimitive.Content>
   </SheetPortal>
 ))

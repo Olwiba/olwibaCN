@@ -6,6 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { UIVariantProvider, useUIVariant, type UIVariant } from "@/components/ui/ui-variant-context"
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
@@ -55,7 +56,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const fieldVariants = cva(
-  "group/field data-[invalid=true]:text-destructive flex w-full gap-3",
+  "group/field data-[invalid=true]:text-destructive flex w-full gap-2",
   {
     variants: {
       orientation: {
@@ -81,16 +82,29 @@ const fieldVariants = cva(
 function Field({
   className,
   orientation = "vertical",
+  mode: modeProp,
+  errorMessage,
+  children,
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+}: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants> & {
+  mode?: UIVariant
+  errorMessage?: string
+}) {
+  const mode = modeProp ?? useUIVariant()
   return (
-    <div
-      role="group"
-      data-slot="field"
-      data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
-      {...props}
-    />
+    <UIVariantProvider mode={mode}>
+      <div
+        role="group"
+        data-slot="field"
+        data-orientation={orientation}
+        data-invalid={errorMessage ? "true" : undefined}
+        className={cn(fieldVariants({ orientation }), className)}
+        {...props}
+      >
+        {children}
+        {errorMessage && <FieldError>{errorMessage}</FieldError>}
+      </div>
+    </UIVariantProvider>
   )
 }
 

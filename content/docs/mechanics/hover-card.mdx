@@ -16,6 +16,9 @@ description: A card that appears when hovering over a trigger element, for sight
 ## Usage
 
 ```tsx
+import { CalendarDays } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   HoverCard,
   HoverCardContent,
@@ -23,14 +26,7 @@ import {
 } from "@/components/ui/hover-card"
 ```
 
-```tsx
-<HoverCard>
-  <HoverCardTrigger>Hover</HoverCardTrigger>
-  <HoverCardContent>
-    Content that appears on hover.
-  </HoverCardContent>
-</HoverCard>
-```
+<LiveUsageCode name="hover-card" defaultCode={`<HoverCard>\n  <HoverCardTrigger asChild>\n    <Button variant="link">@nextjs</Button>\n  </HoverCardTrigger>\n  <HoverCardContent className="w-80">\n    <div className="flex justify-between space-x-4">\n      <Avatar>\n        <AvatarImage src="https://github.com/vercel.png" />\n        <AvatarFallback>VC</AvatarFallback>\n      </Avatar>\n      <div className="space-y-1">\n        <h4 className="text-sm font-semibold">@nextjs</h4>\n        <p className="text-sm">\n          The React Framework - created and maintained by @vercel.\n        </p>\n        <div className="flex items-center pt-2">\n          <CalendarDays className="mr-2 h-4 w-4 opacity-70" />\n          <span className="text-xs text-muted-foreground">\n            Joined December 2021\n          </span>\n        </div>\n      </div>\n    </div>\n  </HoverCardContent>\n</HoverCard>`} />
 
 ## API Reference
 
@@ -47,6 +43,7 @@ import {
 ]} />
 
 <APIReference name="HoverCardContent" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "'bottom'" },
   { name: "sideOffset", type: "number", default: "4" },
   { name: "align", type: "'start' | 'center' | 'end'", default: "'center'" },

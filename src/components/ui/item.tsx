@@ -4,15 +4,55 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
+import { UIVariantProvider, useUIVariant, type UIVariant } from "@/components/ui/ui-variant-context"
 
-function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
+function ItemGroup({
+  className,
+  mode: modeProp,
+  ...props
+}: React.ComponentProps<"div"> & {
+  mode?: UIVariant
+}) {
+  const mode = modeProp ?? useUIVariant()
+
+  if (mode === "playful") {
+    return (
+      <UIVariantProvider mode="playful">
+        <div className="grid w-fit max-w-full">
+          <span
+            aria-hidden="true"
+            className={cn(
+              "pointer-events-none col-start-1 row-start-1 rounded-lg bg-foreground/10",
+              "translate-x-[4px] translate-y-[4px] -rotate-[0.6deg]"
+            )}
+          />
+          <div
+            role="list"
+            data-slot="item-group"
+            className={cn(
+              "group/item-group relative col-start-1 row-start-1 flex flex-col bg-fd-background",
+              className
+            )}
+            {...props}
+          />
+        </div>
+      </UIVariantProvider>
+    )
+  }
+
   return (
-    <div
-      role="list"
-      data-slot="item-group"
-      className={cn("group/item-group flex flex-col", className)}
-      {...props}
-    />
+    <UIVariantProvider mode={mode}>
+      <div
+        role="list"
+        data-slot="item-group"
+        className={cn(
+          "group/item-group flex flex-col",
+          className,
+          mode === "smooth" && "rounded-2xl shadow-sm"
+        )}
+        {...props}
+      />
+    </UIVariantProvider>
   )
 }
 
@@ -42,6 +82,7 @@ const itemVariants = cva(
       size: {
         default: "gap-4 p-4 ",
         sm: "gap-2.5 px-4 py-3",
+        lg: "gap-5 p-5 text-base",
       },
     },
     defaultVariants: {
@@ -55,19 +96,36 @@ function Item({
   className,
   variant = "default",
   size = "default",
+  mode: modeProp,
+  disabled = false,
   asChild = false,
   ...props
 }: React.ComponentProps<"div"> &
-  VariantProps<typeof itemVariants> & { asChild?: boolean }) {
+  VariantProps<typeof itemVariants> & {
+    mode?: UIVariant
+    disabled?: boolean
+    asChild?: boolean
+  }) {
   const Comp = asChild ? Slot : "div"
+  const mode = modeProp ?? useUIVariant()
+
   return (
-    <Comp
-      data-slot="item"
-      data-variant={variant}
-      data-size={size}
-      className={cn(itemVariants({ variant, size, className }))}
-      {...props}
-    />
+    <UIVariantProvider mode={mode}>
+      <Comp
+        data-slot="item"
+        data-variant={variant}
+        data-size={size}
+        data-disabled={disabled ? "true" : undefined}
+        aria-disabled={disabled || undefined}
+        className={cn(
+          itemVariants({ variant, size }),
+          mode === "smooth" && "rounded-xl",
+          disabled && "pointer-events-none opacity-50",
+          className
+        )}
+        {...props}
+      />
+    </UIVariantProvider>
   )
 }
 
@@ -93,11 +151,17 @@ function ItemMedia({
   variant = "default",
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
+  const mode = useUIVariant()
+
   return (
     <div
       data-slot="item-media"
       data-variant={variant}
-      className={cn(itemMediaVariants({ variant, className }))}
+      className={cn(
+        itemMediaVariants({ variant }),
+        mode === "smooth" && variant !== "default" && "rounded-lg",
+        className
+      )}
       {...props}
     />
   )

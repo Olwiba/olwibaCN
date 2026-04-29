@@ -22,23 +22,20 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@/components/ui/input-group"
+import { Search } from "lucide-react"
 ```
 
-```tsx
-<InputGroup>
-  <InputGroupAddon>
-    <Search className="h-4 w-4" />
-  </InputGroupAddon>
-  <InputGroupInput placeholder="Search..." />
-</InputGroup>
-```
+<LiveUsageCode name="input-group" defaultCode={`<div className="flex flex-col gap-4 w-full max-w-sm">\n  <InputGroup>\n    <InputGroupAddon>\n      <Search className="h-4 w-4" />\n    </InputGroupAddon>\n    <InputGroupInput placeholder="Search..." />\n  </InputGroup>\n  <InputGroup>\n    <InputGroupAddon>\n      <Mail className="h-4 w-4" />\n    </InputGroupAddon>\n    <InputGroupInput type="email" placeholder="Email address" />\n    <InputGroupAddon align="inline-end">\n      <InputGroupText>@example.com</InputGroupText>\n    </InputGroupAddon>\n  </InputGroup>\n</div>`} />
 
 ## API Reference
 
-<APIReference name="InputGroup" extends="div" />
+<APIReference name="InputGroup" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "—" },
+  { name: "disabled", type: "boolean", default: "false" }
+]} />
 
 <APIReference name="InputGroupAddon" extends="div" props={[
-  { name: "align", type: "'inline-start' | 'inline-end' | 'block-start' | 'block-end'", default: "'inline-start'" }
+  { name: "align", type: '"inline-start" | "inline-end" | "block-start" | "block-end"', default: '"inline-start"' }
 ]} />
 
 <APIReference name="InputGroupInput" extends="input" />
@@ -46,8 +43,8 @@ import {
 <APIReference name="InputGroupTextarea" extends="textarea" />
 
 <APIReference name="InputGroupButton" extends="button" props={[
-  { name: "variant", type: "ButtonVariant", default: "'ghost'" },
-  { name: "size", type: "'xs' | 'sm' | 'icon-xs' | 'icon-sm'", default: "'xs'" }
+  { name: "variant", type: "ButtonVariant", default: '"ghost"' },
+  { name: "size", type: '"xs" | "sm" | "icon-xs" | "icon-sm"', default: '"xs"' }
 ]} />
 
 <APIReference name="InputGroupText" extends="span" />

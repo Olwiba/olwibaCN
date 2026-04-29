@@ -1,6 +1,6 @@
 'use client';
 
-import { DocsHeader } from './docs/DocsHeader';
+import { DocsHeader } from '@/docs/components/DocsHeader';
 
 const navItems = [
   { label: 'Docs', href: '/docs' },

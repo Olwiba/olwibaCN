@@ -2,6 +2,7 @@ import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
+import { UIVariantProvider } from "@/components/ui/ui-variant-context"
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -32,22 +33,29 @@ const DrawerOverlay = React.forwardRef<
 ))
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
+type DrawerMode = "playful" | "smooth"
+
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & { mode?: DrawerMode }
+>(({ className, mode, children, ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
+        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col border bg-background",
+        !mode && "rounded-t-[10px]",
+        mode === "smooth" && "rounded-t-2xl shadow-xl",
+        mode === "playful" && "rounded-t-xl border-2 shadow-lg shadow-primary/10",
         className
       )}
       {...props}
     >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-      {children}
+      <UIVariantProvider mode={mode}>
+        <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+        {children}
+      </UIVariantProvider>
     </DrawerPrimitive.Content>
   </DrawerPortal>
 ))

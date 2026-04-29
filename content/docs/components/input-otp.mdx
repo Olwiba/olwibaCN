@@ -24,21 +24,7 @@ import {
 } from "@/components/ui/input-otp"
 ```
 
-```tsx
-<InputOTP maxLength={6}>
-  <InputOTPGroup>
-    <InputOTPSlot index={0} />
-    <InputOTPSlot index={1} />
-    <InputOTPSlot index={2} />
-  </InputOTPGroup>
-  <InputOTPSeparator />
-  <InputOTPGroup>
-    <InputOTPSlot index={3} />
-    <InputOTPSlot index={4} />
-    <InputOTPSlot index={5} />
-  </InputOTPGroup>
-</InputOTP>
-```
+<LiveUsageCode name="input-otp" defaultCode={`<InputOTP maxLength={6}>\n  <InputOTPGroup>\n    <InputOTPSlot index={0} />\n    <InputOTPSlot index={1} />\n    <InputOTPSlot index={2} />\n  </InputOTPGroup>\n  <InputOTPSeparator />\n  <InputOTPGroup>\n    <InputOTPSlot index={3} />\n    <InputOTPSlot index={4} />\n    <InputOTPSlot index={5} />\n  </InputOTPGroup>\n</InputOTP>`} />
 
 ## API Reference
 
@@ -48,6 +34,8 @@ import {
   { name: "onChange", type: "(value: string) => void", default: "undefined" },
   { name: "pattern", type: "string", default: "undefined" },
   { name: "containerClassName", type: "string", default: "undefined" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "disabled", type: "boolean", default: "false" }
 ]} />
 

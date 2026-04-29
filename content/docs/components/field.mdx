@@ -22,22 +22,23 @@ import {
   FieldDescription,
   FieldGroup,
 } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 ```
 
-```tsx
-<FieldGroup>
+<LiveUsageCode name="field" defaultCode={`<FieldGroup>
   <Field>
     <FieldLabel>Email</FieldLabel>
     <Input type="email" placeholder="Enter your email" />
     <FieldDescription>We'll never share your email.</FieldDescription>
   </Field>
-</FieldGroup>
-```
+</FieldGroup>`} />
 
 ## API Reference
 
 <APIReference name="Field" extends="div" props={[
-  { name: "orientation", type: "'vertical' | 'horizontal' | 'responsive'", default: "'vertical'" }
+  { name: "mode", type: '"playful" | "smooth"', default: "—" },
+  { name: "orientation", type: '"vertical" | "horizontal" | "responsive"', default: '"vertical"' },
+  { name: "errorMessage", type: "string", default: "—" },
 ]} />
 
 <APIReference name="FieldGroup" extends="div" />
@@ -45,7 +46,7 @@ import {
 <APIReference name="FieldSet" extends="fieldset" />
 
 <APIReference name="FieldLegend" extends="legend" props={[
-  { name: "variant", type: "'legend' | 'label'", default: "'legend'" }
+  { name: "variant", type: '"legend" | "label"', default: '"legend"' }
 ]} />
 
 <APIReference name="FieldLabel" extends="label" />

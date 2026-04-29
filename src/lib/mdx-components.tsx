@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Link } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
-import { ComponentPreview, LiveUsageCode } from '@/components/docs/ComponentPreview';
-import { InstallationTabs } from '@/components/docs/InstallationTabs';
-import { Callout } from '@/components/docs/Callout';
-import { CopyCommandButton } from '@/components/docs/CopyCommandButton';
-import { APIReference } from '@/components/docs/APIReference';
-import { CodeFence } from '@/components/docs/CodeFence';
-import { ThemeCodeBlock } from '@/components/docs/ThemeCodeBlock';
-import { Sandbox } from '@/components/docs/Sandbox';
+import { ComponentPreview, LiveUsageCode } from '@/docs/components/ComponentPreview';
+import { InstallationTabs } from '@/docs/components/InstallationTabs';
+import { Callout } from '@/docs/components/Callout';
+import { CopyCommandButton } from '@/docs/components/CopyCommandButton';
+import { APIReference } from '@/docs/components/APIReference';
+import { CodeFence } from '@/docs/components/CodeFence';
+import { ThemeCodeBlock } from '@/docs/components/ThemeCodeBlock';
+import { Sandbox } from '@/docs/components/Sandbox';
 import {
   ArrowLeft, ArrowRight, Check, ChevronDown, ChevronLeft, ChevronRight,
   ChevronUp, Circle, Dot, GripVertical, Loader2Icon, MoreHorizontal,

@@ -28,27 +28,14 @@ import {
 } from "@/components/ui/command"
 ```
 
-```tsx
-<Command>
-  <CommandInput placeholder="Type a command or search..." />
-  <CommandList>
-    <CommandEmpty>No results found.</CommandEmpty>
-    <CommandGroup heading="Suggestions">
-      <CommandItem>Calendar</CommandItem>
-      <CommandItem>Calculator</CommandItem>
-    </CommandGroup>
-    <CommandSeparator />
-    <CommandGroup heading="Settings">
-      <CommandItem>Profile</CommandItem>
-      <CommandItem>Settings</CommandItem>
-    </CommandGroup>
-  </CommandList>
-</Command>
-```
+<LiveUsageCode name="command" defaultCode={`<Command className="rounded-lg border shadow-md w-[300px]">\n  <CommandInput placeholder="Type a command or search..." />\n  <CommandList>...</CommandList>\n</Command>`} />
 
 ## API Reference
 
-<APIReference name="Command" extends="div" />
+<APIReference name="Command" extends="div" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "—" },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />
 
 <APIReference name="CommandDialog" props={[
   { name: "open", type: "boolean", default: "undefined" },

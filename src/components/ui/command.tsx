@@ -8,20 +8,48 @@ import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Hotkey } from "@/components/ui/hotkey"
+import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
+
+type CommandMode = "playful" | "smooth"
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive>
->(({ className, ...props }, ref) => (
-  <CommandPrimitive
-    ref={ref}
-    className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
-      className
-    )}
-    {...props}
-  />
-))
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive> & {
+    mode?: CommandMode
+    disabled?: boolean
+  }
+>(({ className, mode, disabled, ...props }, ref) => {
+  const inner = (
+    <UIVariantProvider mode={mode}>
+      <CommandPrimitive
+        ref={ref}
+        className={cn(
+          "flex h-full w-full flex-col overflow-hidden bg-popover text-popover-foreground",
+          className,
+          !mode && "rounded-md",
+          mode === "smooth" && "rounded-2xl shadow-xl",
+          mode === "playful" && "rounded-xl border-2 rotate-[0.3deg]",
+          disabled && "pointer-events-none opacity-50",
+        )}
+        {...props}
+      />
+    </UIVariantProvider>
+  )
+
+  if (mode === "playful") {
+    return (
+      <div className="relative">
+        <span
+          className="absolute inset-0 rounded-xl bg-foreground/10 translate-x-[3px] translate-y-[3px] -rotate-[0.5deg]"
+          aria-hidden="true"
+        />
+        {inner}
+      </div>
+    )
+  }
+
+  return inner
+})
 Command.displayName = CommandPrimitive.displayName
 
 const CommandDialog = ({ children, ...props }: DialogProps) => {
@@ -112,16 +140,22 @@ CommandSeparator.displayName = CommandPrimitive.Separator.displayName
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <CommandPrimitive.Item
-    ref={ref}
-    className={cn(
-      "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-      className
-    )}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const mode = useUIVariant()
+  return (
+    <CommandPrimitive.Item
+      ref={ref}
+      className={cn(
+        "relative flex cursor-default gap-2 select-none items-center px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        !mode && "rounded-sm",
+        mode === "smooth" && "rounded-lg",
+        mode === "playful" && "rounded-lg",
+        className
+      )}
+      {...props}
+    />
+  )
+})
 
 CommandItem.displayName = CommandPrimitive.Item.displayName
 

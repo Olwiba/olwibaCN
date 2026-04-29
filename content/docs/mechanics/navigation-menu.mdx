@@ -27,8 +27,7 @@ import {
 } from "@/components/ui/navigation-menu"
 ```
 
-```tsx
-<NavigationMenu>
+<LiveUsageCode name="navigation-menu" defaultCode={`<NavigationMenu>
   <NavigationMenuList>
     <NavigationMenuItem>
       <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
@@ -36,24 +35,30 @@ import {
         <ul className="grid gap-3 p-4 w-[400px]">
           <li>
             <NavigationMenuLink asChild>
-              <a href="#">Introduction</a>
+              <a href="#" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                <div className="text-sm font-medium leading-none">Introduction</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Re-usable components built using Radix UI and Tailwind CSS.
+                </p>
+              </a>
             </NavigationMenuLink>
           </li>
         </ul>
       </NavigationMenuContent>
     </NavigationMenuItem>
     <NavigationMenuItem>
-      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+      <NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
         Documentation
       </NavigationMenuLink>
     </NavigationMenuItem>
   </NavigationMenuList>
-</NavigationMenu>
-```
+</NavigationMenu>`} />
 
 ## API Reference
 
-<APIReference name="NavigationMenu" extends="nav" />
+<APIReference name="NavigationMenu" extends="nav" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "—" },
+]} />
 
 <APIReference name="NavigationMenuList" extends="ul" />
 

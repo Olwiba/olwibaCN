@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { StatusIndicator } from "@/components/ui/status-indicator";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
 type StatusTone = "default" | "success" | "muted" | "destructive";
 type StatusSize = "sm" | "default" | "lg";

@@ -43,7 +43,7 @@ const builtInSandboxRegistry: Record<string, SandboxDefinition> = {
       },
     ],
     defaultViewport: 'desktop',
-    preview: React.lazy(() => import('@/demos/sandbox-dashboard-overview')),
+    preview: React.lazy(() => import('@/docs/demos/sandbox-dashboard-overview')),
     files: [
       {
         path: 'app/page.tsx',

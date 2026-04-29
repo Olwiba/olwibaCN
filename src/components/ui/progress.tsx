@@ -7,12 +7,17 @@ import { cn } from "@/lib/utils"
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
->(({ className, value, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
+    disabled?: boolean
+  }
+>(({ className, value, disabled = false, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
+    aria-disabled={disabled || undefined}
+    data-disabled={disabled ? "" : undefined}
     className={cn(
       "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
+      disabled && "opacity-50",
       className
     )}
     {...props}

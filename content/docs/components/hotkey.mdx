@@ -16,18 +16,12 @@ description: Renders a keyboard shortcut with platform-aware modifiers (⌘ on M
 ## Usage
 
 ```tsx
-import { Hotkey, useIsMac } from "@/components/ui/hotkey"
+import { Hotkey } from "@/components/ui/hotkey"
 ```
 
 Pass a shortcut string (`mod`, `shift`, `alt`, `ctrl` + key). Renders ⌘ on Mac, Ctrl on Windows/Linux.
 
-```tsx
-<Hotkey shortcut="mod+T" />
-```
-
-```tsx
-<Hotkey shortcut="mod+K" asKbd />
-```
+<LiveUsageCode name="hotkey" defaultCode={`<div className="flex w-64 items-center justify-between rounded-md border px-3 py-2 text-sm">\n  <span>Open command menu</span>\n  <Hotkey\n    shortcut="mod+K"\n    className="ml-auto text-xs tracking-widest text-muted-foreground"\n  />\n</div>`} />
 
 ## API Reference
 

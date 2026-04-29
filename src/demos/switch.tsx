@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
 // Switch only supports playful — rounded-full is structural for a toggle
 type Mode = "default" | "playful";

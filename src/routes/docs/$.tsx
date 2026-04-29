@@ -7,9 +7,9 @@ import { useFumadocsLoader } from 'fumadocs-core/source/client';
 import * as React from 'react';
 import { Suspense } from 'react';
 import { mdxComponents } from '@/lib/mdx-components';
-import { type TocItem } from '@/components/docs/DocsToc';
-import { DocsLayout, extractTextFromReactNode, type PageLoaderData } from '@/components/docs/DocsLayout';
-import { type SidebarSection } from '@/components/docs/DocsSidebar';
+import { type TocItem } from '@/docs/components/DocsToc';
+import { DocsLayout, extractTextFromReactNode, type PageLoaderData } from '@/docs/components/DocsLayout';
+import { type SidebarSection } from '@/docs/components/DocsSidebar';
 import { findNeighbour } from 'fumadocs-core/page-tree';
 import { ErrorPage } from '@/components/ui/error-page';
 
@@ -36,7 +36,6 @@ const sidebarSections: SidebarSection[] = [
 const completedComponents = [
   '/docs/components/accordion',
   '/docs/components/alert',
-  '/docs/components/alert-dialog',
   '/docs/components/aspect-ratio',
   '/docs/components/avatar',
   '/docs/components/badge',
@@ -48,9 +47,39 @@ const completedComponents = [
   '/docs/components/carousel',
   '/docs/components/chart',
   '/docs/components/checkbox',
+  '/docs/mechanics/alert-dialog',
   '/docs/mechanics/collapsible',
+  '/docs/mechanics/command',
   '/docs/mechanics/context-menu',
-  '/docs/components/confetti',
+  '/docs/mechanics/dialog',
+  '/docs/mechanics/drawer',
+  '/docs/mechanics/dropdown-menu',
+  '/docs/mechanics/hover-card',
+  '/docs/mechanics/menubar',
+  '/docs/mechanics/navigation-menu',
+  '/docs/mechanics/popover',
+  '/docs/mechanics/resizable',
+  '/docs/mechanics/confetti',
+  '/docs/mechanics/form',
+  '/docs/components/hotkey',
+  '/docs/components/kbd',
+  '/docs/components/progress',
+  '/docs/components/separator',
+  '/docs/components/skeleton',
+  '/docs/components/spinner',
+  '/docs/components/empty',
+  '/docs/components/field',
+  '/docs/mechanics/scroll-area',
+  '/docs/mechanics/sonner',
+  '/docs/mechanics/sheet',
+  '/docs/mechanics/tooltip',
+  '/docs/components/input',
+  '/docs/components/input-group',
+  '/docs/components/input-otp',
+  '/docs/components/item',
+  '/docs/components/label',
+  '/docs/components/pagination',
+  '/docs/components/radio-group',
 ];
 
 export const Route = createFileRoute('/docs/$')({

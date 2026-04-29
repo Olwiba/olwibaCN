@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Mail } from "lucide-react";

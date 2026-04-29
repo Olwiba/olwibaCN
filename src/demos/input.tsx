@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
 type Mode = "default" | "playful" | "smooth";
 
@@ -15,11 +15,11 @@ export default function InputDemo() {
   const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
-  const usageProps = [
-    mode !== "default" && `mode="${mode}"`,
-    disabled && "disabled",
-  ].filter(Boolean).join(" ");
-  useUsageCode(`<Input${usageProps ? " " + usageProps : ""} placeholder="Email" />`);
+  const modeAttr = mode !== "default" ? ` mode="${mode}"` : "";
+  const disabledAttr = disabled ? " disabled" : "";
+  useUsageCode(
+    `<div className="flex flex-col gap-4 w-[300px]">\n  <Input type="text" placeholder="Text"${modeAttr}${disabledAttr} />\n  <Input type="password" placeholder="Password"${modeAttr}${disabledAttr} />\n</div>`
+  );
 
   return (
     <>

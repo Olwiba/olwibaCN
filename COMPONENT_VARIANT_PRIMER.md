@@ -69,7 +69,7 @@ Not all components need size, but when added:
 
 ## Demo Controls Pattern
 
-Every demo is a `"use client"` component using `DemoControls` from `@/components/docs/ComponentPreview`.
+Every demo is a `"use client"` component using `DemoControls` from `@/docs/components/ComponentPreview`.
 
 Control order: **Size → Mode → Options**
 
@@ -77,7 +77,7 @@ Control order: **Size → Mode → Options**
 "use client"
 
 import { useState } from "react"
-import { DemoControls } from "@/components/docs/ComponentPreview"
+import { DemoControls } from "@/docs/components/ComponentPreview"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"

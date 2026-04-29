@@ -66,6 +66,7 @@ export function CodeFence({
   const [highlightedHtml, setHighlightedHtml] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    setHighlightedHtml(null);
     if (!code) return;
     let cancelled = false;
 

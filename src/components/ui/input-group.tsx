@@ -5,32 +5,44 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { UIVariantProvider, type UIVariant } from "@/components/ui/ui-variant-context"
 
-function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
+function InputGroup({
+  className,
+  mode,
+  disabled,
+  ...props
+}: React.ComponentProps<"div"> & {
+  mode?: UIVariant
+  disabled?: boolean
+}) {
   return (
-    <div
-      data-slot="input-group"
-      role="group"
-      className={cn(
-        "group/input-group border-input dark:bg-input/30 shadow-xs relative flex w-full items-center rounded-md border outline-none transition-[color,box-shadow]",
-        "h-9 has-[>textarea]:h-auto",
+    <UIVariantProvider mode={mode}>
+      <div
+        data-slot="input-group"
+        data-disabled={disabled ? "true" : undefined}
+        role="group"
+        className={cn(
+          "group/input-group border-input dark:bg-input/30 shadow-xs relative flex w-full items-center rounded-md border outline-none transition-[color,box-shadow]",
+          "h-9 has-[>textarea]:h-auto",
 
-        // Variants based on alignment.
-        "has-[>[data-align=inline-start]]:[&>input]:pl-2",
-        "has-[>[data-align=inline-end]]:[&>input]:pr-2",
-        "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
-        "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
+          "has-[>[data-align=inline-start]]:[&>input]:pl-2",
+          "has-[>[data-align=inline-end]]:[&>input]:pr-2",
+          "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
+          "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
 
-        // Focus state.
-        "has-[[data-slot=input-group-control]:focus-visible]:ring-ring has-[[data-slot=input-group-control]:focus-visible]:ring-1",
+          "has-[[data-slot=input-group-control]:focus-visible]:ring-ring has-[[data-slot=input-group-control]:focus-visible]:ring-1",
 
-        // Error state.
-        "has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[[data-slot][aria-invalid=true]]:border-destructive dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40",
+          "has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[[data-slot][aria-invalid=true]]:border-destructive dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40",
 
-        className
-      )}
-      {...props}
-    />
+          mode === "smooth" && "rounded-xl shadow-xl",
+          mode === "playful" && "rotate-[0.3deg] [box-shadow:3px_3px_0px_0px_color-mix(in_srgb,currentColor_12%,transparent)]",
+          disabled && "pointer-events-none opacity-50",
+          className
+        )}
+        {...props}
+      />
+    </UIVariantProvider>
   )
 }
 
@@ -131,14 +143,16 @@ function InputGroupInput({
   ...props
 }: React.ComponentProps<"input">) {
   return (
-    <Input
-      data-slot="input-group-control"
-      className={cn(
-        "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-transparent",
-        className
-      )}
-      {...props}
-    />
+    <UIVariantProvider mode={undefined}>
+      <Input
+        data-slot="input-group-control"
+        className={cn(
+          "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-transparent",
+          className
+        )}
+        {...props}
+      />
+    </UIVariantProvider>
   )
 }
 

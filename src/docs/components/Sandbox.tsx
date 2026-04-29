@@ -21,9 +21,9 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getSandboxDefinition } from '@/components/docs/sandbox-registry';
-import { CodeFence } from '@/components/docs/CodeFence';
-import { CopyButton } from '@/components/docs/CopyButton';
+import { getSandboxDefinition } from '@/docs/components/sandbox-registry';
+import { CodeFence } from '@/docs/components/CodeFence';
+import { CopyButton } from '@/docs/components/CopyButton';
 
 type SandboxViewport = 'desktop' | 'tablet' | 'mobile' | 'custom';
 type SandboxMode = 'preview' | 'code';

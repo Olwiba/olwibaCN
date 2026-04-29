@@ -19,12 +19,7 @@ description: Displays a keyboard key or shortcut in a styled inline element.
 import { Kbd, KbdGroup } from "@/components/ui/kbd"
 ```
 
-```tsx
-<KbdGroup>
-  <Kbd>⌘</Kbd>
-  <Kbd>K</Kbd>
-</KbdGroup>
-```
+<LiveUsageCode name="kbd" defaultCode={`<div className="flex flex-col gap-4">\n  <div className="flex items-center gap-2">\n    <span className="text-sm text-muted-foreground">Press</span>\n    <KbdGroup>\n      <Kbd>⌘</Kbd>\n      <Kbd>K</Kbd>\n    </KbdGroup>\n    <span className="text-sm text-muted-foreground">to open command menu</span>\n  </div>\n  <div className="flex items-center gap-2">\n    <span className="text-sm text-muted-foreground">Press</span>\n    <KbdGroup>\n      <Kbd>Ctrl</Kbd>\n      <Kbd>C</Kbd>\n    </KbdGroup>\n    <span className="text-sm text-muted-foreground">to copy</span>\n  </div>\n  <div className="flex gap-2">\n    <Kbd>Enter</Kbd>\n    <Kbd>Tab</Kbd>\n    <Kbd>Esc</Kbd>\n  </div>\n</div>`} />
 
 ## API Reference
 

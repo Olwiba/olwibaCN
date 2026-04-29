@@ -25,18 +25,7 @@ import {
 import { Button } from "@/components/ui/button"
 ```
 
-```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Hover me</Button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>Add to library</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
+<LiveUsageCode name="tooltip" defaultCode={`<TooltipProvider>\n  <Tooltip>\n    <TooltipTrigger asChild>\n      <Button variant="outline">Hover me</Button>\n    </TooltipTrigger>\n    <TooltipContent>\n      <p>Add to library</p>\n    </TooltipContent>\n  </Tooltip>\n</TooltipProvider>`} />
 
 ## API Reference
 
@@ -58,5 +47,6 @@ import { Button } from "@/components/ui/button"
 
 <APIReference name="TooltipContent" extends="div" props={[
   { name: "sideOffset", type: "number", default: "4" },
-  { name: "side", type: "'top' | 'right' | 'bottom' | 'left'", default: "undefined" }
+  { name: "side", type: '"top" | "right" | "bottom" | "left"', default: "undefined" },
+  { name: "mode", type: '"playful" | "smooth"', default: "—" }
 ]} />

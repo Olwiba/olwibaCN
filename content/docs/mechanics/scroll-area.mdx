@@ -19,21 +19,14 @@ description: A container with custom-styled scrollbars for consistent cross-brow
 import { ScrollArea } from "@/components/ui/scroll-area"
 ```
 
-```tsx
-<ScrollArea className="h-72 w-48 rounded-md border">
-  <div className="p-4">
-    <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
-    <div className="text-sm">v1.2.0-beta.50</div>
-    <div className="text-sm">v1.2.0-beta.49</div>
-    <div className="text-sm">...</div>
-  </div>
-</ScrollArea>
-```
+<LiveUsageCode name="scroll-area" defaultCode={`<ScrollArea className="h-64 w-full rounded-md border font-mono text-sm">\n  <div className="overflow-x-hidden p-4">\n    {logs.map((log, i) => (\n      <div key={i} className="flex gap-6 py-1">\n        <span className="shrink-0 text-muted-foreground">{log.time}</span>\n        <span className="w-14 shrink-0">{log.level}</span>\n        <span className="min-w-0 truncate">{log.msg}</span>\n      </div>\n    ))}\n  </div>\n</ScrollArea>`} />
 
 ## API Reference
 
-<APIReference name="ScrollArea" extends="div" />
+<APIReference name="ScrollArea" extends="div" props={[
+  { name: "scrollbars", type: '"vertical" | "horizontal" | "both"', default: '"vertical"' },
+]} />
 
 <APIReference name="ScrollBar" extends="div" props={[
-  { name: "orientation", type: "'vertical' | 'horizontal'", default: "'vertical'" }
+  { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"' },
 ]} />

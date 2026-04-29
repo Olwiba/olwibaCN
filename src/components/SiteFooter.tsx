@@ -1,4 +1,4 @@
-import { DocsFooter } from './docs/DocsFooter';
+import { DocsFooter } from '@/docs/components/DocsFooter';
 
 export function SiteFooter() {
   return (

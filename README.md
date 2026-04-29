@@ -154,7 +154,7 @@ Notable exported primitives include:
 
 ## Docs Shell Source Of Truth
 
-This repository contains docs-shell source files under `src/components/docs/*`, but those are not the published consumer contract for documentation sites.
+This repository contains docs-shell source files under `src/docs/components/*`, but those are not the published consumer contract for documentation sites.
 
 Canonical docs flow:
 - implement shared docs-shell behavior in `olwibaCN`

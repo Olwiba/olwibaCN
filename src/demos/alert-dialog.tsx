@@ -13,7 +13,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { UIVariantProvider } from "@/components/ui/ui-variant-context";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
@@ -24,14 +25,35 @@ export default function AlertDialogDemo() {
   const [mode, setMode] = useState<AlertDialogMode>("default");
   const [disabled, setDisabled] = useState(false);
 
-  const contentProps = mode !== "default" ? ` mode="${mode}"` : "";
-  useUsageCode(`<AlertDialog>\n  <AlertDialogTrigger asChild>\n    <Button variant="outline"${disabled ? " disabled" : ""}>Click me</Button>\n  </AlertDialogTrigger>\n  <AlertDialogContent${contentProps}>\n    ...\n  </AlertDialogContent>\n</AlertDialog>`);
+  const modeAttr = mode !== "default" ? ` mode="${mode}"` : "";
+  const disabledAttr = disabled ? " disabled" : "";
+  useUsageCode(
+    `<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button${disabledAttr}>Click me</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent${modeAttr}>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your
+        account and remove your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`
+  );
 
   return (
     <>
+      <UIVariantProvider mode={mode === "default" ? undefined : mode}>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="outline" disabled={disabled}>Click me</Button>
+          <Button disabled={disabled}>Click me</Button>
         </AlertDialogTrigger>
         <AlertDialogContent mode={mode === "default" ? undefined : mode}>
           <AlertDialogHeader>
@@ -47,6 +69,7 @@ export default function AlertDialogDemo() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      </UIVariantProvider>
 
       <DemoControls>
         <div className="flex flex-wrap items-start gap-6">

@@ -27,31 +27,13 @@ import {
 } from "@/components/ui/pagination"
 ```
 
-```tsx
-<Pagination>
-  <PaginationContent>
-    <PaginationItem>
-      <PaginationPrevious href="#" />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#">1</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#" isActive>2</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationEllipsis />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationNext href="#" />
-    </PaginationItem>
-  </PaginationContent>
-</Pagination>
-```
+<LiveUsageCode name="pagination" defaultCode={`<Pagination>\n  <PaginationContent>\n    <PaginationItem>\n      <PaginationPrevious href="#" />\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationLink href="#">1</PaginationLink>\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationLink href="#" isActive>2</PaginationLink>\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationLink href="#">3</PaginationLink>\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationEllipsis />\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationNext href="#" />\n    </PaginationItem>\n  </PaginationContent>\n</Pagination>`} />
 
 ## API Reference
 
-<APIReference name="Pagination" extends="nav" />
+<APIReference name="Pagination" extends="nav" props={[
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" }
+]} />
 
 <APIReference name="PaginationContent" extends="ul" />
 
@@ -59,7 +41,8 @@ import {
 
 <APIReference name="PaginationLink" extends="a" props={[
   { name: "isActive", type: "boolean", default: "false" },
-  { name: "size", type: "'default' | 'sm' | 'lg' | 'icon'", default: "'icon'" }
+  { name: "size", type: '"default" | "sm" | "lg" | "icon"', default: '"icon"' },
+  { name: "disabled", type: "boolean", default: "false" }
 ]} />
 
 <APIReference name="PaginationPrevious" extends="a" />

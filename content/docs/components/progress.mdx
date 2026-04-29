@@ -19,13 +19,12 @@ description: A horizontal bar that visually indicates the completion status of a
 import { Progress } from "@/components/ui/progress"
 ```
 
-```tsx
-<Progress value={66} />
-```
+<LiveUsageCode name="progress" defaultCode={`<div className="w-[300px]">\n  <Progress value={66} aria-label="Upload progress" />\n</div>`} />
 
 ## API Reference
 
 <APIReference name="Progress" extends="div" props={[
   { name: "value", type: "number", default: "undefined" },
-  { name: "max", type: "number", default: "100" }
+  { name: "max", type: "number", default: "100" },
+  { name: "disabled", type: "boolean", default: "false" }
 ]} />

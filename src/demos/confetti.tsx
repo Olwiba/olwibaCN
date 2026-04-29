@@ -5,7 +5,7 @@ import { PartyPopper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { DemoControls, useUsageCode } from "@/components/docs/ComponentPreview";
+import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { fireConfetti } from "@/lib/confetti";
 import { cn } from "@/lib/utils";
 
