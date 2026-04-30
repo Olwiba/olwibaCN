@@ -159,22 +159,6 @@ export default function ItemDemo() {
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
-            <div className="flex gap-1.5">
-              {variants.map((v) => (
-                <Button
-                  key={v}
-                  variant={variant === v ? "default" : "secondary"}
-                  size="sm"
-                  onClick={() => setVariant(v)}
-                >
-                  {v.charAt(0).toUpperCase() + v.slice(1)}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
             <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
               {modes.map((m) => (
@@ -185,6 +169,22 @@ export default function ItemDemo() {
                   onClick={() => setMode(m)}
                 >
                   {m.charAt(0).toUpperCase() + m.slice(1)}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <div className="flex gap-1.5">
+              {variants.map((v) => (
+                <Button
+                  key={v}
+                  variant={variant === v ? "default" : "secondary"}
+                  size="sm"
+                  onClick={() => setVariant(v)}
+                >
+                  {v.charAt(0).toUpperCase() + v.slice(1)}
                 </Button>
               ))}
             </div>

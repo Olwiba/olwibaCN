@@ -33,65 +33,6 @@ const sidebarSections: SidebarSection[] = [
   { name: 'Components', href: '/docs/components', enchanted: true },
 ];
 
-const completedComponents = [
-  '/docs/components/accordion',
-  '/docs/components/alert',
-  '/docs/components/aspect-ratio',
-  '/docs/components/avatar',
-  '/docs/components/badge',
-  '/docs/components/breadcrumb',
-  '/docs/components/button-group',
-  '/docs/components/button',
-  '/docs/components/calendar',
-  '/docs/components/card',
-  '/docs/components/carousel',
-  '/docs/components/chart',
-  '/docs/components/checkbox',
-  '/docs/mechanics/alert-dialog',
-  '/docs/mechanics/collapsible',
-  '/docs/mechanics/command',
-  '/docs/mechanics/context-menu',
-  '/docs/mechanics/dialog',
-  '/docs/mechanics/drawer',
-  '/docs/mechanics/dropdown-menu',
-  '/docs/mechanics/hover-card',
-  '/docs/mechanics/menubar',
-  '/docs/mechanics/navigation-menu',
-  '/docs/mechanics/popover',
-  '/docs/mechanics/resizable',
-  '/docs/mechanics/confetti',
-  '/docs/mechanics/form',
-  '/docs/components/hotkey',
-  '/docs/components/kbd',
-  '/docs/components/progress',
-  '/docs/components/separator',
-  '/docs/components/skeleton',
-  '/docs/components/spinner',
-  '/docs/components/empty',
-  '/docs/components/field',
-  '/docs/mechanics/scroll-area',
-  '/docs/mechanics/sonner',
-  '/docs/mechanics/sheet',
-  '/docs/mechanics/tooltip',
-  '/docs/components/input',
-  '/docs/components/input-group',
-  '/docs/components/input-otp',
-  '/docs/components/item',
-  '/docs/components/label',
-  '/docs/components/pagination',
-  '/docs/components/radio-group',
-  '/docs/components/select',
-  '/docs/components/sidebar',
-  '/docs/components/slider',
-  '/docs/components/status-indicator',
-  '/docs/components/switch',
-  '/docs/components/table',
-  '/docs/components/tabs',
-  '/docs/components/textarea',
-  '/docs/components/toggle',
-  '/docs/components/toggle-group',
-];
-
 export const Route = createFileRoute('/docs/$')({
   component: Page,
   notFoundComponent: DocsNotFound,
@@ -156,7 +97,7 @@ function Page() {
   const data = useFumadocsLoader(loaderData);
 
   return (
-    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections} defaultOpenFolders completedItems={completedComponents}>
+    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections} defaultOpenFolders>
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
         {clientLoader.useContent(data.path, undefined)}
       </Suspense>

@@ -38,7 +38,6 @@ export interface DocsSidebarProps extends React.ComponentProps<'div'> {
   sections?: SidebarSection[];
   folderIcons?: Record<string, React.ComponentType<{ className?: string }>>;
   defaultOpenFolders?: boolean;
-  completedItems?: string[];
 }
 
 interface SidebarFolderProps {
@@ -50,11 +49,10 @@ interface SidebarFolderProps {
   inSection: boolean;
   defaultOpen: boolean;
   pathname: string;
-  completedItems?: string[];
   enchanted?: boolean;
 }
 
-function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSection, defaultOpen, pathname, completedItems, enchanted }: SidebarFolderProps) {
+function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSection, defaultOpen, pathname, enchanted }: SidebarFolderProps) {
   const [open, setOpen] = useState(defaultOpen);
   const HeaderRow = enchanted ? Enchanted : 'div';
   const router = useRouter();
@@ -98,38 +96,30 @@ function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSectio
         {/* Width ghost: always in DOM so sidebar width is stable on open/close */}
         <div className="h-0 w-fit overflow-hidden pointer-events-none select-none" aria-hidden="true">
           <SidebarMenuSub>
-            {pages.map((page) => {
-              const isComplete = !completedItems || completedItems.includes(page.url);
-              return (
-                <SidebarMenuSubItem key={page.url}>
-                  <SidebarMenuSubButton>
-                    {page.name}
-                    {!isComplete && <span className="ml-1">*</span>}
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              );
-            })}
+            {pages.map((page) => (
+              <SidebarMenuSubItem key={page.url}>
+                <SidebarMenuSubButton>
+                  {page.name}
+                </SidebarMenuSubButton>
+              </SidebarMenuSubItem>
+            ))}
           </SidebarMenuSub>
         </div>
 
         <CollapsibleContent>
           <SidebarMenuSub>
-            {pages.map((page) => {
-              const isComplete = !completedItems || completedItems.includes(page.url);
-              return (
-                <SidebarMenuSubItem key={page.url}>
-                  <SidebarMenuSubButton
-                    isActive={page.url === pathname}
-                    onClick={() => {
-                      void router.navigate({ href: page.url });
-                    }}
-                  >
-                      {page.name}
-                      {!isComplete && <span className="ml-1 text-muted-foreground/50">*</span>}
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              );
-            })}
+            {pages.map((page) => (
+              <SidebarMenuSubItem key={page.url}>
+                <SidebarMenuSubButton
+                  isActive={page.url === pathname}
+                  onClick={() => {
+                    void router.navigate({ href: page.url });
+                  }}
+                >
+                    {page.name}
+                </SidebarMenuSubButton>
+              </SidebarMenuSubItem>
+            ))}
           </SidebarMenuSub>
         </CollapsibleContent>
       </SidebarMenuItem>
@@ -137,7 +127,7 @@ function SidebarFolder({ name, href, icon: FolderIcon, pages, isActive, inSectio
   );
 }
 
-export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, completedItems, ...props }: DocsSidebarProps) {
+export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, ...props }: DocsSidebarProps) {
   const location = useLocation();
   const router = useRouter();
   const pathname = location.pathname;
@@ -208,7 +198,6 @@ export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, c
                           inSection={inSection}
                           defaultOpen={isExpanded}
                           pathname={pathname}
-                          completedItems={completedItems}
                           enchanted={enchanted}
                         />
                       );

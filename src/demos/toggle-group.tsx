@@ -97,22 +97,6 @@ export default function ToggleGroupDemo() {
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
-            <div className="flex gap-1.5">
-              {variants.map((value) => (
-                <Button
-                  key={value}
-                  variant={variant === value ? "default" : "secondary"}
-                  size="sm"
-                  onClick={() => setVariant(value)}
-                >
-                  {value}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
             <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">
               {modes.map((value) => (
@@ -121,6 +105,22 @@ export default function ToggleGroupDemo() {
                   variant={mode === value ? "default" : "secondary"}
                   size="sm"
                   onClick={() => setMode(value)}
+                >
+                  {value}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <span className="text-xs font-medium text-fd-muted-foreground">Variant</span>
+            <div className="flex gap-1.5">
+              {variants.map((value) => (
+                <Button
+                  key={value}
+                  variant={variant === value ? "default" : "secondary"}
+                  size="sm"
+                  onClick={() => setVariant(value)}
                 >
                   {value}
                 </Button>

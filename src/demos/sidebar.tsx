@@ -193,22 +193,6 @@ export default function SidebarDemo() {
       <DemoControls>
         <div className="flex flex-wrap items-start gap-6">
           <div className="space-y-1.5">
-            <span className="text-xs font-medium text-fd-muted-foreground">Collapse</span>
-            <div className="flex gap-1.5">
-              {collapsibleOptions.map((option) => (
-                <Button
-                  key={option}
-                  variant={collapsible === option ? "default" : "secondary"}
-                  size="sm"
-                  onClick={() => setCollapsible(option)}
-                >
-                  {collapsibleLabels[option]}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
             <span className="text-xs font-medium text-fd-muted-foreground">Menu Size</span>
             <div className="flex gap-1.5">
               {menuSizes.map((size) => (
@@ -235,6 +219,22 @@ export default function SidebarDemo() {
                   onClick={() => setMode(m)}
                 >
                   {m.charAt(0).toUpperCase() + m.slice(1)}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <span className="text-xs font-medium text-fd-muted-foreground">Collapse</span>
+            <div className="flex gap-1.5">
+              {collapsibleOptions.map((option) => (
+                <Button
+                  key={option}
+                  variant={collapsible === option ? "default" : "secondary"}
+                  size="sm"
+                  onClick={() => setCollapsible(option)}
+                >
+                  {collapsibleLabels[option]}
                 </Button>
               ))}
             </div>
