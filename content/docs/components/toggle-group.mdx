@@ -16,26 +16,33 @@ description: A set of toggle buttons supporting single or multiple selection mod
 ## Usage
 
 ```tsx
+import { Bold, Italic, Underline } from "lucide-react"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 ```
 
-```tsx
-<ToggleGroup type="multiple">
-  <ToggleGroupItem value="bold" aria-label="Toggle bold">Bold</ToggleGroupItem>
-  <ToggleGroupItem value="italic" aria-label="Toggle italic">Italic</ToggleGroupItem>
-  <ToggleGroupItem value="underline" aria-label="Toggle underline">Underline</ToggleGroupItem>
-</ToggleGroup>
-```
+<LiveUsageCode name="toggle-group" defaultCode={`<ToggleGroup type="multiple" defaultValue={["bold"]}>
+  <ToggleGroupItem value="bold" aria-label="Toggle bold">
+    <Bold />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic" aria-label="Toggle italic">
+    <Italic />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline" aria-label="Toggle underline">
+    <Underline />
+  </ToggleGroupItem>
+</ToggleGroup>`} />
 
 ## API Reference
 
 <APIReference name="ToggleGroup" extends="div" props={[
   { name: "type", type: "'single' | 'multiple'", default: "undefined" },
   { name: "value", type: "string | string[]", default: "undefined" },
+  { name: "defaultValue", type: "string | string[]", default: "undefined" },
   { name: "onValueChange", type: "(value: string | string[]) => void", default: "undefined" },
   { name: "disabled", type: "boolean", default: "false" },
   { name: "variant", type: "'default' | 'outline'", default: "'default'" },
-  { name: "size", type: "'default' | 'sm' | 'lg'", default: "'default'" }
+  { name: "size", type: "'default' | 'sm' | 'lg'", default: "'default'" },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" }
 ]} />
 
 <APIReference name="ToggleGroupItem" extends="button" props={[

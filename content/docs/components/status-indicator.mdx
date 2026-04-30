@@ -21,7 +21,7 @@ import { StatusIndicator } from "@/components/ui/status-indicator"
 
 <LiveUsageCode
   name="status-indicator"
-  defaultCode={`<StatusIndicator tone="success" pulse>Operational</StatusIndicator>`}
+  defaultCode={`<StatusIndicator pulse>Operational</StatusIndicator>`}
 />
 
 Use `StatusIndicator` when you need a generic live/online/offline signal without committing to a product-specific badge, pill, or card. It stays intentionally small:
@@ -36,9 +36,10 @@ Use `StatusIndicator` when you need a generic live/online/offline signal without
   name="StatusIndicator"
   extends="span"
   props={[
-    { name: "tone", type: '"default" | "success" | "muted" | "destructive"', default: '"default"' },
+    { name: "color", type: "string", default: "undefined", description: "CSS color value for the dot. Falls back to the theme primary color." },
     { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
     { name: "pulse", type: "boolean", default: "false" },
+    { name: "disabled", type: "boolean", default: "false" },
     { name: "dotClassName", type: "string", default: "undefined", description: "Additional classes for the dot wrapper." },
   ]}
 />

@@ -20,12 +20,12 @@ import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 ```
 
-<LiveUsageCode name="switch" defaultCode={`<Switch />`} />
+<LiveUsageCode name="switch" defaultCode={`<div className="flex items-center space-x-2">\n  <Switch id="airplane-mode" />\n  <Label htmlFor="airplane-mode">Airplane Mode</Label>\n</div>`} />
 
 ## API Reference
 
 <APIReference name="Switch" extends="button" props={[
-  { name: "mode", type: '"playful"', default: "undefined" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
   { name: "checked", type: "boolean", default: "undefined" },
   { name: "onCheckedChange", type: "(checked: boolean) => void", default: "undefined" },
   { name: "defaultChecked", type: "boolean", default: "false" },

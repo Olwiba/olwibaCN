@@ -378,7 +378,7 @@ Run through this for each item. Tick when done.
 | sonner | ⬜ | ✅ needed | Toast surface |
 | tooltip | ⬜ | ✅ needed | Small panel surface |
 
-### Components (27 / 35 done)
+### Components (38 / 38 done)
 
 | Component | Done | Notes |
 |---|---|---|
@@ -407,16 +407,16 @@ Run through this for each item. Tick when done.
 | pagination | ✅ | Uses buttons — mode |
 | progress | ✅ | |
 | radio-group | ✅ | Radix form primitive; disabled controls only |
-| select | ⬜ | Panel surface + trigger |
+| select | ✅ | Panel surface + trigger |
 | separator | ✅ | Minimal |
-| sidebar | ⬜ | Complex |
+| sidebar | ✅ | Primitive navigation system; AppShell composition lives in `@olwiba/ui` |
 | skeleton | ✅ | No mode |
-| slider | ⬜ | |
-| spinner | ✅ | Size only |
-| status-indicator | ⬜ | |
-| switch | ⬜ | |
-| table | ⬜ | |
-| tabs | ⬜ | |
-| textarea | ⬜ | |
-| toggle | ⬜ | |
-| toggle-group | ⬜ | |
+| slider | ✅ | Size only |
+| spinner | ✅ | SVG indicator; size through `className` |
+| status-indicator | ✅ | Size, color, pulse, disabled |
+| switch | ✅ | Size + disabled; no mode |
+| table | ✅ | Size controls table density; no mode/disabled |
+| tabs | ✅ | Size on list; mode on root; disabled via trigger |
+| textarea | ✅ | Size, mode, disabled; playful backdrop only |
+| toggle | ✅ | Size, variant, mode, disabled; playful backdrop when pressed |
+| toggle-group | ✅ | Size, variant, mode, disabled; playful backdrop on active items |

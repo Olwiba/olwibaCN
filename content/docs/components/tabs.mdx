@@ -19,16 +19,18 @@ description: A tabbed interface for switching between different content panels.
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 ```
 
-```tsx
-<Tabs defaultValue="account" className="w-[400px]">
+<LiveUsageCode name="tabs" defaultCode={`<Tabs defaultValue="account" className="w-[400px]">
   <TabsList className="grid w-full grid-cols-2">
     <TabsTrigger value="account">Account</TabsTrigger>
     <TabsTrigger value="password">Password</TabsTrigger>
   </TabsList>
-  <TabsContent value="account">Make changes to your account here.</TabsContent>
-  <TabsContent value="password">Change your password here.</TabsContent>
-</Tabs>
-```
+  <TabsContent value="account" className="rounded-md border p-4 text-sm text-muted-foreground">
+    Make changes to your account here.
+  </TabsContent>
+  <TabsContent value="password" className="rounded-md border p-4 text-sm text-muted-foreground">
+    Change your password here.
+  </TabsContent>
+</Tabs>`} />
 
 ## API Reference
 
@@ -36,11 +38,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
   { name: "value", type: "string", default: "undefined" },
   { name: "onValueChange", type: "(value: string) => void", default: "undefined" },
   { name: "defaultValue", type: "string", default: "undefined" },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
   { name: "orientation", type: "'horizontal' | 'vertical'", default: "'horizontal'" },
   { name: "dir", type: "'ltr' | 'rtl'", default: "undefined" }
 ]} />
 
-<APIReference name="TabsList" extends="div" />
+<APIReference name="TabsList" extends="div" props={[
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"', description: "Controls the list height and trigger padding." }
+]} />
 
 <APIReference name="TabsTrigger" extends="button" props={[
   { name: "value", type: "string" },

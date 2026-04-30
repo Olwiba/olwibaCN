@@ -1,6 +1,6 @@
 ---
 title: Sidebar
-description: A collapsible application sidebar with menus, groups, badges, and nested items.
+description: Low-level sidebar primitives for building collapsible navigation shells.
 ---
 
 <div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
@@ -19,52 +19,48 @@ description: A collapsible application sidebar with menus, groups, badges, and n
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { Home, Inbox, Settings, User } from "lucide-react"
 ```
 
-```tsx
-<SidebarProvider defaultOpen>
-  <Sidebar className="border-r">
-    <SidebarContent>
-      <SidebarGroup>
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>Home</SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>Settings</SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-    </SidebarContent>
-  </Sidebar>
-  <main className="flex-1 p-4">
-    <SidebarTrigger />
-    <p>Main content</p>
-  </main>
-</SidebarProvider>
-```
+<LiveUsageCode name="sidebar" defaultCode={`<SidebarProvider defaultOpen>\n  <Sidebar>\n    <SidebarHeader>\n      <SidebarMenu>\n        <SidebarMenuItem>\n          <SidebarMenuButton>\n            <Home />\n            <span>Olwiba</span>\n          </SidebarMenuButton>\n        </SidebarMenuItem>\n      </SidebarMenu>\n    </SidebarHeader>\n    <SidebarContent>\n      <SidebarGroup>\n        <SidebarGroupLabel>Application</SidebarGroupLabel>\n        <SidebarGroupContent>\n          <SidebarMenu>\n            <SidebarMenuItem>\n              <SidebarMenuButton isActive>\n                <Home />\n                <span>Home</span>\n              </SidebarMenuButton>\n            </SidebarMenuItem>\n            <SidebarMenuItem>\n              <SidebarMenuButton>\n                <Inbox />\n                <span>Inbox</span>\n              </SidebarMenuButton>\n            </SidebarMenuItem>\n            <SidebarMenuItem>\n              <SidebarMenuButton>\n                <Settings />\n                <span>Settings</span>\n              </SidebarMenuButton>\n            </SidebarMenuItem>\n          </SidebarMenu>\n        </SidebarGroupContent>\n      </SidebarGroup>\n    </SidebarContent>\n    <SidebarFooter>\n      <SidebarMenu>\n        <SidebarMenuItem>\n          <SidebarMenuButton>\n            <User />\n            <span>User</span>\n          </SidebarMenuButton>\n        </SidebarMenuItem>\n      </SidebarMenu>\n    </SidebarFooter>\n  </Sidebar>\n  <SidebarInset>\n    <header className="flex h-12 items-center gap-2 border-b px-4">\n      <SidebarTrigger />\n      <span className="text-sm font-medium">Dashboard</span>\n    </header>\n    <div className="p-4 text-sm text-muted-foreground">Main content area</div>\n  </SidebarInset>\n</SidebarProvider>`} />
+
+## Composition
+
+`Sidebar` is the primitive navigation system. Use `@olwiba/ui`'s `AppShell` when you want an opinionated dashboard shell with brand, user menu, page header, and navigation data props.
+
+The interactive preview uses `layout="embedded"`, `mobileBreakpoint={0}`, and `sidebarPosition="contained"` so the sidebar stays inside the demo frame. Omit those options for a normal full-page application shell.
 
 ## API Reference
 
 <APIReference name="SidebarProvider" props={[
   { name: "defaultOpen", type: "boolean", default: "true" },
   { name: "open", type: "boolean", default: "undefined" },
-  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" }
+  { name: "onOpenChange", type: "(open: boolean) => void", default: "undefined" },
+  { name: "mobileBreakpoint", type: "number", default: "768" },
+  { name: "layout", type: '"viewport" | "embedded"', default: '"viewport"' },
+  { name: "sidebarWidth", type: "string", default: '"16rem"' },
+  { name: "sidebarWidthIcon", type: "string", default: '"3rem"' }
 ]} />
 
-<APIReference name="Sidebar" extends="aside" />
+<APIReference name="Sidebar" extends="div" props={[
+  { name: "side", type: '"left" | "right"', default: '"left"' },
+  { name: "variant", type: '"sidebar" | "floating" | "inset"', default: '"sidebar"' },
+  { name: "collapsible", type: '"offcanvas" | "icon" | "none"', default: '"offcanvas"' },
+  { name: "mode", type: '"playful" | "smooth"', default: "undefined" },
+  { name: "sidebarPosition", type: '"viewport" | "contained"', default: '"viewport"' }
+]} />
 
 <APIReference name="SidebarTrigger" extends="button" props={[
   { name: "asChild", type: "boolean", default: "false" }
@@ -78,29 +74,48 @@ import {
 
 <APIReference name="SidebarGroup" extends="div" />
 
-<APIReference name="SidebarGroupLabel" extends="span" />
+<APIReference name="SidebarGroupLabel" extends="div" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
 
 <APIReference name="SidebarGroupContent" extends="div" />
 
-<APIReference name="SidebarGroupAction" extends="div" />
+<APIReference name="SidebarGroupAction" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" }
+]} />
 
 <APIReference name="SidebarMenu" extends="ul" />
 
 <APIReference name="SidebarMenuItem" extends="li" />
 
-<APIReference name="SidebarMenuButton" extends="button" />
+<APIReference name="SidebarMenuButton" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" },
+  { name: "isActive", type: "boolean", default: "false" },
+  { name: "variant", type: '"default" | "outline"', default: '"default"' },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "tooltip", type: "string | TooltipContentProps", default: "undefined" }
+]} />
 
-<APIReference name="SidebarMenuAction" extends="div" />
+<APIReference name="SidebarMenuAction" extends="button" props={[
+  { name: "asChild", type: "boolean", default: "false" },
+  { name: "showOnHover", type: "boolean", default: "false" }
+]} />
 
 <APIReference name="SidebarMenuBadge" extends="div" />
 
 <APIReference name="SidebarMenuSub" extends="ul" />
 
-<APIReference name="SidebarMenuSubButton" extends="button" />
+<APIReference name="SidebarMenuSubButton" extends="a" props={[
+  { name: "asChild", type: "boolean", default: "false" },
+  { name: "size", type: '"sm" | "md"', default: '"md"' },
+  { name: "isActive", type: "boolean", default: "false" }
+]} />
 
-<APIReference name="SidebarMenuSubItem" extends="div" />
+<APIReference name="SidebarMenuSubItem" extends="li" />
 
-<APIReference name="SidebarMenuSkeleton" extends="div" />
+<APIReference name="SidebarMenuSkeleton" extends="div" props={[
+  { name: "showIcon", type: "boolean", default: "false" }
+]} />
 
 <APIReference name="SidebarSeparator" extends="div" />
 
@@ -108,4 +123,4 @@ import {
 
 <APIReference name="SidebarInset" extends="main" />
 
-<APIReference name="SidebarRail" extends="div" />
+<APIReference name="SidebarRail" extends="button" />

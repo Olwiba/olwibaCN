@@ -19,9 +19,7 @@ description: A draggable control for selecting a numeric value within a defined 
 import { Slider } from "@/components/ui/slider"
 ```
 
-```tsx
-<Slider defaultValue={[50]} max={100} step={1} />
-```
+<LiveUsageCode name="slider" defaultCode={`<div className="w-[300px]">\n  <Slider defaultValue={[50]} max={100} step={1} />\n</div>`} />
 
 ## API Reference
 
@@ -32,5 +30,6 @@ import { Slider } from "@/components/ui/slider"
   { name: "min", type: "number", default: "0" },
   { name: "max", type: "number", default: "100" },
   { name: "step", type: "number", default: "1" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
   { name: "disabled", type: "boolean", default: "false" }
 ]} />

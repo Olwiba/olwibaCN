@@ -80,6 +80,16 @@ const completedComponents = [
   '/docs/components/label',
   '/docs/components/pagination',
   '/docs/components/radio-group',
+  '/docs/components/select',
+  '/docs/components/sidebar',
+  '/docs/components/slider',
+  '/docs/components/status-indicator',
+  '/docs/components/switch',
+  '/docs/components/table',
+  '/docs/components/tabs',
+  '/docs/components/textarea',
+  '/docs/components/toggle',
+  '/docs/components/toggle-group',
 ];
 
 export const Route = createFileRoute('/docs/$')({

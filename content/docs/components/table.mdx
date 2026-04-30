@@ -27,13 +27,13 @@ import {
 } from "@/components/ui/table"
 ```
 
-```tsx
-<Table>
+<LiveUsageCode name="table" defaultCode={`<Table>
   <TableCaption>A list of your recent invoices.</TableCaption>
   <TableHeader>
     <TableRow>
       <TableHead>Invoice</TableHead>
       <TableHead>Status</TableHead>
+      <TableHead>Method</TableHead>
       <TableHead className="text-right">Amount</TableHead>
     </TableRow>
   </TableHeader>
@@ -41,15 +41,29 @@ import {
     <TableRow>
       <TableCell className="font-medium">INV001</TableCell>
       <TableCell>Paid</TableCell>
+      <TableCell>Credit Card</TableCell>
       <TableCell className="text-right">$250.00</TableCell>
     </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">INV002</TableCell>
+      <TableCell>Pending</TableCell>
+      <TableCell>PayPal</TableCell>
+      <TableCell className="text-right">$150.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">INV003</TableCell>
+      <TableCell>Unpaid</TableCell>
+      <TableCell>Bank Transfer</TableCell>
+      <TableCell className="text-right">$350.00</TableCell>
+    </TableRow>
   </TableBody>
-</Table>
-```
+</Table>`} />
 
 ## API Reference
 
-<APIReference name="Table" extends="table" />
+<APIReference name="Table" extends="table" props={[
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"', description: "Controls table density, text size, and cell spacing." }
+]} />
 
 <APIReference name="TableHeader" extends="thead" />
 

@@ -5,6 +5,12 @@ import { PartyPopper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { fireConfetti } from "@/lib/confetti";
 import { cn } from "@/lib/utils";
@@ -26,7 +32,7 @@ type ColorPreset = {
 };
 
 const colorPresets: ColorPreset[] = [
-  { label: "Theme", swatch: "var(--primary)" },
+  { label: "Primary", swatch: "var(--primary)" },
   { label: "Red", swatch: "#ef4444", colors: ["#ef4444", "#fca5a5", "#dc2626"] },
   { label: "Orange", swatch: "#f97316", colors: ["#f97316", "#fed7aa", "#ea580c"] },
   { label: "Yellow", swatch: "#eab308", colors: ["#eab308", "#fef08a", "#ca8a04"] },
@@ -82,23 +88,29 @@ export default function ConfettiDemo() {
 
           <div className="space-y-1.5">
             <span className="text-xs font-medium text-fd-muted-foreground">Color</span>
-            <div className="flex h-9 items-center gap-1.5">
-              {colorPresets.map((preset, i) => (
-                <button
-                  key={preset.label}
-                  title={preset.label}
-                  onClick={() => setColorIndex(i)}
-                  className={cn(
-                    "h-6 w-6 rounded-full border-2 transition-all",
-                    colorIndex === i
-                      ? "border-foreground scale-110"
-                      : "border-transparent hover:border-muted-foreground/50"
-                  )}
-                  style={{ background: preset.swatch }}
-                  aria-label={preset.label}
-                />
-              ))}
-            </div>
+            <TooltipProvider delayDuration={150}>
+              <div className="flex h-9 items-center gap-1.5">
+                {colorPresets.map((preset, i) => (
+                  <Tooltip key={preset.label}>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        onClick={() => setColorIndex(i)}
+                        className={cn(
+                          "h-6 w-6 rounded-full border-2 transition-all",
+                          colorIndex === i
+                            ? "scale-110 border-foreground"
+                            : "border-transparent hover:border-muted-foreground/50"
+                        )}
+                        style={{ background: preset.swatch }}
+                        aria-label={preset.label}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>{preset.label}</TooltipContent>
+                  </Tooltip>
+                ))}
+              </div>
+            </TooltipProvider>
           </div>
 
           <div className="space-y-1.5">

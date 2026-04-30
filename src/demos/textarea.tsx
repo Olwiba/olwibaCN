@@ -8,30 +8,54 @@ import { Switch } from "@/components/ui/switch";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
 type Mode = "default" | "playful" | "smooth";
+type TextareaSize = "sm" | "default" | "lg";
 
 const modes: Mode[] = ["default", "playful", "smooth"];
+const sizes: TextareaSize[] = ["default", "sm", "lg"];
 
 export default function TextareaDemo() {
+  const [size, setSize] = useState<TextareaSize>("default");
   const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
   const usageProps = [
+    size !== "default" && `size="${size}"`,
     mode !== "default" && `mode="${mode}"`,
     disabled && "disabled",
   ].filter(Boolean).join(" ");
-  useUsageCode(`<Textarea${usageProps ? " " + usageProps : ""} placeholder="Type your message here." />`);
+  useUsageCode(`<div className="w-[300px]">
+  <Textarea${usageProps ? " " + usageProps : ""} placeholder="Type your message here." />
+</div>`);
 
   return (
     <>
-      <Textarea
-        placeholder="Type your message here."
-        className="w-[300px]"
-        mode={mode === "default" ? undefined : mode}
-        disabled={disabled}
-      />
+      <div className="w-[300px]">
+        <Textarea
+          placeholder="Type your message here."
+          size={size}
+          mode={mode === "default" ? undefined : mode}
+          disabled={disabled}
+        />
+      </div>
 
       <DemoControls>
         <div className="flex flex-wrap items-start gap-6">
+          <div className="space-y-1.5">
+            <span className="text-xs font-medium text-fd-muted-foreground">Size</span>
+            <div className="flex gap-1.5">
+              {sizes.map((value) => (
+                <Button
+                  key={value}
+                  variant={size === value ? "default" : "secondary"}
+                  size="sm"
+                  onClick={() => setSize(value)}
+                >
+                  {value}
+                </Button>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-1.5">
             <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
             <div className="flex gap-1.5">

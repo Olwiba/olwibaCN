@@ -4,15 +4,9 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const statusIndicatorDotVariants = cva(
-  "relative inline-flex shrink-0 rounded-full bg-current",
+  "relative inline-flex shrink-0 rounded-full bg-current text-primary",
   {
     variants: {
-      tone: {
-        default: "text-foreground",
-        success: "text-primary",
-        muted: "text-muted-foreground",
-        destructive: "text-destructive",
-      },
       size: {
         sm: "size-1.5",
         default: "size-2",
@@ -20,7 +14,6 @@ const statusIndicatorDotVariants = cva(
       },
     },
     defaultVariants: {
-      tone: "default",
       size: "default",
     },
   }
@@ -30,15 +23,17 @@ export interface StatusIndicatorProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof statusIndicatorDotVariants> {
   pulse?: boolean
+  disabled?: boolean
   dotClassName?: string
 }
 
 function StatusIndicator({
   className,
   dotClassName,
-  tone,
+  color,
   size,
   pulse = false,
+  disabled = false,
   children,
   ...props
 }: StatusIndicatorProps) {
@@ -50,13 +45,19 @@ function StatusIndicator({
   return (
     <span
       data-slot="status-indicator"
-      className={cn("inline-flex items-center gap-2", className)}
+      data-disabled={disabled ? true : undefined}
+      aria-disabled={disabled ? true : undefined}
+      className={cn(
+        "inline-flex items-center gap-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+        className
+      )}
       aria-hidden={hasAccessibleLabel ? undefined : true}
       {...props}
     >
       <span
         data-slot="status-indicator-dot"
-        className={cn(statusIndicatorDotVariants({ tone, size }), dotClassName)}
+        className={cn(statusIndicatorDotVariants({ size }), dotClassName)}
+        style={color ? { color } : undefined}
       >
         {pulse ? (
           <span
