@@ -29,7 +29,7 @@ const sidebarSections: SidebarSection[] = [
   { name: 'Themes', href: '/docs/themes' },
   { name: 'Modes', href: '/docs/modes' },
   { name: 'Icons', href: '/docs/icons' },
-  { name: 'Mechanics', href: '/docs/mechanics' },
+  { name: 'Mechanics', href: '/docs/mechanics', collapsedByDefault: true },
   { name: 'Components', href: '/docs/components', enchanted: true },
 ];
 

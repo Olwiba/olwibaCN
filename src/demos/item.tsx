@@ -54,7 +54,7 @@ function getItemUsageCode({
     </ItemMedia>
     <ItemContent>
       <ItemTitle>John Doe</ItemTitle>
-      <ItemDescription>Software Engineer at Acme Inc.</ItemDescription>
+      <ItemDescription>Software Engineer at Nexus Inc.</ItemDescription>
     </ItemContent>
     <ItemActions>
       <Button variant="ghost" size="icon" aria-label="More options">
@@ -65,7 +65,7 @@ function getItemUsageCode({
   <Item${itemAttrs}>
     <ItemMedia variant="image">
       <Avatar>
-        <AvatarImage src="https://github.com/vercel.png" />
+        <AvatarImage src="/favicon/favicon-512.png" />
         <AvatarFallback>JS</AvatarFallback>
       </Avatar>
     </ItemMedia>
@@ -109,7 +109,7 @@ export default function ItemDemo() {
           </ItemMedia>
           <ItemContent>
             <ItemTitle>John Doe</ItemTitle>
-            <ItemDescription>Software Engineer at Acme Inc.</ItemDescription>
+            <ItemDescription>Software Engineer at Nexus Inc.</ItemDescription>
           </ItemContent>
           <ItemActions>
             <Button variant="ghost" size="icon" aria-label="More options">
@@ -124,7 +124,7 @@ export default function ItemDemo() {
         >
           <ItemMedia variant="image">
             <Avatar>
-              <AvatarImage src="https://github.com/vercel.png" />
+              <AvatarImage src="/favicon/favicon-512.png" />
               <AvatarFallback>JS</AvatarFallback>
             </Avatar>
           </ItemMedia>

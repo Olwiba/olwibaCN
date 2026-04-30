@@ -27,6 +27,7 @@ export interface SidebarSection {
   href: string;
   icon?: React.ComponentType<{ className?: string }>;
   enchanted?: boolean;
+  collapsedByDefault?: boolean;
 }
 
 const TOP_LEVEL_SECTIONS: SidebarSection[] = [
@@ -172,7 +173,7 @@ export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, .
               <SidebarGroupContent>
                 <SidebarMenu className="gap-0.5">
 
-                  {navSections.map(({ name, href, icon: Icon, enchanted }) => {
+                  {navSections.map(({ name, href, icon: Icon, enchanted, collapsedByDefault }) => {
                     const inSection = href === '/docs' ? pathname === href : pathname.startsWith(href);
                     const isActive = pathname === href;
                     const folder = folderBySection.get(href);
@@ -185,7 +186,7 @@ export function DocsSidebar({ tree, sections, folderIcons, defaultOpenFolders, .
                         if (child.$id?.endsWith('index.mdx')) return false;
                         return true;
                       });
-                      const isExpanded = inSection || (defaultOpenFolders ?? false);
+                      const isExpanded = inSection || ((defaultOpenFolders ?? false) && !(collapsedByDefault ?? false));
 
                       return (
                         <SidebarFolder

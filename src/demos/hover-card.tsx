@@ -28,18 +28,18 @@ function getHoverCardUsageCode({
 
   return `<HoverCard>
   <HoverCardTrigger asChild>
-    <Button variant="link"${modeAttr}${disabledAttr}>@nextjs</Button>
+    <Button variant="link"${modeAttr}${disabledAttr}>@olwiba</Button>
   </HoverCardTrigger>
   <HoverCardContent className="w-80"${modeAttr}>
     <div className="flex justify-between space-x-4">
       <Avatar${modeAttr}>
-        <AvatarImage src="https://github.com/vercel.png" />
-        <AvatarFallback>VC</AvatarFallback>
+        <AvatarImage src="/favicon/favicon-512.png" />
+        <AvatarFallback>OB</AvatarFallback>
       </Avatar>
       <div className="space-y-1">
-        <h4 className="text-sm font-semibold">@nextjs</h4>
+        <h4 className="text-sm font-semibold">@olwiba</h4>
         <p className="text-sm">
-          The React Framework - created and maintained by @vercel.
+          Crafting interfaces and developer tools. Building in the open.
         </p>
         <div className="flex items-center pt-2">
           <CalendarDays className="mr-2 h-4 w-4 opacity-70" />
@@ -65,18 +65,18 @@ export default function HoverCardDemo() {
     <>
       <HoverCard>
         <HoverCardTrigger asChild>
-          <Button variant="link" mode={modeProp} disabled={disabled}>@nextjs</Button>
+          <Button variant="link" mode={modeProp} disabled={disabled}>@olwiba</Button>
         </HoverCardTrigger>
         <HoverCardContent className="w-80" mode={modeProp}>
           <div className="flex justify-between space-x-4">
             <Avatar mode={modeProp}>
-              <AvatarImage src="https://github.com/vercel.png" />
-              <AvatarFallback>VC</AvatarFallback>
+              <AvatarImage src="/favicon/favicon-512.png" />
+              <AvatarFallback>OB</AvatarFallback>
             </Avatar>
             <div className="space-y-1">
-              <h4 className="text-sm font-semibold">@nextjs</h4>
+              <h4 className="text-sm font-semibold">@olwiba</h4>
               <p className="text-sm">
-                The React Framework - created and maintained by @vercel.
+                Crafting interfaces and developer tools. Building in the open.
               </p>
               <div className="flex items-center pt-2">
                 <CalendarDays className="mr-2 h-4 w-4 opacity-70" />
