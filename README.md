@@ -1,5 +1,7 @@
 # @olwiba/cn
 
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
 > Shared UI primitives, styling foundations, and shadcn registry components for the Olwiba ecosystem.
 
 ## What This Is
@@ -203,6 +205,10 @@ The `publish-package` GitHub Actions workflow runs automatically on `v*` tags an
 If the `DISCORD_WEBHOOK_URL` GitHub Actions secret is configured, the publish workflow also sends a Discord notification on both success and failure.
 
 When a shared docs behavior change starts here as beta docs work, validate it in `olwibaCN` first, then sync the released docs-facing pieces into `olwibaDOCS`.
+
+## Contributing
+
+Bug reports and pull requests welcome. Open an issue first for anything beyond a small fix.
 
 ## Related
 
