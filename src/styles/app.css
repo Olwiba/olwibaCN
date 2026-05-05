@@ -158,6 +158,13 @@
   }
   html {
     @apply overscroll-y-none scroll-smooth;
+    min-width: 360px;
+  }
+
+  @media (max-width: 360px) {
+    html {
+      zoom: calc(100vw / 360);
+    }
   }
   body {
     @apply bg-background text-foreground;

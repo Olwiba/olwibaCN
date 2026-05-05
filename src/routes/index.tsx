@@ -20,7 +20,7 @@ function Home() {
         <div className="absolute inset-y-0 right-0 w-64 bg-gradient-to-l from-background" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center">
+      <div className="relative z-10 flex flex-col items-center w-full">
         <AsciiText text="olwibaCN" accent="CN" accentColor="var(--primary)" />
         <p className="text-muted-foreground text-lg mb-8 max-w-md">
           Custom shadcn/ui component registry. Copy and paste components into your apps.
