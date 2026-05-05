@@ -11,6 +11,15 @@ function Home() {
   return (
     <div className="relative flex flex-col flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] justify-center items-center px-4 py-16 text-center">
       <IsometricCanvas />
+
+      {/* Vignette fade — z-[1]: above canvas, below text */}
+      <div className="absolute inset-0 z-[1] pointer-events-none">
+        <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-background" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background" />
+        <div className="absolute inset-y-0 left-0 w-64 bg-gradient-to-r from-background" />
+        <div className="absolute inset-y-0 right-0 w-64 bg-gradient-to-l from-background" />
+      </div>
+
       <div className="relative z-10 flex flex-col items-center">
         <AsciiText text="olwibaCN" accent="CN" accentColor="var(--primary)" />
         <p className="text-muted-foreground text-lg mb-8 max-w-md">

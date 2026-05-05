@@ -225,12 +225,12 @@ const SNIPPETS: React.ReactNode[] = [
   <SnippetButtonVariants key="button-variants" />,
 ];
 
-const COLS = 7;
-const ROWS = 10;
+const COLS = 13;
+const ROWS = 22;
 
 function buildGrid(items: React.ReactNode[], rows: number, cols: number): React.ReactNode[][] {
   return Array.from({ length: rows }, (_, r) =>
-    Array.from({ length: cols }, (_, c) => items[(r * cols + c) % items.length])
+    Array.from({ length: cols }, (_, c) => items[(r * 7 + c) % items.length])
   );
 }
 
@@ -242,12 +242,6 @@ export function IsometricCanvas() {
   return (
     <div
       className="absolute inset-0 overflow-hidden pointer-events-none select-none"
-      style={{
-        maskImage:
-          'radial-gradient(ellipse 80% 70% at 50% 50%, black 15%, transparent 75%)',
-        WebkitMaskImage:
-          'radial-gradient(ellipse 80% 70% at 50% 50%, black 15%, transparent 75%)',
-      }}
       aria-hidden="true"
     >
       <div
@@ -257,14 +251,14 @@ export function IsometricCanvas() {
         <div
           className="transform-gpu"
           style={{
-            transform: 'scale(1.6) rotateX(55deg) rotateZ(-45deg)',
+            transform: 'translateX(180px) scale(1.6) rotateX(55deg) rotateZ(-45deg)',
             transformOrigin: 'center center',
             transformStyle: 'preserve-3d',
           }}
         >
-          {/* Doubled rows for seamless loop */}
+          {/* Tripled rows — animate by 1/3, always viewing middle third */}
           <div className="animate-iso-scroll will-change-transform">
-            {[...baseRows, ...baseRows].map((row, rowIdx) => (
+            {[...baseRows, ...baseRows, ...baseRows].map((row, rowIdx) => (
               <div key={rowIdx} className="flex gap-3 mb-3">
                 {row.map((snippet, colIdx) => (
                   <div
@@ -279,6 +273,7 @@ export function IsometricCanvas() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }
