@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/olwibaCN.gif" alt="olwibaCN" style="width: 100%;" />
+</p>
+
 # @olwiba/cn
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
@@ -87,72 +91,7 @@ The registry mirrors the primitive layer and also exposes copy-own helpers such 
 
 The published package export surface is built from [`src/components/ui/index.ts`](./src/components/ui/index.ts).
 
-### Shared primitives
-
-Notable exported primitives include:
-- `Accordion`
-- `Alert`
-- `AlertDialog`
-- `AspectRatio`
-- `Avatar`
-- `Badge`
-- `Breadcrumb`
-- `Button`
-- `ButtonGroup`
-- `Calendar`
-- `Card`
-- `Carousel`
-- `Chart`
-- `Checkbox`
-- `Collapsible`
-- `Command`
-- `ContextMenu`
-- `Dialog`
-- `Drawer`
-- `DropdownMenu`
-- `Empty`
-- `Field`
-- `Form`
-- `HoverCard`
-- `Input`
-- `InputGroup`
-- `InputOTP`
-- `Item`
-- `Kbd`
-- `Label`
-- `Menubar`
-- `NavigationMenu`
-- `Pagination`
-- `Popover`
-- `Progress`
-- `RadioGroup`
-- `ResizablePanelGroup`
-- `ScrollArea`
-- `Select`
-- `Separator`
-- `Sheet`
-- `Sidebar`
-- `Skeleton`
-- `Slider`
-- `Spinner`
-- `Switch`
-- `Table`
-- `Tabs`
-- `Textarea`
-- `Toaster`
-- `Toggle`
-- `ToggleGroup`
-- `Tooltip`
-
-### Utilities and helpers
-
-- `cn`
-- `UIVariantProvider`
-- `useUIVariant`
-- `useIsMobile`
-- `fireConfetti`
-- `ThemeScript`
-- `AsciiText`
+It includes shared primitives, variant helpers, hooks, utilities, effects, theme helpers, and standalone components such as `AsciiText`.
 
 ## Docs Shell Source Of Truth
 
