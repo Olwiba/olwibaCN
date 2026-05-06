@@ -33,7 +33,8 @@
     "start": "bun run server.ts",
     "registry:build": "npx shadcn@latest build",
     "tsc": "tsc",
-    "types:check": "fumadocs-mdx && tsc --noEmit"
+    "types:check": "fumadocs-mdx && tsc --noEmit",
+    "iso:generate": "bun scripts/generate-iso-previews.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -97,7 +98,8 @@
     "tailwindcss": ">=4.0.0"
   },
   "devDependencies": {
-    "@olwiba/dx": "0.0.2",
+    "@olwiba/dx": "0.0.3",
+    "playwright": "^1.40.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/canvas-confetti": "^1.9.0",
     "@types/mdx": "^2.0.13",
