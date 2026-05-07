@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="./public/olwibaCN.gif" alt="olwibaCN" style="width: 100%;" />
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="./public/olwibaCN--light.gif" />
+    <source media="(prefers-color-scheme: dark)" srcset="./public/olwibaCN.gif" />
+    <img src="./public/olwibaCN.gif" alt="olwibaCN" style="width: 100%;" />
+  </picture>
 </p>
 
 # @olwiba/cn
