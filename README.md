@@ -86,6 +86,16 @@ shadcn add @olwibacn/button
 **Components** The things you can see and interact with
 **Mechanics** The behaviours that bring your project to life
 
+## Tech Stack
+
+- [React](https://react.dev) 19
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS](https://tailwindcss.com) v4
+- [Radix UI](https://www.radix-ui.com)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Lucide React](https://lucide.dev)
+- [CVA](https://cva.style)
+
 ## Ecosystem
 
 - _Coming soon!_
