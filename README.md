@@ -6,11 +6,24 @@
   </picture>
 </p>
 
-# @olwiba/cn
+<h1 align="center">@olwiba/cn</h1>
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+<p align="center">
+  <strong>Shared UI primitives, styling foundations, and shadcn registry components for the Olwiba ecosystem.</strong>
+</p>
 
-> Shared UI primitives, styling foundations, and shadcn registry components for the Olwiba ecosystem.
+<p align="center">
+  <a href="https://cn.olwiba.com">Docs</a> ·
+  <a href="https://github.com/Olwiba/olwibaCN/issues/new?template=bug_report.md">Report a bug</a> ·
+  <a href="https://github.com/Olwiba/olwibaCN/issues/new?template=feature_request.md">Feature request</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/sponsors/Olwiba"><img src="https://img.shields.io/static/v1?label=Sponsor&message=❤&logo=GitHub&color=%23fe8e86" alt="Sponsor" /></a>
+  <a href="https://buymeacoffee.com/olwiba"><img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me A Coffee" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Olwiba/olwibaCN?label=license&logo=github" alt="License" /></a>
+  <a href="https://github.com/Olwiba/olwibaCN/issues"><img src="https://img.shields.io/github/issues/Olwiba/olwibaCN" alt="Issues" /></a>
+</p>
 
 ## What This Is
 
