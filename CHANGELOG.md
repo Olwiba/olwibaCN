@@ -1,5 +1,29 @@
 # Changelog
 
+
+## 0.1.15
+
+### Added
+
+- Isometric component showcase canvas on homepage with infinite plane, vignette, and varied grid
+- `Chart`: `disabled` prop
+- `Carousel`: `mode`, `size`, and `disabled` props; fixed playful nav button wrapper
+- `Calendar`: `size`, `uiMode`, and `disabled` props with smooth and playful style variants
+- `Breadcrumb`: `size` variant
+- `Card`: propagates `mode` to child components via `UIVariantProvider`
+- Mechanics category, Icons page, and ErrorPage in component docs
+
+### Changed
+
+- Package now published to [npmjs.com](https://npmjs.com) (previously GitHub Packages)
+- Updated ecosystem package dependencies
+
+### Fixed
+
+- Responsive ASCII logo on homepage and mobile min-width scaling
+- TOC active item scoped to first heading at top of viewport
+- TOC scroll bleeding into page content; removed misplaced entry from mechanics sidebar
+
 ## 0.1.14
 
 ### Changed
