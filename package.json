@@ -86,7 +86,7 @@
     "tailwindcss": ">=4.0.0"
   },
   "devDependencies": {
-    "@olwiba/dx": "0.0.8",
+    "@olwiba/dx": "0.0.10",
     "@tailwindcss/postcss": "^4.1.18",
     "@tanstack/react-router": "^1.151.6",
     "@tanstack/react-router-devtools": "^1.151.6",
@@ -117,7 +117,9 @@
     "url": "https://github.com/Olwiba/olwibaCN"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "provenance": true
   },
   "author": "Olwiba",
   "license": "MIT",
