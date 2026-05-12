@@ -12,8 +12,7 @@ export function SiteHeader() {
     <DocsHeader
       logo={<>olwiba<span className="text-primary">CN</span></>}
       navItems={navItems}
-      githubUrl="https://github.com/olwiba/olwibaCN"
-      githubBadge="soon"
+      githubUrl="https://github.com/Olwiba/olwibaCN"
     />
   );
 }

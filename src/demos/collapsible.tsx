@@ -23,10 +23,10 @@ export default function CollapsibleDemo() {
     `      </Button>\n` +
     `    </CollapsibleTrigger>\n` +
     `  </div>\n` +
-    `  <div className="rounded-md border px-4 py-3 font-mono text-sm">nexus-core</div>\n` +
+    `  <div className="rounded-md border px-4 py-3 font-mono text-sm">design-system</div>\n` +
     `  <CollapsibleContent>\n` +
-    `    <div className="rounded-md border px-4 py-3 font-mono text-sm">nexus-dx</div>\n` +
-    `    <div className="rounded-md border px-4 py-3 font-mono text-sm">nexus-ui</div>\n` +
+    `    <div className="rounded-md border px-4 py-3 font-mono text-sm">marketing-site</div>\n` +
+    `    <div className="rounded-md border px-4 py-3 font-mono text-sm">admin-console</div>\n` +
     `  </CollapsibleContent>\n` +
     `</Collapsible>`
   );
@@ -49,14 +49,14 @@ export default function CollapsibleDemo() {
           </CollapsibleTrigger>
         </div>
         <div className="rounded-md border px-4 py-3 font-mono text-sm">
-          nexus-core
+          design-system
         </div>
         <CollapsibleContent className="space-y-2">
           <div className="rounded-md border px-4 py-3 font-mono text-sm">
-            nexus-dx
+            marketing-site
           </div>
           <div className="rounded-md border px-4 py-3 font-mono text-sm">
-            nexus-ui
+            admin-console
           </div>
         </CollapsibleContent>
       </Collapsible>

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://cn.olwiba.com
+    about: Browse the component reference and usage examples.
+  - name: Discussions
+    url: https://github.com/Olwiba/olwibaCN/discussions
+    about: Ask questions, share ideas, or get help with usage.

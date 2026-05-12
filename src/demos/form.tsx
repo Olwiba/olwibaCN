@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { useUsageCode } from "@/docs/components/ComponentPreview";
 
 const formSchema = z.object({
@@ -53,7 +54,7 @@ export default function FormDemo() {
   );
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    toast.success(`Submitted as ${values.username}`);
   }
 
   return (

@@ -12,6 +12,10 @@ bunfig.toml
 .tanstack
 .source
 
+# Local agent tooling
+.claude/
+.amp/
+
 # Build output
 dist/
 /build/

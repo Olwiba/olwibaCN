@@ -1,7 +1,14 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { AsciiText } from '@/components/AsciiText';
-import { IsometricCanvas } from '@/components/IsometricCanvas';
+import { IsometricPlane, type IsometricImage } from '@/components/IsometricPlane';
+import rawManifest from '@/iso-previews-manifest.json';
+
+type ManifestEntry = { file: string; width: number; height: number; theme: string };
+
+const isoImages: IsometricImage[] = (rawManifest as ManifestEntry[])
+  .filter((e) => e.theme === 'dark')
+  .map((e) => ({ src: `/iso-previews/${e.file}`, width: e.width, height: e.height }));
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -10,9 +17,8 @@ export const Route = createFileRoute('/')({
 function Home() {
   return (
     <div className="relative flex flex-col flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] justify-center items-center px-4 py-16 text-center">
-      <IsometricCanvas />
+      {isoImages.length > 0 && <IsometricPlane images={isoImages} />}
 
-      {/* Vignette fade — z-[1]: above canvas, below text */}
       <div className="absolute inset-0 z-[1] pointer-events-none">
         <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-background" />
         <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background" />

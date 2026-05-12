@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.14
+
+### Changed
+
+- Republished `0.1.13` contents under a new version to recover from a failed publish workflow run. No source changes.
+
+## 0.1.13
+
+### Added
+
+- `Enchanted` effect component for animated highlight states.
+- Dedicated `animations.css` stylesheet, extracted out of `app.css`.
+- Dev banner support in the `tsup` watcher (via `@olwiba/dx`).
+
+### Changed
+
+- Migrated dev banner rendering to `@olwiba/dx`.
+- Docs sidebar collapsible header split into a chevron toggle and a navigable category name; sidebar width transitions are smoother.
+
+### Fixed
+
+- Docs `CollapsibleTrigger` decoupled from `Link` to prevent dual navigation when toggling categories.
+
 ## 0.1.12
 
 ### Added
