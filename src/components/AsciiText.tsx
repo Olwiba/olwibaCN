@@ -45,6 +45,46 @@ export function AsciiText({
     active: false,
   });
   const wavesRef = useRef<{ cx: number; cy: number; t: number }[]>([]);
+  // Cached resolved colors. Recomputed only when inputs or theme change,
+  // never inside the requestAnimationFrame loop. getComputedStyle on every
+  // frame triggers a full style recalc and tanks fps when other compositor
+  // work (e.g. the isometric plane) is on screen.
+  const colorsRef = useRef<{ base: string; accent: string }>({ base: '#a3a3a3', accent: '#a3a3a3' });
+
+  const resolveColors = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const root = document.documentElement;
+    const rootStyle = getComputedStyle(root);
+    const style = getComputedStyle(canvas);
+    const baseColor = color || style.color || '#a3a3a3';
+    let highlightColor = baseColor;
+    if (accentColor) {
+      const varMatch = accentColor.match(/^var\(--([^)]+)\)$/);
+      if (varMatch) {
+        highlightColor = rootStyle.getPropertyValue(`--${varMatch[1]}`).trim() || baseColor;
+      } else {
+        highlightColor = accentColor;
+      }
+    }
+    colorsRef.current = { base: baseColor, accent: highlightColor };
+  }, [color, accentColor]);
+
+  // Resolve colors when inputs change.
+  useEffect(() => {
+    resolveColors();
+  }, [resolveColors]);
+
+  // Re-resolve when the theme switches (dark/light class flips on <html>).
+  useEffect(() => {
+    if (typeof MutationObserver === 'undefined') return;
+    const observer = new MutationObserver(() => resolveColors());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme', 'style'],
+    });
+    return () => observer.disconnect();
+  }, [resolveColors]);
 
   const render = useCallback(() => {
     const canvas = canvasRef.current;
@@ -55,20 +95,7 @@ export function AsciiText({
     const time = timeRef.current;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const root = document.documentElement;
-    const rootStyle = getComputedStyle(root);
-    const style = getComputedStyle(canvas);
-    const baseColor = color || style.color || '#a3a3a3';
-    // Resolve CSS variables for canvas (which can't use var() directly)
-    let highlightColor = baseColor;
-    if (accentColor) {
-      const varMatch = accentColor.match(/^var\(--([^)]+)\)$/);
-      if (varMatch) {
-        highlightColor = rootStyle.getPropertyValue(`--${varMatch[1]}`).trim() || baseColor;
-      } else {
-        highlightColor = accentColor;
-      }
-    }
+    const { base: baseColor, accent: highlightColor } = colorsRef.current;
 
     renderAsciiFrameToContext(ctx as unknown as AsciiFrameContext, { cells, cols, rows }, {
       accentColumns: accentCols,
@@ -86,7 +113,7 @@ export function AsciiText({
 
     // Prune old waves
     wavesRef.current = wavesRef.current.filter((w) => time - w.t < 3);
-  }, [cells, accentCols, color, accentColor]);
+  }, [cells, accentCols, cols, rows]);
 
   useEffect(() => {
     hasPaintedRef.current = false;
