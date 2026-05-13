@@ -27,15 +27,19 @@
 
 ## What This Is
 
-`@olwiba/cn` is a custom shadcn component registry. It contains beautifully designed, copy-paste ready primitive components built on React 19 and Tailwind CSS v4.
+`@olwiba/cn` is a custom shadcn component registry.  
+It contains beautifully designed, copy-paste ready primitive components built on React 19 and Tailwind CSS v4.
 
 Primitives are the individual lego pieces for building on the web.
 
 If you're interested in composite components, these are prebuilt, opinionated combinations of primitives that solve specific UI problems. They're coming soon in `@olwiba/ui`.
 
-The project introduces the idea of a `mode` prop, this lets you dial in the visual personality without touching variants or structure. Pair that with seven built-in color themes and you get a design system that can conform to your project.
+The project introduces the idea of a `mode` prop, this lets you dial in the visual personality without touching variants or structure.  
+Pair that with seven built-in color themes and you get a design system that can conform to your project.
 
-It ships two ways — as an installable package or as a shadcn registry you can copy directly into your project.
+It ships two ways: 
+1. As an installable package
+2. As a shadcn registry you can copy directly into your project
 
 ## Installation
 
