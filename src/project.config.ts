@@ -22,12 +22,12 @@ export const projectConfig = {
   id: "olwibaCN",
   label: "olwibaCN",
   brandAccent: {
-    hex: "#10b981",
-    lightOklch: "oklch(0.596 0.145 163.225)",
-    darkOklch: "oklch(0.765 0.177 163.223)",
+    hex: "#06b6d4",
+    lightOklch: "oklch(0.609 0.126 221.723)",
+    darkOklch: "oklch(0.789 0.154 211.530)",
   },
   theme: {
-    defaultName: "emerald",
+    defaultName: "cyan",
   },
   banner: {
     segments: [
