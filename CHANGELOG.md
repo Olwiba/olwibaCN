@@ -1,6 +1,18 @@
 # Changelog
 
 
+
+## 0.1.17
+
+### Changed
+
+- `IsometricPlane`: layered compositor optimisations — reduced per-frame work
+- `AsciiText`: resolved colors now cached, dropping per-frame style recalculation
+
+### Fixed
+
+- `@keyframes` hoisted out of `@theme` inline block so production builds correctly emit animation definitions
+
 ## 0.1.15
 
 ### Added

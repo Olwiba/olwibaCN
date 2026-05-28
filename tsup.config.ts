@@ -3,38 +3,54 @@ import { resolve } from 'path';
 import { createTsupBannerHook } from '@olwiba/dx';
 import { projectBanner } from './src/project.config';
 
-export default defineConfig({
-  entry: ['src/components/ui/index.ts'],
-  format: ['esm'],
+const shared = {
+  format: ['esm'] as const,
   dts: true,
-  splitting: false,
   sourcemap: true,
-  clean: true,
-  external: ['react', 'react-dom', 'tailwindcss'],
   treeshake: true,
   minify: false,
-  esbuildOptions(options) {
+  esbuildOptions(options: { alias?: Record<string, string>; loader?: Record<string, string> }) {
     options.alias = {
       '@': resolve(__dirname, 'src'),
     };
-    // Bundle .flf font files as raw text (used by AsciiText)
-    // The ?raw suffix is a Vite convention; esbuild just needs the text loader.
     options.loader = { ...options.loader, '.flf': 'text' };
   },
   esbuildPlugins: [
     {
       name: 'strip-raw-query',
-      setup(build) {
-        // Resolve `?raw` query imports (Vite convention) to the bare file path
+      setup(build: {
+        onResolve: (
+          filter: RegExp,
+          callback: (args: { path: string }) => { path: string },
+        ) => void;
+      }) {
         build.onResolve({ filter: /\?raw$/ }, (args) => ({
           path: resolve(__dirname, 'src', args.path.replace(/\?raw$/, '').replace(/^@\//, '')),
         }));
       },
     },
   ],
-  // Preserve "use client" directives
-  banner: {
-    js: '"use client";',
+};
+
+export default defineConfig([
+  {
+    ...shared,
+    entry: ['src/components/ui/index.ts'],
+    outDir: 'dist',
+    clean: true,
+    external: ['react', 'react-dom', 'tailwindcss'],
+    splitting: false,
+    banner: {
+      js: '"use client";',
+    },
+    onSuccess: createTsupBannerHook(projectBanner),
   },
-  onSuccess: createTsupBannerHook(projectBanner),
-});
+  {
+    ...shared,
+    entry: ['src/email/index.ts'],
+    outDir: 'dist/email',
+    clean: false,
+    external: ['react', 'react-dom', '@react-email/components'],
+    onSuccess: createTsupBannerHook(projectBanner),
+  },
+]);
