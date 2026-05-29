@@ -3,518 +3,518 @@
     "name": "accordion",
     "theme": "light",
     "file": "accordion-light.png",
-    "width": 748,
+    "width": 773,
     "height": 267
   },
   {
     "name": "accordion",
     "theme": "dark",
     "file": "accordion-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 267
   },
   {
     "name": "alert",
     "theme": "light",
     "file": "alert-light.png",
-    "width": 748,
+    "width": 773,
     "height": 550
   },
   {
     "name": "alert",
     "theme": "dark",
     "file": "alert-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 550
   },
   {
     "name": "aspect-ratio",
     "theme": "light",
     "file": "aspect-ratio-light.png",
-    "width": 748,
+    "width": 773,
     "height": 265
   },
   {
     "name": "aspect-ratio",
     "theme": "dark",
     "file": "aspect-ratio-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 265
   },
   {
     "name": "avatar",
     "theme": "light",
     "file": "avatar-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "avatar",
     "theme": "dark",
     "file": "avatar-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "badge",
     "theme": "light",
     "file": "badge-light.png",
-    "width": 748,
+    "width": 773,
     "height": 118
   },
   {
     "name": "badge",
     "theme": "dark",
     "file": "badge-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 118
   },
   {
     "name": "breadcrumb",
     "theme": "light",
     "file": "breadcrumb-light.png",
-    "width": 748,
+    "width": 773,
     "height": 116
   },
   {
     "name": "breadcrumb",
     "theme": "dark",
     "file": "breadcrumb-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 116
   },
   {
     "name": "button",
     "theme": "light",
     "file": "button-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "button",
     "theme": "dark",
     "file": "button-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "button-group",
     "theme": "light",
     "file": "button-group-light.png",
-    "width": 748,
+    "width": 773,
     "height": 272
   },
   {
     "name": "button-group",
     "theme": "dark",
     "file": "button-group-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 272
   },
   {
     "name": "calendar",
     "theme": "light",
     "file": "calendar-light.png",
-    "width": 748,
+    "width": 773,
     "height": 425
   },
   {
     "name": "calendar",
     "theme": "dark",
     "file": "calendar-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 425
   },
   {
     "name": "card",
     "theme": "light",
     "file": "card-light.png",
-    "width": 748,
+    "width": 773,
     "height": 324
   },
   {
     "name": "card",
     "theme": "dark",
     "file": "card-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 324
   },
   {
     "name": "carousel",
     "theme": "light",
     "file": "carousel-light.png",
-    "width": 748,
+    "width": 773,
     "height": 416
   },
   {
     "name": "carousel",
     "theme": "dark",
     "file": "carousel-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 416
   },
   {
     "name": "chart",
     "theme": "light",
     "file": "chart-light.png",
-    "width": 748,
-    "height": 463
+    "width": 773,
+    "height": 477
   },
   {
     "name": "chart",
     "theme": "dark",
     "file": "chart-dark.png",
-    "width": 748,
-    "height": 463
+    "width": 773,
+    "height": 477
   },
   {
     "name": "checkbox",
     "theme": "light",
     "file": "checkbox-light.png",
-    "width": 748,
+    "width": 773,
     "height": 116
   },
   {
     "name": "checkbox",
     "theme": "dark",
     "file": "checkbox-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 116
   },
   {
     "name": "empty",
     "theme": "light",
     "file": "empty-light.png",
-    "width": 748,
+    "width": 773,
     "height": 373
   },
   {
     "name": "empty",
     "theme": "dark",
     "file": "empty-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 373
   },
   {
     "name": "field",
     "theme": "light",
     "file": "field-light.png",
-    "width": 748,
+    "width": 773,
     "height": 192
   },
   {
     "name": "field",
     "theme": "dark",
     "file": "field-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 192
   },
   {
     "name": "hotkey",
     "theme": "light",
     "file": "hotkey-light.png",
-    "width": 748,
+    "width": 773,
     "height": 134
   },
   {
     "name": "hotkey",
     "theme": "dark",
     "file": "hotkey-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 134
   },
   {
     "name": "input",
     "theme": "light",
     "file": "input-light.png",
-    "width": 748,
+    "width": 773,
     "height": 192
   },
   {
     "name": "input",
     "theme": "dark",
     "file": "input-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 192
   },
   {
     "name": "input-group",
     "theme": "light",
     "file": "input-group-light.png",
-    "width": 748,
+    "width": 773,
     "height": 184
   },
   {
     "name": "input-group",
     "theme": "dark",
     "file": "input-group-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 184
   },
   {
     "name": "input-otp",
     "theme": "light",
     "file": "input-otp-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "input-otp",
     "theme": "dark",
     "file": "input-otp-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "item",
     "theme": "light",
     "file": "item-light.png",
-    "width": 748,
+    "width": 773,
     "height": 255
   },
   {
     "name": "item",
     "theme": "dark",
     "file": "item-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 255
   },
   {
     "name": "kbd",
     "theme": "light",
     "file": "kbd-light.png",
-    "width": 748,
+    "width": 773,
     "height": 188
   },
   {
     "name": "kbd",
     "theme": "dark",
     "file": "kbd-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 188
   },
   {
     "name": "label",
     "theme": "light",
     "file": "label-light.png",
-    "width": 748,
+    "width": 773,
     "height": 162
   },
   {
     "name": "label",
     "theme": "dark",
     "file": "label-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 162
   },
   {
     "name": "pagination",
     "theme": "light",
     "file": "pagination-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "pagination",
     "theme": "dark",
     "file": "pagination-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "progress",
     "theme": "light",
     "file": "progress-light.png",
-    "width": 748,
+    "width": 773,
     "height": 112
   },
   {
     "name": "progress",
     "theme": "dark",
     "file": "progress-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 112
   },
   {
     "name": "radio-group",
     "theme": "light",
     "file": "radio-group-light.png",
-    "width": 748,
+    "width": 773,
     "height": 172
   },
   {
     "name": "radio-group",
     "theme": "dark",
     "file": "radio-group-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 172
   },
   {
     "name": "select",
     "theme": "light",
     "file": "select-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "select",
     "theme": "dark",
     "file": "select-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "separator",
     "theme": "light",
     "file": "separator-light.png",
-    "width": 748,
+    "width": 773,
     "height": 187
   },
   {
     "name": "separator",
     "theme": "dark",
     "file": "separator-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 187
   },
   {
     "name": "skeleton",
     "theme": "light",
     "file": "skeleton-light.png",
-    "width": 748,
+    "width": 773,
     "height": 144
   },
   {
     "name": "skeleton",
     "theme": "dark",
     "file": "skeleton-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 144
   },
   {
     "name": "slider",
     "theme": "light",
     "file": "slider-light.png",
-    "width": 748,
+    "width": 773,
     "height": 104
   },
   {
     "name": "slider",
     "theme": "dark",
     "file": "slider-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 104
   },
   {
     "name": "spinner",
     "theme": "light",
     "file": "spinner-light.png",
-    "width": 748,
+    "width": 773,
     "height": 112
   },
   {
     "name": "spinner",
     "theme": "dark",
     "file": "spinner-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 112
   },
   {
     "name": "status-indicator",
     "theme": "light",
     "file": "status-indicator-light.png",
-    "width": 748,
+    "width": 773,
     "height": 116
   },
   {
     "name": "status-indicator",
     "theme": "dark",
     "file": "status-indicator-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 116
   },
   {
     "name": "switch",
     "theme": "light",
     "file": "switch-light.png",
-    "width": 748,
+    "width": 773,
     "height": 120
   },
   {
     "name": "switch",
     "theme": "dark",
     "file": "switch-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 120
   },
   {
     "name": "table",
     "theme": "light",
     "file": "table-light.png",
-    "width": 748,
+    "width": 773,
     "height": 339
   },
   {
     "name": "table",
     "theme": "dark",
     "file": "table-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 339
   },
   {
     "name": "tabs",
     "theme": "light",
     "file": "tabs-light.png",
-    "width": 748,
+    "width": 773,
     "height": 198
   },
   {
     "name": "tabs",
     "theme": "dark",
     "file": "tabs-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 198
   },
   {
     "name": "textarea",
     "theme": "light",
     "file": "textarea-light.png",
-    "width": 748,
+    "width": 773,
     "height": 176
   },
   {
     "name": "textarea",
     "theme": "dark",
     "file": "textarea-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 176
   },
   {
     "name": "toggle",
     "theme": "light",
     "file": "toggle-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "toggle",
     "theme": "dark",
     "file": "toggle-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "toggle-group",
     "theme": "light",
     "file": "toggle-group-light.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   },
   {
     "name": "toggle-group",
     "theme": "dark",
     "file": "toggle-group-dark.png",
-    "width": 748,
+    "width": 773,
     "height": 136
   }
 ]

@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { generatePreviews } from '@olwiba/dx/generate-previews';
+// Nexus dev: use sibling olwibaDX source so theme fixes apply before @olwiba/dx publish.
+import { generatePreviews } from '../../olwibaDX/src/generate-previews.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

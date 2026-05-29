@@ -1,5 +1,8 @@
+import { projectConfig } from "@/project.config";
+
 export const Theme = {
   Default: "default",
+  Cyan: "cyan",
   Emerald: "emerald",
   Blue: "blue",
   Purple: "purple",
@@ -12,6 +15,11 @@ export type Theme = (typeof Theme)[keyof typeof Theme];
 
 export const themes: { name: Theme; label: string; color: string }[] = [
   { name: Theme.Default, label: "Default", color: "oklch(0.145 0 0)" },
+  {
+    name: Theme.Cyan,
+    label: "Cyan",
+    color: projectConfig.brandAccent.lightOklch,
+  },
   { name: Theme.Emerald, label: "Emerald", color: "oklch(0.596 0.145 163.225)" },
   { name: Theme.Blue, label: "Blue", color: "oklch(0.546 0.245 262.881)" },
   { name: Theme.Purple, label: "Purple", color: "oklch(0.558 0.288 302.321)" },
@@ -31,6 +39,18 @@ const themeStyles: Record<Theme, string> = {
       --primary: oklch(0.922 0 0);
       --primary-foreground: oklch(0.205 0 0);
       --ring: oklch(0.556 0 0);
+    }
+  `,
+  [Theme.Cyan]: `
+    :root {
+      --primary: var(--project-brand-accent);
+      --primary-foreground: oklch(0.985 0 0);
+      --ring: var(--project-brand-accent);
+    }
+    .dark {
+      --primary: var(--project-brand-accent-dark);
+      --primary-foreground: oklch(0.145 0 0);
+      --ring: var(--project-brand-accent-dark);
     }
   `,
   [Theme.Emerald]: `
@@ -155,6 +175,19 @@ const themeCode: Record<Theme, string> = {
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+}`,
+
+  [Theme.Cyan]: `:root {
+  --radius: 0.25rem;
+  --primary: ${projectConfig.brandAccent.lightOklch};
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: ${projectConfig.brandAccent.lightOklch};
+}
+
+.dark {
+  --primary: ${projectConfig.brandAccent.darkOklch};
+  --primary-foreground: oklch(0.145 0 0);
+  --ring: ${projectConfig.brandAccent.darkOklch};
 }`,
 
   [Theme.Emerald]: `:root {
@@ -446,10 +479,12 @@ const themeCode: Record<Theme, string> = {
 }`,
 };
 
+const PROJECT_DEFAULT_THEME = projectConfig.theme.defaultName as Theme;
+
 export const getThemeStyles = (theme: Theme): string => {
-  return themeStyles[theme] || themeStyles[Theme.Emerald];
+  return themeStyles[theme] ?? themeStyles[PROJECT_DEFAULT_THEME] ?? "";
 };
 
 export const getThemeCode = (theme: Theme): string => {
-  return themeCode[theme] || themeCode[Theme.Emerald];
+  return themeCode[theme] ?? themeCode[PROJECT_DEFAULT_THEME] ?? "";
 };

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Link } from '@tanstack/react-router';
 import { ModeSwitcher } from '@/components/ModeSwitcher';
+import { cn } from '@/lib/utils';
 import { SearchButton } from './SearchButton';
 
 export interface DocsHeaderProps {
@@ -47,7 +48,10 @@ export function DocsHeader({ logo, navItems, githubUrl, githubBadge, rightSlot }
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-1.5 py-1 text-sm rounded-md opacity-50 sm:px-3 sm:py-1.5"
+                className={cn(
+                  'flex items-center gap-2 rounded-md px-1.5 py-1 text-sm transition-colors hover:text-foreground/80 sm:px-3 sm:py-1.5',
+                  githubBadge && 'opacity-50',
+                )}
               >
                 <svg className="size-4 fill-current" viewBox="0 0 24 24">
                   <title>GitHub</title>
