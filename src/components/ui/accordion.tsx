@@ -3,6 +3,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 type AccordionMode = "playful" | "smooth"
 type AccordionSize = "sm" | "default"
@@ -15,11 +16,16 @@ const Accordion = React.forwardRef<
     mode?: AccordionMode
     size?: AccordionSize
   }
->(({ mode, size, ...props }, ref) => (
-  <AccordionContext.Provider value={{ mode, size }}>
-    <AccordionPrimitive.Root ref={ref} {...props} />
-  </AccordionContext.Provider>
-))
+>(({ mode: modeProp, size, ...props }, ref) => {
+  const inheritedMode = useUIVariant()
+  const mode = modeProp ?? inheritedMode
+
+  return (
+    <AccordionContext.Provider value={{ mode, size }}>
+      <AccordionPrimitive.Root ref={ref} {...props} />
+    </AccordionContext.Provider>
+  )
+})
 Accordion.displayName = "Accordion"
 
 const AccordionItem = React.forwardRef<

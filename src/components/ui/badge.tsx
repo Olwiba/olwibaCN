@@ -2,6 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 const badgeVariants = cva(
   "inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
@@ -33,12 +34,21 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   disabled?: boolean
+  mode?: "playful" | "smooth"
 }
 
-function Badge({ className, variant, size, disabled = false, ...props }: BadgeProps) {
+function Badge({ className, variant, size, disabled = false, mode: modeProp, ...props }: BadgeProps) {
+  const mode = modeProp ?? useUIVariant()
+
   return (
     <div
-      className={cn(badgeVariants({ variant, size }), disabled && "opacity-50 pointer-events-none", className)}
+      className={cn(
+        badgeVariants({ variant, size }),
+        disabled && "opacity-50 pointer-events-none",
+        mode === "smooth" && "shadow-sm",
+        mode === "playful" && "rotate-[0.5deg] [box-shadow:2px_2px_0px_0px_color-mix(in_srgb,currentColor_15%,transparent)]",
+        className
+      )}
       {...props}
     />
   )
