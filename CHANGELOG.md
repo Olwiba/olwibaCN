@@ -4,6 +4,14 @@
 
 
 
+
+## 0.1.20
+
+### Changed
+
+- ci: add workflow_dispatch tag input for manual republish
+- feat(mode): add mode awareness to Badge and Accordion
+
 ## 0.1.19
 
 ### Changed
