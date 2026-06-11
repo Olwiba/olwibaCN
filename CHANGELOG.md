@@ -9,8 +9,8 @@
 
 ### Changed
 
-- ci: add workflow_dispatch tag input for manual republish
-- feat(mode): add mode awareness to Badge and Accordion
+- `Badge`: now reads `UIVariant` context — smooth mode applies `shadow-sm`, playful mode applies rotation + offset box-shadow
+- `Accordion`: falls back to `useUIVariant()` when no explicit `mode` prop is passed, fixing FAQ section always rendering in default mode regardless of global mode state
 
 ## 0.1.19
 
