@@ -1,10 +1,5 @@
 # Changelog
 
-
-
-
-
-
 ## 0.1.20
 
 ### Changed
@@ -14,15 +9,11 @@
 
 ## 0.1.19
 
-### Changed
-
-- No notable changes.
+No user-facing changes.
 
 ## 0.1.18
 
-### Changed
-
-- No notable changes.
+No user-facing changes.
 
 ## 0.1.17
 
@@ -136,6 +127,7 @@
 
 - Package type declarations are now emitted (`tsup dts: true`) and published.
 - Package metadata now explicitly exposes types (`types` + `exports["."].types`).
+
 ## 0.1.1
 
 ### Added
@@ -174,4 +166,3 @@
 - Initial release
 - Custom shadcn/ui component primitives
 - Documentation site with Fumadocs + TanStack Start
-
