@@ -1,5 +1,18 @@
 # Changelog
 
+
+## 0.1.21
+
+### Changed
+
+- `DocsToc`: merged `useActiveItem` and `useScrollProgress` into a single `useTocScrollState` hook; geometry is measured once and cached, rebuild only on resize; scroll updates batched via `requestAnimationFrame`; pure `measureTocGeometry` / `calculateTocScrollState` functions extracted; bailed-out re-render when state is unchanged
+- `SearchDialog`: browse pages now accepted via explicit `browsePages` prop instead of fetched internally from `/api/pages` on mount; `PageItem` renamed to `SearchDialogBrowsePage` and exported; `groupedPages` derived with `useMemo` instead of `useState` + `useEffect`
+
+### Fixed
+
+- `tsup` config: corrected `onResolve` parameter type from `filter: RegExp` to `options: { filter: RegExp }` and narrowed `format` cast
+- Search API: replaced `SortedResult` import with local generic `SearchResult` type in `rankResults`
+
 ## 0.1.20
 
 ### Changed

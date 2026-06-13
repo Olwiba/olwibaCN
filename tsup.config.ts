@@ -4,7 +4,7 @@ import { createTsupBannerHook } from '@olwiba/dx';
 import { projectBanner } from './src/project.config';
 
 const shared = {
-  format: ['esm'] as const,
+  format: ['esm' as const],
   dts: true,
   sourcemap: true,
   treeshake: true,
@@ -20,7 +20,7 @@ const shared = {
       name: 'strip-raw-query',
       setup(build: {
         onResolve: (
-          filter: RegExp,
+          options: { filter: RegExp },
           callback: (args: { path: string }) => { path: string },
         ) => void;
       }) {

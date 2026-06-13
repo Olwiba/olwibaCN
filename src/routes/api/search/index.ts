@@ -1,10 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { createFromSource, type SortedResult } from 'fumadocs-core/search/server';
+import { createFromSource } from 'fumadocs-core/search/server';
 import { source } from '@/lib/source';
 
 const search = createFromSource(source, {
   language: 'english',
 });
+
+type SearchResult = {
+  type: string;
+  url: string;
+} & Record<string, unknown>;
 
 function getCategoryRank(url: string): number {
   // Core docs pages (e.g. /docs, /docs/themes) rank highest
@@ -19,7 +24,7 @@ function getTypeRank(type: string): number {
   return 2; // text / content matches
 }
 
-function rankResults(results: SortedResult[]): SortedResult[] {
+function rankResults<T extends SearchResult>(results: T[]): T[] {
   return results.sort((a, b) => {
     const typeA = getTypeRank(a.type);
     const typeB = getTypeRank(b.type);
@@ -36,7 +41,7 @@ export const Route = createFileRoute('/api/search/')({
     handlers: {
       GET: async ({ request }) => {
         const response = await search.GET(request);
-        const results: SortedResult[] = await response.json();
+        const results = (await response.json()) as SearchResult[];
         return Response.json(rankResults(results));
       },
     },
