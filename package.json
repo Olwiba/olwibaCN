@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@olwiba/docs": "^0.1.25",
+    "@olwiba/docs": "workspace:*",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -98,7 +98,7 @@
     }
   },
   "devDependencies": {
-    "@olwiba/dx": "0.0.10",
+    "@olwiba/dx": "workspace:*",
     "@tailwindcss/postcss": "^4.1.18",
     "@tanstack/react-router": "^1.151.6",
     "@tanstack/react-router-devtools": "^1.151.6",

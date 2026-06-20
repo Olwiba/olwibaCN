@@ -32,12 +32,14 @@ const shared = {
   ],
 };
 
+const isWatch = process.argv.includes('--watch');
+
 export default defineConfig([
   {
     ...shared,
     entry: ['src/components/ui/index.ts'],
     outDir: 'dist',
-    clean: true,
+    clean: !isWatch,
     external: ['react', 'react-dom', 'tailwindcss'],
     splitting: false,
     banner: {
