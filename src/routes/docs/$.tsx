@@ -1,17 +1,13 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
-import { source } from '@/lib/source';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import browserCollections from 'fumadocs-mdx:collections/browser';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
-import * as React from 'react';
 import { Suspense } from 'react';
 import { mdxComponents } from '@/lib/mdx-components';
-import { type TocItem } from '@/docs/components/DocsToc';
-import { DocsLayout, extractTextFromReactNode, type PageLoaderData } from '@/docs/components/DocsLayout';
+import { DocsLayout, type PageLoaderData } from '@/docs/components/DocsLayout';
 import { type SidebarSection } from '@/docs/components/DocsSidebar';
-import { findNeighbour } from 'fumadocs-core/page-tree';
 import { ErrorPage } from '@/components/ui/error-page';
+import { serverLoader } from './-loader';
 
 function DocsNotFound() {
   return (
@@ -44,38 +40,6 @@ export const Route = createFileRoute('/docs/$')({
   },
 });
 
-const serverLoader = createServerFn({
-  method: 'GET',
-})
-  .inputValidator((slugs: string[]) => slugs)
-  .handler(async ({ data: slugs }) => {
-    const page = source.getPage(slugs);
-    if (!page) throw notFound();
-
-    const pageTree = source.getPageTree();
-    const neighbours = findNeighbour(pageTree, page.url);
-    const rawContent = await page.data.getText('raw');
-
-    return {
-      path: page.path,
-      url: page.url,
-      pageTree: await source.serializePageTree(pageTree),
-      frontmatter: {
-        title: page.data.title,
-        description: page.data.description,
-      },
-      toc: (page.data.toc ?? []).map((item: { title?: React.ReactNode; url: string; depth: number }) => ({
-        title: extractTextFromReactNode(item.title),
-        url: item.url,
-        depth: item.depth,
-      })) as TocItem[],
-      rawContent,
-      neighbours: {
-        previous: neighbours.previous ? { url: neighbours.previous.url, name: extractTextFromReactNode(neighbours.previous.name) } : null,
-        next: neighbours.next ? { url: neighbours.next.url, name: extractTextFromReactNode(neighbours.next.name) } : null,
-      },
-    };
-  });
 
 const clientLoader = browserCollections.docs.createClientLoader({
   component({ default: MDX }) {

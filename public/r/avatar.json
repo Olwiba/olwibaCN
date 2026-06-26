@@ -4,7 +4,8 @@
   "title": "Avatar",
   "description": "Image element with a fallback",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "ui-variant-context"
   ],
   "files": [
     {

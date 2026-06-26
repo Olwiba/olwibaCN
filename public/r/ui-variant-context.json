@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ui-variant-context",
+  "title": "UI Variant Context",
+  "description": "Global mode context (playful/smooth) for olwibaCN primitives",
+  "files": [
+    {
+      "path": "src/components/ui/ui-variant-context.tsx",
+      "content": "import * as React from \"react\"\n\nexport type UIVariant = \"playful\" | \"smooth\" | undefined\n\nconst UIVariantContext = React.createContext<UIVariant>(undefined)\n\n/**\n * Sets a global default UI variant for all olwibaCN primitives in the tree.\n * Individual components can still override with an explicit `mode` prop.\n */\nexport function UIVariantProvider({\n  mode,\n  children,\n}: {\n  mode: UIVariant\n  children: React.ReactNode\n}) {\n  return (\n    <UIVariantContext.Provider value={mode}>\n      {children}\n    </UIVariantContext.Provider>\n  )\n}\n\nexport function useUIVariant(): UIVariant {\n  return React.useContext(UIVariantContext)\n}\n",
+      "type": "registry:lib",
+      "target": "components/ui/ui-variant-context.tsx"
+    }
+  ],
+  "type": "registry:lib"
+}

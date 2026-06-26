@@ -8,13 +8,6 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { SearchDialog } from '@/docs/components/SearchDialog';
 import { ActiveThemeProvider } from '@/components/active-theme';
 import { projectThemeStyleVars } from '@/project.config';
-import { source } from '@/lib/source';
-
-const searchBrowsePages = source.getPages().map((page) => ({
-  title: page.data.title,
-  description: page.data.description,
-  url: page.url,
-}));
 
 function NotFound() {
   return (
@@ -62,13 +55,6 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const SearchDialogWithBrowse = React.useCallback(
-    (props: React.ComponentProps<typeof SearchDialog>) => (
-      <SearchDialog {...props} browsePages={searchBrowsePages} />
-    ),
-    []
-  );
-
   return (
     <html
       lang="en"
@@ -82,7 +68,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <ActiveThemeProvider>
           <RootProvider
             search={{
-              SearchDialog: SearchDialogWithBrowse,
+              SearchDialog,
             }}
           >
             <SiteHeader />

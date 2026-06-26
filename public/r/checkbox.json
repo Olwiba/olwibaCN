@@ -4,7 +4,8 @@
   "title": "Checkbox",
   "description": "Control that allows multiple selections",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "ui-variant-context"
   ],
   "files": [
     {

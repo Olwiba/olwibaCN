@@ -4,7 +4,8 @@
   "title": "Button",
   "description": "Displays a button or link styled as a button",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "ui-variant-context"
   ],
   "files": [
     {

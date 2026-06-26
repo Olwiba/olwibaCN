@@ -1,10 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { createFromSource } from 'fumadocs-core/search/server';
-import { source } from '@/lib/source';
-
-const search = createFromSource(source, {
-  language: 'english',
-});
 
 type SearchResult = {
   type: string;
@@ -40,6 +34,13 @@ export const Route = createFileRoute('/api/search/')({
   server: {
     handlers: {
       GET: async ({ request }) => {
+        const [{ createFromSource }, { source }] = await Promise.all([
+          import('fumadocs-core/search/server'),
+          import('@/lib/source'),
+        ]);
+        const search = createFromSource(source, {
+          language: 'english',
+        });
         const response = await search.GET(request);
         const results = (await response.json()) as SearchResult[];
         return Response.json(rankResults(results));
