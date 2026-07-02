@@ -1,6 +1,19 @@
 # Changelog
 
 
+
+## 0.1.22
+
+### Changed
+
+- `Button`: base styles now include `cursor-pointer` so buttons show a pointer cursor on hover
+- Package is now mirrored to GitHub Packages in addition to npmjs.com
+
+### Fixed
+
+- Docs source no longer shipped in the client bundle: doc content moved into a route loader (`docs/-loader.ts`), `SearchDialog` fetches browse pages lazily, and registry JSON regenerated (adds `ui-variant-context` registry entry)
+- `tsup` watch mode no longer cleans `dist` on every rebuild, preventing momentary missing-file errors during development
+
 ## 0.1.21
 
 ### Changed
