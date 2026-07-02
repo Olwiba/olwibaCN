@@ -17,8 +17,8 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
-# Install curl for healthcheck
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# Install curl + wget for healthchecks (Coolify's built-in healthcheck uses wget)
+RUN apt-get update && apt-get install -y curl wget && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/content ./content
