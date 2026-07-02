@@ -1,6 +1,6 @@
 {
   "name": "@olwiba/cn",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "private": false,
   "type": "module",
   "sideEffects": false,
@@ -97,7 +97,7 @@
     }
   },
   "devDependencies": {
-    "@olwiba/dx": "workspace:*",
+    "@olwiba/dx": "0.0.10",
     "@tailwindcss/postcss": "^4.1.18",
     "@tanstack/react-router": "^1.151.6",
     "@tanstack/react-router-devtools": "^1.151.6",
