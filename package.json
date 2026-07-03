@@ -98,7 +98,7 @@
   },
   "devDependencies": {
     "@olwiba/dx": "0.0.19",
-    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.3.1",
     "@tanstack/react-router": "^1.151.6",
     "@tanstack/react-router-devtools": "^1.151.6",
     "@tanstack/react-start": "^1.153.0",
