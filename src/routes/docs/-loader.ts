@@ -51,5 +51,5 @@ const loadDocsData = createServerOnlyFn(async (slugs: string[]) => {
 export const serverLoader = createServerFn({
   method: 'GET',
 })
-  .inputValidator((slugs: string[]) => slugs)
+  .validator((slugs: string[]) => slugs)
   .handler(async ({ data: slugs }) => loadDocsData(slugs));
