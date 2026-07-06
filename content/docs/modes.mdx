@@ -1,6 +1,6 @@
 ---
 title: Modes
-description: Apply personality to components with the mode prop — default, smooth, or playful.
+description: Apply personality to components with the mode prop - default, smooth, or playful.
 ---
 
 ## Overview
@@ -9,9 +9,9 @@ Components in this library share a consistent `mode` prop that controls their vi
 
 | Mode | Description |
 |------|-------------|
-| *(omitted)* | Default — blocky, sharp, standard |
-| `smooth` | Softens the blockiness — rounder corners, more fluid |
-| `playful` | Expressive and fun — backdrop shadow, slight rotation |
+| *(omitted)* | Default - blocky, sharp, standard |
+| `smooth` | Softens the blockiness - rounder corners, more fluid |
+| `playful` | Expressive and fun - backdrop shadow, slight rotation |
 
 ## Usage
 
@@ -35,7 +35,7 @@ The base style across all components. Sharp corners, solid shadows, no frills. C
 
 ## Smooth
 
-Removes the geometric blockiness from the default theme. Components get rounder corners and softer edges — same structure, just less rigid.
+Removes the geometric blockiness from the default theme. Components get rounder corners and softer edges - same structure, just less rigid.
 
 ```tsx
 <Button variant="outline" mode="smooth">Smooth</Button>
@@ -52,6 +52,6 @@ Adds a fun, expressive layer. Components render with a backdrop shadow and a sub
 ## Implementation notes
 
 - `mode` is a prop on the component itself, not a CVA variant. This is because `playful` requires a DOM structure change (wrapper `<span>` + backdrop `<span>`) that class utilities alone can't express.
-- `smooth` is applied via additional Tailwind classes on the root element — no structural change needed.
+- `smooth` is applied via additional Tailwind classes on the root element - no structural change needed.
 - `mode` is defined per-component. The visual interpretation of smooth and playful is tailored to each component's shape.
-- The default (omitted) is always zero-cost — no extra classes or DOM nodes.
+- The default (omitted) is always zero-cost - no extra classes or DOM nodes.

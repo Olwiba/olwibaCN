@@ -48,7 +48,38 @@ export function IsometricPlane({
 
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
-  if (!mounted || images.length === 0) return null;
+
+  // Hold rendering until every unique image is fetched and decoded, so the
+  // plane fades in fully populated instead of showing empty card squares.
+  const [imagesReady, setImagesReady] = React.useState(false);
+  React.useEffect(() => {
+    setImagesReady(false);
+    if (images.length === 0) return;
+    let cancelled = false;
+    const srcs = [...new Set(images.map((img) => img.src))];
+    Promise.allSettled(
+      srcs.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new Image();
+            const settle = () => {
+              img.decode().catch(() => {}).finally(resolve);
+            };
+            img.onload = settle;
+            img.onerror = () => resolve();
+            img.src = src;
+            if (img.complete) settle();
+          }),
+      ),
+    ).then(() => {
+      if (!cancelled) setImagesReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [images]);
+
+  if (!mounted || !imagesReady || images.length === 0) return null;
 
   const h = cardHeight === 'auto' ? undefined : cardHeight;
   const tripled = [...baseRows, ...baseRows, ...baseRows];

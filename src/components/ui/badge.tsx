@@ -34,19 +34,47 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   disabled?: boolean
-  mode?: "playful" | "smooth"
+  mode?: "playful"
+}
+
+const playfulBackdrop: Record<string, string> = {
+  default: "bg-primary/30 dark:bg-primary/20",
+  destructive: "bg-destructive/30 dark:bg-destructive/20",
+  secondary: "bg-foreground/10 dark:bg-foreground/10",
+  outline: "bg-foreground/10 dark:bg-foreground/10",
 }
 
 function Badge({ className, variant, size, disabled = false, mode: modeProp, ...props }: BadgeProps) {
   const mode = modeProp ?? useUIVariant()
+
+  if (mode === "playful") {
+    return (
+      <span
+        className={cn(
+          "group/playful relative inline-flex",
+          disabled && "opacity-50 pointer-events-none",
+        )}
+      >
+        <span
+          aria-hidden="true"
+          className={cn(
+            "absolute inset-0 rounded-full transition-transform duration-200 translate-x-[3px] translate-y-[3px] -rotate-[0.5deg] group-hover/playful:-rotate-[1.5deg] group-hover/playful:scale-[1.01]",
+            playfulBackdrop[variant ?? "default"],
+          )}
+        />
+        <div
+          className={cn(badgeVariants({ variant, size }), "relative rotate-[0.3deg]", className)}
+          {...props}
+        />
+      </span>
+    )
+  }
 
   return (
     <div
       className={cn(
         badgeVariants({ variant, size }),
         disabled && "opacity-50 pointer-events-none",
-        mode === "smooth" && "shadow-sm",
-        mode === "playful" && "rotate-[0.5deg] [box-shadow:2px_2px_0px_0px_color-mix(in_srgb,currentColor_15%,transparent)]",
         className
       )}
       {...props}

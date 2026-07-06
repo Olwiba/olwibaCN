@@ -7,6 +7,7 @@ import { mdxComponents } from '@/lib/mdx-components';
 import { DocsLayout, type PageLoaderData } from '@/docs/components/DocsLayout';
 import { type SidebarSection } from '@/docs/components/DocsSidebar';
 import { ErrorPage } from '@/components/ui/error-page';
+import { FeedbackSidebarItem } from '@/feedback/FeedbackSidebarItem';
 import { serverLoader } from './-loader';
 
 function DocsNotFound() {
@@ -61,7 +62,13 @@ function Page() {
   const data = useFumadocsLoader(loaderData);
 
   return (
-    <DocsLayout loaderData={loaderData} pageTree={data.pageTree} sections={sidebarSections} defaultOpenFolders>
+    <DocsLayout
+      loaderData={loaderData}
+      pageTree={data.pageTree}
+      sections={sidebarSections}
+      defaultOpenFolders
+      sidebarBottomSlot={<FeedbackSidebarItem />}
+    >
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
         {clientLoader.useContent(data.path, undefined)}
       </Suspense>

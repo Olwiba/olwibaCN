@@ -9,18 +9,22 @@ import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
 type BadgeVariant = "default" | "secondary" | "outline" | "destructive";
 type BadgeSize = "sm" | "default" | "lg";
+type Mode = "default" | "playful";
 
 const variants: BadgeVariant[] = ["default", "secondary", "outline", "destructive"];
 const sizes: BadgeSize[] = ["default", "sm", "lg"];
+const modes: Mode[] = ["default", "playful"];
 
 export default function BadgeDemo() {
   const [variant, setVariant] = useState<BadgeVariant>("default");
   const [size, setSize] = useState<BadgeSize>("default");
+  const [mode, setMode] = useState<Mode>("default");
   const [disabled, setDisabled] = useState(false);
 
   const usageProps = [
     variant !== "default" && `variant="${variant}"`,
     size !== "default" && `size="${size}"`,
+    mode !== "default" && `mode="${mode}"`,
     disabled && "disabled",
   ].filter(Boolean).join(" ");
   useUsageCode(`<Badge${usageProps ? " " + usageProps : ""}>Badge</Badge>`);
@@ -28,7 +32,14 @@ export default function BadgeDemo() {
   return (
     <>
       <div className="flex flex-wrap gap-2">
-        <Badge variant={variant} size={size} disabled={disabled}>Badge</Badge>
+        <Badge
+          variant={variant}
+          size={size}
+          mode={mode === "default" ? undefined : mode}
+          disabled={disabled}
+        >
+          Badge
+        </Badge>
       </div>
 
       <DemoControls>
@@ -60,6 +71,22 @@ export default function BadgeDemo() {
                   onClick={() => setVariant(v)}
                 >
                   {v.charAt(0).toUpperCase() + v.slice(1)}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <span className="text-xs font-medium text-fd-muted-foreground">Mode</span>
+            <div className="flex gap-1.5">
+              {modes.map((m) => (
+                <Button
+                  key={m}
+                  variant={mode === m ? "default" : "secondary"}
+                  size="sm"
+                  onClick={() => setMode(m)}
+                >
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
                 </Button>
               ))}
             </div>
