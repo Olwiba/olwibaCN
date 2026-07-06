@@ -8,6 +8,7 @@ import { DocsLayout, type PageLoaderData } from '@/docs/components/DocsLayout';
 import { type SidebarSection } from '@/docs/components/DocsSidebar';
 import { ErrorPage } from '@/components/ui/error-page';
 import { FeedbackSidebarItem } from '@/feedback/FeedbackSidebarItem';
+import { getFeedbackConfig, submitFeedback } from '@/feedback/server';
 import { serverLoader } from './-loader';
 
 function DocsNotFound() {
@@ -67,7 +68,12 @@ function Page() {
       pageTree={data.pageTree}
       sections={sidebarSections}
       defaultOpenFolders
-      sidebarBottomSlot={<FeedbackSidebarItem />}
+      sidebarBottomSlot={
+        <FeedbackSidebarItem
+          getConfig={() => getFeedbackConfig()}
+          submit={(payload) => submitFeedback({ data: payload })}
+        />
+      }
     >
       <Suspense fallback={<div className="animate-pulse h-64 bg-muted rounded-lg" />}>
         {clientLoader.useContent(data.path, undefined)}

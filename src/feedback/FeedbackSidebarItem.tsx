@@ -14,11 +14,33 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Enchanted } from '@/components/ui/enchanted';
 import { cn } from '@/lib/utils';
-import { getFeedbackConfig, submitFeedback } from './server';
+import { fireConfetti } from '@/lib/confetti';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-export function FeedbackSidebarItem() {
+/** Payload handed to the `submit` prop. Matches FeedbackSubmission in feedback/submission.ts. */
+export interface FeedbackSidebarPayload {
+  /** 1-5 answer to "Do you like this?" */
+  rating: number;
+  message: string;
+  /** Page the dialog was opened from, for context in the notification. */
+  page?: string;
+  /** Honeypot - humans never fill this. */
+  website?: string;
+}
+
+export interface FeedbackSidebarItemProps {
+  /**
+   * Server fns are compiled per-app by TanStack Start, so the host app wires
+   * its own and passes them in — the component stays app-agnostic.
+   */
+  getConfig: () => Promise<{ enabled: boolean }>;
+  submit: (payload: FeedbackSidebarPayload) => Promise<{ ok: boolean; error?: string }>;
+}
+
+const CONFETTI_PINKS = ['#db2777', '#ec4899', '#f472b6', '#f9a8d4', '#fbcfe8'];
+
+export function FeedbackSidebarItem({ getConfig, submit }: FeedbackSidebarItemProps) {
   const [enabled, setEnabled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [rating, setRating] = React.useState<number | null>(null);
@@ -29,7 +51,7 @@ export function FeedbackSidebarItem() {
 
   React.useEffect(() => {
     let cancelled = false;
-    getFeedbackConfig()
+    getConfig()
       .then((config) => {
         if (!cancelled && config.enabled) setEnabled(true);
       })
@@ -37,7 +59,7 @@ export function FeedbackSidebarItem() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [getConfig]);
 
   if (!enabled) return null;
 
@@ -47,6 +69,11 @@ export function FeedbackSidebarItem() {
       setStatus('idle');
       setError(null);
     }
+  };
+
+  const handleTriggerClick = () => {
+    fireConfetti({ colors: CONFETTI_PINKS });
+    handleOpenChange(true);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -62,13 +89,11 @@ export function FeedbackSidebarItem() {
     setStatus('sending');
     setError(null);
     try {
-      const result = await submitFeedback({
-        data: {
-          rating,
-          message,
-          page: window.location.pathname,
-          website,
-        },
+      const result = await submit({
+        rating,
+        message,
+        page: window.location.pathname,
+        website,
       });
       if (result.ok) {
         setStatus('sent');
@@ -89,7 +114,7 @@ export function FeedbackSidebarItem() {
       <Enchanted hoverOnly glintClassName="text-pink-500">
         <button
           type="button"
-          onClick={() => handleOpenChange(true)}
+          onClick={handleTriggerClick}
           className="flex h-8 w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm text-muted-foreground outline-hidden transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2"
         >
           <span aria-hidden="true">🥰</span>
@@ -148,7 +173,7 @@ export function FeedbackSidebarItem() {
                 <Textarea
                   id="feedback-message"
                   value={message}
-                  onChange={(event) => setMessage(event.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(event.target.value)}
                   placeholder="What can we improve?"
                   rows={5}
                   maxLength={2000}
@@ -165,7 +190,7 @@ export function FeedbackSidebarItem() {
                   tabIndex={-1}
                   autoComplete="off"
                   value={website}
-                  onChange={(event) => setWebsite(event.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setWebsite(event.target.value)}
                 />
               </div>
 
