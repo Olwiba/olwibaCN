@@ -33,7 +33,7 @@ export const getFeedbackConfig = createServerFn({ method: 'GET' }).handler(async
 });
 
 export const submitFeedback = createServerFn({ method: 'POST' })
-  .validator((input: FeedbackSubmission): FeedbackSubmission => {
+  .inputValidator((input: FeedbackSubmission): FeedbackSubmission => {
     if (!Number.isInteger(input.rating) || input.rating < 1 || input.rating > 5) {
       throw new Error('Rating must be between 1 and 5');
     }
