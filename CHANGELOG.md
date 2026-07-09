@@ -5,6 +5,33 @@
 
 
 
+
+## 0.1.26
+
+### Added
+
+- Support pro brand shine
+- Allow hiding header tools
+- Make FeedbackSidebarItem app-agnostic, add pink confetti
+- Add feedback sidebar, badge/input playful mode, toast rename
+
+### Changed
+
+- Halve IsometricPlane row count to trim decorative DOM weight
+- Exempt first-party @olwiba/* from minimum release age
+- Revert "chore: replace deprecated createServerFn inputValidator with validator"
+- Replace deprecated createServerFn inputValidator with validator
+- Resolve dev port via @olwiba/dx resolveDevPort
+
+### Fixed
+
+- Render iso plane skeleton during SSR, respect reduced motion
+- Use inputValidator, not validator, for createServerFn
+- Regenerate standalone bun.lock for tailwind/dx dep changes
+- Preserve fumadocs relevance order
+- Compile Tailwind via @tailwindcss/vite plugin
+- Add wget to runtime stage for Coolify healthcheck
+
 ## 0.1.25
 
 No user-facing changes.
