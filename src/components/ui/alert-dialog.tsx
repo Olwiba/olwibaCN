@@ -3,7 +3,7 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { UIVariantProvider } from "@/components/ui/ui-variant-context"
+import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
 
 const AlertDialog = AlertDialogPrimitive.Root
 
@@ -31,7 +31,10 @@ type AlertDialogMode = "playful" | "smooth"
 const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & { mode?: AlertDialogMode }
->(({ className, mode, children, ...props }, ref) => (
+>(({ className, mode: modeProp, children, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
+
+  return (
   <AlertDialogPortal>
     <AlertDialogOverlay />
     <AlertDialogPrimitive.Content
@@ -50,7 +53,8 @@ const AlertDialogContent = React.forwardRef<
       </UIVariantProvider>
     </AlertDialogPrimitive.Content>
   </AlertDialogPortal>
-))
+  )
+})
 AlertDialogContent.displayName = AlertDialogPrimitive.Content.displayName
 
 const AlertDialogHeader = ({

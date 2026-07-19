@@ -4,7 +4,7 @@ import * as React from "react"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
-import { UIVariantProvider } from "@/components/ui/ui-variant-context"
+import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
 
 type TooltipMode = "playful" | "smooth"
 
@@ -17,7 +17,10 @@ const TooltipTrigger = TooltipPrimitive.Trigger
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & { mode?: TooltipMode }
->(({ className, sideOffset = 4, mode, children, ...props }, ref) => (
+>(({ className, sideOffset = 4, mode: modeProp, children, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
+
+  return (
   <TooltipPrimitive.Content
     ref={ref}
     sideOffset={sideOffset}
@@ -33,7 +36,8 @@ const TooltipContent = React.forwardRef<
       {children}
     </UIVariantProvider>
   </TooltipPrimitive.Content>
-))
+  )
+})
 TooltipContent.displayName = TooltipPrimitive.Content.displayName
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }

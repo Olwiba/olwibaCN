@@ -10,12 +10,14 @@ import {
 import { useTheme } from "next-themes"
 import { Toaster as Sonner } from "sonner"
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "@/components/ui/ui-variant-context"
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 type ToasterMode = "playful" | "smooth"
 
-const Toaster = ({ mode, className, style, ...props }: ToasterProps & { mode?: ToasterMode }) => {
+const Toaster = ({ mode: modeProp, className, style, ...props }: ToasterProps & { mode?: ToasterMode }) => {
   const { theme = "system" } = useTheme()
+  const mode = modeProp ?? useUIVariant()
 
   return (
     <>

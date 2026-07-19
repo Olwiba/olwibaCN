@@ -5,17 +5,19 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { UIVariantProvider, type UIVariant } from "@/components/ui/ui-variant-context"
+import { UIVariantProvider, useUIVariant, type UIVariant } from "@/components/ui/ui-variant-context"
 
 function InputGroup({
   className,
-  mode,
+  mode: modeProp,
   disabled,
   ...props
 }: React.ComponentProps<"div"> & {
   mode?: UIVariant
   disabled?: boolean
 }) {
+  const mode = modeProp ?? useUIVariant()
+
   return (
     <UIVariantProvider mode={mode}>
       <div

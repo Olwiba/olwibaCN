@@ -2,6 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { useUIVariant } from "./ui-variant-context"
 
 const alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
@@ -34,7 +35,10 @@ const Alert = React.forwardRef<
       size?: AlertSize
       disabled?: boolean
     }
->(({ className, variant, mode, size, disabled, ...props }, ref) => (
+>(({ className, variant, mode: modeProp, size, disabled, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
+
+  return (
   <div
     ref={ref}
     role="alert"
@@ -49,7 +53,8 @@ const Alert = React.forwardRef<
     )}
     {...props}
   />
-))
+  )
+})
 Alert.displayName = "Alert"
 
 const AlertTitle = React.forwardRef<

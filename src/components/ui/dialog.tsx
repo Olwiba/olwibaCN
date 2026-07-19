@@ -5,7 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { UIVariantProvider } from "@/components/ui/ui-variant-context"
+import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
 
 const Dialog = DialogPrimitive.Root
 
@@ -35,7 +35,10 @@ type DialogMode = "playful" | "smooth"
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { mode?: DialogMode }
->(({ className, mode, children, ...props }, ref) => (
+>(({ className, mode: modeProp, children, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
+
+  return (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -58,7 +61,8 @@ const DialogContent = React.forwardRef<
       </UIVariantProvider>
     </DialogPrimitive.Content>
   </DialogPortal>
-))
+  )
+})
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
 const DialogHeader = ({

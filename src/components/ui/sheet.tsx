@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { UIVariantProvider } from "@/components/ui/ui-variant-context"
+import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
 
 type SheetMode = "playful" | "smooth"
 
@@ -76,7 +76,10 @@ interface SheetContentProps
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "right", className, children, container, mode, ...props }, ref) => (
+>(({ side = "right", className, children, container, mode: modeProp, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
+
+  return (
   <SheetPortal container={container ?? undefined}>
     <SheetOverlay />
     <SheetPrimitive.Content
@@ -98,7 +101,8 @@ const SheetContent = React.forwardRef<
       </UIVariantProvider>
     </SheetPrimitive.Content>
   </SheetPortal>
-))
+  )
+})
 SheetContent.displayName = SheetPrimitive.Content.displayName
 
 const SheetHeader = ({

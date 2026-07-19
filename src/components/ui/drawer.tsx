@@ -2,7 +2,7 @@ import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
-import { UIVariantProvider } from "@/components/ui/ui-variant-context"
+import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -38,7 +38,10 @@ type DrawerMode = "playful" | "smooth"
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & { mode?: DrawerMode }
->(({ className, mode, children, ...props }, ref) => (
+>(({ className, mode: modeProp, children, ...props }, ref) => {
+  const mode = modeProp ?? useUIVariant()
+
+  return (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
@@ -58,7 +61,8 @@ const DrawerContent = React.forwardRef<
       </UIVariantProvider>
     </DrawerPrimitive.Content>
   </DrawerPortal>
-))
+  )
+})
 DrawerContent.displayName = "DrawerContent"
 
 const DrawerHeader = ({
