@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
+import { glassSurface } from "@/components/ui/glass"
 
 const Dialog = DialogPrimitive.Root
 
@@ -30,7 +31,7 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
-type DialogMode = "playful" | "smooth"
+type DialogMode = "playful" | "smooth" | "glass"
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
@@ -40,7 +41,9 @@ const DialogContent = React.forwardRef<
 
   return (
   <DialogPortal>
-    <DialogOverlay />
+    {/* Glass content blurs whatever sits behind it — a nearly opaque black
+        overlay would frost to a flat dark pane, so lighten it in glass. */}
+    <DialogOverlay className={mode === "glass" ? "bg-black/40" : undefined} />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
@@ -48,6 +51,7 @@ const DialogContent = React.forwardRef<
         !mode && "shadow-lg sm:rounded-lg",
         mode === "smooth" && "rounded-2xl shadow-xl",
         mode === "playful" && "rounded-xl border-2 shadow-lg shadow-primary/10",
+        mode === "glass" && cn(glassSurface, "rounded-2xl"),
         className
       )}
       {...props}

@@ -17,8 +17,8 @@ import { Switch } from "@/components/ui/switch";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 import { UIVariantProvider } from "@/components/ui/ui-variant-context";
 
-type DialogMode = "default" | "playful" | "smooth";
-const modes: DialogMode[] = ["default", "playful", "smooth"];
+type DialogMode = "default" | "playful" | "smooth" | "glass";
+const modes: DialogMode[] = ["default", "playful", "smooth", "glass"];
 
 export default function DialogDemo() {
   const [mode, setMode] = useState<DialogMode>("default");

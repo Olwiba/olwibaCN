@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useUIVariant } from "./ui-variant-context"
 
-type AccordionMode = "playful" | "smooth"
+type AccordionMode = "playful" | "smooth" | "glass"
 type AccordionSize = "sm" | "default"
 
 const AccordionContext = React.createContext<{ mode?: AccordionMode; size?: AccordionSize }>({})

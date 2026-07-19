@@ -5,8 +5,9 @@ import * as PopoverPrimitive from "@radix-ui/react-popover"
 
 import { cn } from "@/lib/utils"
 import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
+import { glassPanel } from "@/components/ui/glass"
 
-type PopoverMode = "playful" | "smooth"
+type PopoverMode = "playful" | "smooth" | "glass"
 
 const Popover = PopoverPrimitive.Root
 
@@ -32,6 +33,7 @@ const PopoverContent = React.forwardRef<
           !mode && "rounded-md shadow-md",
           mode === "smooth" && "rounded-2xl shadow-xl",
           mode === "playful" && "rounded-xl border-2 shadow-lg shadow-primary/10",
+          mode === "glass" && cn(glassPanel, "rounded-xl"),
           className
         )}
         {...props}

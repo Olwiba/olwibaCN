@@ -33,7 +33,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
-  mode?: "playful" | "smooth"
+  mode?: "playful" | "smooth" | "glass"
   size?: CarouselSize
   disabled?: boolean
 }
@@ -45,7 +45,7 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
-  mode?: "playful" | "smooth"
+  mode?: "playful" | "smooth" | "glass"
   carouselSize: CarouselSize
   disabled?: boolean
 } & CarouselProps

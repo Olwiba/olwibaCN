@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Mail } from "lucide-react";
 
-type Mode = "default" | "playful" | "smooth";
+type Mode = "default" | "playful" | "smooth" | "glass";
 
 const variants: NonNullable<ButtonProps["variant"]>[] = [
   "default",
@@ -19,7 +19,7 @@ const variants: NonNullable<ButtonProps["variant"]>[] = [
 ];
 
 const sizes: NonNullable<ButtonProps["size"]>[] = ["default", "sm", "lg", "icon"];
-const modes: Mode[] = ["default", "playful", "smooth"];
+const modes: Mode[] = ["default", "playful", "smooth", "glass"];
 
 export default function ButtonDemo() {
   const [size, setSize] = useState<ButtonProps["size"]>("default");

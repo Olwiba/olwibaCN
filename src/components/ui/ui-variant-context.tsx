@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export type UIVariant = "playful" | "smooth" | undefined
+export type UIVariant = "playful" | "smooth" | "glass" | undefined
 
 const UIVariantContext = React.createContext<UIVariant>(undefined)
 

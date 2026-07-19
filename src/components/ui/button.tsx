@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { useUIVariant } from "./ui-variant-context"
+import { glassBlur } from "./glass"
 
 const buttonVariants = cva(
   "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/20 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -39,7 +40,17 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
-  mode?: "playful" | "smooth"
+  mode?: "playful" | "smooth" | "glass"
+}
+
+// Glass keeps each variant's hue but lets the backdrop bleed through:
+// translucent fill + blur/saturate + hairline light border. Ghost and link
+// have no fill to frost, so they stay unchanged.
+const glassButtonBg: Record<string, string> = {
+  default: "bg-primary/75 hover:bg-primary/60",
+  destructive: "bg-destructive/75 hover:bg-destructive/60",
+  outline: "bg-background/40 hover:bg-background/60",
+  secondary: "bg-secondary/50 hover:bg-secondary/40",
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -75,11 +86,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       )
     }
 
+    const isGlass = mode === "glass" && variant !== "ghost" && variant !== "link"
+
     return (
       <Comp
         className={cn(
           buttonVariants({ variant, size, className }),
           mode === "smooth" && "rounded-full shadow-none",
+          isGlass &&
+            cn(
+              glassBlur,
+              "border border-white/25 shadow-sm shadow-black/10 dark:border-white/15",
+              glassButtonBg[variant ?? "default"],
+            ),
         )}
         ref={ref}
         {...props}

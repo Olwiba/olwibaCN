@@ -10,10 +10,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
-type TooltipMode = "default" | "playful" | "smooth";
+type TooltipMode = "default" | "playful" | "smooth" | "glass";
 type TooltipSide = "top" | "right" | "bottom" | "left";
 
-const modes: TooltipMode[] = ["default", "playful", "smooth"];
+const modes: TooltipMode[] = ["default", "playful", "smooth", "glass"];
 const sides: TooltipSide[] = ["top", "right", "bottom", "left"];
 
 function getTooltipUsageCode({

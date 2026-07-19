@@ -2,9 +2,10 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { UIVariantProvider, useUIVariant } from "./ui-variant-context"
+import { glassSurface } from "./glass"
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  mode?: "playful" | "smooth"
+  mode?: "playful" | "smooth" | "glass"
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -38,6 +39,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           className={cn(
             "rounded-lg border bg-card text-card-foreground shadow-sm",
             mode === "smooth" && "rounded-3xl",
+            mode === "glass" && cn(glassSurface, "rounded-xl"),
             className
           )}
           {...props}

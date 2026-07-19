@@ -12,9 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
-type Mode = "default" | "playful" | "smooth";
+type Mode = "default" | "playful" | "smooth" | "glass";
 
-const modes: Mode[] = ["default", "playful", "smooth"];
+const modes: Mode[] = ["default", "playful", "smooth", "glass"];
 
 export default function CardDemo() {
   const [mode, setMode] = useState<Mode>("default");

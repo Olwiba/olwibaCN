@@ -12,8 +12,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
-type PopoverMode = "default" | "playful" | "smooth";
-const modes: PopoverMode[] = ["default", "playful", "smooth"];
+type PopoverMode = "default" | "playful" | "smooth" | "glass";
+const modes: PopoverMode[] = ["default", "playful", "smooth", "glass"];
 
 function getPopoverUsageCode({ mode, disabled }: { mode: PopoverMode; disabled: boolean }) {
   const modeAttr = mode !== "default" ? ` mode="${mode}"` : "";

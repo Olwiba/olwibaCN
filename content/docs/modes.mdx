@@ -12,6 +12,7 @@ Components in this library share a consistent `mode` prop that controls their vi
 | *(omitted)* | Default - blocky, sharp, standard |
 | `smooth` | Softens the blockiness - rounder corners, more fluid |
 | `playful` | Expressive and fun - backdrop shadow, slight rotation |
+| `glass` | Frosted glassmorphism - translucent surfaces, backdrop blur, hairline light borders |
 
 ## Usage
 
@@ -48,6 +49,16 @@ Adds a fun, expressive layer. Components render with a backdrop shadow and a sub
 ```tsx
 <Button variant="outline" mode="playful">Playful</Button>
 ```
+
+## Glass
+
+Frosted glassmorphism: surfaces go translucent over a backdrop blur with a saturation boost, a hairline light border, and a deep soft shadow. Backgrounds use theme tokens at reduced opacity, so glass follows your theme and brand color in both light and dark mode.
+
+```tsx
+<Card mode="glass">Glass</Card>
+```
+
+Glass needs content behind it to blur — over a flat page background it reads as a lower-contrast default. Pair it with imagery, gradients, or layered surfaces. Currently supported on Button, Card, Input, Dialog, Popover, and Tooltip; tiny controls (checkbox, switch, kbd) deliberately stay unchanged in glass — frosted chrome is illegible at that size. The shared recipe lives in `components/ui/glass.ts` — components compose `glassSurface` (containers), `glassPanel` (floating panels), or `glassControl` (form controls) rather than hand-rolling classes.
 
 ## Implementation notes
 

@@ -7,9 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
-type Mode = "default" | "playful" | "smooth";
+type Mode = "default" | "playful" | "smooth" | "glass";
 
-const modes: Mode[] = ["default", "playful", "smooth"];
+const modes: Mode[] = ["default", "playful", "smooth", "glass"];
 
 export default function InputDemo() {
   const [mode, setMode] = useState<Mode>("default");
