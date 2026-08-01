@@ -32,14 +32,16 @@ const shared = {
   ],
 };
 
-const isWatch = process.argv.includes('--watch');
-
 export default defineConfig([
   {
     ...shared,
     entry: ['src/components/ui/index.ts'],
     outDir: 'dist',
-    clean: !isWatch,
+    // Cleaning here raced the email config below (both build concurrently
+    // from one `tsup` invocation; email's output nests under dist/email, so
+    // this config's clean could delete it mid-write). Cleaning now happens
+    // once, sequentially, via scripts/clean-dist.ts before tsup even starts.
+    clean: false,
     external: ['react', 'react-dom', 'tailwindcss'],
     splitting: false,
     banner: {

@@ -6,6 +6,29 @@
 
 
 
+
+## 0.1.27
+
+### Added
+
+- New `mode="glass"` — frosted glassmorphism built on theme tokens (`background` / `popover` at reduced opacity) so it follows every theme and brand color in light and dark. Supported on `Button`, `Card`, `Input`, `Dialog`, `Popover`, and `Tooltip`; unsupported components fall through to default. Shared recipes live in `components/ui/glass.ts` (`glassSurface` for containers, `glassPanel` for floating panels, `glassControl` for form controls, plus `glassBlur`) so the look is tunable in one place. Tiny controls (checkbox, radio, switch, kbd) deliberately stay unchanged — frosted chrome is illegible at that size. `UIVariant` union widened to include `glass`
+- `ContextMenu`, `Switch`, `RadioGroup`, `Kbd`, `Hotkey`, and `Progress` are now mode-aware, closing the family gaps: `ContextMenu` mirrors `DropdownMenu` (content `mode` prop + `UIVariantProvider` inheritance, per-mode item/trigger rounding); `Switch` and `RadioGroupItem` get the checkbox-style playful backdrop; `Kbd` / `Hotkey` get smooth rounding and a playful keycap backdrop; `Progress` gets the card-style neutral backdrop. Each reads `UIVariant` context with a per-component `mode` override
+- `DocsLayout`: `variant="product"` drops the blueprint rails, widens gutters, and enlarges the title and description. Default `variant="technical"` renders identically to before; the root now carries `data-docs-variant` for CSS hooks
+- Docs components `DocsHeroPattern` (gradient + grid hero backdrop), `DocsCardGrid` (pointer-glow landing nav cards), and `DocsFeedback` (inline was-this-page-helpful widget, same app-agnostic submit contract as `FeedbackSidebarItem`). Token colors throughout, no new dependencies
+
+### Changed
+
+- `AsciiText`: shine sweep slowed 25% (1.35 → 1.0125 passes per second, extracted to a `SHINE_SPEED` constant) — the band read too fast on mobile
+- Build now cleans `dist` once up front via `scripts/clean-dist.ts` instead of during the bundle step
+
+### Fixed
+
+- `Dialog`, `AlertDialog`, `Alert`, `Sheet`, `Drawer`, `Tooltip`, `Toaster`, `ErrorPage`, and `InputGroup` accepted a `mode` prop but never read `UIVariant` context, so app-wide mode from `UIVariantProvider` silently skipped them. The overlay components made it worse by re-providing their own unset mode, resetting global mode for everything rendered inside a dialog, sheet, or drawer. All now resolve `modeProp ?? useUIVariant()`
+- `Drawer`: public exports explicitly annotated so emitted declarations no longer reference vaul's internal `@radix-ui/react-dialog` types through package-store paths (TS2742), which broke `dts` builds outside this repo's exact `node_modules` layout
+- Sandbox previews without an explicit `height` were pinned to the min-height floor; the iframe now measures `#sandbox-root` with a `ResizeObserver` and drives the frame height, so demos grow and shrink with their content. The `height` prop and `shellPreview` keep fixed-frame behavior; expanded mode scrolls tall previews
+- Docs footer links (report a bug, feature request, changelog) overflowed the footer row on narrow viewports; below `md` they now collapse into a drop-up menu behind an ellipsis button
+- Concurrent `tsup` configs raced on cleaning `dist` — the main bundle's clean could delete the email build's output mid-write
+
 ## 0.1.26
 
 ### Added

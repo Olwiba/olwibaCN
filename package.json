@@ -1,6 +1,6 @@
 {
   "name": "@olwiba/cn",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "private": false,
   "type": "module",
   "sideEffects": false,
@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup",
+    "build": "bun scripts/clean-dist.ts && tsup",
     "web:dev": "fumadocs-mdx && vite dev",
     "web:build": "fumadocs-mdx && bun run registry:build && vite build",
     "start": "bun run server.ts",
