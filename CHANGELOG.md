@@ -7,6 +7,18 @@
 
 
 
+
+## 0.1.28
+
+### Changed
+
+- `Toaster`: close button moved from top-left to top-right and tucked fully inside the toast (was straddling the edge), restyled as a 20px ghost button on theme tokens instead of sonner's bordered `--gray*` default. Colour is inherited rather than a fixed token, so it stays legible on `richColors` toasts of every type
+
+### Fixed
+
+- `Toaster` followed the OS colour scheme instead of the app's. It read next-themes' `useTheme()`, which only resolves in an app that mounts `ThemeProvider` — everywhere else the hook returned undefined and the value fell back to `"system"`, so a dark app on a light machine got a light toast. It also read `theme` rather than `resolvedTheme`, wrong even in a Next app. Theme is now derived from the `dark` class (or `data-theme`) on `<html>` and watched with a `MutationObserver`, which every setup agrees on, next-themes included. `next-themes` is no longer imported by this component
+- `Toaster`: `modeProp ?? useUIVariant()` short-circuited, so passing an explicit `mode` skipped the hook call and changed hook order between renders
+
 ## 0.1.27
 
 ### Added
