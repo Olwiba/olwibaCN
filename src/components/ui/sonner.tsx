@@ -7,7 +7,7 @@ import {
   OctagonX,
   TriangleAlert,
 } from "lucide-react"
-import { useTheme } from "next-themes"
+import * as React from "react"
 import { Toaster as Sonner } from "sonner"
 import { cn } from "@/lib/utils"
 import { useUIVariant } from "@/components/ui/ui-variant-context"
@@ -15,12 +15,93 @@ import { useUIVariant } from "@/components/ui/ui-variant-context"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 type ToasterMode = "playful" | "smooth"
 
+/**
+ * Reads the theme off the document rather than a provider.
+ *
+ * This used to call next-themes' `useTheme()`, which only works in an app that
+ * mounts its ThemeProvider — anywhere else the hook returns undefined, the
+ * value fell back to "system", and sonner then followed the *OS* colour scheme
+ * instead of the app's. A dark app on a light machine got a light toast.
+ *
+ * The class on `<html>` is the one thing every setup agrees on, next-themes
+ * included, so watching it works for all of them.
+ */
+function useDocumentTheme(): "light" | "dark" {
+  const [theme, setTheme] = React.useState<"light" | "dark">("light")
+
+  React.useEffect(() => {
+    const root = document.documentElement
+    const read = () =>
+      setTheme(
+        root.classList.contains("dark") || root.dataset.theme === "dark"
+          ? "dark"
+          : "light",
+      )
+
+    read()
+    const observer = new MutationObserver(read)
+    observer.observe(root, { attributes: true, attributeFilter: ["class", "data-theme"] })
+    return () => observer.disconnect()
+  }, [])
+
+  return theme
+}
+
 const Toaster = ({ mode: modeProp, className, style, ...props }: ToasterProps & { mode?: ToasterMode }) => {
-  const { theme = "system" } = useTheme()
-  const mode = modeProp ?? useUIVariant()
+  const theme = useDocumentTheme()
+  // Not `modeProp ?? useUIVariant()` — `??` short-circuits, so passing an
+  // explicit mode skipped the hook call and changed the hook order between
+  // renders.
+  const ctxVariant = useUIVariant()
+  const mode = modeProp ?? ctxVariant
 
   return (
     <>
+      {/*
+        sonner ships the close button top-LEFT, straddling the toast's edge
+        (`--toast-close-button-start: 0` with a -35%/-35% transform), sized
+        20px with a border, and coloured from its own `--gray*` scale rather
+        than the theme. Every one of those is overridden here: moved to the
+        top-right, tucked fully inside, and restyled as a ghost button on
+        theme tokens so it follows light/dark like everything else.
+
+        The extra `[data-sonner-toaster]` ancestor is load-bearing — it takes
+        the selector past the specificity of sonner's own rules, including its
+        `[data-sonner-theme='dark']` variants, so this doesn't depend on
+        stylesheet order.
+      */}
+      <style>{`
+        [data-sonner-toaster] {
+          --toast-close-button-start: unset;
+          --toast-close-button-end: 0.5rem;
+          --toast-close-button-transform: translateY(0.5rem);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-close-button] {
+          height: 1.25rem;
+          width: 1.25rem;
+          padding: 0;
+          border: none;
+          border-radius: var(--radius-sm);
+          background: transparent;
+          /* Inherited rather than a fixed token: on a richColors toast the
+             text is already the only colour guaranteed to read against that
+             background, so borrowing it keeps the button legible on every
+             variant without a rule per type. */
+          color: inherit;
+          opacity: 0.6;
+          transition: opacity 150ms ease, background-color 150ms ease;
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-close-button] svg {
+          height: 0.75rem;
+          width: 0.75rem;
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:hover [data-close-button]:hover {
+          background: color-mix(in oklab, currentColor 12%, transparent);
+          border-color: transparent;
+          color: inherit;
+          opacity: 1;
+        }
+      `}</style>
       {mode === "smooth" && (
         <style>{`[data-sonner-toaster].toaster-smooth { --border-radius: 1.5rem; }`}</style>
       )}
