@@ -1,0 +1,46 @@
+---
+title: Number Input
+description: A number field whose stepper buttons follow the theme.
+---
+
+<div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/number-input" />
+</div>
+
+<ComponentPreview name="number-input" />
+
+## Installation
+
+<InstallationTabs name="number-input" />
+
+## Usage
+
+```tsx
+import { NumberInput } from "@/components/ui/number-input"
+```
+
+<LiveUsageCode name="number-input" defaultCode={`<div className="flex flex-col gap-4 w-[300px]">\n  <NumberInput placeholder="0" />\n  <NumberInput placeholder="0" min={0} max={10} step={2} />\n</div>`} />
+
+## Notes
+
+- **Controlled or uncontrolled.** Stepping writes through the prototype's value
+  setter and dispatches `input`, so React sees the change either way.
+- **Bounds disable the buttons.** With `min`/`max` set, each stepper greys out
+  on arrival rather than letting you push past and be clamped.
+- **Stepping an empty field starts at `min`** (or `0`), rather than jumping to
+  plus or minus one step.
+- **The buttons are not tab stops.** `ArrowUp` / `ArrowDown` already step a
+  number input natively, so a keyboard user gains nothing from two extra stops
+  per field.
+- **`step` drives rounding.** A `step` of `0.1` formats to one decimal place, so
+  repeated presses don't accumulate floating-point dust.
+
+## API Reference
+
+<APIReference name="NumberInput" extends="input" props={[
+  { name: "mode", type: '"playful" | "smooth" | "glass"', default: "undefined" },
+  { name: "hideStepper", type: "boolean", default: "false" },
+  { name: "incrementLabel", type: "string", default: '"Increase"' },
+  { name: "decrementLabel", type: "string", default: '"Decrease"' },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />
