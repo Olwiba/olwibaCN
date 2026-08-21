@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.29
+
+### Added
+
+- `NumberInput`: a number field whose steppers follow the theme. Native spin buttons can't be styled — `::-webkit-inner-spin-button` accepts little beyond `appearance: none` and Firefox exposes no hook at all — so they read as unstyled OS chrome inside a themed control, worst in `glass` and `playful`. This hides them and draws stacked chevrons inside the field border. Works controlled or uncontrolled: stepping writes through the prototype's value setter and dispatches `input`, which leaves React's instance-level value tracker stale and so registers as a change. `min`/`max` disable the respective button on arrival rather than clamping silently, stepping an empty field lands on `min` (or `0`) instead of ±step, `step` drives decimal rounding so repeated presses don't accrue float dust, and the buttons are not tab stops because `ArrowUp`/`ArrowDown` already step natively
+- `Input` exports `inputBase` and `inputPlayfulBacking`, so a control that has to look like an Input without being one shares the surface instead of copying it
+
+### Fixed
+
+- `Input`: `modeProp ?? useUIVariant()` short-circuited, so passing an explicit `mode` skipped the hook call and changed hook order between renders. Same fix as `Toaster` in 0.1.28
+
+### Note
+
+- `Input` is unchanged behaviourally: a bare `<Input type="number" />` keeps its native spinners. Removing them there would take the control away from existing consumers and give nothing back — reach for `NumberInput` instead
+
 
 
 
