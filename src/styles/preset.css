@@ -54,30 +54,50 @@
   --neutral-tint-hue: 0;
   --neutral-tint-chroma: 0;
 
+  /*
+   * How far the page drops below pure white. Also 0 by default.
+   *
+   * Chroma alone is not enough. `oklch(1 0.004 186)` is still white — there is
+   * almost no room for colour at maximum lightness — so a tint applied to a
+   * pure-white background barely registers, and "light mode is too bright"
+   * stays true. Lowering the page a little is what makes the tint visible and
+   * the page comfortable.
+   *
+   * It also separates card from background, which are otherwise the identical
+   * value: a card is distinguished from the page only by its border, and a
+   * translucent surface over it (`bg-card/45`) shows nothing at all. The card
+   * drops by a fifth of what the page does, so it lifts without becoming a
+   * different colour.
+   *
+   * Foregrounds are untouched, and the largest move here is 1 → 0.985, so
+   * contrast is effectively unchanged.
+   */
+  --neutral-lift: 0;
+
   /* Per-surface share of --neutral-tint-chroma. */
   --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
   --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
   --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
   --neutral-tint-line: calc(var(--neutral-tint-chroma) * 0.83);
 
-  --background: oklch(1 var(--neutral-tint-page) var(--neutral-tint-hue));
+  --background: oklch(calc(1 - var(--neutral-lift)) var(--neutral-tint-page) var(--neutral-tint-hue));
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 var(--neutral-tint-raised) var(--neutral-tint-hue));
+  --card: oklch(calc(1 - var(--neutral-lift) * 0.2) var(--neutral-tint-raised) var(--neutral-tint-hue));
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 var(--neutral-tint-raised) var(--neutral-tint-hue));
+  --popover: oklch(calc(1 - var(--neutral-lift) * 0.2) var(--neutral-tint-raised) var(--neutral-tint-hue));
   --popover-foreground: oklch(0.145 0 0);
 
   --primary: oklch(0.596 0.145 163.225);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 var(--neutral-tint-muted) var(--neutral-tint-hue));
+  --secondary: oklch(calc(0.97 - var(--neutral-lift) * 0.53) var(--neutral-tint-muted) var(--neutral-tint-hue));
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 var(--neutral-tint-muted) var(--neutral-tint-hue));
+  --muted: oklch(calc(0.97 - var(--neutral-lift) * 0.53) var(--neutral-tint-muted) var(--neutral-tint-hue));
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 var(--neutral-tint-chroma) var(--neutral-tint-hue));
+  --accent: oklch(calc(0.97 - var(--neutral-lift)) var(--neutral-tint-chroma) var(--neutral-tint-hue));
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 var(--neutral-tint-line) var(--neutral-tint-hue));
-  --input: oklch(0.922 var(--neutral-tint-line) var(--neutral-tint-hue));
+  --border: oklch(calc(0.922 - var(--neutral-lift) * 0.67) var(--neutral-tint-line) var(--neutral-tint-hue));
+  --input: oklch(calc(0.922 - var(--neutral-lift) * 0.67) var(--neutral-tint-line) var(--neutral-tint-hue));
   --ring: oklch(0.596 0.145 163.225);
 
   --chart-1: oklch(0.765 0.177 163.223);
@@ -86,13 +106,13 @@
   --chart-4: oklch(0.508 0.118 165.612);
   --chart-5: oklch(0.432 0.095 166.913);
 
-  --sidebar: oklch(0.985 var(--neutral-tint-muted) var(--neutral-tint-hue));
+  --sidebar: oklch(calc(0.985 - var(--neutral-lift) * 0.67) var(--neutral-tint-muted) var(--neutral-tint-hue));
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.596 0.145 163.225);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent: oklch(calc(0.97 - var(--neutral-lift)) var(--neutral-tint-chroma) var(--neutral-tint-hue));
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-border: oklch(calc(0.922 - var(--neutral-lift) * 0.67) var(--neutral-tint-line) var(--neutral-tint-hue));
   --sidebar-ring: oklch(0.596 0.145 163.225);
 }
 
