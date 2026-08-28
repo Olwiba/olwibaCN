@@ -22,24 +22,62 @@
 :root {
   --radius: 0.25rem;
 
-  --background: oklch(1 0 0);
+  /*
+   * Neutral tint — off by default.
+   *
+   * The light neutrals below are pure achromatic: `oklch(1 0 0)` for the
+   * background, chroma 0 on every one of them. That is a deliberate shadcn
+   * default and it is fine for a neutral product, but it makes a branded one
+   * read as clinical: an accent dropped onto pure white has nothing to sit
+   * against, and light mode looks less like "light" than like the absence of
+   * colour.
+   *
+   * Setting these two lets a product tint its neutrals toward its brand hue
+   * without restating every token:
+   *
+   *   :root:not(.dark) {
+   *     --neutral-tint-hue: 186;
+   *     --neutral-tint-chroma: 0.012;
+   *   }
+   *
+   * `:root:not(.dark)`, not `:root` — see the note above the dark block.
+   *
+   * Chroma is scaled per surface rather than applied flat. A tint that reads
+   * as deliberate on a border reads as a colour cast across a full-page
+   * background, so the largest surfaces get a fraction of it and the smallest
+   * get all of it.
+   *
+   * Both default to 0, and `oklch(L 0 H)` is achromatic whatever the hue, so
+   * a consumer that sets neither renders exactly the colours it did before.
+   * The declarations change; the computed values do not.
+   */
+  --neutral-tint-hue: 0;
+  --neutral-tint-chroma: 0;
+
+  /* Per-surface share of --neutral-tint-chroma. */
+  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
+  --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
+  --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
+  --neutral-tint-line: calc(var(--neutral-tint-chroma) * 0.83);
+
+  --background: oklch(1 var(--neutral-tint-page) var(--neutral-tint-hue));
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
+  --card: oklch(1 var(--neutral-tint-raised) var(--neutral-tint-hue));
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
+  --popover: oklch(1 var(--neutral-tint-raised) var(--neutral-tint-hue));
   --popover-foreground: oklch(0.145 0 0);
 
   --primary: oklch(0.596 0.145 163.225);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
+  --secondary: oklch(0.97 var(--neutral-tint-muted) var(--neutral-tint-hue));
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
+  --muted: oklch(0.97 var(--neutral-tint-muted) var(--neutral-tint-hue));
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: oklch(0.97 var(--neutral-tint-chroma) var(--neutral-tint-hue));
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --border: oklch(0.922 var(--neutral-tint-line) var(--neutral-tint-hue));
+  --input: oklch(0.922 var(--neutral-tint-line) var(--neutral-tint-hue));
   --ring: oklch(0.596 0.145 163.225);
 
   --chart-1: oklch(0.765 0.177 163.223);
@@ -48,7 +86,7 @@
   --chart-4: oklch(0.508 0.118 165.612);
   --chart-5: oklch(0.432 0.095 166.913);
 
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: oklch(0.985 var(--neutral-tint-muted) var(--neutral-tint-hue));
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.596 0.145 163.225);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -58,6 +96,19 @@
   --sidebar-ring: oklch(0.596 0.145 163.225);
 }
 
+/*
+ * Overriding any of these from a consumer stylesheet needs `:root:not(.dark)`,
+ * not `:root`.
+ *
+ * `.dark` is a class and `:root` is a pseudo-class — the same specificity. A
+ * consumer's stylesheet is imported after this preset, so a plain `:root`
+ * block wins on source order and repaints *dark* mode with the light values.
+ * It looks like the override was ignored in light mode and applied in dark,
+ * which sends you looking in the wrong place entirely.
+ *
+ * The neutral tint knobs above exist partly to avoid needing such an override
+ * at all.
+ */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
