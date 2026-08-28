@@ -1,5 +1,19 @@
 # Changelog
 
+
+## 0.1.30
+
+### Added
+
+- Light-mode neutrals can be tinted toward a brand hue with `--neutral-tint-hue` and `--neutral-tint-chroma`, both defaulting to `0`. Pure achromatic neutrals — `oklch(1 0 0)` for the background, chroma 0 on every one of them — are the shadcn default and right for a neutral product, but they make a branded one read as clinical: an accent dropped onto pure white has nothing to sit against, and light mode looks less like "light" than like the absence of colour. Nine tokens read the two knobs: `background`, `card`, `popover`, `secondary`, `muted`, `accent`, `border`, `input`, `sidebar`
+- Chroma is scaled per surface rather than applied flat, because a tint that reads as deliberate on a border reads as a colour cast across a full-page background. The page takes `0.33` of it, raised surfaces `0.25`, muted surfaces `0.67`, lines `0.83`, and `accent` takes it whole. Those shares are derived variables (`--neutral-tint-page`, `--neutral-tint-raised`, `--neutral-tint-muted`, `--neutral-tint-line`) rather than magic numbers repeated at each token, so a product tunes one value
+
+### Note
+
+- Nothing changes for a consumer who sets neither knob. `oklch(L 0 H)` is achromatic whatever the hue, so the declarations change and the computed values do not
+- Dark is untouched, and deliberately not parameterised: dark neutrals are already dark enough to carry an accent, so the problem doesn't exist there
+- Overriding these from a consumer stylesheet needs `:root:not(.dark)`, not `:root`. `.dark` is a class and `:root` a pseudo-class — equal specificity — and a consumer's stylesheet is imported after this preset, so a plain `:root` block wins on source order and repaints *dark* mode with the light values. It presents as the override being ignored in light mode and applied in dark, which sends you looking in the wrong place. The tint knobs exist partly to avoid needing such an override at all
+
 ## 0.1.29
 
 ### Added
