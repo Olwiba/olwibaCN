@@ -1,6 +1,26 @@
 # Changelog
 
 
+
+## 0.1.31
+
+### Added
+
+- `--neutral-lift`, how far light-mode surfaces drop below pure white, defaulting to `0`. The tint knobs shipped in 0.1.30 were incomplete on their own: `oklch(1 0.004 186)` is still white — there is almost no room for chroma at maximum lightness — so tinting a pure-white background barely registers and "light mode is too bright" stays true. The knob worked and did not solve the problem. Lowering the page a little is what makes both the tint visible and the page comfortable
+- Lifting also separates `card` from `background`, which are otherwise the identical value. A card is distinguished from the page only by its border, and a translucent surface over it — `bg-card/45` — shows nothing at all. The card drops by a fifth of what the page does, so it lifts without reading as a different colour
+- Each token takes its own share of the lift rather than a flat offset, the same way chroma does: the page and `accent` take it whole, raised surfaces `0.2`, `secondary` and `muted` `0.53`, lines and `sidebar` `0.67`. At `--neutral-lift: 0.015` with `--neutral-tint-chroma: 0.012` this reproduces a set of hand-tuned values to within a rounding step on one token, which is where the ratios came from
+
+### Fixed
+
+- `--sidebar-accent` and `--sidebar-border` were hardcoded achromatic, so they were the two light-mode tokens 0.1.30's tint knobs silently skipped — a tinted sidebar kept grey hover and grey rules. Both now read `--neutral-tint-chroma` / `--neutral-tint-line` like their non-sidebar counterparts
+
+### Note
+
+- Nothing changes for a consumer who sets nothing. `--neutral-lift: 0` makes every `calc()` resolve to the previous literal
+- Foregrounds are untouched and the largest move is `1` → `0.985`, so contrast is effectively unchanged and still far past AA
+- Dark is untouched, and deliberately not parameterised: the problem doesn't exist there
+- Overriding these from a consumer stylesheet still needs `:root:not(.dark)`, not `:root` — see the 0.1.30 note
+
 ## 0.1.30
 
 ### Added
