@@ -23,98 +23,61 @@
   --radius: 0.25rem;
 
   /*
-   * Neutral tint — off by default.
+   * Light neutrals: off-white, tinted toward the brand. Not configurable.
    *
-   * The light neutrals below are pure achromatic: `oklch(1 0 0)` for the
-   * background, chroma 0 on every one of them. That is a deliberate shadcn
-   * default and it is fine for a neutral product, but it makes a branded one
-   * read as clinical: an accent dropped onto pure white has nothing to sit
-   * against, and light mode looks less like "light" than like the absence of
-   * colour.
+   * The shadcn defaults are `oklch(1 0 0)` for the page and chroma 0 on every
+   * neutral — pure white, pure grey. Both are the same mistake in different
+   * directions, and neither is ever the answer anyone actually wanted:
    *
-   * Setting these two lets a product tint its neutrals toward its brand hue
-   * without restating every token:
+   *   - Pure white emits more light than any other surface on screen, so long
+   *     reading tires eyes faster than an off-white does, and a page of it
+   *     reads as sterile rather than clean.
+   *   - Pure grey neutrals give a brand accent nothing to sit against. Light
+   *     mode stops looking like a lighter version of the palette and starts
+   *     looking like the absence of one.
    *
-   *   :root:not(.dark) {
-   *     --neutral-tint-hue: 186;
-   *     --neutral-tint-chroma: 0.012;
-   *   }
+   * So neither is a setting. The page sits at #fafafa, the neutrals carry a
+   * trace of the brand hue, and a product gets that by doing nothing.
    *
-   * `:root:not(.dark)`, not `:root` — see the note above the dark block.
+   * The hue is read from `--primary` with relative colour syntax, so this
+   * needs no per-product configuration and cannot drift from the brand. The
+   * plain off-white values live here; the brand-derived ones are applied in an
+   * `@supports` block below, so a browser without relative colour syntax keeps
+   * a correct, untinted off-white rather than nothing at all.
    *
-   * Chroma is scaled per surface rather than applied flat. A tint that reads
-   * as deliberate on a border reads as a colour cast across a full-page
-   * background, so the largest surfaces get a fraction of it and the smallest
-   * get all of it.
+   * Chroma is scaled per surface rather than applied flat — a tint that reads
+   * as deliberate on a border reads as a colour cast across a full page — and
+   * lightness is stepped so a card lifts off the page rather than matching it,
+   * which is what makes a translucent surface over it visible at all.
    *
-   * Both tint knobs default to 0, and `oklch(L 0 H)` is achromatic whatever
-   * the hue, so a consumer that sets neither gets no colour at all.
-   *
-   * `--neutral-lift` below is the exception: it has a non-zero default,
-   * because pure white is worth refusing by default rather than opting out
-   * of. That is the only value a consumer inherits without asking.
+   * `--neutral-tint-chroma: 0` is the single escape hatch, for a product where
+   * a colour cast would fight its content — a charting or data tool. It keeps
+   * the off-white and drops the hue.
    */
-  --neutral-tint-hue: 0;
-  --neutral-tint-chroma: 0;
-
-  /*
-   * How far the page drops below pure white. Also 0 by default.
-   *
-   * Chroma alone is not enough. `oklch(1 0.004 186)` is still white — there is
-   * almost no room for colour at maximum lightness — so a tint applied to a
-   * pure-white background barely registers, and "light mode is too bright"
-   * stays true. Lowering the page a little is what makes the tint visible and
-   * the page comfortable.
-   *
-   * It also separates card from background, which are otherwise the identical
-   * value: a card is distinguished from the page only by its border, and a
-   * translucent surface over it (`bg-card/45`) shows nothing at all. The card
-   * drops by a fifth of what the page does, so it lifts without becoming a
-   * different colour.
-   *
-   * Foregrounds are untouched, and the largest move here is 1 → 0.985, so
-   * contrast is effectively unchanged.
-   *
-   * The default is not 0. Pure white is the one value worth refusing outright:
-   * it emits more light than any other surface on the screen, which is why
-   * long reading sessions tire eyes faster on #ffffff than on an off-white,
-   * and it flattens a page into something sterile. The convention in
-   * editorial and product design is to sit just off it.
-   *
-   * 0.003 puts the page at #fefefe — one step per channel, deliberately
-   * conservative. It removes the extreme without restyling any consumer's
-   * product, and it is the floor rather than the recommendation: 0.015
-   * (#fafafa) is where the glare actually goes, and is what nestrrr uses.
-   *
-   * `--neutral-lift: 0` still gets pure white back for anything that wants
-   * it — a print stylesheet, a canvas, a screenshot surface.
-   */
-  --neutral-lift: 0.003;
-
-  /* Per-surface share of --neutral-tint-chroma. */
+  --neutral-tint-chroma: 0.012;
   --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
   --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
   --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
   --neutral-tint-line: calc(var(--neutral-tint-chroma) * 0.83);
 
-  --background: oklch(calc(1 - var(--neutral-lift)) var(--neutral-tint-page) var(--neutral-tint-hue));
+  --background: oklch(0.985 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(calc(1 - var(--neutral-lift) * 0.2) var(--neutral-tint-raised) var(--neutral-tint-hue));
+  --card: oklch(0.997 0 0);
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(calc(1 - var(--neutral-lift) * 0.2) var(--neutral-tint-raised) var(--neutral-tint-hue));
+  --popover: oklch(0.997 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
   --primary: oklch(0.596 0.145 163.225);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(calc(0.97 - var(--neutral-lift) * 0.53) var(--neutral-tint-muted) var(--neutral-tint-hue));
+  --secondary: oklch(0.962 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(calc(0.97 - var(--neutral-lift) * 0.53) var(--neutral-tint-muted) var(--neutral-tint-hue));
+  --muted: oklch(0.962 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(calc(0.97 - var(--neutral-lift)) var(--neutral-tint-chroma) var(--neutral-tint-hue));
+  --accent: oklch(0.955 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(calc(0.922 - var(--neutral-lift) * 0.67) var(--neutral-tint-line) var(--neutral-tint-hue));
-  --input: oklch(calc(0.922 - var(--neutral-lift) * 0.67) var(--neutral-tint-line) var(--neutral-tint-hue));
+  --border: oklch(0.912 0 0);
+  --input: oklch(0.912 0 0);
   --ring: oklch(0.596 0.145 163.225);
 
   --chart-1: oklch(0.765 0.177 163.223);
@@ -123,13 +86,13 @@
   --chart-4: oklch(0.508 0.118 165.612);
   --chart-5: oklch(0.432 0.095 166.913);
 
-  --sidebar: oklch(calc(0.985 - var(--neutral-lift) * 0.67) var(--neutral-tint-muted) var(--neutral-tint-hue));
+  --sidebar: oklch(0.975 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.596 0.145 163.225);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(calc(0.97 - var(--neutral-lift)) var(--neutral-tint-chroma) var(--neutral-tint-hue));
+  --sidebar-accent: oklch(0.955 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(calc(0.922 - var(--neutral-lift) * 0.67) var(--neutral-tint-line) var(--neutral-tint-hue));
+  --sidebar-border: oklch(0.912 0 0);
   --sidebar-ring: oklch(0.596 0.145 163.225);
 }
 
@@ -146,6 +109,36 @@
  * The neutral tint knobs above exist partly to avoid needing such an override
  * at all.
  */
+/*
+ * The brand-derived half, gated on relative colour syntax being supported.
+ *
+ * `@supports` rather than two declarations in `:root`. A custom property
+ * accepts almost any token stream, so `--background: oklch(from ...)` is
+ * stored even by a browser that cannot parse it — the failure only appears
+ * when the value is *used*, and then it is invalid at computed-value time and
+ * the property falls back to its initial value, not to an earlier declaration.
+ * The result would be a transparent page rather than an untinted one.
+ *
+ * Gating on support means an older browser simply never sees these, and keeps
+ * the plain off-white neutrals above. Which are correct on their own — the
+ * tint is the refinement, not the requirement.
+ */
+@supports (color: oklch(from white l c h)) {
+  :root {
+    --background: oklch(from var(--primary) 0.985 var(--neutral-tint-page) h);
+    --card: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
+    --popover: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
+    --secondary: oklch(from var(--primary) 0.962 var(--neutral-tint-muted) h);
+    --muted: oklch(from var(--primary) 0.962 var(--neutral-tint-muted) h);
+    --accent: oklch(from var(--primary) 0.955 var(--neutral-tint-chroma) h);
+    --border: oklch(from var(--primary) 0.912 var(--neutral-tint-line) h);
+    --input: oklch(from var(--primary) 0.912 var(--neutral-tint-line) h);
+    --sidebar: oklch(from var(--primary) 0.975 var(--neutral-tint-muted) h);
+    --sidebar-accent: oklch(from var(--primary) 0.955 var(--neutral-tint-chroma) h);
+    --sidebar-border: oklch(from var(--primary) 0.912 var(--neutral-tint-line) h);
+  }
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
