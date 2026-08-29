@@ -3,6 +3,27 @@
 
 
 
+
+## 0.1.33
+
+### Changed
+
+- Light neutrals are off-white and tinted toward the brand hue, and neither is configurable any more. The page sits at `#fafafa` (`oklch(0.985 …)`) rather than `#fefefe`, and every light neutral carries a trace of colour. A product gets both by doing nothing. The last three releases arrived at this by half-steps — a hue knob, then a chroma knob, then a lift, each defaulting to off or nearly off — and the result was that the defaults stayed wrong and every product had to restate the same three lines to fix them. Pure white and pure grey are the same mistake in two directions: white emits more light than any other surface on screen, so long reading tires eyes faster than an off-white and the page reads as sterile rather than clean; grey neutrals give a brand accent nothing to sit against, so light mode stops looking like a lighter version of the palette and starts looking like the absence of one. Neither is worth a setting
+- The hue is read from `--primary` with relative colour syntax — `oklch(from var(--primary) 0.985 var(--neutral-tint-page) h)` — which is what makes this work without configuration. `cn` cannot know a product's brand hue, but it can read the one already declared, and a tint derived that way cannot drift from the brand the way a hardcoded number does
+- Lightness is now stepped per token rather than derived from a lift multiplier, and `--card` (`0.997`) sits *above* `--background` (`0.985`) instead of below it. A card previously differed from the page only by its border, so a translucent surface over it — `bg-card/45` — showed nothing at all. Popovers move with cards; `secondary`, `muted`, `accent`, lines and `sidebar` each take their own step
+
+### Removed
+
+- `--neutral-tint-hue` and `--neutral-lift`, both added in the last two releases. The hue comes from `--primary` now, and the lift is baked into the token values. A consumer still setting either gets no error and no effect — the properties are simply unread
+- The `:root:not(.dark)` override advice from 0.1.30 no longer applies to the one remaining knob. Dark's tokens don't read `--neutral-tint-chroma`, so a plain `:root` block is safe for it. The advice still holds for overriding any *token* directly
+
+### Note
+
+- `--neutral-tint-chroma: 0` is the single escape hatch, for a product where a colour cast would fight its content — a charting or data tool. It keeps the off-white and drops the hue. There is no longer a way to get pure white back short of setting `--background` yourself
+- The brand-derived values live in `@supports (color: oklch(from white l c h))`, not alongside the plain ones in `:root`. The usual progressive-enhancement pattern — plain value first, derived value second, let an old browser drop the second — does not work for custom properties. A custom property accepts almost any token stream, so `--background: oklch(from …)` is *stored* even where it cannot be parsed; the failure surfaces only when the value is used, and then it is invalid at computed-value time and falls back to the property's initial value rather than to the earlier declaration. That is a transparent page, not an untinted one. Gating on support means an older browser never sees them and keeps the plain off-white neutrals, which are correct on their own — the tint is the refinement, not the requirement
+- Foregrounds are untouched. The largest move is `1` → `0.985` on `background`, so contrast is effectively unchanged and still far past AA
+- Dark is untouched. Neither problem exists there
+
 ## 0.1.32
 
 ### Changed
