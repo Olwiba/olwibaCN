@@ -47,9 +47,12 @@
    * background, so the largest surfaces get a fraction of it and the smallest
    * get all of it.
    *
-   * Both default to 0, and `oklch(L 0 H)` is achromatic whatever the hue, so
-   * a consumer that sets neither renders exactly the colours it did before.
-   * The declarations change; the computed values do not.
+   * Both tint knobs default to 0, and `oklch(L 0 H)` is achromatic whatever
+   * the hue, so a consumer that sets neither gets no colour at all.
+   *
+   * `--neutral-lift` below is the exception: it has a non-zero default,
+   * because pure white is worth refusing by default rather than opting out
+   * of. That is the only value a consumer inherits without asking.
    */
   --neutral-tint-hue: 0;
   --neutral-tint-chroma: 0;
@@ -71,8 +74,22 @@
    *
    * Foregrounds are untouched, and the largest move here is 1 → 0.985, so
    * contrast is effectively unchanged.
+   *
+   * The default is not 0. Pure white is the one value worth refusing outright:
+   * it emits more light than any other surface on the screen, which is why
+   * long reading sessions tire eyes faster on #ffffff than on an off-white,
+   * and it flattens a page into something sterile. The convention in
+   * editorial and product design is to sit just off it.
+   *
+   * 0.003 puts the page at #fefefe — one step per channel, deliberately
+   * conservative. It removes the extreme without restyling any consumer's
+   * product, and it is the floor rather than the recommendation: 0.015
+   * (#fafafa) is where the glare actually goes, and is what nestrrr uses.
+   *
+   * `--neutral-lift: 0` still gets pure white back for anything that wants
+   * it — a print stylesheet, a canvas, a screenshot surface.
    */
-  --neutral-lift: 0;
+  --neutral-lift: 0.003;
 
   /* Per-surface share of --neutral-tint-chroma. */
   --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
