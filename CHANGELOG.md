@@ -2,6 +2,21 @@
 
 
 
+
+## 0.1.32
+
+### Changed
+
+- `--neutral-lift` now defaults to `0.003` instead of `0`, putting the light-mode page at `#fefefe` rather than `#ffffff`. Pure white is the one value worth refusing by default: it emits more light than any other surface on the screen, so long reading sessions tire eyes faster on `#ffffff` than on an off-white, and it flattens a page into something sterile. Sitting just off it is the convention in editorial and product design, and it is the same reasoning behind the near-universal advice against pure black — which Refactoring UI states outright, while saying nothing about white
+- `0.003` is deliberately conservative: one step per channel, enough to remove the extreme without restyling any consumer's product. It is the floor rather than the recommendation — `0.015` puts the page at `#fafafa`, which is where the glare actually goes
+
+### Note
+
+- This is the only value a consumer now inherits without asking for it. The two tint knobs shipped in 0.1.30 still default to `0` and still change nothing. The comment claiming all three were a no-op has been corrected rather than left to mislead
+- `--neutral-lift: 0` gets pure white back for anything that wants it — a print stylesheet, a canvas, a screenshot surface
+- The lift is distributed per token as in 0.1.31, so this moves every light-mode surface by its own share, not just `background`. Foregrounds are untouched and contrast is unaffected at this magnitude
+- Dark is untouched
+
 ## 0.1.31
 
 ### Added
