@@ -5,6 +5,20 @@
 
 
 
+
+## 0.1.35
+
+No packaged changes — `dist` and the two stylesheets are byte-identical to 0.1.34. Everything below is the docs site's `Sandbox`, which is documented here because page-pattern demos are how the components get read.
+
+### Added
+
+- `SandboxControls`, a portal for a demo's own example switches — loading/empty/populated, layout variants. A demo renders it anywhere in its tree, including inside the preview iframe, and the DOM lands in a bordered strip below the preview frame. Rendered in place, those switches sit inside the previewed page and read as product chrome, which teaches exactly the wrong lesson about a page pattern: the reader can't tell which controls belong to the pattern and which belong to the documentation. The strip mirrors the `ComponentPreview`/`DemoControls` convention already used for component demos, so the two demo types now read the same way
+- The strip carries `data-slot="sandbox-controls"`, matching the ecosystem's `data-slot` convention and making it addressable from tests and inspection
+
+### Fixed
+
+- An expanded sandbox renders near-fullscreen, but a fixed-height preview kept its pixel height, floored at 720 — so every viewport preset stranded vertical space below the demo in the one mode that had room to spare. Fixed-height previews now stretch through the modal via the flex chain instead of a pixel height. Auto-height previews are unchanged: they keep growing and scrolling the wrapper, since there is no fixed frame to stretch
+
 ## 0.1.34
 
 No user-facing changes.
