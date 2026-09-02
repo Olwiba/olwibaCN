@@ -6,6 +6,17 @@
 
 
 
+
+## 0.1.36
+
+### Added
+
+- Add form presentation
+
+### Fixed
+
+- Default toasts to 6s, not sonner's 4s
+
 ## 0.1.35
 
 No packaged changes — `dist` and the two stylesheets are byte-identical to 0.1.34. Everything below is the docs site's `Sandbox`, which is documented here because page-pattern demos are how the components get read.
