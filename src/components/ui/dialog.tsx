@@ -32,11 +32,24 @@ const DialogOverlay = React.forwardRef<
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 type DialogMode = "playful" | "smooth" | "glass"
+type DialogPresentation = "default" | "form"
+
+type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+  mode?: DialogMode
+  /**
+   * Geometry for the interaction being presented.
+   *
+   * `form` keeps substantial content inset, top-aligned, viewport-constrained,
+   * and internally scrollable on compact screens. It returns to the standard
+   * centred dialog geometry from `sm` upward.
+   */
+  presentation?: DialogPresentation
+}
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { mode?: DialogMode }
->(({ className, mode: modeProp, children, ...props }, ref) => {
+  DialogContentProps
+>(({ className, mode: modeProp, presentation = "default", children, ...props }, ref) => {
   const mode = modeProp ?? useUIVariant()
 
   return (
@@ -47,7 +60,11 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-top-full data-[state=open]:slide-in-from-top-full",
+        "fixed left-[50%] z-50 grid translate-x-[-50%] gap-4 border bg-background duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-top-full data-[state=open]:slide-in-from-top-full",
+        presentation === "default" &&
+          "top-[50%] w-full max-w-lg translate-y-[-50%] p-6",
+        presentation === "form" &&
+          "top-4 max-h-[calc(100dvh-2rem)] w-[calc(100vw-1rem)] max-w-lg translate-y-0 overflow-y-auto rounded-lg p-4 pb-6 sm:top-[50%] sm:max-h-[85dvh] sm:w-full sm:translate-y-[-50%] sm:p-6",
         !mode && "shadow-lg sm:rounded-lg",
         mode === "smooth" && "rounded-2xl shadow-xl",
         mode === "playful" && "rounded-xl border-2 shadow-lg shadow-primary/10",
@@ -135,4 +152,6 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  type DialogContentProps,
+  type DialogPresentation,
 }
