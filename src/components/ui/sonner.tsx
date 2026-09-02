@@ -47,7 +47,24 @@ function useDocumentTheme(): "light" | "dark" {
   return theme
 }
 
-const Toaster = ({ mode: modeProp, className, style, ...props }: ToasterProps & { mode?: ToasterMode }) => {
+/**
+ * sonner's own default is 4 seconds, which user testing found is roughly the
+ * time it takes to *notice* a toast — people reported them vanishing as they
+ * looked over. Anything carrying an action ("View my monitors") also has to be
+ * read and then acted on, which 4s does not allow.
+ *
+ * A default rather than a fixed value: `duration` is still a prop, and an
+ * individual toast can override it at the call site.
+ */
+const DEFAULT_TOAST_DURATION = 6000
+
+const Toaster = ({
+  mode: modeProp,
+  className,
+  style,
+  duration = DEFAULT_TOAST_DURATION,
+  ...props
+}: ToasterProps & { mode?: ToasterMode }) => {
   const theme = useDocumentTheme()
   // Not `modeProp ?? useUIVariant()` — `??` short-circuits, so passing an
   // explicit mode skipped the hook call and changed the hook order between
@@ -118,6 +135,7 @@ const Toaster = ({ mode: modeProp, className, style, ...props }: ToasterProps & 
       )}
       <Sonner
         theme={theme as ToasterProps["theme"]}
+        duration={duration}
         className={cn("toaster group", mode && `toaster-${mode}`, className)}
         style={{ zIndex: 9999999, ...style }}
         icons={{
