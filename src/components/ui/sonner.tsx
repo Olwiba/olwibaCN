@@ -112,6 +112,46 @@ const Toaster = ({
           height: 0.75rem;
           width: 0.75rem;
         }
+        /* Reserve the corner the close button now occupies.
+           sonner's own button straddles the toast's edge (a -35%/-35%
+           transform), so it can never touch the content. Moving it inside gave
+           it a neater home and took that guarantee away with it: on a toast
+           whose title runs the width of the card, the cross landed on the
+           text. Padding is the other half of that decision. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:has([data-close-button]) {
+          padding-right: 2rem;
+        }
+        /* Type scale. sonner renders title and description at the same weight
+           and size, so a one-line toast reads as a sentence rather than a
+           result — which is most of why these looked unfinished next to the
+           richer notify() ones. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-title] {
+          font-weight: 500;
+          line-height: 1.35;
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-description] {
+          margin-top: 0.185rem;
+          font-size: 0.8125rem;
+          line-height: 1.45;
+          opacity: 0.75;
+        }
+        /* Buttons inherit the toast's own colour rather than the global
+           primary, so an action on a richColors error still reads against red
+           instead of disappearing into it. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-button] {
+          height: 1.75rem;
+          border-radius: var(--radius-sm);
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action] {
+          background: color-mix(in oklab, currentColor 90%, transparent);
+          color: var(--normal-bg);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-cancel] {
+          background: color-mix(in oklab, currentColor 10%, transparent);
+          color: inherit;
+        }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true']:hover [data-close-button]:hover {
           background: color-mix(in oklab, currentColor 12%, transparent);
           border-color: transparent;
