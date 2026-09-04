@@ -7,6 +7,15 @@
 
 
 
+
+## 0.1.37
+
+### Fixed
+
+- Give the close button its corner back, and a type scale [skip ci]
+- Make the mobile docs chrome actually usable [skip ci]
+- Pin @olwiba/dx 0.0.23 [skip ci]
+
 ## 0.1.36
 
 ### Added
