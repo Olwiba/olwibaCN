@@ -201,7 +201,13 @@ function IframePreview({
   }, [autoHeight, mountNode]);
 
   return (
-    <div className={cn('relative w-full', !autoHeight && 'h-full', className)}>
+    // Marked so preview capture has a stable target. The demo itself lives in
+    // an iframe, which a selector cannot reach into; screenshotting this
+    // wrapper captures what the frame is displaying.
+    <div
+      data-slot="sandbox-preview"
+      className={cn('relative w-full', !autoHeight && 'h-full', className)}
+    >
       <iframe
         ref={iframeRef}
         className={cn('block w-full border-0 bg-transparent', !autoHeight && 'h-full')}
