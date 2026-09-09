@@ -9,6 +9,27 @@
 
 
 
+
+## 0.1.39
+
+No packaged changes — `dist` and the two published stylesheets are byte-identical to 0.1.38. Everything below is docs-site surface: the sidebar, the API reference, the demo harness, and the animation sync source.
+
+### Added
+
+- `SidebarItemDecoration`, handed to `DocsSidebar` through `DocsLayout`'s new `itemDecoration` prop. Four optional per-page callbacks — `suffix` for a node rendered after the label, `enchanted` for the glint treatment, `muted` for rows the visitor cannot fully read yet, and `label` for screen-reader-only text describing the row's state. Deliberately generic: a docs site may want to mark rows paid, new or deprecated, and the sidebar has no business knowing which — it renders what it is given. `label` is the part that isn't optional in practice, because colour and motion must never carry the state on their own
+- `locked` on `APIReference`, which renders the closed control with a lock, a `title` explaining why it will not open, and no contents. This is presentation for a decision made on the server, not the decision itself: it is safe only because the panel is closed by default and its body is conditionally rendered, so a locked control and a full one are identical in the DOM. Callers must omit `props` entirely — passing them alongside `locked` puts the data in the page for anyone to read. The control carries `aria-disabled` rather than `disabled`, matching `DocsHeader`'s locked GitHub control; a disabled button stops emitting pointer events, so the title explaining the lock would never appear
+- `src/docs/components/demo-controls.tsx`, holding `DemoControls`, `LiveUsageCode` and `useUsageCode`. They lived in `ComponentPreview`, which also holds a registry of one site's demos and is necessarily site-local, while these three are generic and every published demo imports them — so a demo rendered by another site had to carry a consumer-local alias to a file that site does not have. `ComponentPreview` re-exports all three, so existing imports keep working
+- `data-slot="sandbox-preview"` on the sandbox's iframe wrapper, giving preview capture a stable target. The demo itself lives in an iframe, which a selector cannot reach into; screenshotting the wrapper captures what the frame is displaying
+
+### Fixed
+
+- `ActiveThemeProvider` returned early whenever `initialTheme` was set, so any site declaring an application default could never restore a visitor's saved choice — the theme silently reset on every navigation. `initialTheme` is the application's default, not an override: precedence is the default first, then whatever the visitor picked
+- Under `prefers-reduced-motion: reduce`, `.animate-enchanted` is now hidden. The reduced-motion block previously only paused `[data-iso-scroll]`, so glints kept animating at full strength for the visitors who asked them not to. They are hidden rather than paused because the keyframes drive opacity and scale, so a paused glint freezes wherever it happened to be — some invisible, some mid-pop — which reads as a rendering fault rather than a decoration. Hiding costs nothing: wherever the effect marks something, a label carries the meaning and the glint is decoration on top. `animations.css` is the sync source for `cn-animations.css`, so this reaches consumers on their next sync rather than through `dist`
+
+### Changed
+
+- A decorated sidebar row keeps its glint while it is the current page, instead of having to be pointed at. Everywhere else the effect stays hover-only, so a long list of decorated rows does not all animate at once. This is also why the reduced-motion fix above matters more than it used to: the effect can now run persistently rather than only under a cursor
+
 ## 0.1.38
 
 No user-facing changes.
