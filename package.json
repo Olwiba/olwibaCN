@@ -35,7 +35,8 @@
     "tsc": "tsc",
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "iso:generate": "bun scripts/generate-iso-previews.ts",
-    "env:check": "dx env-check"
+    "env:check": "dx env-check",
+    "docs:check": "dx docs-check"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
