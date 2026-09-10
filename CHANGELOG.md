@@ -10,6 +10,18 @@
 
 
 
+
+## 0.1.40
+
+### Added
+
+- Let the header collapse and the prop table explain itself
+
+### Changed
+
+- Pin @olwiba/dx 0.0.28 for env:check
+- Add env:check
+
 ## 0.1.39
 
 No packaged changes — `dist` and the two published stylesheets are byte-identical to 0.1.38. Everything below is docs-site surface: the sidebar, the API reference, the demo harness, and the animation sync source.
