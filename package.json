@@ -34,7 +34,8 @@
     "registry:build": "npx shadcn@latest build",
     "tsc": "tsc",
     "types:check": "fumadocs-mdx && tsc --noEmit",
-    "iso:generate": "bun scripts/generate-iso-previews.ts"
+    "iso:generate": "bun scripts/generate-iso-previews.ts",
+    "env:check": "dx env-check"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
