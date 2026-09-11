@@ -12,6 +12,17 @@
 
 
 
+
+## 0.1.42
+
+### Added
+
+- `showCloseButton` on `DialogContent`, defaulting to `true`. The corner close control rendered unconditionally, so a dialog that already ends in an obvious way out — a confirm button, the last step of a flow — carried two exits and no way to drop one. Escape and clicking the overlay still close the dialog whichever way this is set, so turning the corner button off costs no accessibility. It is a composition escape hatch rather than a licence to ship a dialog with no way out: leave it on for anything a reader might want out of quickly, and turn it off only where the second control genuinely competes with the one they are meant to press. `AlertDialog` is untouched — it has never rendered a corner close, because the point of it is that you answer the question
+
+### Changed
+
+- devDependency bumps: `@olwiba/docs` 0.1.46 → 0.1.47, `@olwiba/dx` 0.0.28 → 0.0.30. Docs-site and tooling only; neither reaches `dist` or a consumer
+
 ## 0.1.41
 
 No packaged changes — `dist` and the two published stylesheets are byte-identical to 0.1.40. Three surfaces move here: the docs-site chrome (header, footer, search), the shadcn registry published at `/r`, and the server.
