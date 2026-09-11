@@ -99,6 +99,7 @@
     }
   },
   "devDependencies": {
+    "@olwiba/docs": "0.1.46",
     "@olwiba/dx": "0.0.28",
     "@tailwindcss/vite": "^4.3.1",
     "@tanstack/react-router": "^1.151.6",
