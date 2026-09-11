@@ -11,6 +11,26 @@
 
 
 
+
+## 0.1.41
+
+No packaged changes — `dist` and the two published stylesheets are byte-identical to 0.1.40. Three surfaces move here: the docs-site chrome (header, footer, search), the shadcn registry published at `/r`, and the server.
+
+### Added
+
+- `versions` on `DocsFooter`, rendering each released version as a pill linking to its changelog, plus the `VersionPill` component and `DocsFooterVersion` type behind it. A pill carries a bare semver — the `v` is added at render — with an optional `label` for sites shipping more than one package and an `accent` of `pro`, which borrows the primary colour so two pills can be told apart without reading them. This replaces the `changelog.md` text link, which said the same thing in more words and left the one fact a visitor actually wants — which version is out — somewhere else entirely. Setting `versions` ignores `changelogUrl`; the pills take over from the text link rather than sitting beside it, and `changelogUrl` on its own still works for sites that have not moved. Unlike the links, pills stay visible at every width: they are the shortest thing in the footer and the only part of it that changes, so collapsing them into the overflow menu would hide the one thing worth glancing at
+- `number-input` in the published registry, along with the `glass` button mode on `button` and `ui-variant-context`. Both were committed in source and never regenerated into `public/r`, so the registry a consumer installs from had been serving the previous generation of those files
+
+### Fixed
+
+- `SearchButton` was `w-full max-w-[75%]` at every width, so on a 390px screen search claimed three quarters of the header row and left the wordmark crushed to a four-pixel sliver beside it. Nothing overflowed — the row simply gave all its space to the widest thing in it. Below `md` it is now a square icon button, the header gutter drops from `px-4` to `px-3`, and the wordmark steps down to `text-base` under `sm` rather than truncating mid-word. The ⌘K hint moves with the field to `md`, since a phone has no ⌘K to offer
+- The footer's overflow menu rendered whenever the footer had anything on its right side, so a site with version pills and no links got a menu button that opened an empty menu. It now renders only when there are links or a changelog URL to put in it
+
+### Changed
+
+- `rightSlot` renders after the overflow button instead of before it. The theme switcher is pinned to the end of the header row, so anything a site keeps in the bar — a second switcher, most obviously — belongs beside it rather than stranded on the far side of a menu button. The overflow trigger also drops from `size-9` to `size-8`, matching the other controls in the row
+- `server.ts` uses `createServer()` from `@olwiba/docs/server` instead of a hand-rolled Hono server. olwibaCN was the last site still running its own; `@olwiba/docs` was extracted from this repository, so the duplication was history rather than a decision, and it meant a server fix had to be made twice. `createServer()` is a superset of what was here — the same static-then-SSR routing, plus a cached SSR handler instead of a dynamic import per request, paths resolved against `process.cwd()` rather than relatively, and a bound fetch. The implied dependency cycle is nominal: `@olwiba/docs` peer-depends on `@olwiba/cn`, but the `/server` subpath imports only `hono` and `node:path`, and it is a devDependency besides — `files` is dist-only, so nothing reaches consumers
+
 ## 0.1.40
 
 ### Added
