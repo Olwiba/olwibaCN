@@ -13,6 +13,11 @@
 
 
 
+
+## 0.1.43
+
+No user-facing changes.
+
 ## 0.1.42
 
 ### Added
