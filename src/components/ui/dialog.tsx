@@ -44,12 +44,21 @@ type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.
    * centred dialog geometry from `sm` upward.
    */
   presentation?: DialogPresentation
+  /**
+   * Whether the corner close button renders.
+   *
+   * Leave it on for anything the reader might want out of quickly. Turn it off
+   * only when the dialog already ends in an obvious way out, where a second
+   * control in the corner is one exit too many. Escape and clicking the
+   * overlay still close it either way, so this costs no accessibility.
+   */
+  showCloseButton?: boolean
 }
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   DialogContentProps
->(({ className, mode: modeProp, presentation = "default", children, ...props }, ref) => {
+>(({ className, mode: modeProp, presentation = "default", showCloseButton = true, children, ...props }, ref) => {
   const mode = modeProp ?? useUIVariant()
 
   return (
@@ -75,10 +84,12 @@ const DialogContent = React.forwardRef<
     >
       <UIVariantProvider mode={mode}>
         {children}
-        <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-          <X className="h-4 w-4" />
-          <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
+        {showCloseButton && (
+          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        )}
       </UIVariantProvider>
     </DialogPrimitive.Content>
   </DialogPortal>
