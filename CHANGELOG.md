@@ -14,6 +14,20 @@
 
 
 
+
+## 0.1.44
+
+No packaged changes — nothing under the two entry points that build into `dist` (`src/components/ui`, `src/email`) moved, and the two published stylesheets are untouched. This release is the docs-site layout and the example environment file.
+
+### Fixed
+
+- The docs layout wrapper carried `lg:px-2` on top of the sidebar's own `px-2`, so sidebar text sat 16px from the layout edge and 8px from the rail on its other side. Nothing was broken — the two paddings simply did not know about each other, and the result read as a lopsided gutter at every width above `lg`. The outer padding is gone: the page's dashed rails already provide the outer breathing room, and the sidebar keeps the one gutter it actually owns
+
+### Changed
+
+- `.env.example` documents `VITE_GA_MEASUREMENT_ID`. Unset is the supported default — nothing loads, no request reaches Google, and there is no consent question to answer — which is the reason to write it down rather than leave it as a variable someone discovers in the source and has to guess the shape of. A measurement ID is public by design, so it ships in the page and authorises nothing. The note also records the deployment trap: it is a `VITE_` build argument, baked in when the image is built, so setting it on a running container does nothing until the image is rebuilt. In Coolify that means marking it as a build variable and redeploying, not restarting
+- devDependency bump: `@olwiba/dx` 0.0.30 → 0.0.31. Build and lint tooling only; it is not a runtime dependency and nothing about it reaches a consumer
+
 ## 0.1.43
 
 No user-facing changes.

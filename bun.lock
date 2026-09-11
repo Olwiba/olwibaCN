@@ -55,7 +55,7 @@
       },
       "devDependencies": {
         "@olwiba/docs": "0.1.47",
-        "@olwiba/dx": "0.0.30",
+        "@olwiba/dx": "0.0.31",
         "@tailwindcss/vite": "^4.3.1",
         "@tanstack/react-router": "^1.151.6",
         "@tanstack/react-router-devtools": "^1.151.6",
@@ -242,7 +242,7 @@
 
     "@olwiba/docs": ["@olwiba/docs@0.1.47", "", { "dependencies": { "clsx": "^2.1.1", "fumadocs-core": "^16.4.7", "fumadocs-ui": "^16.4.7", "hono": "^4.7.0", "lucide-react": "^0.562.0", "shiki": "^3.0.0", "sonner": "^2.0.7", "tailwind-merge": "^3.4.0" }, "peerDependencies": { "@olwiba/cn": ">=0.1.2", "@tanstack/react-router": ">=1.0.0", "react": ">=18.0.0", "react-dom": ">=18.0.0" } }, "sha512-gdsg2kpvbUGahNjVdTUDbVp3eE9nPQgrjS98Lschyrf9X91ptKu7y5y8ZgdH7tO+hPvc3G5CgoYjqE/6NBj53g=="],
 
-    "@olwiba/dx": ["@olwiba/dx@0.0.30", "", { "peerDependencies": { "@typescript-eslint/eslint-plugin": ">=8.0.0", "@typescript-eslint/parser": ">=8.0.0", "eslint": ">=9.0.0", "eslint-plugin-react-hooks": ">=5.0.0", "lucide-static": ">=0.400.0", "puppeteer-core": ">=25.9.0", "sharp": ">=0.35.0" }, "optionalPeers": ["@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "eslint-plugin-react-hooks", "lucide-static", "puppeteer-core", "sharp"], "bin": { "dx": "dist/cli.js" } }, "sha512-eQOVX1q37KleDq/WZ83gBJQqC2ocQlJKm1QDhLAY93B5DVcGkeyaBUPSqr2br/fKO3IEwSqR5N0xX6r2OO7gfQ=="],
+    "@olwiba/dx": ["@olwiba/dx@0.0.31", "", { "peerDependencies": { "@typescript-eslint/eslint-plugin": ">=8.0.0", "@typescript-eslint/parser": ">=8.0.0", "eslint": ">=9.0.0", "eslint-plugin-react-hooks": ">=5.0.0", "lucide-static": ">=0.400.0", "puppeteer-core": ">=25.9.0", "sharp": ">=0.35.0" }, "optionalPeers": ["@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "eslint-plugin-react-hooks", "lucide-static", "puppeteer-core", "sharp"], "bin": { "dx": "dist/cli.js" } }, "sha512-blEKDqA6tnUapkRHkcUD4QNHakyNvAmlUicEhO7zDtiD7OPpMZKSH9bnXKq5NS8JQan7+PQn1RGcEmvc0GrHCw=="],
 
     "@oozcitak/dom": ["@oozcitak/dom@2.0.2", "", { "dependencies": { "@oozcitak/infra": "^2.0.2", "@oozcitak/url": "^3.0.0", "@oozcitak/util": "^10.0.0" } }, "sha512-GjpKhkSYC3Mj4+lfwEyI1dqnsKTgwGy48ytZEhm4A/xnH/8z9M3ZVXKr/YGQi3uCLs1AEBS+x5T2JPiueEDW8w=="],
 
