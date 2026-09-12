@@ -64,7 +64,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="flex min-h-screen flex-col antialiased [--header-height:3.5rem] [--footer-height:3.5rem]">
+      <body className="flex min-h-dvh flex-col antialiased [--header-height:3.5rem] [--footer-height:3.5rem]">
         <ActiveThemeProvider>
           <RootProvider
             search={{
