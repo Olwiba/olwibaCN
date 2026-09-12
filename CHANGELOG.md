@@ -15,6 +15,13 @@
 
 
 
+
+## 0.1.45
+
+### Added
+
+- Put the version pill beside the credit line
+
 ## 0.1.44
 
 No packaged changes — nothing under the two entry points that build into `dist` (`src/components/ui`, `src/email`) moved, and the two published stylesheets are untouched. This release is the docs-site layout and the example environment file.
