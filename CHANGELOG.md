@@ -16,6 +16,17 @@
 
 
 
+
+## 0.1.46
+
+### Added
+
+- Put the version pill beside the credit line
+
+### Changed
+
+- Update
+
 ## 0.1.45
 
 ### Added
