@@ -6,6 +6,10 @@
  *
  * Defaults to dark mode if no preference is stored.
  *
+ * The `.dark` class this writes is the theme's source of truth — nothing here
+ * reads `prefers-color-scheme`. Code that needs the theme as a value rather than
+ * as a `dark:` variant should call `useResolvedTheme`, which observes this class.
+ *
  * Usage (in your root layout / document shell):
  *   <head>
  *     <ThemeScript />

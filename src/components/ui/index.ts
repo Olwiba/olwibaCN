@@ -67,6 +67,7 @@ export { AsciiText, type AsciiTextProps } from '../AsciiText';
 // Hooks
 export { useIsMobile } from '@/hooks/use-mobile';
 export { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
+export { useResolvedTheme } from '@/hooks/use-resolved-theme';
 
 // Lib
 export { fireConfetti, type ConfettiOptions } from '../../lib/confetti';
