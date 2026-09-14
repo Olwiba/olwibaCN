@@ -1,29 +1,11 @@
 # Changelog
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 0.1.50
 
-No user-facing changes.
+### Added
+
+- `useResolvedTheme`, a hook reporting the theme actually in effect. It reads the `dark` class on `<html>`, which is what `ThemeScript` and the theme switches write, rather than `prefers-color-scheme`, which nothing in this design system sets. For content that needs the theme as a value instead of a `dark:` variant: raster assets requested in a light or dark flavour, canvas fills, embed parameters.
+- `authSlot` on `DocsHeader`, pinned immediately before the optional theme toggle, so the account action holds one position regardless of sign-in state or viewport. It becomes the rightmost control when `showModeSwitcher` is off.
 
 ## 0.1.49
 
