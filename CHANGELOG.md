@@ -2,6 +2,19 @@
 
 
 
+
+## 0.1.53
+
+### Fixed
+
+- `closeButton` on `Toaster` never reached sonner, so 0.1.52's new default of `true` turned the close button off everywhere instead of on, including the docs site that was meant to gain one. The prop was destructured to give it a default and then not passed back on, which took it out of `...props` without putting it anywhere else: the one route that could have supplied it had stopped doing so, and sonner fell back to its own default of `false`. It is now forwarded explicitly.
+- The toast action button was invisible. The rule filled it with `color-mix(in oklab, currentColor 90%, transparent)` while setting `color: var(--normal-bg)` on the same element, and `currentColor` resolves to the element's own colour, so the fill and the text both computed to the toast background: a dark button with dark text on a dark toast, impossible to see or to aim at. The fill now names `var(--normal-text)` directly, which keeps the contrast pair explicit and still tracks a `richColors` toast, since sonner sets both variables per type. Hovering mixes the fill back towards the toast background rather than relying on inheritance.
+- The action button also never moved to the second row 0.1.52 claimed for it, and stayed inline at the end of the first. Forcing the wrap with `flex: 0 0 100%` and clamping the width back with `max-width: max-content` cannot work together, because flex line-breaking measures the item after `max-width` is applied, so the button stayed narrow and therefore stayed on the line.
+
+### Changed
+
+- The toast is laid out with grid rather than sonner's flex row. Three things have to hold at once: the icon keeps its own column, it sits at the top of that column rather than centred against the whole card, and the action takes a row of its own beneath the text at its label width. Grid states those placements instead of coaxing them out of flex, where the third could not be had without disturbing the first. A toast with no icon gives column one back to the text, so nothing starts behind an empty gutter. Visual behaviour is unchanged for anyone who was already getting what 0.1.52 described.
+
 ## 0.1.52
 
 ### Fixed
