@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { AsciiText } from '@/components/AsciiText';
@@ -7,44 +6,24 @@ import rawManifest from '@/iso-previews-manifest.json';
 
 type ManifestEntry = { file: string; width: number; height: number; theme: string };
 
-function useColorScheme(): 'light' | 'dark' {
-  // Always start 'light' so the first client render matches SSR output; the
-  // effect below corrects to the real scheme immediately after hydration.
-  const [scheme, setScheme] = React.useState<'light' | 'dark'>('light');
-
-  React.useEffect(() => {
-    const read = () =>
-      setScheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    read();
-    const observer = new MutationObserver(read);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  return scheme;
-}
-
-function useIsoImages(scheme: 'light' | 'dark'): IsometricImage[] {
-  return React.useMemo(
-    () =>
-      (rawManifest as ManifestEntry[])
-        .filter((e) => e.theme === scheme)
-        .map((e) => ({ src: `/iso-previews/${e.file}`, width: e.width, height: e.height })),
-    [scheme],
-  );
-}
+/**
+ * The dark captures, in both themes.
+ *
+ * This used to follow the page theme, which sounds right and is not: the plane
+ * sits on the page background, so in light mode a light screenshot is a pale
+ * rectangle on a pale surface and the component inside it all but disappears.
+ * The dark captures carry their own contrast, so they read as objects on the
+ * plane whichever way the page is set, which is what the Pro site already does.
+ */
+const isoImages: IsometricImage[] = (rawManifest as ManifestEntry[])
+  .filter((e) => e.theme === 'dark')
+  .map((e) => ({ src: `/iso-previews/${e.file}`, width: e.width, height: e.height }));
 
 export const Route = createFileRoute('/')({
   component: Home,
 });
 
 function Home() {
-  const scheme = useColorScheme();
-  const isoImages = useIsoImages(scheme);
-
   return (
     <div className="relative flex flex-col flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] justify-center items-center px-4 py-16 text-center">
       {isoImages.length > 0 && <IsometricPlane images={isoImages} />}
