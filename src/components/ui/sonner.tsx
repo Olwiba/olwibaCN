@@ -88,12 +88,25 @@ const Toaster = ({
         stylesheet order.
       */}
       <style>{`
-        [data-sonner-toaster] {
-          --toast-close-button-start: unset;
-          --toast-close-button-end: 0.5rem;
-          --toast-close-button-transform: translateY(0.5rem);
-        }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-close-button] {
+          /* Positioned here rather than through sonner's own
+             --toast-close-button-start/end variables, which is what this used
+             to do and why the button still rendered top-left, half outside the
+             card, on every consumer.
+
+             sonner declares those variables on \`[data-sonner-toaster][dir='ltr']\`
+             — two attribute selectors — and the override sat on
+             \`[data-sonner-toaster]\`, which is one. Sonner won every time, so
+             the variables never changed and \`left: 0\` stood. Nothing about it
+             looked wrong in this file; the rule was simply never in effect.
+
+             This selector already carries the extra ancestor needed to outrank
+             sonner's own \`[data-sonner-toast][data-styled='true'] [data-close-button]\`,
+             so setting the properties directly is both simpler and no longer
+             dependent on variables whose declaration site we do not control. */
+          left: unset;
+          right: 0.5rem;
+          top: 0.5rem;
           height: 1.25rem;
           width: 1.25rem;
           padding: 0;
