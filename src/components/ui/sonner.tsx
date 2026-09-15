@@ -63,6 +63,12 @@ const Toaster = ({
   className,
   style,
   duration = DEFAULT_TOAST_DURATION,
+  // On by default, because the alternative was every consumer deciding
+  // separately: the apps passed `closeButton`, the docs site did not, and the
+  // same component then looked like two different components depending on where
+  // you met it. A toast carrying an action is also one you may want to dismiss
+  // without taking it, and waiting out the timer is not a dismissal.
+  closeButton = true,
   ...props
 }: ToasterProps & { mode?: ToasterMode }) => {
   const theme = useDocumentTheme()
@@ -105,13 +111,18 @@ const Toaster = ({
              so setting the properties directly is both simpler and no longer
              dependent on variables whose declaration site we do not control. */
           left: unset;
-          right: 0.5rem;
-          top: 0.5rem;
+          right: 0.375rem;
+          top: 0.375rem;
           height: 1.25rem;
           width: 1.25rem;
           padding: 0;
           border: none;
+          /* The top-right corner is rounded harder than the other three so the
+             hover fill nests inside the toast's own curve. Tucked this close to
+             the corner, a uniformly square-ish button reads as overhanging the
+             card the moment it gains a background. */
           border-radius: var(--radius-sm);
+          border-top-right-radius: 0.375rem;
           background: transparent;
           /* Inherited rather than a fixed token: on a richColors toast the
              text is already the only colour guaranteed to read against that
@@ -148,6 +159,24 @@ const Toaster = ({
           line-height: 1.45;
           opacity: 0.75;
         }
+        /* Top-aligned rather than centred on the whole card.
+           sonner centres every child, which is right for a one-line toast and
+           steadily worse as it grows: with a title, a description and an
+           action, the icon drifts to the middle of a three-line block and
+           stops reading as the marker for the line it belongs to. Toasts have
+           no height limit, so this only gets worse the taller they are. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] {
+          align-items: flex-start;
+          flex-wrap: wrap;
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-icon] {
+          /* Optical centring against the title's first line, not its box. */
+          margin-top: 0.0625rem;
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-content] {
+          flex: 1 1 auto;
+          min-width: 0;
+        }
         /* Buttons inherit the toast's own colour rather than the global
            primary, so an action on a richColors error still reads against red
            instead of disappearing into it. */
@@ -156,6 +185,25 @@ const Toaster = ({
           border-radius: var(--radius-sm);
           font-size: 0.75rem;
           font-weight: 500;
+        }
+        /* The action gets its own row under the text.
+           sonner puts it inline at the end of the flex row, which on a toast
+           with a description squeezes it against the right edge next to the
+           close button and leaves it competing with the cross for the same
+           corner. A flex-basis of 100% forces the wrap; max-width: max-content
+           then pulls it back to its label width so it does not become a
+           full-width bar. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action] {
+          flex: 0 0 100%;
+          max-width: max-content;
+          margin-left: 0;
+          margin-top: 0.5rem;
+        }
+        /* Line the action up with the title rather than the icon. The offset is
+           the icon's own box plus the toast's column gap, so the three left
+           edges of title, description and action agree. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:has([data-icon]) [data-action] {
+          margin-left: calc(1rem + var(--toast-icon-margin-start) + var(--toast-icon-margin-end) + 6px);
         }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action] {
           background: color-mix(in oklab, currentColor 90%, transparent);
