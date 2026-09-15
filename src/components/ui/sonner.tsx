@@ -159,23 +159,45 @@ const Toaster = ({
           line-height: 1.45;
           opacity: 0.75;
         }
-        /* Top-aligned rather than centred on the whole card.
+        /* Grid rather than sonner's flex row.
+           Three things have to hold at once: the icon keeps its own column to
+           the left of the text, it sits at the top of that column rather than
+           centred, and the action takes a second row beneath the text instead of
+           running inline at the end of the first.
+
            sonner centres every child, which is right for a one-line toast and
-           steadily worse as it grows: with a title, a description and an
-           action, the icon drifts to the middle of a three-line block and
-           stops reading as the marker for the line it belongs to. Toasts have
-           no height limit, so this only gets worse the taller they are. */
+           steadily worse as it grows: with a title, a description and an action
+           the icon drifts to the middle of a three-line block and stops reading
+           as the marker for the line it belongs to. Toasts have no height limit,
+           so that only gets worse the taller they are.
+
+           Flex could not express the third without disturbing the first.
+           Forcing a wrap with flex-basis: 100% and then clamping the width back
+           with max-content does nothing, because flex line-breaking measures the
+           item *after* max-width is applied: the button stayed narrow and stayed
+           inline. Stating the placement is shorter than coaxing it. */
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] {
-          align-items: flex-start;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: auto minmax(0, 1fr);
+          align-items: start;
+          column-gap: 6px;
+          row-gap: 0.5rem;
         }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-icon] {
+          grid-column: 1;
+          grid-row: 1;
           /* Optical centring against the title's first line, not its box. */
           margin-top: 0.0625rem;
         }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-content] {
-          flex: 1 1 auto;
+          grid-column: 2;
+          grid-row: 1;
           min-width: 0;
+        }
+        /* A toast with no icon has nothing in column one, which collapses to
+           zero width, so the text still starts at the padding edge. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:not(:has([data-icon])) [data-content] {
+          grid-column: 1 / -1;
         }
         /* Buttons inherit the toast's own colour rather than the global
            primary, so an action on a richColors error still reads against red
@@ -186,28 +208,32 @@ const Toaster = ({
           font-size: 0.75rem;
           font-weight: 500;
         }
-        /* The action gets its own row under the text.
-           sonner puts it inline at the end of the flex row, which on a toast
-           with a description squeezes it against the right edge next to the
-           close button and leaves it competing with the cross for the same
-           corner. A flex-basis of 100% forces the wrap; max-width: max-content
-           then pulls it back to its label width so it does not become a
-           full-width bar. */
+        /* Second row, under the text and sharing its left edge.
+           justify-self: start keeps it at its label width instead of
+           stretching across the column, which a grid item otherwise does. */
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action] {
-          flex: 0 0 100%;
-          max-width: max-content;
-          margin-left: 0;
-          margin-top: 0.5rem;
+          grid-column: 2;
+          grid-row: 2;
+          justify-self: start;
+          margin: 0;
         }
-        /* Line the action up with the title rather than the icon. The offset is
-           the icon's own box plus the toast's column gap, so the three left
-           edges of title, description and action agree. */
-        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:has([data-icon]) [data-action] {
-          margin-left: calc(1rem + var(--toast-icon-margin-start) + var(--toast-icon-margin-end) + 6px);
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:not(:has([data-icon])) [data-action] {
+          grid-column: 1 / -1;
         }
+        /* Inverted against the toast: its text colour becomes the fill.
+           This used to read color-mix(in oklab, currentColor 90%, transparent)
+           for the background while the same rule set color: var(--normal-bg).
+           currentColor resolves to the element's own colour, so both ended up
+           as the toast background: a dark button with dark text on a dark
+           toast, invisible and impossible to aim at. Naming the token instead of
+           reaching for currentColor keeps the contrast pair explicit, and still
+           tracks a richColors toast, since sonner sets both variables per type. */
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action] {
-          background: color-mix(in oklab, currentColor 90%, transparent);
+          background: var(--normal-text);
           color: var(--normal-bg);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action]:hover {
+          background: color-mix(in oklab, var(--normal-text) 88%, var(--normal-bg));
         }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-cancel] {
           background: color-mix(in oklab, currentColor 10%, transparent);
@@ -237,6 +263,13 @@ const Toaster = ({
       <Sonner
         theme={theme as ToasterProps["theme"]}
         duration={duration}
+        // Forwarded explicitly because it is destructured above to give it a
+        // default. Taking it out of `...props` without passing it back on meant
+        // sonner never received it at all and fell back to its own default of
+        // false, so defaulting it to true here turned the close button off
+        // everywhere instead of on: the props object no longer carried it, and
+        // the one place that could have supplied it had stopped doing so.
+        closeButton={closeButton}
         className={cn("toaster group", mode && `toaster-${mode}`, className)}
         style={{ zIndex: 9999999, ...style }}
         icons={{
