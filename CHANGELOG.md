@@ -1,5 +1,20 @@
 # Changelog
 
+
+## 0.1.51
+
+### Added
+
+- `PasswordInput`, a password field with a reveal toggle. Typing a password blind is why people paste from a password manager into a plain text field first to check it, or give up and reset an account they already had — a password field is a place someone can be silently wrong about what they typed. The fix has been standard for years, but only if it is shipped once: left to each form, half of them get it and half do not, which is what was happening here. It wraps `Input` rather than reimplementing the field, so mode variants, invalid styling and the playful backing all keep working, and the extra right padding lives on `PasswordInput` instead of `inputBase` because it exists only to make room for the button. The toggle is a real `button` carrying `aria-pressed` and a label that says what pressing it will do rather than what it currently is, but it sits at `tabIndex={-1}`: it has to be reachable by pointer and by screen reader, and putting it in the tab order drops an obstacle into the most common path through a login form, field to submit. The field is never `type="text"` at rest — revealing is transient state that resets on remount, so a revealed password cannot survive a navigation back to the form. `hideToggle` keeps the field a password input and drops the reveal control entirely, for the rare case where offering to show the value is wrong regardless of who is asking: a shared terminal, a kiosk, a recorded screen share.
+
+### Fixed
+
+- The toast close button rendered at the top left of the toast, half outside the card, for every consumer — not only in the docs site, where it was noticed. `Toaster` tried to move it by overriding sonner's `--toast-close-button-start`/`-end` variables on `[data-sonner-toaster]`, one attribute selector. Sonner declares them on `[data-sonner-toaster][dir='ltr']`, two, so sonner won every time: the variables never changed, the underlying `left: 0` stood, and nothing about the override looked wrong in the file — the rule was simply never in effect. The position is now set directly as `left: unset; right: 0.5rem; top: 0.5rem` on the rule that already styles the button, whose selector carries the extra ancestor needed to outrank sonner's own. Simpler, and no longer dependent on variables declared somewhere we do not control.
+
+### Changed
+
+- devDependency bump: `@olwiba/docs` 0.1.51 → 0.1.52. Docs-site only; it does not reach `dist` or a consumer.
+
 ## 0.1.50
 
 ### Added
