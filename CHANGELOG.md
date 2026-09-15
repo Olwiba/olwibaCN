@@ -1,6 +1,19 @@
 # Changelog
 
 
+
+## 0.1.52
+
+### Fixed
+
+- The toast icon sat in the vertical centre of the card. sonner centres every child, which is right for a one-line toast and steadily worse as the toast grows: with a title, a description and an action the icon drifts to the middle of a three-line block and stops reading as the marker for the line it belongs to. Toasts have no height limit, so the taller they get the further off it sits. The toast is now top-aligned, with the icon nudged down `0.0625rem` so it centres optically against the title's first line rather than against its box.
+- The action button was inline at the end of sonner's flex row, which on a toast with a description squeezed it against the right edge and left it competing with the close button for the same corner. It now takes its own row under the text: `flex: 0 0 100%` forces the wrap and `max-width: max-content` pulls it back to its label width so it does not stretch into a full-width bar. On a toast with an icon it is indented by the icon's box plus the column gap, so the left edges of title, description and action agree.
+
+### Changed
+
+- `closeButton` on `Toaster` now defaults to `true`. The apps passed it and the docs site did not, so the same component looked like two different components depending on where you met it. A toast carrying an action is also one you may want to dismiss without taking it, and waiting out the timer is not a dismissal. Pass `closeButton={false}` to get the old behaviour back.
+- The close button is tucked further into the corner, `0.375rem` from the top and right rather than `0.5rem`, and its top-right corner is rounded harder than the other three so the hover fill nests inside the card's own curve instead of overhanging it.
+
 ## 0.1.51
 
 ### Added
