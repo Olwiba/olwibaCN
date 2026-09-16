@@ -3,6 +3,16 @@
 
 
 
+
+## 0.1.54
+
+### Changed
+
+- The toast close button sits flush in the corner at `0`/`0` rather than inset by `0.375rem`, and its top-right corner now takes the same `--border-radius` sonner gives the card instead of approximating it at `0.375rem`. The inset looked deliberate in isolation and wrong in place: the button read as floating in the toast's padding rather than occupying the corner, and the gap looked uneven, because the card's radius pulls the edge away diagonally and equal top and right offsets therefore do not produce an equal-looking margin. Flush, with the card's own radius, the hover fill ends exactly where the card ends and the two curves read as one line. The other three corners stay square, since they meet content rather than an edge. The button is also `1.5rem` rather than `1.25rem`: at the smaller size the icon sat visibly off-centre once the button was in the corner rather than inset.
+- The docs site is off pure white. Its light theme was `oklch(1 0 0)`, the same polarising white the products moved away from after an accessibility pass. That work was packaged into this package's preset, so anything importing it got the off-white for free, but the docs site predates the preset and carries its own hand-rolled neutral block, so it never received any of it, and products that read well sat beside docs that glared. The neutrals now match the preset exactly, with the muted and line steps adjusted to sit against the new base rather than against white, and the brand tint comes too, gated behind `@supports (color: oklch(from white l c h))` so a browser without relative colour syntax keeps the plain off-white rather than falling through to a transparent page. The tinted block is scoped `:root:not(.dark)`, not `:root`: `.dark` is a class and `:root` a pseudo-class, so they carry the same specificity, and a plain `:root` block imported later would win on source order and repaint dark mode with the light values. Values are copied rather than imported from the preset; importing it alongside the fumadocs presets the site already pulls in is the better answer and wants a build to verify. Docs-site only; `src/styles/app-theme.css` does not reach `dist` or a consumer.
+- The isometric previews on the docs home page use the dark captures in both themes. They followed the page theme, which sounds right and is not: the plane sits directly on the page background, so in light mode a light screenshot is a pale rectangle on a pale surface and the component inside it all but disappears, leaving the plane reading as half empty. The dark captures carry their own contrast and read as objects on the plane whichever way the page is set, which is what the Pro site already does. Both variants were already on disk, so nothing was recaptured, and the theme-observer hook goes with the selection that needed it. Docs-site only.
+- devDependency bump: `@olwiba/dx` 0.0.34 → 0.0.35. Docs-site only; it does not reach `dist` or a consumer.
+
 ## 0.1.53
 
 ### Fixed
