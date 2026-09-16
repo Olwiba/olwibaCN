@@ -113,6 +113,15 @@ const Toaster = ({
           left: unset;
           right: 0;
           top: 0;
+          /* sonner's own transform: var(--toast-close-button-transform) is
+             still in play here, and on ltr it resolves to
+             translate(-35%, -35%) — the offset that makes *its* button straddle
+             the top-left edge. Setting left/right/top moved the box; the
+             transform then dragged it back out by ~8px up and left, which is
+             why the button read as floating above and outside the corner even
+             though the coordinates said 0/0. The offset has to be cancelled,
+             not just overridden at the other end. */
+          transform: none;
           height: 1.5rem;
           width: 1.5rem;
           padding: 0;
@@ -128,7 +137,15 @@ const Toaster = ({
              where the card ends and the two curves are one line. The remaining
              corners stay square, since they meet content rather than an edge. */
           border-radius: 0;
-          border-top-right-radius: var(--border-radius);
+          /* Minus the border, because the two curves are measured from
+             different edges. The toast's --border-radius describes its *outer*
+             edge, but this button is absolutely positioned, so top/right: 0
+             puts it on the padding box — the *inner* edge of that 1px border,
+             where the curve is one pixel tighter. Drawing the outer radius here
+             made the button fall away from the corner faster than the card
+             does, which is the hairline gap that showed up in the curve and
+             nowhere along the straight edges. */
+          border-top-right-radius: calc(var(--border-radius) - 1px);
           background: transparent;
           /* Inherited rather than a fixed token: on a richColors toast the
              text is already the only colour guaranteed to read against that
@@ -251,9 +268,98 @@ const Toaster = ({
           color: inherit;
           opacity: 1;
         }
+        /* Success and error carry a colour; everything else stays neutral.
+
+           Expressed by overriding sonner's own --normal-bg/-border/-text
+           rather than painting background and border directly, because those
+           three variables are what the rest of this stylesheet already reads:
+           the action button inverts --normal-text against --normal-bg, the
+           close button inherits the text colour. Retinting the variables moves
+           all of it at once, and a tinted toast keeps a legible action button
+           without a rule per type.
+
+           The tint is deliberately weak. The accent carries the icon at full
+           strength and the border at a third, while the card stays within a
+           few percent of the page background and the text stays --foreground.
+           That is enough to read as green or red at a glance and not enough to
+           turn a toast into a banner, which is what sonner's own richColors
+           does. Anyone who wants that can still pass richColors: these rules
+           bow out of a toast that has it, despite outranking it, because
+           opting in to richColors should not land you in a third thing that is
+           neither. */
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='success']:not([data-rich-colors='true']) {
+          /* Falls back to a green of our own: --destructive is part of the
+             shadcn token set and can be relied on, but there is no --success
+             counterpart, and a registry item cannot require the consumer to go
+             and add one. Named through var() anyway, so a project that does
+             have the token gets its own green rather than ours. */
+          --toast-accent: var(--success, oklch(0.55 0.14 152));
+        }
+        [data-sonner-toaster][data-sonner-theme='dark'] [data-sonner-toast][data-styled='true'][data-type='success']:not([data-rich-colors='true']) {
+          /* Lightened for dark mode by hand. --destructive gets this for free
+             from the theme; a literal cannot, and the light-mode green goes
+             muddy against a dark card. */
+          --toast-accent: var(--success, oklch(0.76 0.15 155));
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='error']:not([data-rich-colors='true']) {
+          --toast-accent: var(--destructive);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error']):not([data-rich-colors='true']) {
+          --normal-bg: color-mix(in oklab, var(--toast-accent) 7%, var(--background));
+          --normal-border: color-mix(in oklab, var(--toast-accent) 30%, var(--border));
+          --normal-text: var(--foreground);
+          /* Restated as concrete properties, not left to sonner's base rule to
+             pick up from the variables. The toastOptions classNames below set
+             bg-background/text-foreground/border-border as utilities, which tie
+             with sonner's own rule on specificity and win on order, so the
+             variables alone would change nothing visible. */
+          background: var(--normal-bg);
+          border-color: var(--normal-border);
+          color: var(--normal-text);
+        }
+        [data-sonner-toaster][data-sonner-theme='dark'] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error']):not([data-rich-colors='true']) {
+          /* A dark card needs more of the accent to shift by the same visible
+             amount, since the mix is against near-black rather than near-white. */
+          --normal-bg: color-mix(in oklab, var(--toast-accent) 14%, var(--background));
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error']):not([data-rich-colors='true']) [data-icon] {
+          color: var(--toast-accent);
+        }
       `}</style>
       {mode === "smooth" && (
-        <style>{`[data-sonner-toaster].toaster-smooth { --border-radius: 1.5rem; }`}</style>
+        <style>{`
+          [data-sonner-toaster].toaster-smooth { --border-radius: 1.5rem; }
+          /* The corner-hugging close button is a default-mode idea and does not
+             survive the move to a 1.5rem radius. At 8px the button's own curve
+             is a small correction to a mostly square corner; at 24px the corner
+             is deeper than the button is wide, so the shape degenerates into a
+             bare quarter-circle whose two straight edges cut across the card's
+             curve. Rounder cards want the opposite treatment: pull the button
+             off the edge and let it be a circle.
+
+             The inset is derived rather than chosen. A rounded corner is an arc
+             whose centre sits --border-radius in from both edges, so putting the
+             button's centre on that same point makes the two concentric, and
+             the gap between button and card edge stays equal the whole way
+             around the curve instead of pinching at the diagonal. That centre
+             is --border-radius from the card's outer edge, the button reaches
+             half its own width back toward it, and top/right are measured from
+             the padding box, one border inside. Hence the 1px.
+
+             It follows --border-radius, so this stays true if the smooth radius
+             is ever retuned. */
+          [data-sonner-toaster].toaster-smooth [data-sonner-toast][data-styled='true'] [data-close-button] {
+            top: calc(var(--border-radius) - 0.75rem - 1px);
+            right: calc(var(--border-radius) - 0.75rem - 1px);
+            border-radius: 50%;
+          }
+          /* Reserving the corner again, now that the button has moved inward:
+             its far edge is the inset plus its own width, and the content stops
+             short of that. */
+          [data-sonner-toaster].toaster-smooth [data-sonner-toast][data-styled='true']:has([data-close-button]) {
+            padding-right: calc(var(--border-radius) + 1.25rem);
+          }
+        `}</style>
       )}
       {mode === "playful" && (
         <style>{`
