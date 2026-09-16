@@ -111,18 +111,24 @@ const Toaster = ({
              so setting the properties directly is both simpler and no longer
              dependent on variables whose declaration site we do not control. */
           left: unset;
-          right: 0.375rem;
-          top: 0.375rem;
-          height: 1.25rem;
-          width: 1.25rem;
+          right: 0;
+          top: 0;
+          height: 1.5rem;
+          width: 1.5rem;
           padding: 0;
           border: none;
-          /* The top-right corner is rounded harder than the other three so the
-             hover fill nests inside the toast's own curve. Tucked this close to
-             the corner, a uniformly square-ish button reads as overhanging the
-             card the moment it gains a background. */
-          border-radius: var(--radius-sm);
-          border-top-right-radius: 0.375rem;
+          /* Flush into the corner, with the top-right corner following the
+             toast's own curve rather than approximating it.
+
+             An inset looked deliberate in isolation and wrong in place: the
+             button read as floating in the padding instead of occupying the
+             corner, and the gap was uneven because the toast's radius pulls the
+             card edge away diagonally. Sitting at 0/0 with the same
+             --border-radius sonner gives the card, the hover fill ends exactly
+             where the card ends and the two curves are one line. The remaining
+             corners stay square, since they meet content rather than an edge. */
+          border-radius: 0;
+          border-top-right-radius: var(--border-radius);
           background: transparent;
           /* Inherited rather than a fixed token: on a richColors toast the
              text is already the only colour guaranteed to read against that
