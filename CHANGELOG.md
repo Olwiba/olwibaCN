@@ -9,6 +9,13 @@
 
 
 
+
+## 0.1.60
+
+### Fixed
+
+- Seed from a constant so hydration matches
+
 ## 0.1.59
 
 ### Added
