@@ -5,6 +5,17 @@
 
 
 
+
+## 0.1.56
+
+### Added
+
+- Own the toast trigger alongside the Toaster
+
+### Changed
+
+- Gate dev and build on dx dep-check
+
 ## 0.1.55
 
 ### Fixed
