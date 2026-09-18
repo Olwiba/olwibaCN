@@ -54,13 +54,22 @@
    * a colour cast would fight its content — a charting or data tool. It keeps
    * the off-white and drops the hue.
    */
-  --neutral-tint-chroma: 0.012;
+  /* Raised from 0.012 on 2026-09-18. At that value the page carried roughly
+     0.004 chroma, which is below the threshold where anyone reads it as a
+     colour at all — the light theme looked like plain white, and the brand
+     only existed in the accents. User testing described the product as
+     unfinished in light mode for want of exactly this.
+
+     The per-surface ratios below are unchanged, so borders still carry the
+     most and the page the least; this only moves where the whole scale sits.
+     It remains a single number to turn down, and 0 still drops the hue. */
+  --neutral-tint-chroma: 0.024;
   --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
   --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
   --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
   --neutral-tint-line: calc(var(--neutral-tint-chroma) * 0.83);
 
-  --background: oklch(0.985 0 0);
+  --background: oklch(0.977 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(0.997 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -125,7 +134,11 @@
  */
 @supports (color: oklch(from white l c h)) {
   :root {
-    --background: oklch(from var(--primary) 0.985 var(--neutral-tint-page) h);
+    /* 0.977, matching the untinted fallback above. Cards stay at 0.997, so
+       dropping the page widens the gap between the two — a card now lifts off
+       the page instead of merging into it, which is the other half of why
+       light mode read as flat. */
+    --background: oklch(from var(--primary) 0.977 var(--neutral-tint-page) h);
     --card: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --popover: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --secondary: oklch(from var(--primary) 0.962 var(--neutral-tint-muted) h);
