@@ -50,6 +50,7 @@ export * from './separator';
 export * from './sheet';
 export * from './sidebar';
 export * from './skeleton';
+export * from './notify';
 export * from './slider';
 export * from './sonner';
 export * from './spinner';
