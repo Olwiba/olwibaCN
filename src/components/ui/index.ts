@@ -79,3 +79,16 @@ export { ThemeScript } from './theme-script';
 
 // Effects
 export { Enchanted, type EnchantedProps } from './enchanted';
+
+// Feedback
+//
+// Lives in src/feedback rather than here because the module also carries server
+// helpers (submission, rate limiting, providers) that must not reach a browser
+// bundle. Only the component is exported from the package entry; @olwiba/docs
+// previously carried the sole copy, synced from here, which meant a product
+// wanting the button had to depend on the docs package to get it.
+export {
+  FeedbackSidebarItem,
+  type FeedbackSidebarItemProps,
+  type FeedbackSidebarPayload,
+} from '@/feedback/FeedbackSidebarItem';
