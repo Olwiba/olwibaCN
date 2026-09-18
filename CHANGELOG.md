@@ -7,6 +7,13 @@
 
 
 
+
+## 0.1.58
+
+### Added
+
+- Make the no-preference default configurable
+
 ## 0.1.57
 
 ### Added
