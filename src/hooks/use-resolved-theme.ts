@@ -19,13 +19,28 @@ import * as React from 'react';
  * matter who moved it: a switch component, another tab replaying localStorage,
  * or devtools.
  *
- * SSR returns `'dark'`, matching ThemeScript's own default for a visitor with
- * no stored preference. A first client render still reports the real class, so
- * a light-theme visitor does not get a dark-flavoured asset requested and then
- * swapped.
+ * SSR and the first client render both report `'dark'`, so the two agree and
+ * hydration is safe whatever the app's ThemeScript default is. The real class
+ * is picked up immediately afterwards, in an effect.
  */
 export function useResolvedTheme(): 'light' | 'dark' {
-  const [theme, setTheme] = React.useState<'light' | 'dark'>(read);
+  // Seeded with a constant, not by reading the class.
+  //
+  // The initialiser runs during the first client render, which is the render
+  // React matches against the server's HTML. Reading the real class there means
+  // returning something the server could not have known, and any markup derived
+  // from it — an image URL, an iframe src — mismatches and React throws #418.
+  //
+  // That was invisible while ThemeScript always produced `dark`: server and
+  // client agreed by luck. The moment an app defaults to `system`, a visitor on
+  // a light device hydrates against dark-flavoured HTML. Genesis's sign-up
+  // journey caught this within a minute of the default changing.
+  //
+  // The cost is one render at the wrong value before the effect corrects it,
+  // which for the assets this hook exists to pick is a swap nobody sees. The
+  // alternative — correct on first paint, broken hydration — is not a trade
+  // worth making.
+  const [theme, setTheme] = React.useState<'light' | 'dark'>('dark');
 
   React.useEffect(() => {
     // The class can change between the initial state and this effect running:
