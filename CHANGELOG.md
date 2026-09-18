@@ -6,6 +6,13 @@
 
 
 
+
+## 0.1.57
+
+### Added
+
+- Export FeedbackSidebarItem and make its copy props
+
 ## 0.1.56
 
 ### Added
