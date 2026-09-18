@@ -8,6 +8,13 @@
 
 
 
+
+## 0.1.59
+
+### Added
+
+- Give the light theme a visible brand tint
+
 ## 0.1.58
 
 ### Added
