@@ -2,7 +2,7 @@ import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, type ButtonProps } from "@/components/ui/button"
 import { UIVariantProvider, useUIVariant } from "@/components/ui/ui-variant-context"
 
 const AlertDialog = AlertDialogPrimitive.Root
@@ -112,10 +112,19 @@ AlertDialogDescription.displayName =
 
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
->(({ children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> & {
+    /**
+     * Forwarded to the underlying Button. Exists because the confirm action of
+     * an alert dialog is very often destructive, and without it every caller
+     * hand-wrote `bg-destructive text-…` on className instead — which is how
+     * one ended up reaching for a `-foreground` token this theme has never
+     * defined, and rendering black text on a red button.
+     */
+    variant?: ButtonProps["variant"]
+  }
+>(({ children, variant, ...props }, ref) => (
   <AlertDialogPrimitive.Action ref={ref} asChild {...props}>
-    <Button>{children}</Button>
+    <Button variant={variant}>{children}</Button>
   </AlertDialogPrimitive.Action>
 ))
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName
