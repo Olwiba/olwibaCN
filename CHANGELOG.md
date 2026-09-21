@@ -10,6 +10,13 @@
 
 
 
+
+## 0.1.61
+
+### Fixed
+
+- Let the confirm action take a button variant
+
 ## 0.1.60
 
 ### Fixed
