@@ -70,12 +70,15 @@
      going grey, and a light card needs an edge without going dark. Borrowing
      the brand hue does both — the page reads warm rather than grey, and the
      hairline reads as the theme rather than as a grey rule. */
-  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.6);
+  /* 0.6 → 0.45 on 2026-09-22, tuned live in nestrrr. With the sidebar now
+     carrying more of the hue (see --sidebar below), the page can carry less
+     and still read as tinted: the contrast between the two does the work. */
+  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.45);
   --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
   --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
   --neutral-tint-line: calc(var(--neutral-tint-chroma) * 1.5);
 
-  /* 0.963, not 0.977. The card sits at 0.997, so the two surfaces differed by
+  /* 0.971, not 0.977. The card sits at 0.997, so the two surfaces differed by
      two percent of lightness and the hairline was carrying the separation on
      its own — a white card on a white page, which is only ever obvious once
      someone says it.
@@ -85,7 +88,28 @@
      right land: GitHub #F6F8FA, Stripe #F6F9FC, Linear #F7F7F8 — off-white,
      not grey. Dark mode needs none of it: "lighter than the page" reads
      immediately there, which is the asymmetry that makes light mode harder. */
-  --background: oklch(0.963 0 0);
+  --background: oklch(0.971 0 0);
+  /* Header and in-app footer. Their own token rather than --sidebar: a thin
+     horizontal strip reads the same chroma far more strongly than a full
+     height column does, so the bars carry less of it. Dark mode maps this
+     back to --background. */
+  --app-chrome: oklch(0.978 0 0);
+  /* Aurora wash, for AppContentAura.
+   *
+   * Explicit lightness rather than --primary's own. The brand accent sits
+   * around 0.6, and a mid-lightness colour laid over a near-white page
+   * darkens it — the backdrop read as grey-green rather than as light. On a
+   * light page the wash has to sit about as light as the page, around 0.95,
+   * and carry its colour in chroma rather than in darkness. 0.93 was still
+   * visibly below a 0.971 page.
+   *
+   * Hue rotations off --primary are what make it an aurora rather than one
+   * green: warm stays near the brand, cool runs toward teal, edge is a
+   * whisper of violet. Rebranding rotates all three together. */
+  --aurora-warm: oklch(from var(--primary) 0.95 calc(c * 0.6) calc(h + 26));
+  --aurora-cool: oklch(from var(--primary) 0.95 calc(c * 0.6) calc(h + 42));
+  --aurora-edge: oklch(from var(--primary) 0.96 calc(c * 0.35) calc(h - 78));
+
   --foreground: oklch(0.145 0 0);
   --card: oklch(0.997 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -154,7 +178,10 @@
        dropping the page widens the gap between the two — a card now lifts off
        the page instead of merging into it, which is the other half of why
        light mode read as flat. */
-    --background: oklch(from var(--primary) 0.963 var(--neutral-tint-page) h);
+    /* 0.971 since 2026-09-22 (was 0.963): the lighter tint and the more
+       tinted sidebar separate chrome from content, so the page no longer has
+       to sit as far down to do it. Still about 3% under the card. */
+    --background: oklch(from var(--primary) 0.971 var(--neutral-tint-page) h);
     --card: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --popover: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --secondary: oklch(from var(--primary) 0.962 var(--neutral-tint-muted) h);
@@ -162,14 +189,32 @@
     --accent: oklch(from var(--primary) 0.955 var(--neutral-tint-chroma) h);
     --border: oklch(from var(--primary) 0.912 var(--neutral-tint-line) h);
     --input: oklch(from var(--primary) 0.912 var(--neutral-tint-line) h);
-    --sidebar: oklch(from var(--primary) 0.975 var(--neutral-tint-muted) h);
-    --sidebar-accent: oklch(from var(--primary) 0.955 var(--neutral-tint-chroma) h);
+    /* More of the hue than the muted fills, so the sidebar reads as
+       deliberately brand-tinted rather than as an off-white that happens to
+       differ from the page by a shade. */
+    --sidebar: oklch(from var(--primary) 0.975 calc(var(--neutral-tint-chroma) * 1.1) h);
+    --app-chrome: oklch(from var(--primary) 0.978 var(--neutral-tint-muted) h);
+    /* Active and hovered nav items. This was 0.955 against a 0.975 sidebar:
+       a two point step on the same hue, which nobody could see. A real tint
+       of the brand for the fill, and the brand pushed dark for the text, so
+       the selected item reads from colour as well as from fill. */
+    --sidebar-accent: oklch(from var(--primary) 0.915 calc(c * 0.45) h);
+    --sidebar-accent-foreground: oklch(from var(--primary) 0.36 c h);
     --sidebar-border: oklch(from var(--primary) 0.912 var(--neutral-tint-line) h);
   }
 }
 
 .dark {
   --background: oklch(0.145 0 0);
+  /* The bars were the page's own colour in dark mode and that already reads
+     correctly: lighter-than-the-page is what separates surfaces here. */
+  --app-chrome: var(--background);
+  /* Dark keeps the brand's own lightness: here the wash is lighter than the
+     page by definition, so it lifts rather than dulls. */
+  --aurora-warm: oklch(from var(--primary) l c calc(h + 26));
+  --aurora-cool: oklch(from var(--primary) l c calc(h + 42));
+  --aurora-edge: oklch(from var(--primary) l calc(c * 0.8) calc(h - 78));
+
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
