@@ -91,7 +91,16 @@
   --blueprint-fg: oklch(0 0 0 / 0.04);
 
   /* Neutral base colors */
-  --background: oklch(0.985 0 0);
+  /* 0.968, not 0.985. The card sits at 0.997, so at the old value the two
+     surfaces differed by barely a percent of lightness and the hairline was
+     doing all the work on its own — a white card on a white page.
+
+     You cannot push a card above white, so the only direction with headroom
+     is down, on the page. Three percent is where the systems that get this
+     right land: GitHub #F6F8FA, Stripe #F6F9FC, Linear #F7F7F8, all of them
+     off-white rather than grey. Dark mode needs none of this, because
+     "lighter than the page" reads instantly there. */
+  --background: oklch(0.968 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(0.997 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -138,10 +147,17 @@
      factors are the preset's: a page barely tinted, lines the most. Set
      --neutral-tint-chroma: 0 to drop the hue and keep the plain off-white. */
   --neutral-tint-chroma: 0.012;
-  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
+  /* The page carries more of the brand than it used to (0.33 → 0.6) and the
+     lines carry noticeably more (0.83 → 1.6). Both answer the same problem
+     from opposite ends: a light page needs to sit *under* its cards without
+     going grey, and a light card needs an edge without going dark. Borrowing
+     the brand hue does both — the page reads warm rather than grey, and the
+     hairline reads as the theme rather than as a grey rule.
+     Set --neutral-tint-chroma: 0 to drop the hue and keep plain off-white. */
+  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.6);
   --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
   --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
-  --neutral-tint-line: calc(var(--neutral-tint-chroma) * 0.83);
+  --neutral-tint-line: calc(var(--neutral-tint-chroma) * 1.6);
 }
 /*
  * The brand-derived half, gated on relative colour syntax being supported.
@@ -155,7 +171,7 @@
  */
 @supports (color: oklch(from white l c h)) {
   :root:not(.dark) {
-    --background: oklch(from var(--primary) 0.985 var(--neutral-tint-page) h);
+    --background: oklch(from var(--primary) 0.968 var(--neutral-tint-page) h);
     --card: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --popover: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --secondary: oklch(from var(--primary) 0.962 var(--neutral-tint-muted) h);

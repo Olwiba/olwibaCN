@@ -64,12 +64,28 @@
      most and the page the least; this only moves where the whole scale sits.
      It remains a single number to turn down, and 0 still drops the hue. */
   --neutral-tint-chroma: 0.024;
-  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.33);
+  /* The page carries more of the brand than it used to (0.33 → 0.6) and the
+     lines carry noticeably more (0.83 → 1.5). Both answer the same problem
+     from opposite ends: a light page has to sit *under* its cards without
+     going grey, and a light card needs an edge without going dark. Borrowing
+     the brand hue does both — the page reads warm rather than grey, and the
+     hairline reads as the theme rather than as a grey rule. */
+  --neutral-tint-page: calc(var(--neutral-tint-chroma) * 0.6);
   --neutral-tint-raised: calc(var(--neutral-tint-chroma) * 0.25);
   --neutral-tint-muted: calc(var(--neutral-tint-chroma) * 0.67);
-  --neutral-tint-line: calc(var(--neutral-tint-chroma) * 0.83);
+  --neutral-tint-line: calc(var(--neutral-tint-chroma) * 1.5);
 
-  --background: oklch(0.977 0 0);
+  /* 0.963, not 0.977. The card sits at 0.997, so the two surfaces differed by
+     two percent of lightness and the hairline was carrying the separation on
+     its own — a white card on a white page, which is only ever obvious once
+     someone says it.
+
+     A card cannot go above white, so the only direction with headroom is
+     down, on the page. Three-ish percent is where the systems that get this
+     right land: GitHub #F6F8FA, Stripe #F6F9FC, Linear #F7F7F8 — off-white,
+     not grey. Dark mode needs none of it: "lighter than the page" reads
+     immediately there, which is the asymmetry that makes light mode harder. */
+  --background: oklch(0.963 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(0.997 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -138,7 +154,7 @@
        dropping the page widens the gap between the two — a card now lifts off
        the page instead of merging into it, which is the other half of why
        light mode read as flat. */
-    --background: oklch(from var(--primary) 0.977 var(--neutral-tint-page) h);
+    --background: oklch(from var(--primary) 0.963 var(--neutral-tint-page) h);
     --card: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --popover: oklch(from var(--primary) 0.997 var(--neutral-tint-raised) h);
     --secondary: oklch(from var(--primary) 0.962 var(--neutral-tint-muted) h);
