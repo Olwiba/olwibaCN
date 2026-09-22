@@ -11,6 +11,13 @@
 
 
 
+
+## 0.1.62
+
+### Fixed
+
+- Give light-mode cards a page to sit on
+
 ## 0.1.61
 
 ### Fixed
