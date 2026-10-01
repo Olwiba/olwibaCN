@@ -288,23 +288,21 @@ const Toaster = ({
            opting in to richColors should not land you in a third thing that is
            neither. */
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='success']:not([data-rich-colors='true']) {
-          /* Falls back to a green of our own: --destructive is part of the
-             shadcn token set and can be relied on, but there is no --success
-             counterpart, and a registry item cannot require the consumer to go
-             and add one. Named through var() anyway, so a project that does
-             have the token gets its own green rather than ours. */
-          --toast-accent: var(--success, oklch(0.55 0.14 152));
+          --toast-accent: var(--success);
         }
         [data-sonner-toaster][data-sonner-theme='dark'] [data-sonner-toast][data-styled='true'][data-type='success']:not([data-rich-colors='true']) {
-          /* Lightened for dark mode by hand. --destructive gets this for free
-             from the theme; a literal cannot, and the light-mode green goes
-             muddy against a dark card. */
-          --toast-accent: var(--success, oklch(0.76 0.15 155));
+          --toast-accent: var(--success);
         }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='error']:not([data-rich-colors='true']) {
           --toast-accent: var(--destructive);
         }
-        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error']):not([data-rich-colors='true']) {
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='warning']:not([data-rich-colors='true']) {
+          --toast-accent: var(--warning);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-type='info']:not([data-rich-colors='true']) {
+          --toast-accent: var(--info);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error'], [data-type='warning'], [data-type='info']):not([data-rich-colors='true']) {
           --normal-bg: color-mix(in oklab, var(--toast-accent) 7%, var(--background));
           --normal-border: color-mix(in oklab, var(--toast-accent) 30%, var(--border));
           --normal-text: var(--foreground);
@@ -317,12 +315,12 @@ const Toaster = ({
           border-color: var(--normal-border);
           color: var(--normal-text);
         }
-        [data-sonner-toaster][data-sonner-theme='dark'] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error']):not([data-rich-colors='true']) {
+        [data-sonner-toaster][data-sonner-theme='dark'] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error'], [data-type='warning'], [data-type='info']):not([data-rich-colors='true']) {
           /* A dark card needs more of the accent to shift by the same visible
              amount, since the mix is against near-black rather than near-white. */
           --normal-bg: color-mix(in oklab, var(--toast-accent) 14%, var(--background));
         }
-        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error']):not([data-rich-colors='true']) [data-icon] {
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true']:is([data-type='success'], [data-type='error'], [data-type='warning'], [data-type='info']):not([data-rich-colors='true']) [data-icon] {
           color: var(--toast-accent);
         }
       `}</style>

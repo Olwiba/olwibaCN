@@ -7,6 +7,14 @@ const statusIndicatorDotVariants = cva(
   "relative inline-flex shrink-0 rounded-full bg-current text-primary",
   {
     variants: {
+      tone: {
+        neutral: "text-muted-foreground",
+        info: "text-info",
+        success: "text-success",
+        warning: "text-warning",
+        attention: "text-attention",
+        progress: "text-primary",
+      },
       size: {
         sm: "size-1.5",
         default: "size-2",
@@ -14,6 +22,7 @@ const statusIndicatorDotVariants = cva(
       },
     },
     defaultVariants: {
+      tone: "progress",
       size: "default",
     },
   }
@@ -31,6 +40,7 @@ function StatusIndicator({
   className,
   dotClassName,
   color,
+  tone,
   size,
   pulse = false,
   disabled = false,
@@ -56,7 +66,7 @@ function StatusIndicator({
     >
       <span
         data-slot="status-indicator-dot"
-        className={cn(statusIndicatorDotVariants({ size }), dotClassName)}
+        className={cn(statusIndicatorDotVariants({ tone, size }), dotClassName)}
         style={color ? { color } : undefined}
       >
         {pulse ? (
