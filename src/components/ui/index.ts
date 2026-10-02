@@ -76,6 +76,19 @@ export { fireConfetti, type ConfettiOptions } from '../../lib/confetti';
 
 // Theme
 export { ThemeScript } from './theme-script';
+export { ThemeSwitchMinimal } from './theme-switch-minimal';
+export {
+  ModeSwitchMinimal,
+  defaultModeSwitchOptions,
+  type ModeSwitchMinimalProps,
+  type ModeSwitchOption,
+} from './mode-switch-minimal';
+export {
+  BrandColorSwitchMinimal,
+  brandColorPresets,
+  type BrandColorOption,
+  type BrandColorSwitchMinimalProps,
+} from './brand-color-switch-minimal';
 
 // Effects
 export { Enchanted, type EnchantedProps } from './enchanted';

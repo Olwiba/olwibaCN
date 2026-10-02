@@ -1,5 +1,6 @@
 'use client';
 
+import { DocsBrandSwitch } from '@/docs/components/DocsBrandSwitch';
 import { DocsHeader } from '@/docs/components/DocsHeader';
 
 const navItems = [
@@ -13,6 +14,7 @@ export function SiteHeader() {
       logo={<>olwiba<span className="text-primary">CN</span></>}
       navItems={navItems}
       githubUrl="https://github.com/Olwiba/olwibaCN"
+      rightSlot={<DocsBrandSwitch />}
     />
   );
 }

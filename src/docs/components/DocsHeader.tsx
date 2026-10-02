@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Link } from '@tanstack/react-router';
-import { ModeSwitcher } from '@/components/ModeSwitcher';
+import { ThemeSwitchMinimal } from '@/components/ui/theme-switch-minimal';
 import { cn } from '@/lib/utils';
 import { SearchButton } from './SearchButton';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -184,7 +184,7 @@ export function DocsHeader({
           )}
           {rightSlot}
           {authSlot}
-          {showModeSwitcher && <ModeSwitcher />}
+          {showModeSwitcher && <ThemeSwitchMinimal />}
         </div>
       </div>
       <div className="h-full w-4 shrink-0 border-dashed lg:w-12 lg:border-r" aria-hidden="true" />
