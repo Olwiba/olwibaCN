@@ -1,4 +1,5 @@
 import { Text, type TextProps } from '@react-email/components';
+import { emailClass, withEmailClass } from './classes';
 import { emailTheme } from './theme';
 
 export type EmailTextProps = TextProps & {
@@ -17,16 +18,29 @@ const variantStyles = {
     lineHeight: '24px',
   },
   caption: {
-    color: emailTheme.mutedText,
+    color: emailTheme.captionText,
     fontSize: '13px',
     lineHeight: '20px',
   },
 } as const;
 
+const variantClasses = {
+  default: emailClass.text,
+  muted: emailClass.muted,
+  caption: emailClass.caption,
+} as const;
+
 export function EmailText({
   variant = 'default',
+  className,
   style,
   ...props
 }: EmailTextProps) {
-  return <Text style={{ ...variantStyles[variant], ...style }} {...props} />;
+  return (
+    <Text
+      className={withEmailClass(variantClasses[variant], className)}
+      style={{ ...variantStyles[variant], ...style }}
+      {...props}
+    />
+  );
 }

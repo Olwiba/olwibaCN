@@ -16,13 +16,13 @@ export function EmailButton({
     <Button
       style={{
         backgroundColor: brandColor,
-        borderRadius: '8px',
+        borderRadius: '0',
         color: emailTheme.buttonText,
         display: 'inline-block',
-        fontSize: '14px',
+        fontSize: '15px',
         fontWeight: 600,
         lineHeight: '1',
-        padding: '12px 20px',
+        padding: '15px 24px',
         textDecoration: 'none',
         textAlign: 'center',
         ...style,
