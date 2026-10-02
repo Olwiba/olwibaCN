@@ -13,6 +13,13 @@
 
 
 
+
+## 0.1.64
+
+### Added
+
+- Add semantic tones and touch-safe hover
+
 ## 0.1.63
 
 ### Added
