@@ -14,6 +14,15 @@
 
 
 
+
+## 0.1.65
+
+### Added
+
+- Follow the site theme, and toggle it per preview
+- Own the header switches the products use
+- Follow the reader's colour scheme
+
 ## 0.1.64
 
 ### Added
