@@ -73,6 +73,15 @@ export const brandColorPresets: BrandColorOption[] = [
     `,
   },
   {
+    name: 'lime',
+    label: 'Lime',
+    swatch: '#84cc16',
+    css: `
+      :root { --primary: oklch(0.648 0.2 131.684); --primary-foreground: oklch(0.985 0 0); --ring: oklch(0.648 0.2 131.684); }
+      .dark  { --primary: oklch(0.841 0.238 132.9); --primary-foreground: oklch(0.145 0 0); --ring: oklch(0.841 0.238 132.9); }
+    `,
+  },
+  {
     name: 'slate',
     label: 'Slate',
     swatch: '#64748b',
