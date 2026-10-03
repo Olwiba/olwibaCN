@@ -15,6 +15,18 @@
 
 
 
+
+## 0.1.66
+
+### Added
+
+- Add lime
+- Pick any colour, or from Tailwind's palette
+
+### Changed
+
+- Rebuild the shadcn registry
+
 ## 0.1.65
 
 ### Added
