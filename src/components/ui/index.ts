@@ -34,6 +34,7 @@ export * from './input-group';
 export * from './input-otp';
 export * from './password-input';
 export * from './number-input';
+export { ColorPicker, parseHexColor, tailwindPalette, type ColorPickerProps } from './color-picker';
 export * from './item';
 export * from './kbd';
 export * from './label';

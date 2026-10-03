@@ -1,0 +1,57 @@
+---
+title: Color Picker
+description: Pick any colour from a saturation field and hue strip, or type a hex value.
+---
+
+<div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/color-picker" />
+</div>
+
+<ComponentPreview name="color-picker" />
+
+## Installation
+
+<InstallationTabs name="color-picker" />
+
+## Usage
+
+```tsx
+import { ColorPicker } from "@/components/ui/color-picker"
+```
+
+<LiveUsageCode name="color-picker" defaultCode={`const [color, setColor] = useState("#10b981")\n\n<ColorPicker\n  value={color}\n  onValueChange={setColor}\n  presets={["#10b981", "#3b82f6", "#a855f7", "#f43f5e"]}\n/>`} />
+
+## Notes
+
+- **The value is a hex string.** `onValueChange` always receives a lowercase
+  `#rrggbb`, which drops straight into a CSS variable, a design token or an
+  email. `value` also accepts the short `#rgb` form.
+- **Two ways to pick.** The default `spectrum` variant reaches any colour.
+  `variant="grid"` offers Tailwind's palette instead: a column for each colour
+  family (seventeen, plus zinc for neutrals) and a row for each step from 50 to
+  950, with 500 in the middle. Moving up or down a column gives a consistent run
+  of tints and shades, and every cell is the hex value Tailwind publishes, so it
+  matches the colours already in use. Drag the dot across it or use the arrow
+  keys; a value that is not on the grid simply selects no cell. The palette is
+  exported as `tailwindPalette` for reuse.
+- **Hue survives greys.** The picker works in HSV underneath, so dragging into
+  black or white and back out keeps the hue you had rather than snapping to red.
+- **Keyboard first.** Both thumbs are sliders: arrow keys move them by 1%, or by
+  10% with Shift. The hue strip also takes Home and End.
+- **Typing applies once the colour is complete.** Six hex digits take effect as
+  you type; anything shorter waits for blur or Enter, so a half-typed value is
+  never read as a colour. Escape abandons the edit.
+- **Controlled or uncontrolled.** Pass `value` and `onValueChange`, or just
+  `defaultValue`.
+
+## API Reference
+
+<APIReference name="ColorPicker" extends="div" props={[
+  { name: "value", type: "string", default: "undefined" },
+  { name: "defaultValue", type: "string", default: '"#10b981"' },
+  { name: "onValueChange", type: "(hex: string) => void", default: "undefined" },
+  { name: "presets", type: "string[]", default: "undefined" },
+  { name: "variant", type: '"spectrum" | "grid"', default: '"spectrum"' },
+  { name: "mode", type: '"playful" | "smooth" | "glass"', default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />

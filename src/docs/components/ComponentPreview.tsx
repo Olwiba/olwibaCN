@@ -17,6 +17,7 @@ const demos: Record<string, React.LazyExoticComponent<React.FC>> = {
   card: React.lazy(() => import('@/demos/card')),
   input: React.lazy(() => import('@/demos/input')),
   'number-input': React.lazy(() => import('@/demos/number-input')),
+  'color-picker': React.lazy(() => import('@/demos/color-picker')),
   checkbox: React.lazy(() => import('@/demos/checkbox')),
   switch: React.lazy(() => import('@/demos/switch')),
   avatar: React.lazy(() => import('@/demos/avatar')),
