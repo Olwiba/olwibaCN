@@ -16,6 +16,14 @@
 
 
 
+
+## 0.1.67
+
+### Fixed
+
+- Action buttons use the brand primary
+- Every page opens at the top, back included
+
 ## 0.1.66
 
 ### Added
