@@ -243,19 +243,30 @@ const Toaster = ({
         [data-sonner-toaster] [data-sonner-toast][data-styled='true']:not(:has([data-icon])) [data-action] {
           grid-column: 1 / -1;
         }
-        /* Inverted against the toast: its text colour becomes the fill.
-           This used to read color-mix(in oklab, currentColor 90%, transparent)
-           for the background while the same rule set color: var(--normal-bg).
-           currentColor resolves to the element's own colour, so both ended up
-           as the toast background: a dark button with dark text on a dark
-           toast, invisible and impossible to aim at. Naming the token instead of
-           reaching for currentColor keeps the contrast pair explicit, and still
-           tracks a richColors toast, since sonner sets both variables per type. */
+        /* The action is the product's primary button, as it is everywhere
+           else. It used to be inverted against the toast (text colour as the
+           fill), which in light mode made every action a near-black slab that
+           read as a different design system from the buttons on the page
+           behind it. A toast's action is the same kind of thing as any other
+           primary action, so it takes the same colours.
+
+           A richColors toast is the exception: it is filled with its type's
+           colour, which the primary may sit too close to, so it keeps the
+           inversion, whose contrast with the fill is guaranteed. Named tokens
+           rather than currentColor in both, which once resolved the fill and
+           the label to the same colour and made the button invisible. */
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action] {
+          background: var(--primary);
+          color: var(--primary-foreground);
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action]:hover {
+          background: color-mix(in oklab, var(--primary) 88%, var(--background));
+        }
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-rich-colors='true'] [data-action] {
           background: var(--normal-text);
           color: var(--normal-bg);
         }
-        [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-action]:hover {
+        [data-sonner-toaster] [data-sonner-toast][data-styled='true'][data-rich-colors='true'] [data-action]:hover {
           background: color-mix(in oklab, var(--normal-text) 88%, var(--normal-bg));
         }
         [data-sonner-toaster] [data-sonner-toast][data-styled='true'] [data-cancel] {
