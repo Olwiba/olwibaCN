@@ -84,8 +84,10 @@ export {
   type ModeSwitchMinimalProps,
   type ModeSwitchOption,
 } from './mode-switch-minimal';
+export { brandColorCss, brandColorTokens, type BrandColorTokens } from './brand-color';
 export {
   BrandColorSwitchMinimal,
+  CUSTOM_BRAND_COLOR,
   brandColorPresets,
   type BrandColorOption,
   type BrandColorSwitchMinimalProps,
