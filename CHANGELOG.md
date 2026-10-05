@@ -17,6 +17,12 @@
 
 
 
+## 0.1.68
+
+### Added
+
+- Custom brand colours now flow through theme controls, documentation previews, and exported UI utilities.
+
 ## 0.1.67
 
 ### Fixed
