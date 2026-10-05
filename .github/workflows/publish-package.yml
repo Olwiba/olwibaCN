@@ -43,9 +43,12 @@ jobs:
           fi
           TAG_VERSION="${REF#v}"
           PKG_VERSION=$(jq -r .version package.json)
-          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ] && [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
             echo "package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"
             exit 1
+          fi
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "Recovery run: aligning package.json $PKG_VERSION to tag $TAG_VERSION"
           fi
           npm pkg set "version=${TAG_VERSION}"
           echo "PKG_NAME=$(jq -r .name package.json)" >> "$GITHUB_ENV"
