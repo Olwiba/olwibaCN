@@ -14,11 +14,11 @@ const buttonVariants = cva(
         default:
           "bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90",
         destructive:
-          "bg-destructive text-white shadow-sm shadow-destructive/20 hover:bg-destructive/90",
+          "border border-destructive/25 bg-destructive/10 text-destructive shadow-sm shadow-destructive/5 hover:bg-destructive/15 dark:bg-destructive/20 dark:hover:bg-destructive/30",
         outline:
           "border border-input bg-background shadow-sm shadow-zinc-800/5 hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm shadow-zinc-800/5 hover:bg-secondary/80",
+          "bg-foreground/10 text-secondary-foreground shadow-sm shadow-zinc-800/5 hover:bg-foreground/15 dark:bg-foreground/20 dark:hover:bg-foreground/25",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline underline-offset-4 decoration-primary/20 hover:decoration-primary/40",
       },
@@ -48,9 +48,9 @@ export interface ButtonProps
 // have no fill to frost, so they stay unchanged.
 const glassButtonBg: Record<string, string> = {
   default: "bg-primary/75 hover:bg-primary/60",
-  destructive: "bg-destructive/75 hover:bg-destructive/60",
+  destructive: "bg-destructive/20 hover:bg-destructive/30",
   outline: "bg-background/40 hover:bg-background/60",
-  secondary: "bg-secondary/50 hover:bg-secondary/40",
+  secondary: "bg-foreground/10 hover:bg-foreground/15",
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

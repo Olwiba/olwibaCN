@@ -17,6 +17,17 @@
 
 
 
+
+## 0.1.69
+
+### Changed
+
+- Align v0.1.68 metadata
+
+### Fixed
+
+- Allow recovery publish version alignment
+
 ## 0.1.68
 
 ### Added
