@@ -3,9 +3,12 @@ import { resolve } from 'path';
 import { createTsupBannerHook } from '@olwiba/dx';
 import { projectBanner } from './src/project.config';
 
+const skipWatchDts =
+  process.argv.includes('--watch') && process.env.OLWIBA_SKIP_WATCH_DTS === '1';
+
 const shared = {
   format: ['esm' as const],
-  dts: true,
+  dts: !skipWatchDts,
   sourcemap: true,
   treeshake: true,
   minify: false,
