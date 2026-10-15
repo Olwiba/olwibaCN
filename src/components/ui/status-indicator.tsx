@@ -78,7 +78,12 @@ function StatusIndicator({
         <span className="relative block size-full rounded-full bg-current" />
       </span>
       {children ? (
-        <span data-slot="status-indicator-label">{children}</span>
+        <span
+          data-slot="status-indicator-label"
+          className="leading-none [text-box-edge:ex_alphabetic] [text-box-trim:trim-both]"
+        >
+          {children}
+        </span>
       ) : null}
     </span>
   )

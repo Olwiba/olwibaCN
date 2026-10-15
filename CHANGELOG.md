@@ -18,6 +18,13 @@
 
 
 
+
+## 0.1.70
+
+### Changed
+
+- Skip declarations in watch mode
+
 ## 0.1.69
 
 ### Changed

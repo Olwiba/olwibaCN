@@ -55,7 +55,7 @@ export default function StatusIndicatorDemo() {
 
   useUsageCode(
     showLabel
-      ? `<StatusIndicator${usageProps ? " " + usageProps : ""}>Operational</StatusIndicator>`
+      ? `<StatusIndicator${usageProps ? " " + usageProps : ""}>systems operational</StatusIndicator>`
       : `<StatusIndicator${usageProps ? " " + usageProps : ""} />`
   );
 
@@ -70,7 +70,7 @@ export default function StatusIndicatorDemo() {
           aria-label={showLabel ? undefined : "Live status"}
           className="text-sm font-medium"
         >
-          {showLabel ? "Operational" : null}
+          {showLabel ? "systems operational" : null}
         </StatusIndicator>
       </div>
 
