@@ -74,6 +74,9 @@ const TabsList = React.forwardRef<
 })
 TabsList.displayName = TabsPrimitive.List.displayName
 
+// The active tab is a raised surface, so it takes the card colour, not the
+// page background: in brand-tinted themes the background is tinted too, and
+// an active tab in it all but vanished into the muted list behind it.
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -85,7 +88,7 @@ const TabsTrigger = React.forwardRef<
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        "relative inline-flex items-center justify-center whitespace-nowrap rounded-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+        "relative inline-flex items-center justify-center whitespace-nowrap rounded-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-card data-[state=active]:text-card-foreground data-[state=active]:shadow-sm",
         tabsTriggerSizes[size],
         mode === "smooth" && "rounded-full data-[state=active]:shadow-none",
         mode === "playful" &&
