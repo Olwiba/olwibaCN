@@ -19,6 +19,13 @@
 
 
 
+
+## 0.1.71
+
+### Fixed
+
+- Active tabs now use the card surface color instead of the page background, so the selected tab stands out against its container.
+
 ## 0.1.70
 
 ### Changed
