@@ -6,7 +6,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "lucide-react"
-import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
+import { DayButton, DayPicker, getDefaultClassNames, type Matcher } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -19,6 +19,13 @@ const calendarCellSizes: Record<CalendarSize, string> = {
   default: "2rem",
   lg: "2.5rem",
 }
+
+// DayPicker's props are a union keyed on `mode`; a plain Omit would collapse it.
+type DayPickerProps = React.ComponentProps<typeof DayPicker> extends infer P
+  ? P extends unknown
+    ? Omit<P, "disabled">
+    : never
+  : never
 
 const CalendarUIContext = React.createContext<{ uiMode?: CalendarUIMode }>({})
 
@@ -34,22 +41,26 @@ function Calendar({
   uiMode,
   disabled = false,
   ...props
-}: React.ComponentProps<typeof DayPicker> & {
+}: DayPickerProps & {
   buttonVariant?: React.ComponentProps<typeof Button>["variant"]
   size?: CalendarSize
   uiMode?: CalendarUIMode
-  disabled?: boolean
+  /** `true` disables the whole calendar; matchers disable individual days. */
+  disabled?: boolean | Matcher | Matcher[]
 }) {
   const defaultClassNames = getDefaultClassNames()
+  const disabledAll = disabled === true
+  const disabledDays = typeof disabled === "boolean" ? undefined : disabled
 
   return (
     <CalendarUIContext.Provider value={{ uiMode }}>
       <div
         style={{ "--cell-size": calendarCellSizes[size] } as React.CSSProperties}
-        className={cn(disabled && "opacity-50 pointer-events-none")}
+        className={cn(disabledAll && "opacity-50 pointer-events-none")}
       >
         <DayPicker
           showOutsideDays={showOutsideDays}
+          disabled={disabledDays}
           className={cn(
             "bg-background group/calendar p-3 [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
             String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,

@@ -1,0 +1,87 @@
+---
+title: Date Picker
+description: Pick a single date, or a range with rolling presets like "Last 7 days".
+---
+
+<div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/date-picker" />
+</div>
+
+<ComponentPreview name="date-picker" />
+
+## Installation
+
+<InstallationTabs name="date-picker" />
+
+## Usage
+
+```tsx
+import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"
+```
+
+<LiveUsageCode name="date-picker" defaultCode={`<DateRangePicker\n  value={range}\n  preset={preset}\n  onValueChange={(range, presetId) => {\n    setRange(range)\n    setPreset(presetId ?? null)\n  }}\n  max={new Date()}\n/>`} />
+
+## Rolling presets
+
+A preset is a window recomputed from "now" each time it is applied. Store the
+preset id rather than the dates, and "Last 7 days" keeps meaning the last seven
+days on the next visit instead of freezing on the dates it first resolved to.
+
+```tsx
+const [preset, setPreset] = useSearchParam("range") // e.g. "7d"
+const range = resolveDateRangePreset(preset) ?? customRange
+```
+
+Pass your own `presets` to change the list, or `presets={false}` to hide it.
+
+```tsx
+const presets: DateRangePreset[] = [
+  { id: "1h", label: "Last hour", range: (now) => ({ from: subHours(now, 1), to: now }) },
+  ...defaultDateRangePresets,
+]
+```
+
+## Notes
+
+- **Ranges are staged.** Calendar picks apply on Apply, so a half-picked range
+  never reaches your handler. Presets apply immediately.
+- **Picked days become whole days.** A range runs from the start of its first
+  day to the end of its last day.
+- **`max` stops the range at that moment.** With `max={new Date()}`, future days
+  are disabled and a range ending today ends now, not at midnight.
+- **Months are calendar months.** "Last 3 months" from 31 May starts on
+  28 or 29 February, not 3 March.
+- **Two months side by side, one on small screens.** Override with
+  `numberOfMonths`.
+- **Helpers are exported:** `resolveDateRangePreset`, `normaliseDateRange` and
+  `formatDateRange`, for resolving presets in a loader or labelling a range
+  elsewhere.
+
+## API Reference
+
+<APIReference name="DateRangePicker" props={[
+  { name: "value", type: "DateRange", default: "undefined" },
+  { name: "onValueChange", type: "(range: DateRange | undefined, presetId?: string) => void", default: "undefined" },
+  { name: "preset", type: "string | null", default: "undefined" },
+  { name: "presets", type: "DateRangePreset[] | false", default: "defaultDateRangePresets" },
+  { name: "min", type: "Date", default: "undefined" },
+  { name: "max", type: "Date", default: "undefined" },
+  { name: "disabledDates", type: "Matcher | Matcher[]", default: "undefined" },
+  { name: "numberOfMonths", type: "number", default: "2 (1 on mobile)" },
+  { name: "dateFormat", type: "string", default: '"d MMM yyyy"' },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth" | "glass"', default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />
+
+<APIReference name="DatePicker" props={[
+  { name: "value", type: "Date | null", default: "undefined" },
+  { name: "onValueChange", type: "(value: Date | null) => void", default: "undefined" },
+  { name: "min", type: "Date", default: "undefined" },
+  { name: "max", type: "Date", default: "undefined" },
+  { name: "dateFormat", type: "string", default: '"d MMM yyyy"' },
+  { name: "name", type: "string", default: "undefined" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth" | "glass"', default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />

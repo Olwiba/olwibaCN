@@ -1,0 +1,56 @@
+---
+title: Combobox
+description: A searchable single-select for lists too long to scroll.
+---
+
+<div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/combobox" />
+</div>
+
+<ComponentPreview name="combobox" />
+
+## Installation
+
+<InstallationTabs name="combobox" />
+
+## Usage
+
+```tsx
+import { Combobox } from "@/components/ui/combobox"
+```
+
+<LiveUsageCode name="combobox" defaultCode={`<Combobox\n  options={timezones}\n  value={value}\n  onValueChange={setValue}\n  placeholder="Select a timezone"\n  clearable\n/>`} />
+
+## Notes
+
+- **Use Select for short lists.** Reach for Combobox once a list needs search,
+  roughly ten options or more, or when options carry a description.
+- **Search matches label and keywords.** `keywords` adds terms that are not in
+  the label, such as a country for a city.
+- **Groups keep first-seen order.** Options sharing a `group` render under one
+  heading, in the order their first option appears.
+- **Clearing is opt-in.** With `clearable`, a clear button appears beside the
+  chevron and picking the selected option again clears it.
+- **Works in native forms.** Pass `name` and the value is submitted through a
+  hidden input.
+- **The trigger matches SelectTrigger**, including `size` and `mode`, so the two
+  line up in a form.
+
+## API Reference
+
+<APIReference name="Combobox" props={[
+  { name: "options", type: "ComboboxOption[]", default: "required" },
+  { name: "value", type: "string | null", default: "undefined" },
+  { name: "defaultValue", type: "string | null", default: "null" },
+  { name: "onValueChange", type: "(value: string | null) => void", default: "undefined" },
+  { name: "placeholder", type: "string", default: '"Select an option"' },
+  { name: "searchPlaceholder", type: "string", default: '"Search..."' },
+  { name: "emptyText", type: "ReactNode", default: '"No results."' },
+  { name: "clearable", type: "boolean", default: "false" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth" | "glass"', default: "undefined" },
+  { name: "name", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />
+
+`ComboboxOption` is `{ value, label, description?, icon?, keywords?, disabled?, group? }`.

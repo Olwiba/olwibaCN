@@ -1,0 +1,54 @@
+---
+title: Multi Select
+description: A searchable list where any number of options can be picked.
+---
+
+<div className="flex flex-col md:flex-row items-center justify-start gap-2 mb-2">
+  <CopyCommandButton command="bunx shadcn@latest add @olwibacn/multi-select" />
+</div>
+
+<ComponentPreview name="multi-select" />
+
+## Installation
+
+<InstallationTabs name="multi-select" />
+
+## Usage
+
+```tsx
+import { MultiSelect } from "@/components/ui/multi-select"
+```
+
+<LiveUsageCode name="multi-select" defaultCode={`<MultiSelect\n  options={environments}\n  value={value}\n  onValueChange={setValue}\n  placeholder="All environments"\n/>`} />
+
+## Notes
+
+- **The list stays open while picking**, so several options can be toggled in
+  one go. Escape or a click outside closes it.
+- **Values come back in option order**, not click order, so the same selection
+  always produces the same array and the same URL.
+- **Chips fit the space.** By default the trigger shows as many chips as fit on
+  one line, keeping room for a `+N` count of the rest, and re-measures when it
+  resizes. Pass a number to `maxVisible` to show exactly that many instead.
+- **Select all skips disabled options**, and Clear leaves a disabled option that
+  was already selected in place.
+- **For a handful of always-visible filters**, a ToggleGroup with
+  `type="multiple"` is quicker to scan than a dropdown.
+- **Works in native forms.** Pass `name` and each value is submitted as its own
+  hidden input.
+
+## API Reference
+
+<APIReference name="MultiSelect" props={[
+  { name: "options", type: "MultiSelectOption[]", default: "required" },
+  { name: "value", type: "string[]", default: "undefined" },
+  { name: "defaultValue", type: "string[]", default: "[]" },
+  { name: "onValueChange", type: "(value: string[]) => void", default: "undefined" },
+  { name: "placeholder", type: "string", default: '"Select options"' },
+  { name: "maxVisible", type: 'number | "auto"', default: '"auto"' },
+  { name: "showActions", type: "boolean", default: "true" },
+  { name: "size", type: '"sm" | "default" | "lg"', default: '"default"' },
+  { name: "mode", type: '"playful" | "smooth" | "glass"', default: "undefined" },
+  { name: "name", type: "string", default: "undefined" },
+  { name: "disabled", type: "boolean", default: "false" },
+]} />
