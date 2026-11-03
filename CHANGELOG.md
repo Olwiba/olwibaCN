@@ -20,6 +20,16 @@
 
 
 
+
+## 0.1.72
+
+### Added
+
+- `Combobox` component: a searchable single-select input.
+- `MultiSelect` component for choosing several options from a list.
+- `DatePicker` component for picking one date.
+- `DateRangePicker` component for picking a start and end date.
+
 ## 0.1.71
 
 ### Fixed
