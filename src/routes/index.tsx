@@ -1,23 +1,12 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { AsciiText } from '@/components/AsciiText';
-import { IsometricPlane, type IsometricImage } from '@/components/IsometricPlane';
+import { IsometricPlane, isoImagesByTheme } from '@/components/IsometricPlane';
 import rawManifest from '@/iso-previews-manifest.json';
 
-type ManifestEntry = { file: string; width: number; height: number; theme: string };
-
-/**
- * The dark captures, in both themes.
- *
- * This used to follow the page theme, which sounds right and is not: the plane
- * sits on the page background, so in light mode a light screenshot is a pale
- * rectangle on a pale surface and the component inside it all but disappears.
- * The dark captures carry their own contrast, so they read as objects on the
- * plane whichever way the page is set, which is what the Pro site already does.
- */
-const isoImages: IsometricImage[] = (rawManifest as ManifestEntry[])
-  .filter((e) => e.theme === 'dark')
-  .map((e) => ({ src: `/iso-previews/${e.file}`, width: e.width, height: e.height }));
+// Light captures on a light page, dark on a dark one. The plane picks the set
+// itself, so every docs site that syncs it behaves the same way.
+const isoImages = isoImagesByTheme(rawManifest);
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -26,7 +15,7 @@ export const Route = createFileRoute('/')({
 function Home() {
   return (
     <div className="relative flex flex-col flex-1 min-h-[calc(100svh-var(--header-height)-var(--footer-height))] justify-center items-center px-4 py-16 text-center">
-      {isoImages.length > 0 && <IsometricPlane images={isoImages} />}
+      {isoImages.light.length > 0 && <IsometricPlane images={isoImages} />}
 
       <div className="absolute inset-0 z-[1] pointer-events-none">
         <div className="absolute inset-x-0 top-0 h-24 sm:h-40 bg-gradient-to-b from-background/90 to-transparent dark:h-24 sm:dark:h-64 dark:from-background dark:to-transparent" />
