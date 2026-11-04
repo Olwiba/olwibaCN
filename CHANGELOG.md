@@ -21,6 +21,13 @@
 
 
 
+
+## 0.1.73
+
+### Fixed
+
+- Isometric tiles on the home page now follow the active page theme.
+
 ## 0.1.72
 
 ### Added
