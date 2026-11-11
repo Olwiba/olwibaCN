@@ -7,11 +7,11 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { DemoControls, useUsageCode } from "@/docs/components/ComponentPreview";
 
-type BadgeVariant = "default" | "secondary" | "outline" | "destructive";
+type BadgeVariant = "default" | "secondary" | "outline" | "success" | "warning" | "destructive";
 type BadgeSize = "sm" | "default" | "lg";
 type Mode = "default" | "playful";
 
-const variants: BadgeVariant[] = ["default", "secondary", "outline", "destructive"];
+const variants: BadgeVariant[] = ["default", "secondary", "outline", "success", "warning", "destructive"];
 const sizes: BadgeSize[] = ["default", "sm", "lg"];
 const modes: Mode[] = ["default", "playful"];
 

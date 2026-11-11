@@ -22,6 +22,13 @@
 
 
 
+
+## 0.1.74
+
+### Fixed
+
+- Pinned the docs site's `react-start` dependency to the last Vite 7 compatible release so the site builds reliably.
+
 ## 0.1.73
 
 ### Fixed

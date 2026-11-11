@@ -13,8 +13,12 @@ const badgeVariants = cva(
           "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        success:
+          "border-success-border bg-success-surface text-success-foreground shadow-sm shadow-success/5",
         destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+          "border-destructive/25 bg-destructive/10 text-destructive shadow-sm shadow-destructive/5 dark:bg-destructive/20",
+        warning:
+          "border-warning-border bg-warning-surface text-warning-foreground shadow-sm shadow-warning/5",
         outline: "text-foreground",
       },
       size: {
@@ -39,7 +43,9 @@ export interface BadgeProps
 
 const playfulBackdrop: Record<string, string> = {
   default: "bg-primary/30 dark:bg-primary/20",
+  success: "bg-success/30 dark:bg-success/20",
   destructive: "bg-destructive/30 dark:bg-destructive/20",
+  warning: "bg-warning/30 dark:bg-warning/20",
   secondary: "bg-foreground/10 dark:bg-foreground/10",
   outline: "bg-foreground/10 dark:bg-foreground/10",
 }
