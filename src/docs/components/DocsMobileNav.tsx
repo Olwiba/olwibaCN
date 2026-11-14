@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useLocation } from '@tanstack/react-router';
+import { Link, usePathname } from 'fumadocs-core/framework';
 import {
   Sheet,
   SheetContent,
@@ -27,8 +27,7 @@ export function DocsMobileNav({ tree, sections }: DocsMobileNavProps) {
   const navSections = sections ?? TOP_LEVEL_SECTIONS;
   const [open, setOpen] = React.useState(false);
   const [portalTarget, setPortalTarget] = React.useState<HTMLElement | null>(null);
-  const location = useLocation();
-  const pathname = location.pathname;
+  const pathname = usePathname();
 
   // Null is a supported outcome, not a failure — see the fallback in the
   // return. Read after mount because the header that owns the mount point
@@ -81,7 +80,7 @@ export function DocsMobileNav({ tree, sections }: DocsMobileNavProps) {
                   {navSections.map(({ name, href }) => (
                     <Link
                       key={name}
-                      to={href}
+                      href={href}
                       className={cn(
                         'rounded-md px-2 py-1.5 text-[0.8rem] font-medium',
                         (href === '/docs'
@@ -107,7 +106,7 @@ export function DocsMobileNav({ tree, sections }: DocsMobileNavProps) {
                   return (
                     <Link
                       key={page.url}
-                      to={page.url}
+                      href={page.url}
                       className={cn(
                         'mb-1 block rounded-md px-2 py-1.5 text-[0.8rem] font-medium',
                         page.url === pathname
@@ -126,7 +125,7 @@ export function DocsMobileNav({ tree, sections }: DocsMobileNavProps) {
                   <div key={item.$id} className="mb-4">
                     {item.index ? (
                       <Link
-                        to={item.index.url}
+                        href={item.index.url}
                         className={cn(
                           'mb-2 block px-2 text-xs font-medium transition-colors',
                           pathname === item.index.url
@@ -154,7 +153,7 @@ export function DocsMobileNav({ tree, sections }: DocsMobileNavProps) {
                           return (
                             <Link
                               key={page.url}
-                              to={page.url}
+                              href={page.url}
                               className={cn(
                                 'rounded-md px-2 py-1.5 text-[0.8rem] font-medium',
                                 page.url === pathname

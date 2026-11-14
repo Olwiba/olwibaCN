@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'fumadocs-core/framework';
 import { cn } from '@/lib/utils';
 import { ComponentPreview, LiveUsageCode } from '@/docs/components/ComponentPreview';
 import { InstallationTabs } from '@/docs/components/InstallationTabs';

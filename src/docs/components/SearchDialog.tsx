@@ -13,7 +13,7 @@ import {
   type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
 import { Search } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'fumadocs-core/framework';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export interface SearchDialogBrowsePage {
@@ -122,7 +122,7 @@ export function SearchDialog(props: SearchDialogProps) {
                   {pages.map((page) => (
                     <Link
                       className="block px-4 py-2 text-sm hover:bg-muted"
-                      to={page.url}
+                      href={page.url}
                       key={page.url}
                       onClick={() => restProps.onOpenChange?.(false)}
                     >
